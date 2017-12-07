@@ -3,7 +3,7 @@
         <h2 class="text-center">{{event.name}}</h2>
         <div v-for="note in notes" class="row">
             <div class="col-xs-12">
-                <button type="button" @click="dataToggle="modal"">
+                <button type="button" @click="dataToggle=" modal "">
                     <h3>{{activity.name}}</h3>
                     <p>{{note.body}}</p>
                 </button>
@@ -14,21 +14,28 @@
 
 <script>
     export default {
-        name: 'notes',
+        name: 'userNotes',
         computed: {
-            events() {
-                return this.$store.state.events
-            },
-            notes() {
-                return this.$store.state.notes
-            },
-            activities()
+            // events() {
+            //     return this.$store.state.events
+            // },
+            // notes() {
+            //     return this.$store.state.notes
+            // },
+            // activities(){
+            //     return this.$store.state.notes
+            // }
         }
     }
 
 </script>
 
 <style>
+    .row {
+        text-align: center;
+    }
 
-
+    .container {
+        text-align: center;
+    }
 </style>

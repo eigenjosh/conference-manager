@@ -14,6 +14,10 @@ export default new Router({
       name: 'Home',
       component: Home
     },
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 3d29b63f2b2bb66807592efa22b459bf9d2d07e3
     {
       path: '/admin-event',
       name: 'adminEvent',
@@ -29,6 +33,7 @@ export default new Router({
       name: 'findEvents',
       component: FindEvents
     },
+<<<<<<< HEAD
     {
       path: '/event-schedule',
       name: 'eventSchedule',
@@ -40,5 +45,8 @@ export default new Router({
       component: MySchedule
     },
    
+=======
+    
+>>>>>>> 3d29b63f2b2bb66807592efa22b459bf9d2d07e3
   ]
 })
