@@ -29,6 +29,7 @@ var store = new vuex.Store({
     //SET USER
     setUser(state, user) {
       state.user = user
+      console.log(state.user)
     },
 
     //HANDLE ERROR
@@ -59,8 +60,9 @@ var store = new vuex.Store({
       debugger
       auth.post('login', payload)
         .then(res => {
+          console.log("successful login")
           commit('setUser', res.data.data)
-          router.push({ name: 'Home' })
+          router.push({ name: 'eventSchedule' })
         })
         .catch(err => { commit('handleError', err)
           
@@ -69,6 +71,7 @@ var store = new vuex.Store({
 
     //REGISTER
     register({ commit, dispatch }, payload) {
+      debugger
       auth.post('register', payload)
         .then(res => {
           commit('setUser', res.data.data)
@@ -84,7 +87,7 @@ var store = new vuex.Store({
       auth('authenticate')
         .then(res => {
           commit('setUser', res.data.data)
-          router.push({ name: 'Home' })
+          router.push({ name: 'eventSchedule' })
         })
         .catch(() => {
           router.push({ name: 'Home' })

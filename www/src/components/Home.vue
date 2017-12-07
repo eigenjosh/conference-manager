@@ -90,7 +90,7 @@
                                 <input type="password" name="password" class="form-control" placeholder="password" required v-model='login.password'>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" type="submit">Submit</button>
+                                <button class="btn btn-submit btn-success" data-dismiss="modal"type="submit">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -112,6 +112,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Create a Confer Account</h4>
+                        <p v-if="error"><b>Your Passwords Do Not Match</b></p>
                     </div>
                     <div class="modal-body">
                         <form id="login" class="form" @submit.prevent="submitRegister">
@@ -136,7 +137,7 @@
                                 <input type="password" name="reEnterPassword" class="form-control" placeholder="Re Enter Password" v-model="signUp.rPassword">
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" type="submit">Submit</button>
+                                <button class="btn btn-submit btn-success" data-dismiss="modal" type="submit">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -183,7 +184,7 @@
             },
             submitRegister() {
                 if (this.signUp.password == this.signUp.rPassword) {
-
+                    this.signUp.name = this.signUp.firstName + ' ' + this.signUp.lastName
                     this.$store.dispatch('register', this.signUp)
                 } else {
                     this.error = true
