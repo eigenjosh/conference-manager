@@ -19,7 +19,7 @@
                 </div>
 
                 <!-- MENU DROWDOWN -->
-                <div class="collapse navbar-collapse text-left" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
 
                     <ul>
                         <li>
@@ -217,6 +217,9 @@
     .jumbotron {
         color: whitesmoke;
         text-shadow: 0px 0px 10px black;
+    }
+    .btn-default{
+        width:100%;
     }
 
     @media (max-width: 2000px) {
