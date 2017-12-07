@@ -91,19 +91,16 @@
                         <form id="login" class="form" @submit.prevent="">
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" name="email" class="form-control" placeholder="Email">
+                                <input type="email" name="email" class="form-control" placeholder="Email" required v-model='login.email'>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
-                                <input type="password" name="password" class="form-control" placeholder="password">
+                                <input type="password" name="password" class="form-control" placeholder="password" required v-model='login.password'>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-submit btn-success" type="submit">Submit</button>
                             </div>
                         </form>
-                        <h3>Don't have an account?
-                            <router-link :to="{name: ''}" class="register">Create an account</router-link>
-                        </h3>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -116,43 +113,48 @@
         <!-- SIGN UP MODAL -->
 
         <div id="myModal2" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-    
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Create a Confer Account</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form id="login" class="form" @submit.prevent="">
-                                <div class="form-group">
-                                    <label for="email">Email:</label>
-                                    <input type="email" name="email" class="form-control" placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password:</label>
-                                    <input type="password" name="password" class="form-control" placeholder="password">
-                                </div>
-                                <div class="form-group">
-                                        <label for="reEnterPassword">Re-enter Password:</label>
-                                        <input type="password" name="reEnterPassword" class="form-control" placeholder="Re Enter Password">
-                                    </div>
-                                <div class="form-group">
-                                    <button class="btn btn-submit btn-success" type="submit">Submit</button>
-                                </div>
-                            </form>
-                            <h3>Already have an account?
-                                <router-link :to="{name: ''}" class="register">Login Here</router-link>
-                            </h3>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Create a Confer Account</h4>
                     </div>
-    
+                    <div class="modal-body">
+                        <form id="login" class="form" @submit.prevent="">
+                            <div class="form-group">
+                                <label for="firstName">First Name:</label>
+                                <input type="firstName" name="firstName" class="form-control" placeholder="First Name" required v-model="signUp.firstName">
+                            </div>
+                            <div class="form-group">
+                                    <label for="lastName">Last Name:</label>
+                                    <input type="lastName" name="lastName" class="form-control" placeholder="Last Name" required v-model="signUp.lastName">
+                                </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" class="form-control" placeholder="Email" required v-model="signUp.email">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" name="password" class="form-control" placeholder="password" required v-model="signUp.password">
+                            </div>
+                            <div class="form-group">
+                                <label for="reEnterPassword">Re-enter Password:</label>
+                                <input type="password" name="reEnterPassword" class="form-control" placeholder="Re Enter Password" v-model="signUp.rPassword">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-submit btn-success" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
+
             </div>
+        </div>
 
     </div>
 </template>
@@ -162,9 +164,40 @@
         name: 'home',
         data() {
             return {
+                signUp: {
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    name: '',
+                    password: '',
+                    rPassword: ''
+                },
+                error: false,
+                login: {
+                    email: '',
+                    password: ''
+                }
             }
         },
         components: {
+        },
+        methods: {
+            submitLogin() {
+                this.$store.dispatch('login', this.login)
+                this.login = {
+                    email: '',
+                    password: ''
+                }
+            },
+            submitRegister() {
+                if (this.signUp.password == this.signUp.rPassword) {
+
+                    this.$store.dispatch('register', this.signUp)
+                } else {
+                    this.error = true
+                    console.error({ error: "Passwords Do Not Match" })
+                }
+            }
         }
     }
 </script>
