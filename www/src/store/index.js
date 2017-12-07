@@ -71,7 +71,7 @@ var store = new vuex.Store({
 
     //REGISTER
     register({ commit, dispatch }, payload) {
-      debugger
+      
       auth.post('register', payload)
         .then(res => {
           commit('setUser', res.data.data)
