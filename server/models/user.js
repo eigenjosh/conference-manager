@@ -8,7 +8,9 @@ let schema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true, dropDups: true },
   password: { type: String, required: true },
-  created: { type: Number, required: true, default: Date.now() }
+  created: { type: Number, required: true, default: Date.now() },
+  events: { type: [ObjectId] },
+  activities: { type: [ObjectId] },
 })
 
 

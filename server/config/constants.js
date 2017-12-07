@@ -11,9 +11,13 @@ const models = {
     name: 'Event',
     endpoint: 'events'
   },
-  list: {
-    name: 'List',
-    endpoint: 'lists'
+  activity: {
+    name: 'Activity',
+    endpoint: 'activites'
+  },
+  note: {
+    name: 'Note',
+    endpoint: 'notes'
   },
   user: {
     name: 'User',

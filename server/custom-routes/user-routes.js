@@ -1,6 +1,7 @@
-let Boards = require('../models/board')
+//let Boards = require('../models/board')
 
 module.exports = {
+  /*
   userBoards: {
     path: '/userboards',
     reqType: 'get',
@@ -26,6 +27,7 @@ module.exports = {
         })
     }
   }
+  */
 }
 
 
