@@ -110,9 +110,16 @@
 </script>
 
 <style>
-    /* .main-pic {
-        background-image: url('http://www.memorymakersevents.com/my_uploads/2017/10/conferencea-.jpg')
-    } */
+    .main-pic {
+        background-image: url('http://www.memorymakersevents.com/my_uploads/2017/10/conferencea-.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    .jumbotron{
+        color:whitesmoke;
+        text-shadow: 0px 0px 10px black;
+    }
 
     /* @media (max-width: 2000px) {
         .navbar-header {
