@@ -61,7 +61,7 @@
 
                         <!-- SECOND DROPDOWN ON RIGHT -->
 
-                        <!-- <li class="dropdown">
+                        <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown
                                 <span class="caret"></span>
                             </a>
@@ -80,7 +80,7 @@
                                     <a href="#">Separated link</a>
                                 </li>
                             </ul>
-                        </li> -->
+                        </li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -121,7 +121,7 @@
         text-shadow: 0px 0px 10px black;
     }
 
-    /* @media (max-width: 2000px) {
+    @media (max-width: 2000px) {
         .navbar-header {
             float: none;
         }
@@ -149,5 +149,5 @@
             padding-top: 10px;
             padding-bottom: 10px;
         }
-    } */
+    }
 </style>
