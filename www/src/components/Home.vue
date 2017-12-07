@@ -13,45 +13,53 @@
                     </button>
                     <a class="navbar-brand">Confer</a>
                     <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Login</button>
-                    
-                                            <!-- Trigger the SIGN UP modal -->
-                                            <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
+
+                    <!-- Trigger the SIGN UP modal -->
+                    <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
                 </div>
 
                 <!-- MENU DROWDOWN -->
                 <div class="collapse navbar-collapse text-left" id="bs-example-navbar-collapse-1">
-                    
-                               <ul>
-                                    <li>
 
-                                        <router-link :to="{name: 'findEvents'}"> <button type="button" class="btn btn-default">Find Events</button></router-link>
-                                    </li>
-                                   <li>
+                    <ul>
+                        <li>
 
-                                       <router-link :to="{name: 'eventSchedule'}"><button type="button" class="btn btn-default">Event Schedule</button></router-link>
-                                    </li>
-                                   
-                                   <li>
+                            <router-link :to="{name: 'findEvents'}">
+                                <button type="button" class="btn btn-default">Find Events</button>
+                            </router-link>
+                        </li>
+                        <li>
 
-                                       <router-link :to="{name:'mySchedule'}"><button type="button" class="btn btn-default">My Schedule</button></router-link>
-                                    </li>
-                                   <li>
+                            <router-link :to="{name: 'eventSchedule'}">
+                                <button type="button" class="btn btn-default">Event Schedule</button>
+                            </router-link>
+                        </li>
 
-                                       <router-link :to="{name:'userNotes'}"><button type="button" class="btn btn-default">My Notes</button></router-link>
-                                    </li>
-                                   
-                                   
-                                </ul>
-                             
-                     
+                        <li>
+
+                            <router-link :to="{name:'mySchedule'}">
+                                <button type="button" class="btn btn-default">My Schedule</button>
+                            </router-link>
+                        </li>
+                        <li>
+
+                            <router-link :to="{name:'userNotes'}">
+                                <button type="button" class="btn btn-default">My Notes</button>
+                            </router-link>
+                        </li>
+
+
+                    </ul>
+
+
                     <!-- SEARCH BAR -->
-                    
+
                     <ul class="nav navbar-nav navbar-right">
                         <!-- LOGIN BUTTON -->
 
                         <!-- Trigger the LOGIN modal -->
                         <!-- Trigger the SIGN UP modal -->
-                       
+
 
 
                     </ul>
@@ -80,7 +88,7 @@
                         <h4 class="modal-title">Sign in to your account</h4>
                     </div>
                     <div class="modal-body">
-                        <form id="login" class="form" @submit.prevent="submitLogin">
+                        <form id="login" class="form">
                             <div class="form-group">
                                 <label for="email">Email:</label>
                                 <input type="email" name="email" class="form-control" placeholder="Email" required v-model='login.email'>
@@ -90,7 +98,7 @@
                                 <input type="password" name="password" class="form-control" placeholder="password" required v-model='login.password'>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" data-dismiss="modal"type="submit">Submit</button>
+                                <button class="btn btn-submit btn-success"  @click="submitLogin" data-dismiss="modal" type="submit">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -112,18 +120,20 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Create a Confer Account</h4>
-                        <p v-if="error"><b>Your Passwords Do Not Match</b></p>
+                        <p v-if="error">
+                            <b>Your Passwords Do Not Match</b>
+                        </p>
                     </div>
                     <div class="modal-body">
-                        <form id="login" class="form" @submit.prevent="submitRegister">
+                        <form id="login" class="form">
                             <div class="form-group">
                                 <label for="firstName">First Name:</label>
                                 <input type="firstName" name="firstName" class="form-control" placeholder="First Name" required v-model="signUp.firstName">
                             </div>
                             <div class="form-group">
-                                    <label for="lastName">Last Name:</label>
-                                    <input type="lastName" name="lastName" class="form-control" placeholder="Last Name" required v-model="signUp.lastName">
-                                </div>
+                                <label for="lastName">Last Name:</label>
+                                <input type="lastName" name="lastName" class="form-control" placeholder="Last Name" required v-model="signUp.lastName">
+                            </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
                                 <input type="email" name="email" class="form-control" placeholder="Email" required v-model="signUp.email">
@@ -137,7 +147,7 @@
                                 <input type="password" name="reEnterPassword" class="form-control" placeholder="Re Enter Password" v-model="signUp.rPassword">
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" data-dismiss="modal" type="submit">Submit</button>
+                                <button class="btn btn-submit btn-success" data-dismiss="modal" type="submit" @click="submitRegister">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -176,6 +186,7 @@
         },
         methods: {
             submitLogin() {
+                debugger
                 this.$store.dispatch('login', this.login)
                 this.login = {
                     email: '',
