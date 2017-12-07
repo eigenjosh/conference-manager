@@ -24,20 +24,20 @@
                                <ul>
                                     <li>
 
-                                        <router-link :to="{name: findEvents}"> <button type="button" class="btn btn-default">Find Events</button></router-link>
+                                        <router-link :to="{name: 'findEvents'}"> <button type="button" class="btn btn-default">Find Events</button></router-link>
                                     </li>
                                    <li>
 
-                                       <router-link :to="eventSchedule"><button type="button" class="btn btn-default">Event Schedule</button></router-link>
+                                       <router-link :to="{name: 'eventSchedule'}"><button type="button" class="btn btn-default">Event Schedule</button></router-link>
                                     </li>
                                    
                                    <li>
 
-                                       <router-link :to="mySchedule"><button type="button" class="btn btn-default">My Schedule</button></router-link>
+                                       <router-link :to="{name:'mySchedule'}"><button type="button" class="btn btn-default">My Schedule</button></router-link>
                                     </li>
                                    <li>
 
-                                       <router-link :to="userNotes"><button type="button" class="btn btn-default">My Notes</button></router-link>
+                                       <router-link :to="{name:'userNotes'}"><button type="button" class="btn btn-default">My Notes</button></router-link>
                                     </li>
                                    
                                    
