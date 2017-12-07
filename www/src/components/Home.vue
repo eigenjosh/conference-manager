@@ -55,38 +55,20 @@
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         <!-- LOGIN BUTTON -->
-                        <button type="button" class="btn btn-primary navbar-btn">Login</button>
-                        <!-- SIGN UP BUTTON -->
-                        <button type="button" class="btn btn-default navbar-btn">Sign-Up</button>
 
-                        <!-- SECOND DROPDOWN ON RIGHT -->
+                        <!-- Trigger the LOGIN modal -->
+                        <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Login</button>
 
-                        <!-- <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#">Another action</a>
-                                </li>
-                                <li>
-                                    <a href="#">Something else here</a>
-                                </li>
-                                <li role="separator" class="divider"></li>
-                                <li>
-                                    <a href="#">Separated link</a>
-                                </li>
-                            </ul>
-                        </li> -->
+                        <!-- Trigger the SIGN UP modal -->
+                        <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
+
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container-fluid -->
         </nav>
+
         <div class="jumbotron main-pic">
             <div class="row">
                 <div class="col-xs-12">
@@ -94,6 +76,86 @@
                 </div>
             </div>
         </div>
+        <!-- LOGIN MODAL -->
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Sign in to your account</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="login" class="form" @submit.prevent="">
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" class="form-control" placeholder="Email" required v-model='login.email'>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" name="password" class="form-control" placeholder="password" required v-model='login.password'>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-submit btn-success" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SIGN UP MODAL -->
+
+        <div id="myModal2" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Create a Confer Account</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="login" class="form" @submit.prevent="">
+                            <div class="form-group">
+                                <label for="firstName">First Name:</label>
+                                <input type="firstName" name="firstName" class="form-control" placeholder="First Name" required v-model="signUp.firstName">
+                            </div>
+                            <div class="form-group">
+                                    <label for="lastName">Last Name:</label>
+                                    <input type="lastName" name="lastName" class="form-control" placeholder="Last Name" required v-model="signUp.lastName">
+                                </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" class="form-control" placeholder="Email" required v-model="signUp.email">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" name="password" class="form-control" placeholder="password" required v-model="signUp.password">
+                            </div>
+                            <div class="form-group">
+                                <label for="reEnterPassword">Re-enter Password:</label>
+                                <input type="password" name="reEnterPassword" class="form-control" placeholder="Re Enter Password" v-model="signUp.rPassword">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-submit btn-success" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -102,9 +164,40 @@
         name: 'home',
         data() {
             return {
+                signUp: {
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    name: '',
+                    password: '',
+                    rPassword: ''
+                },
+                error: false,
+                login: {
+                    email: '',
+                    password: ''
+                }
             }
         },
         components: {
+        },
+        methods: {
+            submitLogin() {
+                this.$store.dispatch('login', this.login)
+                this.login = {
+                    email: '',
+                    password: ''
+                }
+            },
+            submitRegister() {
+                if (this.signUp.password == this.signUp.rPassword) {
+
+                    this.$store.dispatch('register', this.signUp)
+                } else {
+                    this.error = true
+                    console.error({ error: "Passwords Do Not Match" })
+                }
+            }
         }
     }
 </script>
@@ -116,12 +209,13 @@
         background-size: cover;
         background-position: center;
     }
-    .jumbotron{
-        color:whitesmoke;
+
+    .jumbotron {
+        color: whitesmoke;
         text-shadow: 0px 0px 10px black;
     }
 
-    /* @media (max-width: 2000px) {
+    @media (max-width: 2000px) {
         .navbar-header {
             float: none;
         }
@@ -149,5 +243,5 @@
             padding-top: 10px;
             padding-bottom: 10px;
         }
-    } */
+    }
 </style>
