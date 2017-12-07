@@ -215,7 +215,7 @@
         text-shadow: 0px 0px 10px black;
     }
 
-    /* @media (max-width: 2000px) {
+    @media (max-width: 2000px) {
         .navbar-header {
             float: none;
         }
@@ -243,5 +243,5 @@
             padding-top: 10px;
             padding-bottom: 10px;
         }
-    } */
+    }
 </style>
