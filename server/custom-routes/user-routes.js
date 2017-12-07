@@ -43,6 +43,40 @@ module.exports = {
         })
     }
   },
+
+  //TODO: Figure out how to best handle adding/deleting events and activities from array on user
+
+  /*
+  addUserActivity: {
+    path: '/useractivities',
+    reqType: 'put',
+    method(req, res, next) {
+      let action = 'Edit User Activities'
+      Users.findOneAndUpdate({ _id: req.session.uid }, req.body)
+        .then(data => {
+          return res.send(handleResponse(action, { message: 'Successfully updated' }))
+        })
+        .catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
+  editUserEvents: {
+    path: '/userevents/:eventId',
+    reqType: 'put',
+    method(req, res, next) {
+      let action = 'Edit User Events'
+      Users.findOneAndUpdate({ _id: req.session.uid }, req.body)
+        .then(data => {
+          return res.send(handleResponse(action, { message: 'Successfully updated' }))
+        })
+        .catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
+  */
+
   // filter activities by user and event server-side instead of on frontend:
   userActivitiesByEventId: {
     path: '/userevents/:eventId/activities',
