@@ -40,17 +40,17 @@
 
             }
         },
-        mounted(){
-            this.$store.dispatch('getActivitesByEventId', this.event)
-        },
-        computed: {
-            activities(){
-                return this.$store.state.activities[this.activeEvent._id]
-            },
-            activeEvent(){
-                return this.$store.state.activeEvent
-            }
-        }
+        // mounted(){
+        //     this.$store.dispatch('getActivitesByEventId', this.event)
+        // },
+        // computed: {
+        //     activities(){
+        //         return this.$store.state.activities[this.activeEvent._id]
+        //     },
+        //     activeEvent(){
+        //         return this.$store.state.activeEvent
+        //     }
+        // }
     }
 </script>
 
