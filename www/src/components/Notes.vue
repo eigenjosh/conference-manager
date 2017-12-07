@@ -22,7 +22,9 @@
             notes() {
                 return this.$store.state.notes
             },
-            activities()
+            activities(){
+                return this.$store.state.notes
+            }
         }
     }
 
