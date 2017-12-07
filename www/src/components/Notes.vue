@@ -16,15 +16,15 @@
     export default {
         name: 'userNotes',
         computed: {
-            events() {
-                return this.$store.state.events
-            },
-            notes() {
-                return this.$store.state.notes
-            },
-            activities(){
-                return this.$store.state.notes
-            }
+            // events() {
+            //     return this.$store.state.events
+            // },
+            // notes() {
+            //     return this.$store.state.notes
+            // },
+            // activities(){
+            //     return this.$store.state.notes
+            // }
         }
     }
 
