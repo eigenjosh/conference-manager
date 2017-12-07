@@ -62,6 +62,32 @@ module.exports = {
           return next(handleResponse(action, null, error))
         })
     }
+  },
+  adminEvents: {
+    path: '/adminevents',
+    reqType: 'get',
+    method(req, res, next) {
+      let action = 'Find Events Created By Admin'
+      Events.find({ creatorId: req.session.uid })
+        .then(events => {
+          res.send(handleResponse(action, events))
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
+  adminActivities: {
+    path: '/adminactivities',
+    reqType: 'get',
+    method(req, res, next) {
+      let action = 'Find Activities Created By Admin'
+      Activities.find({ creatorId: req.session.uid })
+        .then(activities => {
+          res.send(handleResponse(action, activities))
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
   }
 }
 
