@@ -45,30 +45,62 @@ module.exports = {
   },
 
   //TODO: Figure out how to best handle adding/deleting events and activities from array on user
-
   /*
   addUserActivity: {
     path: '/useractivities',
     reqType: 'put',
     method(req, res, next) {
-      let action = 'Edit User Activities'
+      let action = 'Add User Activity'
       Users.findOneAndUpdate({ _id: req.session.uid }, req.body)
         .then(data => {
-          return res.send(handleResponse(action, { message: 'Successfully updated' }))
+          return res.send(handleResponse(action, { message: 'Successfully added activity to user.' }))
         })
         .catch(error => {
           return next(handleResponse(action, null, error))
         })
     }
   },
-  editUserEvents: {
+  removeUserActivity: {
+    path: '/useractivities/:activityId',
+    reqType: 'put',
+    method(req, res, next) {
+      let action = 'Remove User Activity'
+      Users.findOneAndUpdate({ _id: req.session.uid }, req.body)
+        .then(data => {
+          return res.send(handleResponse(action, { message: 'Successfully removed activity from user.' }))
+        })
+        .catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
+  
+  addUserEvent: {
+    path: '/userevents',
+    reqType: 'put',
+    method(req, res, next) {
+      let action = 'Add User Event'
+      Users.findOneAndUpdate({ _id: req.session.uid }, req.body)
+        .then(data => {
+          return res.send(handleResponse(action, { message: 'Successfully added event to user.' }))
+        })
+        .catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
+  removeUserEvent: {
     path: '/userevents/:eventId',
     reqType: 'put',
     method(req, res, next) {
-      let action = 'Edit User Events'
-      Users.findOneAndUpdate({ _id: req.session.uid }, req.body)
-        .then(data => {
-          return res.send(handleResponse(action, { message: 'Successfully updated' }))
+      let action = 'Remove User Event'
+      Users.find({ _id: req.session.uid })
+        .then(user => {
+          user.activities = user.activities.filter(function(activity){
+            return !(activity.eventId === req.params.eventId)
+          })
+          user.update()
+          return res.send(handleResponse(action, { message: 'Successfully removed event from user.' }))
         })
         .catch(error => {
           return next(handleResponse(action, null, error))
