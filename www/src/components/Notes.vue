@@ -14,7 +14,7 @@
 
 <script>
     export default {
-        name: 'notes',
+        name: 'userNotes',
         computed: {
             events() {
                 return this.$store.state.events
