@@ -7,9 +7,9 @@ const actions = {
 }
 
 const models = {
-  board: {
-    name: 'Board',
-    endpoint: 'boards'
+  event: {
+    name: 'Event',
+    endpoint: 'events'
   },
   list: {
     name: 'List',
