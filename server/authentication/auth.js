@@ -14,7 +14,7 @@ router.post('/register', (req, res) => {
       })
     })
     .catch(err => {
-      res.send({ error: err })
+      res.status(401).send({ error: err })
     })
 })
 
@@ -37,11 +37,11 @@ router.post('/login', (req, res) => {
           })
         })
         .catch(err => {
-          res.send({ error: err || 'Invalid Email or Password' })
+          res.status(401).send({ error: err || 'Invalid Email or Password' })
         })
     })
     .catch(err => {
-      res.send({
+      res.status(401).send({
         error: err,
         message: 'Invalid Email or Password'
       })
@@ -58,11 +58,14 @@ router.delete('/logout', (req, res) => {
 
 router.get('/authenticate', (req,res) => {
   Users.findById(req.session.uid).then(user => {
+    if(!user){
+      return res.status(401).send({"error": "Please login"})
+    }
     return res.send ({
       data: user
     })
   }).catch(err=>{
-    return res.send({
+    return res.status(401).send({
       error:err
     })
   })
