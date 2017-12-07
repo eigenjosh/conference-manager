@@ -9,7 +9,8 @@ const actions = {
 const models = {
   event: {
     name: 'Event',
-    endpoint: 'events'
+    endpoint: 'events',
+    useCustomRoutes: true
   },
   activity: {
     name: 'Activity',
