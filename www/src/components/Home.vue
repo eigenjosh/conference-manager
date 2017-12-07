@@ -12,55 +12,47 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand">Confer</a>
+                    <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Login</button>
+                    
+                                            <!-- Trigger the SIGN UP modal -->
+                                            <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
                 </div>
 
                 <!-- MENU DROWDOWN -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MENU
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <button type="button" class="btn navbar-btn">Find Events</button>
-                                </li>
-                                <li>
-                                    <button type="button" class="btn navbar-btn">Event Schedule</button>
-                                </li>
-                                <li role="separator" class="divider"></li>
-                                <li>
-                                    <button type="button" class="btn navbar-btn">My Schedule</button>
-                                </li>
-                                <li>
-                                    <button type="button" class="btn navbar-btn">My Notes</button>
-                                </li>
-                                <li role="separator" class="divider"></li>
-                                <li>
-                                    <button type="button" class="btn navbar-btn">Login</button>
-                                </li>
-                                <li>
-                                    <button type="button" class="btn navbar-btn">Logout</button>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                <div class="collapse navbar-collapse text-left" id="bs-example-navbar-collapse-1">
+                    
+                               <ul>
+                                    <li>
+
+                                        <router-link :to="{name: findEvents}"> <button type="button" class="btn btn-default">Find Events</button></router-link>
+                                    </li>
+                                   <li>
+
+                                       <router-link :to="eventSchedule"><button type="button" class="btn btn-default">Event Schedule</button></router-link>
+                                    </li>
+                                   
+                                   <li>
+
+                                       <router-link :to="mySchedule"><button type="button" class="btn btn-default">My Schedule</button></router-link>
+                                    </li>
+                                   <li>
+
+                                       <router-link :to="userNotes"><button type="button" class="btn btn-default">My Notes</button></router-link>
+                                    </li>
+                                   
+                                   
+                                </ul>
+                             
+                     
                     <!-- SEARCH BAR -->
-                    <form class="navbar-form navbar-left">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                        </div>
-                        <!-- SUBMIT BUTTON -->
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
+                    
                     <ul class="nav navbar-nav navbar-right">
                         <!-- LOGIN BUTTON -->
 
                         <!-- Trigger the LOGIN modal -->
-                        <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Login</button>
-
                         <!-- Trigger the SIGN UP modal -->
-                        <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
+                       
+
 
                     </ul>
                 </div>

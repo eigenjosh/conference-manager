@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <h1>{{event.name}}</h1>
+                    <h1>event name</h1>
                 </div>
             </div>
             <div class="row">
@@ -17,8 +17,8 @@
             </div>
             <div class="row" v-for="activity in activities">
                 <button type="button" data-toggle="modal">
-                    <p>{{activity.startTime}}</p>
-                    <h3>{{activitiy.name}}</h3>
+                    <!-- <p>{{activity.startTime}}</p>
+                    <h3>{{activitiy.name}}</h3> -->
                 </button>
             </div>
             <div class="row">
