@@ -20,39 +20,100 @@ vue.use(vuex)
 var store = new vuex.Store({
   state: {
     error: {},
-    activeUser:{},
-    schedule:{},
+    activeUser: {},
+    schedule: {},
+    user: {}
   },
   mutations: {
-    handleError(state, err){
+    
+    //SET USER
+    setUser(state, user) {
+      state.user = user
+    },
+
+    //HANDLE ERROR
+    handleError(state, err) {
       state.error = err
     },
-    setSchedule(state, activities){
-      activities = activities.sort((a,b)=>{
-       return Number(a.startTime) - Number(b.startTime)
+
+    //SET & DISPLAY SCHEDULE
+    setSchedule(state, activities) {
+      activities = activities.sort((a, b) => {
+        return Number(a.startTime) - Number(b.startTime)
       })
-      activities.forEach(activity=>{
-        if(!schedule.hasOwnProperty(activity.start)){
-          schedule[activity.start]=[activity]
-        }else{
+      activities.forEach(activity => {
+        if (!schedule.hasOwnProperty(activity.start)) {
+          schedule[activity.start] = [activity]
+        } else {
           schedule[activity.start].push(activity)
         }
       })
     },
   },
   actions: {
-    //when writing your auth routes (login, logout, register) be sure to use auth instead of api for the posts
 
-    handleError({commit, dispatch}, err){
-      commit('handleError', err)
+    //LOGIN AND REGISTER
+
+    //LOGIN
+    login({ commit, dispatch }, payload) {
+      debugger
+      auth.post('login', payload)
+        .then(res => {
+          commit('setUser', res.data.data)
+          router.push({ name: 'Home' })
+        })
+        .catch(err => { commit('handleError', err)
+          
+      })
     },
-    getActivities({commit, dispatch}, event){
-      api('/events/'+ event._id + '/activites')
-        .then(res =>{
+
+    //REGISTER
+    register({ commit, dispatch }, payload) {
+      auth.post('register', payload)
+        .then(res => {
+          commit('setUser', res.data.data)
+          router.push({ name: 'Home' })
+        })
+        .catch((err) => {
+          { commit('handleError', err) }
+        })
+    },
+
+    //AUTHENTICATE
+    authenticate({ commit, dispatch }) {
+      auth('authenticate')
+        .then(res => {
+          commit('setUser', res.data.data)
+          router.push({ name: 'Home' })
+        })
+        .catch(() => {
+          router.push({ name: 'Home' })
+        })
+    },
+
+    //LOGOUT
+    logout({ commit, dispatch }) {
+      auth.delete('logout')
+        .then((user) => {
+          user = {}
+          commit('setUser', user)
+          router.push({ name: 'Home' })
+        })
+    },
+
+    //GET ACTIVITIES BY EVENT ID
+    getActivities({ commit, dispatch }, event) {
+      api('/events/' + event._id + '/activites')
+        .then(res => {
           commit('setSchedule', activities)
         })
     }
-  }
+  },
+
+  //HANDLE ERROR
+  handleError({ commit, dispatch }, err) {
+    commit('handleError', err)
+  },
 
 })
 
