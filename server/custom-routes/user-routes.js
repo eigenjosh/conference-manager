@@ -45,7 +45,7 @@ module.exports = {
   },
 
   //TODO: Figure out how to best handle adding/deleting events and activities from array on user
-  /*
+
   addUserActivity: {
     path: '/useractivities',
     reqType: 'put',
@@ -74,7 +74,7 @@ module.exports = {
         })
     }
   },
-  
+
   addUserEvent: {
     path: '/userevents',
     reqType: 'put',
@@ -96,18 +96,21 @@ module.exports = {
       let action = 'Remove User Event'
       Users.find({ _id: req.session.uid })
         .then(user => {
-          user.activities = user.activities.filter(function(activity){
-            return !(activity.eventId === req.params.eventId)
+          user.activities = user.activities.filter(function (activity) {
+            return !(activity.eventId == req.params.eventId)
           })
+          //need another .then before update?
           user.update()
-          return res.send(handleResponse(action, { message: 'Successfully removed event from user.' }))
+            .then(data => {
+              return res.send(handleResponse(action, { message: 'Successfully removed event from user.' }))
+            })
         })
         .catch(error => {
           return next(handleResponse(action, null, error))
         })
     }
   },
-  */
+
 
   // filter activities by user and event server-side instead of on frontend:
   userActivitiesByEventId: {
