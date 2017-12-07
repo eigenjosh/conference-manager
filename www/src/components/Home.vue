@@ -80,7 +80,7 @@
                         <h4 class="modal-title">Sign in to your account</h4>
                     </div>
                     <div class="modal-body">
-                        <form id="login" class="form" @submit.prevent="">
+                        <form id="login" class="form" @submit.prevent="submitLogin">
                             <div class="form-group">
                                 <label for="email">Email:</label>
                                 <input type="email" name="email" class="form-control" placeholder="Email" required v-model='login.email'>
@@ -114,7 +114,7 @@
                         <h4 class="modal-title">Create a Confer Account</h4>
                     </div>
                     <div class="modal-body">
-                        <form id="login" class="form" @submit.prevent="">
+                        <form id="login" class="form" @submit.prevent="submitRegister">
                             <div class="form-group">
                                 <label for="firstName">First Name:</label>
                                 <input type="firstName" name="firstName" class="form-control" placeholder="First Name" required v-model="signUp.firstName">
