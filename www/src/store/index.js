@@ -25,13 +25,7 @@ var store = new vuex.Store({
       '8:00':[{name: 'im here', startTime: '0800'},{name:'display me', startTime: '0815'},{name: 'start new row??', startTime:'0830'}],
       '9:00':[{name: 'is this different?', startTime: '0900'},{name: 'i hope this worked', startTime:'0900'}]
     },
-    userSchedule:{},
-<<<<<<< HEAD
-=======
-    user: {},
-    events: [],
-    activeEvent: {}
->>>>>>> 1e5f9f5b3592fc352bc3585b46938399d45e8e01
+    userSchedule:{}
   },
   mutations: {
     
