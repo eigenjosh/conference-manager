@@ -22,8 +22,14 @@ var store = new vuex.Store({
     error: {},
     activeUser: {},
     schedule: {
-      '8:00': [{ name: 'im here', startTime: '0800' }, { name: 'display me', startTime: '0815' }, { name: 'start new row??', startTime: '0830' }],
-      '9:00': [{ name: 'is this different?', startTime: '0900' }, { name: 'i hope this worked', startTime: '0900' }]
+      '2017-12-08':{
+        '8:00': [{ name: 'im here', startTime: '0800', endTime:'0900', date:'2017-12-08' }, { name: 'display me', startTime: '0815', endTime:'0900', date:'2017-12-08' }, { name: 'start new row??', startTime: '0830', endTime:'0930', date:'2017-12-08' }],
+        '9:00': [{ name: 'is this different?', startTime: '0900', endTime:'1000', date:'2017-12-08' }, { name: 'i hope this worked', startTime: '0900', endTime:'1000', date:'2017-12-08' }]
+      },
+      '2017-12-09':{
+        '8:00': [{ name: 'im here', startTime: '0800' , endTime:'0900', date:'2017-12-09'}, { name: 'display me', startTime: '0815' , endTime:'0900', date:'2017-12-09'}, { name: 'start new row??', startTime: '0830', endTime:'0930', date:'2017-12-09' }],
+        '9:00': [{ name: 'is this different?', startTime: '0900' , endTime:'1000', date:'2017-12-09'}, { name: 'i hope this worked', startTime: '0900', endTime:'1000', date:'2017-12-09' }]
+      }
     },
     userSchedule: {},
     events: [],
@@ -45,15 +51,24 @@ var store = new vuex.Store({
     //SET & DISPLAY SCHEDULE
     setSchedule(state, activities) {
       activities = activities.sort((a, b) => {
-        return Number(a.startTime) - Number(b.startTime)
+        return Date.parse(a.date) - Date.parse(b.date)
       })
-      activities.forEach(activity => {
-        if (!schedule.hasOwnProperty(activity.start)) {
-          schedule[activity.start] = [activity]
-        } else {
-          schedule[activity.start].push(activity)
+      activities.forEach(activity =>{
+        if(!state.schedule.hasOwnProperty(activity.date)){
+          state.schedule[activity.date] = {}
         }
       })
+      activities = activities.sort((a, b) => {
+        return parseInt(a.startTime) - parseInt(b.startTime)
+      })
+      activities.forEach(activity =>{
+        if(!state.schedule[activity.date].hasOwnProperty(activity.startTime)){
+          state.schedule[activity.date][activity.startTime] = [activity]
+        }else{
+          state.schedule[activity.date][activity.startTime].push(activity)
+        }
+      })
+
     },
     //SET EVENTS
     setEvents(state, data) {
@@ -133,6 +148,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     }
+   
   },
 
 
