@@ -165,7 +165,7 @@
 
             </div>
         </div>
-
+        <!-- Create new event modal -->
         <div id="myModal3" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
@@ -288,7 +288,19 @@
                 this.$store.dispatch('logout')
             },
             createEvent() {
-                console.log(this.event)
+                //console.log(this.event)
+                this.$store.dispatch('createEvent', this.event)
+                this.event = {
+                    name: '',
+                    description: '',
+                    venue: '',
+                    address: '',
+                    city: '',
+                    state: '',
+                    zip: '',
+                    startDate: '',
+                    endDate: ''
+                }
 
             }
         }
