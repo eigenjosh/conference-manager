@@ -91,9 +91,13 @@
             </form>
             <div v-for="event in events" class="row event-row">
                 <div class="col-xs-offset-2 col-xs-8 col-sm-offset-1 col-sm-10">
-                    <h2>{{event.name}}</h2>
-                    <h3>{{event.startDate}} - {{event.endDate}}</h3>
-                    <h3>{{event.description}}</h3>
+                   <router-link :to="{name: 'eventSchedule'}">
+                       <button class="btn btn-default event-btn" >
+                           <h2>{{event.name}}</h2>
+                           <h3>{{event.startDate}} - {{event.endDate}}</h3>
+                           <h3>{{event.description}}</h3>
+                        </button>
+                    </router-link>
                     <!--<router-link :to="'events/'+event.id">
                     
                 </router-link>-->
@@ -300,6 +304,10 @@
                     password: ''
                 }
             },
+            seteActiveEvent(event){
+                debugger
+                this.$store.dispatch('getEventById', event)
+            },
             findEvents() {
                 this.$store.dispatch('findEvents', this.search.location)
                 this.search.location = ''
@@ -340,7 +348,8 @@
 </script>
 
 <style scoped>
-    .event-row {
-        border: 1px solid #000;
+    
+    .event-btn{
+        width: 100%;
     }
 </style>

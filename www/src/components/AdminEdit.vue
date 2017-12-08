@@ -223,8 +223,8 @@
         },
         methods: {
             addActivity(){
-                debugger
-                this.$store.dispatch('addActivity')
+                
+                this.$store.dispatch('addActivity', this.activity)
             },
             setActiveActivity(activity){
                 
