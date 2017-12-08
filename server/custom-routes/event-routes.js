@@ -14,6 +14,19 @@ module.exports = {
                     return next(handleResponse(action, null, error))
                 })
         }
+    },
+    getEventsByLocation: {
+        path: '/findevents/:location',
+        reqType: 'get',
+        method(req, res, next) {
+            let action = 'Find Activities By Location'
+            Events.find({ city: req.params.location})
+                .then(events => {
+                    res.send(handleResponse(action, events))
+                }).catch(error => {
+                    return next(handleResponse(action, null, error))
+                })
+        }
     }
 }
 

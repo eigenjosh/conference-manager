@@ -39,7 +39,7 @@
         },
         methods: {
             findEvents() {
-                //this.$store.dispatch('createBoard', this.newBoard)
+                this.$store.dispatch('findEvents', this.search.location)
                 this.search.location = ''
             }
         }
