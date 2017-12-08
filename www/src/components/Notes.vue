@@ -66,8 +66,13 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
+                            <label for="title">Note Title:</label>
+                            <input type="text" name="title" class="form-control" placeholder="Title..." required v-model='note.title'>
+                        </div>
+                        <div class="form-group">
                             <label for="note-body"></label>
                             <textarea type="text" name="note-body" class="form-control" rows="5" placeholder="Add note..." required v-model="note.body"></textarea>
+                            <button type="submit" class="btn btn-default" @click="createNote" data-dismiss="modal">Add Note</button>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -78,15 +83,43 @@
             </div>
         </div>
 
-        <div class="container">
-            <h2 class="text-center">
-                <h1>User Notes</h1>
-            </h2>
-            <!-- <div v-for="note in userNotes" class="row">
+        <div class="container-fluid">
+            <div class="row">
                 <div class="col-xs-12">
-                    <h1>{{note.body}}</h1>
+                    <h2 class="text-center">
+                        <h1>User Notes</h1>
+                    </h2>
                 </div>
-            </div> -->
+            </div>
+            <div v-for="userNote in userNotes" class="row well">
+                <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal2">
+                    <div class="col-xs-12">
+                        <h1>{{userNote.title}}</h1>
+                    </div>
+                </button>
+                <!-- <div class="col-xs-12">
+                    <h4>{{userNote.body}}</h4>
+                </div> -->
+            </div>
+        </div>
+
+        <div v-for="userNote in userNotes" class="modal-notes">
+            <div id="myModal2" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4>{{userNote.title}}</h4>
+                            <p>{{userNote.body}}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -97,9 +130,13 @@
         data() {
             return {
                 note: {
+                    title: '',
                     body: ''
                 }
             }
+        },
+        mounted() {
+            this.$store.dispatch('getAllUserNotes', this.note.creatorId)
 
         },
         computed: {
@@ -113,6 +150,9 @@
         methods: {
             logout() {
                 this.$store.dispatch('logout')
+            },
+            createNote() {
+                this.$store.dispatch('createNote', this.note)
             }
         }
     }

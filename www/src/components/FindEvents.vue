@@ -75,7 +75,7 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
-        <div class="container">
+        <div class="container-fluid">
             <h1>Find Events</h1>
             <form id="find-events" class="form" @submit.prevent="findEvents">
                 <div class="form-group">
