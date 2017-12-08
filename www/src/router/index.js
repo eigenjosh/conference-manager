@@ -6,6 +6,7 @@ import Notes from 'components/Notes'
 import FindEvents from 'components/FindEvents'
 import EventSchedule from 'components/EventSchedule'
 import MySchedule from 'components/MySchedule'
+import AdminEdit from 'components/AdminEdit'
 
 Vue.use(Router)
 
@@ -41,6 +42,10 @@ export default new Router({
       name: 'mySchedule',
       component: MySchedule
     },
-   
+    {
+    path: '/admin-edit',
+    name: 'adminEdit',
+    component: AdminEdit
+  },
   ]
 })

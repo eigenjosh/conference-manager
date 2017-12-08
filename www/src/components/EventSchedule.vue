@@ -162,11 +162,13 @@
                 <div class="col-xs-6">
                     <!-- <h2>{{activeEvent.name}}</h2> -->
                 </div>
-                <div class="col-xs-6 text-right" v-if="!activeUser._id === event.creatorId">
+                <div class="col-xs-6 text-right" >
                     <button class="btn btn-primary btn-lg">Join Event</button>
                 </div>
-                <div class="col-xs-6 text-right" v-else>
-                        <button class="btn btn-warning btn-lg">Return to Edit Schedule</button>
+                <div class="col-xs-6 text-right" >
+                    <router-link :to="{name: 'adminEvent'}">
+                        <button class="btn btn-warning btn-lg">Edit Schedule</button>
+                    </router-link>
                     </div>
             </div>
             <div class="row" v-for="(timeDict, date) in schedule">
