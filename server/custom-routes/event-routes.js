@@ -28,13 +28,19 @@ module.exports = {
                 })
         }
     },
-    /*
     getEventsByProperties: {
         path: '/findevents?city=:city&state=:state&zip=:zip&venue=:venue',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find Activities By Properties'
-            Events.find({ city: req.params.location})
+            console.log('request parameters for get Events: ', req.params)
+            var query = {}
+            for (var prop in req.params) {
+               if(req.params[prop]) {
+                   query[prop] = req.params[prop]
+               }
+            }
+            Events.find(query)
                 .then(events => {
                     res.send(handleResponse(action, events))
                 }).catch(error => {
@@ -42,7 +48,6 @@ module.exports = {
                 })
         }
     }
-    */
 }
 
 function handleResponse(action, data, error) {
