@@ -49,7 +49,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-6">
-                    <h2>{{activeEvent.name}}</h2>
+                    <!-- <h2>{{activeEvent.name}}</h2> -->
                 </div>
                 <div class="col-xs-6 text-right">
                     <button class="btn btn-primary btn-lg">Join Event</button>
