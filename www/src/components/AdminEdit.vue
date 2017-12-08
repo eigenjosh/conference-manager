@@ -123,22 +123,22 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">{{activity.name}}</h4>
+                            <h4 class="modal-title">{{activeActivity.name}}</h4>
                         </div>
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <h3>{{activity.date}}  {{activity.startTime}}-{{activity.endTime}}</h3>
-                                    <h2>{{activity.name}}</h2>
+                                    <h3>{{activeActivity.date}}  {{activeActivity.startTime}}-{{activeActivity.endTime}}</h3>
+                                    <h2>{{activeActivity.name}}</h2>
                                 </div>
                                 <div class="col-xs-6">
-                                    <h3>{{activity.speakerName}}</h3>
-                                    <h2>{{activity.location}}-seats available:{{activity.capacity}}</h2>
+                                    <h3>{{activeActivity.speakerName}}</h3>
+                                    <h2>{{activeActivity.location}}-seats available:{{activeActivity.capacity}}</h2>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <p>{{activity.description}}</p>
+                                    <p>{{activeActivity.description}}</p>
                                 </div>
                             </div>
                         </div>
@@ -172,7 +172,7 @@
                         <h3>{{time}}</h3>
                     </div>
                     <div class="col-xs-12 col-md-3" v-for="activity in activitiesList">
-                        <button data-toggle="modal" data-target="#myModalDetails" class="btn btn-primary activities">
+                        <button data-toggle="modal" data-target="#myModalDetails" @click="setActiveActivity(activity)"class="btn btn-primary activities">
                             <h5>{{activity.date}} {{activity.startTime}} - {{activity.endTime}}</h5>
                             <h4>{{activity.name}}</h4>
                             <i class="fa fa-pencil pull-right" aria-hidden="true"></i>
@@ -208,6 +208,9 @@
             this.date = new Date().toJSON().split('T')[0];
         },
         computed: {
+            activeActivity(){
+                return this.$store.state.activeActivity
+            },
             activeUser() {
                 return this.$store.state.activeUser
             },
@@ -220,7 +223,12 @@
         },
         methods: {
             addActivity(){
+                debugger
                 this.$store.dispatch('addActivity')
+            },
+            setActiveActivity(activity){
+                
+                this.$store.dispatch('getActivityById', activity)
             },
             logout() {
                 this.$store.dispatch('logout')

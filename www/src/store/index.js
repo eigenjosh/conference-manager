@@ -34,7 +34,8 @@ var store = new vuex.Store({
     userSchedule: {},
     events: [],
     activeEvent: {},
-    userNotes: [{}]
+    userNotes: [{}],
+    activeActivity: {}
   },
   mutations: {
 
@@ -76,6 +77,10 @@ var store = new vuex.Store({
       state.events = data
       console.log(state.events)
     },
+    setActiveActivity(state, data){
+      state.activeActivity = {}
+      state.activeActivity = data
+    }
   },
   actions: {
 
@@ -164,14 +169,32 @@ var store = new vuex.Store({
         .catch(err => {
           commit('handleError', err)
         })
-    }
+    },
+    getActivityById({commit, dispatch}, activity){
+      api('activity/' + activity._id)
+        .then(res => {
+          commit('setActiveActivity', res)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    addActivity({commit, dispatch}, activity){
+      api.post('activities', activity)
+        .then(res => {
+          dispatch('getActivities', {_id: activity.eventId})
+        })
+        .catch(err=>{
+          commit('handleError', err)
+        })
+    },
+  
+  
+    //HANDLE ERROR
+    handleError({ commit, dispatch }, err) {
+      commit('handleError', err)
+    },
    
-  },
-
-
-  //HANDLE ERROR
-  handleError({ commit, dispatch }, err) {
-    commit('handleError', err)
   },
 
 })

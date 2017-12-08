@@ -14,7 +14,7 @@ const models = {
   },
   activity: {
     name: 'Activity',
-    endpoint: 'activites'
+    endpoint: 'activities'
   },
   note: {
     name: 'Note',
