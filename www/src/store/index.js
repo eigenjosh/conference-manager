@@ -158,7 +158,7 @@ var store = new vuex.Store({
     createEvent({ commit, dispatch }, event) {
       api.post('events/', event)
         .then(res => {
-          console.log('res to create event: ', res)
+          console.log('res to create event: ', res.data.data)
           dispatch('getAllEvents')
         })
         .catch(err => {
@@ -168,7 +168,7 @@ var store = new vuex.Store({
     getActivityById({commit, dispatch}, activity){
       api('activities/' + activity._id)
         .then(res => {
-          commit('setActiveActivity', res)
+          commit('setActiveActivity', res.data.data)
         })
         .catch(err => {
           commit('handleError', err)
@@ -177,7 +177,7 @@ var store = new vuex.Store({
     getEventById({commit, dispatch}, event){
       api('events/' + event._id)
         .then(res => {
-          commit('setActiveEvent', res)
+          commit('setActiveEvent', res.data.data)
         })
         .catch(err => {
           commit('handleError', err)

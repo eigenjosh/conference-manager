@@ -92,7 +92,7 @@
             <div v-for="event in events" class="row event-row">
                 <div class="col-xs-offset-2 col-xs-8 col-sm-offset-1 col-sm-10">
                    <router-link :to="{name: 'eventSchedule'}">
-                       <button class="btn btn-default event-btn" >
+                       <button class="btn btn-default event-btn" @click="setActiveEvent(event)">
                            <h2>{{event.name}}</h2>
                            <h3>{{event.startDate}} - {{event.endDate}}</h3>
                            <h3>{{event.description}}</h3>
@@ -304,7 +304,7 @@
                     password: ''
                 }
             },
-            seteActiveEvent(event){
+            setActiveEvent(event){
                 debugger
                 this.$store.dispatch('getEventById', event)
             },

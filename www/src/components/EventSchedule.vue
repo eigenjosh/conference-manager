@@ -162,14 +162,14 @@
                 <div class="col-xs-6">
                     <!-- <h2>{{activeEvent.name}}</h2> -->
                 </div>
-                <div class="col-xs-6 text-right"  >
+                <div class="col-xs-6 text-right" v-if="activeUser._id != activeEvent.creatorId">
                     <button class="btn btn-primary btn-lg">Join Event</button>
                 </div>
-                <div class="col-xs-6 text-right" >
+                <div class="col-xs-6 text-right" v-else>
                     <router-link :to="{name: 'adminEvent'}">
                         <button class="btn btn-warning btn-lg">Edit Schedule</button>
                     </router-link>
-                    </div>
+                </div>
             </div>
             <div class="row" v-for="(timeDict, date) in schedule">
                 <div class="col-xs-12 ">
@@ -181,7 +181,7 @@
                     </div>
                     <div class="col-xs-12 col-md-3" v-for="activity in activitiesList">
                         <button class="btn btn-primary activities">
-                            <h5>{{activity.date}}  {{activity.startTime}} - {{activity.endTime}}</h5>
+                            <h5>{{activity.date}} {{activity.startTime}} - {{activity.endTime}}</h5>
                             <h4>{{activity.name}}</h4>
 
                         </button>
@@ -213,12 +213,12 @@
 
             }
         },
-        mounted(){
-            this.$store.dispatch('getEventById', this.event)
+        mounted() {
+            //this.$store.dispatch('getEventById', this.event)
         },
         computed: {
-            activeEvent(){
-            this.$store.state.activeEvent
+            activeEvent() {
+                return this.$store.state.activeEvent
             },
             activeUser() {
                 return this.$store.state.activeUser
@@ -256,7 +256,7 @@
 </script>
 
 <style>
-    .activities{
-        width:100%;
+    .activities {
+        width: 100%;
     }
 </style>
