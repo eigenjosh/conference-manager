@@ -33,7 +33,8 @@ var store = new vuex.Store({
     },
     userSchedule: {},
     events: [],
-    activeEvent: {}
+    activeEvent: {},
+    userNotes: [{}]
   },
   mutations: {
 

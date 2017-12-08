@@ -1,5 +1,6 @@
 <template>
     <div class="home">
+        <!-- BEGINNING OF NAVBAR -->
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -75,6 +76,8 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
+
+        <!-- END OF NAVBAR -->
 
         <div class="jumbotron main-pic">
             <div class="row">
@@ -165,6 +168,7 @@
 
             </div>
         </div>
+        
         <!-- Create new event modal -->
         <div id="myModal3" class="modal fade" role="dialog">
             <div class="modal-dialog">
