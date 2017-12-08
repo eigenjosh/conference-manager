@@ -21,16 +21,7 @@ var store = new vuex.Store({
   state: {
     error: {},
     activeUser: {},
-    schedule: {
-      '2017-12-08':{
-        '8:00': [{ name: 'im here', startTime: '0800', endTime:'0900', date:'2017-12-08' }, { name: 'display me', startTime: '0815', endTime:'0900', date:'2017-12-08' }, { name: 'start new row??', startTime: '0830', endTime:'0930', date:'2017-12-08' }],
-        '9:00': [{ name: 'is this different?', startTime: '0900', endTime:'1000', date:'2017-12-08' }, { name: 'i hope this worked', startTime: '0900', endTime:'1000', date:'2017-12-08' }]
-      },
-      '2017-12-09':{
-        '8:00': [{ name: 'im here', startTime: '0800' , endTime:'0900', date:'2017-12-09'}, { name: 'display me', startTime: '0815' , endTime:'0900', date:'2017-12-09'}, { name: 'start new row??', startTime: '0830', endTime:'0930', date:'2017-12-09' }],
-        '9:00': [{ name: 'is this different?', startTime: '0900' , endTime:'1000', date:'2017-12-09'}, { name: 'i hope this worked', startTime: '0900', endTime:'1000', date:'2017-12-09' }]
-      }
-    },
+    schedule: {},
     userSchedule: {},
     events: [],
     activeEvent: {},
@@ -76,6 +67,10 @@ var store = new vuex.Store({
     setEvents(state, data) {
       state.events = data
       console.log(state.events)
+    },
+    setActiveEvent(state, data){
+      state.activeEvent = {}
+      state.activeEvent = data
     },
     setActiveActivity(state, data){
       state.activeActivity = {}
@@ -171,9 +166,18 @@ var store = new vuex.Store({
         })
     },
     getActivityById({commit, dispatch}, activity){
-      api('activity/' + activity._id)
+      api('activities/' + activity._id)
         .then(res => {
           commit('setActiveActivity', res)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    getEventById({commit, dispatch}, event){
+      api('events/' + event._id)
+        .then(res => {
+          commit('setActiveEvent', res)
         })
         .catch(err => {
           commit('handleError', err)

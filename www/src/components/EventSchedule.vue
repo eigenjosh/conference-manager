@@ -162,7 +162,7 @@
                 <div class="col-xs-6">
                     <!-- <h2>{{activeEvent.name}}</h2> -->
                 </div>
-                <div class="col-xs-6 text-right" >
+                <div class="col-xs-6 text-right"  >
                     <button class="btn btn-primary btn-lg">Join Event</button>
                 </div>
                 <div class="col-xs-6 text-right" >
@@ -213,10 +213,13 @@
 
             }
         },
-        // mounted(){
-        //     this.$store.dispatch('getActivitesByEventId', this.event)
-        // },
+        mounted(){
+            this.$store.dispatch('getEventById', this.event)
+        },
         computed: {
+            activeEvent(){
+            this.$store.state.activeEvent
+            },
             activeUser() {
                 return this.$store.state.activeUser
             },
