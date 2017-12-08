@@ -2,6 +2,19 @@ var models = require('../config/constants').models
 let mongoose = require('mongoose')
 let ObjectId = mongoose.Schema.ObjectId
 
+/*{
+  "name": "First Annual Horse Uber Conference",
+  "description": "possibly the greatest idea ever",
+  "venue": "Kentucky Derby Raceway",
+  "address": "meh",
+  "city": "meh",
+  "state": "meh",
+  "zip": "meh",
+  "startDate": "meh",
+  "endDate": "meh"
+}
+*/
+
 var schema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
