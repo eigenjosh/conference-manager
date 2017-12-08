@@ -1,6 +1,15 @@
 <template>
     <div class="container">
         <h1>Find Events</h1>
+        <form id="find-events" class="form" @submit.prevent="findEvents">
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" name="text" class="form-control" placeholder="Location" required v-model='search.location'>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-submit btn-success" type="submit">Submit</button>
+            </div>
+        </form>
         <div v-for="event in events" class="row event-row">
             <div class="col-xs-offset-1 col-xs-10 col-sm-offset-1 col-sm-8">
                 <!--<router-link :to="'events/'+event.id">
@@ -16,12 +25,23 @@
 <script>
     export default {
         name: 'findEvents',
+        data() {
+            return {
+                search: {
+                    location: ''
+                }
+            }
+        },
         computed: {
-            /*
             events() {
                 return this.$store.state.events
             }
-            */
+        },
+        methods: {
+            findEvents() {
+                //this.$store.dispatch('createBoard', this.newBoard)
+                this.search.location = ''
+            }
         }
     }
 </script>
