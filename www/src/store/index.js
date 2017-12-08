@@ -87,7 +87,6 @@ var store = new vuex.Store({
         .then(res => {
           console.log("successful login")
           commit('setUser', res.data.data)
-          router.push({ name: 'Home' })
         })
         .catch(err => {
           commit('handleError', err)
@@ -101,7 +100,6 @@ var store = new vuex.Store({
       auth.post('register', payload)
         .then(res => {
           commit('setUser', res.data.data)
-          router.push({ name: 'Home' })
         })
         .catch((err) => {
           { commit('handleError', err) }
@@ -113,10 +111,10 @@ var store = new vuex.Store({
       auth('authenticate')
         .then(res => {
           commit('setUser', res.data.data)
-          router.push({ name: 'Home' })
+          
         })
         .catch(() => {
-          router.push({ name: 'Home' })
+          
         })
     },
 
@@ -129,7 +127,13 @@ var store = new vuex.Store({
           router.push({ name: 'Home' })
         })
     },
-
+    //GET ALL EVENTS
+    getAllEvents({ commit, dispatch }) {
+      api('/events')
+        .then(res => {
+          commit('setEvents', res.data.data)
+        })
+    },
     //GET ACTIVITIES BY EVENT ID
     getActivities({ commit, dispatch }, event) {
       api('/events/' + event._id + '/activites')
@@ -143,6 +147,18 @@ var store = new vuex.Store({
         .then(res => {
           console.log('res to findEvents: ', res)
           commit('setEvents', res.data.data)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
+    //CREATE NEW EVENT
+    createEvent({ commit, dispatch }, event) {
+      api.post('events/', event)
+        .then(res => {
+          console.log('res to create event: ', res)
+          dispatch('getAllEvents')
         })
         .catch(err => {
           commit('handleError', err)
