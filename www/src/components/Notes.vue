@@ -66,8 +66,13 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
+                            <label for="title">Note Title:</label>
+                            <input type="text" name="title" class="form-control" placeholder="Title..." required v-model='note.title'>
+                        </div>
+                        <div class="form-group">
                             <label for="note-body"></label>
                             <textarea type="text" name="note-body" class="form-control" rows="5" placeholder="Add note..." required v-model="note.body"></textarea>
+                            <button type="submit" class="btn btn-default" @click="createNote" data-dismiss="modal">Add Note</button>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -79,14 +84,21 @@
         </div>
 
         <div class="container">
-            <h2 class="text-center">
-                <h1>User Notes</h1>
-            </h2>
-            <!-- <div v-for="note in userNotes" class="row">
+            <div class="row">
                 <div class="col-xs-12">
-                    <h1>{{note.body}}</h1>
+                    <h2 class="text-center">
+                        <h1>User Notes</h1>
+                    </h2>
                 </div>
-            </div> -->
+            </div>
+            <div v-for="userNote in userNotes" class="row well">
+                    <div class="col-xs-12">
+                            <h1>{{userNote.title}}</h1>
+                        </div>
+                <div class="col-xs-12">
+                    <h4>{{userNote.body}}</h4>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -97,9 +109,13 @@
         data() {
             return {
                 note: {
+                    title: '',
                     body: ''
                 }
             }
+        },
+        mounted() {
+            this.$store.dispatch('getAllUserNotes', this.note.creatorId)
 
         },
         computed: {
@@ -113,6 +129,9 @@
         methods: {
             logout() {
                 this.$store.dispatch('logout')
+            },
+            createNote() {
+                this.$store.dispatch('createNote', this.note)
             }
         }
     }

@@ -46,40 +46,46 @@ var store = new vuex.Store({
       activities = activities.sort((a, b) => {
         return Date.parse(a.date) - Date.parse(b.date)
       })
-      activities.forEach(activity =>{
-        if(!state.schedule.hasOwnProperty(activity.date)){
+      activities.forEach(activity => {
+        if (!state.schedule.hasOwnProperty(activity.date)) {
           state.schedule[activity.date] = {}
         }
       })
       activities = activities.sort((a, b) => {
         return parseInt(a.startTime) - parseInt(b.startTime)
       })
-      activities.forEach(activity =>{
-        if(!state.schedule[activity.date].hasOwnProperty(activity.startTime)){
+      activities.forEach(activity => {
+        if (!state.schedule[activity.date].hasOwnProperty(activity.startTime)) {
           state.schedule[activity.date][activity.startTime] = [activity]
-        }else{
+        } else {
           state.schedule[activity.date][activity.startTime].push(activity)
         }
       })
 
     },
+
     //SET EVENTS
     setEvents(state, data) {
       state.events = data
       console.log(state.events)
     },
-    setActiveEvent(state, data){
+    setActiveEvent(state, data) {
       state.activeEvent = {}
       state.activeEvent = data
     },
-    setActiveActivity(state, data){
+    setActiveActivity(state, data) {
       state.activeActivity = {}
       state.activeActivity = data
+    },
+
+    // SET USER NOTES
+    setUserNotes(state, data) {
+      state.userNotes = data
     }
   },
   actions: {
 
-    //LOGIN AND REGISTER
+    //***LOGIN AND REGISTER***
 
     //LOGIN
     login({ commit, dispatch }, payload) {
@@ -112,10 +118,10 @@ var store = new vuex.Store({
       auth('authenticate')
         .then(res => {
           commit('setUser', res.data.data)
-          
+
         })
         .catch(() => {
-          
+
         })
     },
 
@@ -128,6 +134,9 @@ var store = new vuex.Store({
           router.push({ name: 'Home' })
         })
     },
+
+    //*** EVENTS/ACTIVITIES ***/
+
     //GET ALL EVENTS
     getAllEvents({ commit, dispatch }) {
       api('/events')
@@ -165,7 +174,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    getActivityById({commit, dispatch}, activity){
+    getActivityById({ commit, dispatch }, activity) {
       api('activities/' + activity._id)
         .then(res => {
           commit('setActiveActivity', res)
@@ -174,7 +183,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    getEventById({commit, dispatch}, event){
+    getEventById({ commit, dispatch }, event) {
       api('events/' + event._id)
         .then(res => {
           commit('setActiveEvent', res)
@@ -183,24 +192,43 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    addActivity({commit, dispatch}, activity){
+    addActivity({ commit, dispatch }, activity) {
       debugger
       api.post('activities', activity)
         .then(res => {
           console.log(res)
-          dispatch('getActivities', {_id: activity.eventId})
+          dispatch('getActivities', { _id: activity.eventId })
         })
-        .catch(err=>{
+        .catch(err => {
           commit('handleError', err)
         })
     },
-  
-  
+
+    // CREATE NOTE
+    createNote({ commit, dispatch }, note) {
+      api.post('notes', note)
+        .then(res => {
+          console.log(res)
+          dispatch('getAllUserNotes')
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
+    // GET ALL USER NOTES
+    getAllUserNotes({ commit, dispatch }) {
+      api.get('usernotes')
+        .then(res => {
+          commit('setUserNotes', res.data.data)
+        })
+    },
+
     //HANDLE ERROR
     handleError({ commit, dispatch }, err) {
       commit('handleError', err)
     },
-   
+
   },
 
 })
