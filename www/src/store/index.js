@@ -22,13 +22,13 @@ var store = new vuex.Store({
     error: {},
     activeUser: {},
     schedule: {
-      '2017-12-08':{
-        '8:00': [{ name: 'im here', startTime: '0800', endTime:'0900', date:'2017-12-08' }, { name: 'display me', startTime: '0815', endTime:'0900', date:'2017-12-08' }, { name: 'start new row??', startTime: '0830', endTime:'0930', date:'2017-12-08' }],
-        '9:00': [{ name: 'is this different?', startTime: '0900', endTime:'1000', date:'2017-12-08' }, { name: 'i hope this worked', startTime: '0900', endTime:'1000', date:'2017-12-08' }]
+      '2017-12-08': {
+        '8:00': [{ name: 'im here', startTime: '0800', endTime: '0900', date: '2017-12-08' }, { name: 'display me', startTime: '0815', endTime: '0900', date: '2017-12-08' }, { name: 'start new row??', startTime: '0830', endTime: '0930', date: '2017-12-08' }],
+        '9:00': [{ name: 'is this different?', startTime: '0900', endTime: '1000', date: '2017-12-08' }, { name: 'i hope this worked', startTime: '0900', endTime: '1000', date: '2017-12-08' }]
       },
-      '2017-12-09':{
-        '8:00': [{ name: 'im here', startTime: '0800' , endTime:'0900', date:'2017-12-09'}, { name: 'display me', startTime: '0815' , endTime:'0900', date:'2017-12-09'}, { name: 'start new row??', startTime: '0830', endTime:'0930', date:'2017-12-09' }],
-        '9:00': [{ name: 'is this different?', startTime: '0900' , endTime:'1000', date:'2017-12-09'}, { name: 'i hope this worked', startTime: '0900', endTime:'1000', date:'2017-12-09' }]
+      '2017-12-09': {
+        '8:00': [{ name: 'im here', startTime: '0800', endTime: '0900', date: '2017-12-09' }, { name: 'display me', startTime: '0815', endTime: '0900', date: '2017-12-09' }, { name: 'start new row??', startTime: '0830', endTime: '0930', date: '2017-12-09' }],
+        '9:00': [{ name: 'is this different?', startTime: '0900', endTime: '1000', date: '2017-12-09' }, { name: 'i hope this worked', startTime: '0900', endTime: '1000', date: '2017-12-09' }]
       }
     },
     userSchedule: {},
@@ -55,36 +55,44 @@ var store = new vuex.Store({
       activities = activities.sort((a, b) => {
         return Date.parse(a.date) - Date.parse(b.date)
       })
-      activities.forEach(activity =>{
-        if(!state.schedule.hasOwnProperty(activity.date)){
+      activities.forEach(activity => {
+        if (!state.schedule.hasOwnProperty(activity.date)) {
           state.schedule[activity.date] = {}
         }
       })
       activities = activities.sort((a, b) => {
         return parseInt(a.startTime) - parseInt(b.startTime)
       })
-      activities.forEach(activity =>{
-        if(!state.schedule[activity.date].hasOwnProperty(activity.startTime)){
+      activities.forEach(activity => {
+        if (!state.schedule[activity.date].hasOwnProperty(activity.startTime)) {
           state.schedule[activity.date][activity.startTime] = [activity]
-        }else{
+        } else {
           state.schedule[activity.date][activity.startTime].push(activity)
         }
       })
 
     },
+
     //SET EVENTS
     setEvents(state, data) {
       state.events = data
       console.log(state.events)
     },
-    setActiveActivity(state, data){
+
+    //SET ACTIVE ACTIVITY
+    setActiveActivity(state, data) {
       state.activeActivity = {}
       state.activeActivity = data
+    },
+
+    // SET USER NOTES
+    setUserNotes(state, data) {
+      state.userNotes = data
     }
   },
   actions: {
 
-    //LOGIN AND REGISTER
+    //***LOGIN AND REGISTER***
 
     //LOGIN
     login({ commit, dispatch }, payload) {
@@ -117,10 +125,10 @@ var store = new vuex.Store({
       auth('authenticate')
         .then(res => {
           commit('setUser', res.data.data)
-          
+
         })
         .catch(() => {
-          
+
         })
     },
 
@@ -133,6 +141,9 @@ var store = new vuex.Store({
           router.push({ name: 'Home' })
         })
     },
+
+    //*** EVENTS/ACTIVITIES ***/
+
     //GET ALL EVENTS
     getAllEvents({ commit, dispatch }) {
       api('/events')
@@ -170,7 +181,9 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    getActivityById({commit, dispatch}, activity){
+
+    // GET ACTIVITY BY ID
+    getActivityById({ commit, dispatch }, activity) {
       api('activity/' + activity._id)
         .then(res => {
           commit('setActiveActivity', res)
@@ -179,22 +192,43 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    addActivity({commit, dispatch}, activity){
+
+    // ADD ACTIVITY
+    addActivity({ commit, dispatch }, activity) {
       api.post('activities', activity)
         .then(res => {
-          dispatch('getActivities', {_id: activity.eventId})
+          dispatch('getActivities', { _id: activity.eventId })
         })
-        .catch(err=>{
+        .catch(err => {
           commit('handleError', err)
         })
     },
-  
-  
+
+    // CREATE NOTE
+    createNote({ commit, dispatch }, note) {
+      api.post('notes', note)
+        .then(res => {
+          console.log(res)
+          dispatch('getAllUserNotes')
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
+    // GET ALL USER NOTES
+    getAllUserNotes({ commit, dispatch }) {
+      api.get('usernotes')
+        .then(res => {
+          commit('setUserNotes', res.data.data)
+        })
+    },
+
     //HANDLE ERROR
     handleError({ commit, dispatch }, err) {
       commit('handleError', err)
     },
-   
+
   },
 
 })
