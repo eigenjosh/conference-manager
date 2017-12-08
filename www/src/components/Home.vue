@@ -5,19 +5,21 @@
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                        aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand">Confer</a>
+                    aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">Confer</a>
+                <div class="text-right">
                     <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Login</button>
-
-                    <!-- Trigger the SIGN UP modal -->
                     <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
                 </div>
-
+                
+                <!-- Trigger the SIGN UP modal -->
+            </div>
+            
                 <!-- MENU DROWDOWN -->
                 <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
 
@@ -220,6 +222,9 @@
     }
     .btn-default{
         width:100%;
+    }
+    .navbar ul{
+        list-style-type: none;
     }
 
     @media (max-width: 2000px) {
