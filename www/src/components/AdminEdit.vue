@@ -223,10 +223,11 @@
         },
         methods: {
             addActivity(){
+                debugger
                 this.$store.dispatch('addActivity')
             },
             setActiveActivity(activity){
-                debugger
+                
                 this.$store.dispatch('getActivityById', activity)
             },
             logout() {

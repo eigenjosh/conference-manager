@@ -14,6 +14,7 @@ var schema = new mongoose.Schema({
 	eventId: { type: ObjectId, required: true },
 	notes: { type: [String] },
 	speakerId: { type: ObjectId },
+	speakerName: { type: String },
 	capacity: { type: Number }
 });
 
