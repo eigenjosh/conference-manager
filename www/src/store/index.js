@@ -21,7 +21,11 @@ var store = new vuex.Store({
   state: {
     error: {},
     activeUser: {},
-    schedule: {},
+    schedule: {
+      '8:00':[{name: 'im here', startTime: '0800'},{name:'display me', startTime: '0815'},{name: 'start new row??', startTime:'0830'}],
+      '9:00':[{name: 'is this different?', startTime: '0900'},{name: 'i hope this worked', startTime:'0900'}]
+    },
+    userSchedule:{},
     user: {}
   },
   mutations: {
