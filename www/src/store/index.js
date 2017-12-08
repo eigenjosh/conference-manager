@@ -179,8 +179,10 @@ var store = new vuex.Store({
         })
     },
     addActivity({commit, dispatch}, activity){
+      debugger
       api.post('activities', activity)
         .then(res => {
+          console.log(res)
           dispatch('getActivities', {_id: activity.eventId})
         })
         .catch(err=>{
