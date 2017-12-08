@@ -22,13 +22,15 @@ var store = new vuex.Store({
     error: {},
     activeUser: {},
     schedule: {
-      '8:00':[{name: 'im here', startTime: '0800'},{name:'display me', startTime: '0815'},{name: 'start new row??', startTime:'0830'}],
-      '9:00':[{name: 'is this different?', startTime: '0900'},{name: 'i hope this worked', startTime:'0900'}]
+      '8:00': [{ name: 'im here', startTime: '0800' }, { name: 'display me', startTime: '0815' }, { name: 'start new row??', startTime: '0830' }],
+      '9:00': [{ name: 'is this different?', startTime: '0900' }, { name: 'i hope this worked', startTime: '0900' }]
     },
-    userSchedule:{}
+    userSchedule: {},
+    events: [],
+    activeEvent: {}
   },
   mutations: {
-    
+
     //SET USER
     setUser(state, user) {
       state.activeUser = user
@@ -53,6 +55,11 @@ var store = new vuex.Store({
         }
       })
     },
+    //SET EVENTS
+    setEvents(state, data) {
+      state.events = data
+      console.log(state.events)
+    },
   },
   actions: {
 
@@ -67,14 +74,15 @@ var store = new vuex.Store({
           commit('setUser', res.data.data)
           router.push({ name: 'Home' })
         })
-        .catch(err => { commit('handleError', err)
-          
-      })
+        .catch(err => {
+          commit('handleError', err)
+
+        })
     },
 
     //REGISTER
     register({ commit, dispatch }, payload) {
-      
+
       auth.post('register', payload)
         .then(res => {
           commit('setUser', res.data.data)
@@ -113,8 +121,20 @@ var store = new vuex.Store({
         .then(res => {
           commit('setSchedule', activities)
         })
+    },
+    //GET EVENTS BY LOCATION
+    findEvents({ commit, dispatch }, location) {
+      api(`/findevents/${location}`)
+        .then(res => {
+          console.log('res to findEvents: ', res)
+          commit('setEvents', res.data.data)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
     }
   },
+
 
   //HANDLE ERROR
   handleError({ commit, dispatch }, err) {
