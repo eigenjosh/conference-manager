@@ -167,56 +167,58 @@
         </div>
 
         <div id="myModal3" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-    
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Create a New Event</h4>
-        
-                        </div>
-                        <div class="modal-body">
-                            <form id="login" class="form">
-                                <div class="form-group">
-                                    <label for="eventName">Event Name</label>
-                                    <input type="text" name="eventName" class="form-control" placeholder="Whats the event called?" required v-model="event.name" required>
-                                </div>
-                                <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <textarea type="text" name="description" class="form-control" rows="5"placeholder="What is this event for?" required v-model="event.description"></textarea>
-                                    </div>
-                                <div class="form-group">
-                                    <label for="startDate">Start Date:</label>
-                                    <input type="date" name="startDate" class="form-control" placeholder="Start Date" :min="date"required v-model="event.startDate" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="endDate">End Date:</label>
-                                    <input type="date" name="endDate" class="form-control" placeholder="End Date" :min="event.startDate"required v-model="event.endDate">
-                                </div>
-                                <div class="form-group">
-                                    <label for="venue">Venue:</label>
-                                    <input type="text" name="venue" class="form-control" placeholder="Venue" required v-model="event.venue">
-                                </div>
-                                <div class="form-group">
-                                    <label for="address">Address:</label>
-                                    <input type="text" name="address" class="form-control" placeholder="Venue Address" v-model="event.address.address" required>
-                                    <input type="text" name="city" class="form-control" placeholder="Venue City" v-model="event.address.city" required>
-                                    <input type="text" name="state" class="form-control" placeholder="Venue State" v-model="event.address.state" required>
-                                    <input type="text" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.address.zip" required>    
-                                </div>
-                                <div class="form-group">
-                                    <button class="btn btn-submit btn-success" data-dismiss="modal" type="submit" >Create New Event</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Create a New Event</h4>
+
                     </div>
-    
+                    <div class="modal-body">
+                        <form id="login" class="form">
+                            <div class="form-group">
+                                <label for="eventName">Event Name</label>
+                                <input type="text" name="eventName" class="form-control" placeholder="Whats the event called?" required v-model="event.name"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea type="text" name="description" class="form-control" rows="5" placeholder="What is this event for?" required v-model="event.description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="startDate">Start Date:</label>
+                                <input type="date" name="startDate" class="form-control" placeholder="Start Date" :min="date" required v-model="event.startDate"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="endDate">End Date:</label>
+                                <input type="date" name="endDate" class="form-control" placeholder="End Date" :min="event.startDate" required v-model="event.endDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="venue">Venue:</label>
+                                <input type="text" name="venue" class="form-control" placeholder="Venue" required v-model="event.venue">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address:</label>
+                                <input type="text" name="address" class="form-control" placeholder="Venue Address" v-model="event.address" required>
+                                <input type="text" name="city" class="form-control" placeholder="Venue City" v-model="event.city" required>
+                                <input type="text" name="state" class="form-control" placeholder="Venue State" v-model="event.state" required>
+                                <input type="text" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.zip" required>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-submit btn-success" data-dismiss="modal" @click="createEvent" type="submit">Create New Event</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
+
             </div>
+        </div>
 
     </div>
 </template>
@@ -241,15 +243,13 @@
                     password: ''
                 },
                 event: {
-                    name:'',
+                    name: '',
                     description: '',
                     venue: '',
-                    address:{
-                        address:'',
-                        city: '',
-                        state: '',
-                        zip: ''
-                    },
+                    address: '',
+                    city: '',
+                    state: '',
+                    zip: '',
                     startDate: '',
                     endDate: ''
                 }
@@ -286,6 +286,10 @@
             },
             logout() {
                 this.$store.dispatch('logout')
+            },
+            createEvent() {
+                console.log(this.event)
+
             }
         }
     }
