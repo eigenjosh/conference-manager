@@ -180,7 +180,7 @@
                             <form id="login" class="form">
                                 <div class="form-group">
                                     <label for="eventName">Event Name</label>
-                                    <input type="text" name="eventName" class="form-control" placeholder="Whats the event called?" required v-model="event.name">
+                                    <input type="text" name="eventName" class="form-control" placeholder="Whats the event called?" required v-model="event.name" required>
                                 </div>
                                 <div class="form-group">
                                         <label for="description">Description</label>
@@ -188,25 +188,25 @@
                                     </div>
                                 <div class="form-group">
                                     <label for="startDate">Start Date:</label>
-                                    <input type="text" name="startDate" class="form-control" placeholder="Start Date" required v-model="event.startDate">
+                                    <input type="date" name="startDate" class="form-control" placeholder="Start Date" :min="date"required v-model="event.startDate" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="endDate">End Date:</label>
-                                    <input type="text" name="endDate" class="form-control" placeholder="End Date" required v-model="event.endDate">
+                                    <input type="date" name="endDate" class="form-control" placeholder="End Date" :min="event.startDate"required v-model="event.endDate">
                                 </div>
                                 <div class="form-group">
                                     <label for="venue">Venue:</label>
                                     <input type="text" name="venue" class="form-control" placeholder="Venue" required v-model="event.venue">
                                 </div>
                                 <div class="form-group">
-                                    <label for="address">Adress:</label>
-                                    <input type="text" name="address" class="form-control" placeholder="Venue Address" v-model="event.address.address">
-                                    <input type="text" name="city" class="form-control" placeholder="Venue City" v-model="event.address.city">
-                                    <input type="text" name="state" class="form-control" placeholder="Venue State" v-model="event.address.state">
-                                    <input type="text" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.address.zip">    
+                                    <label for="address">Address:</label>
+                                    <input type="text" name="address" class="form-control" placeholder="Venue Address" v-model="event.address.address" required>
+                                    <input type="text" name="city" class="form-control" placeholder="Venue City" v-model="event.address.city" required>
+                                    <input type="text" name="state" class="form-control" placeholder="Venue State" v-model="event.address.state" required>
+                                    <input type="text" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.address.zip" required>    
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-submit btn-success" data-dismiss="modal" type="submit" @click="createEvent">Create New Event</button>
+                                    <button class="btn btn-submit btn-success" data-dismiss="modal" type="submit" >Create New Event</button>
                                 </div>
                             </form>
                         </div>
@@ -226,6 +226,7 @@
         name: 'home',
         data() {
             return {
+                date: Date,
                 signUp: {
                     firstName: '',
                     lastName: '',
@@ -258,6 +259,7 @@
         },
         mounted() {
             this.$store.dispatch('authenticate')
+            this.date = new Date().toJSON().split('T')[0];
         },
         computed: {
             activeUser() {
