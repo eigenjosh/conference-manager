@@ -5,21 +5,24 @@
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                    aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand">Confer</a>
-                <div class="text-right">
-                    <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Login</button>
-                    <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
+                        aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand">Confer</a>
+                    <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
+                        <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3">Create Event</button>
+                        <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
+                    </div>
+                    <div class="text-right" v-else>
+                        <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Login</button>
+                        <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
+                    </div>
+                    <!-- Trigger the SIGN UP modal -->
                 </div>
-                
-                <!-- Trigger the SIGN UP modal -->
-            </div>
-            
+
                 <!-- MENU DROWDOWN -->
                 <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
 
@@ -30,26 +33,28 @@
                                 <button type="button" class="btn btn-default">Find Events</button>
                             </router-link>
                         </li>
-                        <li>
+                        <!-- <li>
 
                             <router-link :to="{name: 'eventSchedule'}">
                                 <button type="button" class="btn btn-default">Event Schedule</button>
                             </router-link>
-                        </li>
+                        </li> -->
 
-                        <li>
+                        <div v-if="activeUser.hasOwnProperty('name')">
+                            <li>
 
-                            <router-link :to="{name:'mySchedule'}">
-                                <button type="button" class="btn btn-default">My Schedule</button>
-                            </router-link>
-                        </li>
-                        <li>
+                                <router-link :to="{name:'mySchedule'}">
+                                    <button type="button" class="btn btn-default">My Schedule</button>
+                                </router-link>
+                            </li>
+                            <li>
 
-                            <router-link :to="{name:'userNotes'}">
-                                <button type="button" class="btn btn-default">My Notes</button>
-                            </router-link>
-                        </li>
+                                <router-link :to="{name:'userNotes'}">
+                                    <button type="button" class="btn btn-default">My Notes</button>
+                                </router-link>
+                            </li>
 
+                        </div>
 
                     </ul>
 
@@ -100,7 +105,7 @@
                                 <input type="password" name="password" class="form-control" placeholder="password" required v-model='login.password'>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success"  @click="submitLogin" data-dismiss="modal" type="submit">Submit</button>
+                                <button class="btn btn-submit btn-success" @click="submitLogin" data-dismiss="modal" type="submit">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -161,6 +166,58 @@
             </div>
         </div>
 
+        <div id="myModal3" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+    
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Create a New Event</h4>
+        
+                        </div>
+                        <div class="modal-body">
+                            <form id="login" class="form">
+                                <div class="form-group">
+                                    <label for="eventName">Event Name</label>
+                                    <input type="text" name="eventName" class="form-control" placeholder="Whats the event called?" required v-model="event.name">
+                                </div>
+                                <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <textarea type="text" name="description" class="form-control" rows="5"placeholder="What is this event for?" required v-model="event.description"></textarea>
+                                    </div>
+                                <div class="form-group">
+                                    <label for="startDate">Start Date:</label>
+                                    <input type="text" name="startDate" class="form-control" placeholder="Start Date" required v-model="event.startDate">
+                                </div>
+                                <div class="form-group">
+                                    <label for="endDate">End Date:</label>
+                                    <input type="text" name="endDate" class="form-control" placeholder="End Date" required v-model="event.endDate">
+                                </div>
+                                <div class="form-group">
+                                    <label for="venue">Venue:</label>
+                                    <input type="text" name="venue" class="form-control" placeholder="Venue" required v-model="event.venue">
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Adress:</label>
+                                    <input type="text" name="address" class="form-control" placeholder="Venue Address" v-model="event.address.address">
+                                    <input type="text" name="city" class="form-control" placeholder="Venue City" v-model="event.address.city">
+                                    <input type="text" name="state" class="form-control" placeholder="Venue State" v-model="event.address.state">
+                                    <input type="text" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.address.zip">    
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-submit btn-success" data-dismiss="modal" type="submit" @click="createEvent">Create New Event</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+
     </div>
 </template>
 
@@ -181,10 +238,31 @@
                 login: {
                     email: '',
                     password: ''
+                },
+                event: {
+                    name:'',
+                    description: '',
+                    venue: '',
+                    address:{
+                        address:'',
+                        city: '',
+                        state: '',
+                        zip: ''
+                    },
+                    startDate: '',
+                    endDate: ''
                 }
             }
         },
         components: {
+        },
+        mounted() {
+            this.$store.dispatch('authenticate')
+        },
+        computed: {
+            activeUser() {
+                return this.$store.state.activeUser
+            }
         },
         methods: {
             submitLogin() {
@@ -203,6 +281,9 @@
                     this.error = true
                     console.error({ error: "Passwords Do Not Match" })
                 }
+            },
+            logout() {
+                this.$store.dispatch('logout')
             }
         }
     }
@@ -220,10 +301,12 @@
         color: whitesmoke;
         text-shadow: 0px 0px 10px black;
     }
-    .btn-default{
-        width:100%;
+
+    .btn-default {
+        width: 100%;
     }
-    .navbar ul{
+
+    .navbar ul {
         list-style-type: none;
     }
 
