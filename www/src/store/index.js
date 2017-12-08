@@ -53,6 +53,11 @@ var store = new vuex.Store({
         }
       })
     },
+    //SET EVENTS
+    setEvents(state, data) {
+      state.events = data
+      console.log(state.events)
+    },
   },
   actions: {
 
@@ -114,6 +119,18 @@ var store = new vuex.Store({
           commit('setSchedule', activities)
         })
     }
+  },
+
+  //GET EVENTS BY LOCATION
+  findEvents({ commit, dispatch }, location) {
+    api(`/findevents/${location}`)
+      .then(res => {
+        console.log('res to findEvents: ', res)
+        commit('setEvents', res.data.data)
+      })
+      .catch(err => {
+        commit('handleError', err)
+      })
   },
 
   //HANDLE ERROR
