@@ -114,7 +114,6 @@
                             <div class="form-group">
                                 <label for="note-body"></label>
                                 <textarea type="text" name="note-body" class="form-control" rows="5" placeholder="Add note..." required v-model="note.body">{{userNote.body}}</textarea>
-                                <button type="submit" class="btn btn-default" @click="createNote" data-dismiss="modal">Add Note</button>
                             </div>
 
                         </div>
