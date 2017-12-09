@@ -111,7 +111,12 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4>{{userNote.title}}</h4>
-                            <p>{{userNote.body}}</p>
+                            <div class="form-group">
+                                <label for="note-body"></label>
+                                <textarea type="text" name="note-body" class="form-control" rows="5" placeholder="Add note..." required v-model="note.body">{{userNote.body}}</textarea>
+                                <button type="submit" class="btn btn-default" @click="createNote" data-dismiss="modal">Add Note</button>
+                            </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -155,7 +155,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-6">
-                    <!-- <h2>{{activeEvent.name}}</h2> -->
+                    <h2>{{event.name}}</h2>
                 </div>
 
                 <div class="col-xs-6 text-right">
@@ -198,7 +198,9 @@
                    startTime: '',
                    endTime: '',
                    capacity: '',
-                   speakerName: ''
+                   speakerName: '',
+                //    creatorId: this.activeUser._id,
+                //    eventId: this.activeEvent._id
                }
 
             }
@@ -211,20 +213,20 @@
             activeActivity(){
                 return this.$store.state.activeActivity
             },
-            activeUser() {
+            user() {
                 return this.$store.state.activeUser
             },
             schedule() {
                 return this.$store.state.schedule
             },
-            // activeEvent(){
-            //     return this.$store.state.activeEvent
-            // }
+            event(){
+                return this.$store.state.activeEvent
+            }
         },
         methods: {
             addActivity(){
-                
-                this.$store.dispatch('addActivity', this.activity)
+                debugger
+                this.$store.dispatch('addActivity', {activity: this.activity, creatorId: this.event.creatorId, eventId: this.event._id})
             },
             setActiveActivity(activity){
                 
