@@ -166,7 +166,7 @@
                     <button class="btn btn-primary btn-lg">Join Event</button>
                 </div>
                 <div class="col-xs-6 text-right" v-else>
-                    <router-link :to="{name: 'adminEvent'}">
+                    <router-link :to="{name: 'adminEdit'}">
                         <button class="btn btn-warning btn-lg">Edit Schedule</button>
                     </router-link>
                 </div>

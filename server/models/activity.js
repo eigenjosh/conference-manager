@@ -15,7 +15,7 @@ var schema = new mongoose.Schema({
 	notes: { type: [String] },
 	speakerId: { type: ObjectId },
 	speakerName: { type: String },
-	capacity: { type: Number }
+	capacity: { type: String }
 });
 
 module.exports = mongoose.model(models.activity.name, schema);

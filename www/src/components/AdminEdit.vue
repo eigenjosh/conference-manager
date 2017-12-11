@@ -199,8 +199,8 @@
                    endTime: '',
                    capacity: '',
                    speakerName: '',
-                //    creatorId: this.activeUser._id,
-                //    eventId: this.activeEvent._id
+                //    creatorId: this.user._id,
+                //    eventId: this.event._id
                }
 
             }
@@ -226,7 +226,7 @@
         methods: {
             addActivity(){
                 debugger
-                this.$store.dispatch('addActivity', {activity: this.activity, creatorId: this.event.creatorId, eventId: this.event._id})
+                this.$store.dispatch('addActivity', {activity: this.activity, creatorId: this.user._id, eventId: this.event._id})
             },
             setActiveActivity(activity){
                 
