@@ -273,7 +273,6 @@ var store = new vuex.Store({
 
     // GET NOTE BY NOTE ID
     getNotebyNoteId({ commit, dispatch }, note) {
-      debugger
       api('notes/' + note._id)
         .then(res => {
           commit('setActiveNote', res.data.data)
