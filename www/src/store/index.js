@@ -3,6 +3,7 @@ import vue from 'vue'
 import vuex from 'vuex'
 import socketStore from './socket-store'
 import router from '../router'
+import plugins from './plugins'
 
 let api = axios.create({
   baseURL: 'http://localhost:3000/api/',

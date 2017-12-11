@@ -23,7 +23,7 @@
                     <!-- Trigger the SIGN UP modal -->
                 </div>
 
-                <!-- MENU DROWDOWN -->
+                <!-- MENU DROPDOWN -->
                 <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
 
                     <ul>
@@ -94,6 +94,7 @@
                    <router-link :to="{name: 'eventSchedule'}">
                        <button class="btn btn-default event-btn" @click="setActiveEvent(event)">
                            <h2>{{event.name}}</h2>
+                           <h6 >Created <timeago :since="event.created"></timeago></h6>
                            <h3>{{event.startDate}} - {{event.endDate}}</h3>
                            <h3>{{event.description}}</h3>
                         </button>
@@ -273,7 +274,8 @@
                     state: '',
                     zip: '',
                     startDate: '',
-                    endDate: ''
+                    endDate: '',
+                    created: Date.now()
                 },
                 search: {
                     location: ''
@@ -339,7 +341,8 @@
                     state: '',
                     zip: '',
                     startDate: '',
-                    endDate: ''
+                    endDate: '',
+                    created: Date.now()
                 }
 
             }

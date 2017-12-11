@@ -1,10 +1,7 @@
 import vue from 'vue'
-import VueTimeago from 'vue-timeago'
-import router from './router'
-import store from './store'
-import './plugins'
+import vueTimeago from 'vue-timeago'
 
-Vue.use(VueTimeago, {
+vue.use(vueTimeago, {
   name: 'timeago', // component name, `timeago` by default
   locale: 'en-US',
   locales: {
