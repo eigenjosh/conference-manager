@@ -1,6 +1,7 @@
 import axios from 'axios'
 import vue from 'vue'
 import vuex from 'vuex'
+import socketStore from './socket-store'
 import router from '../router'
 
 let api = axios.create({
