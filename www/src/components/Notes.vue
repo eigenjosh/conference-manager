@@ -92,14 +92,11 @@
                 </div>
             </div>
             <div v-for="userNote in userNotes" class="row well">
-                <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal2">
+                <button type="button" @click="setActiveNote(userNote)" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal2">
                     <div class="col-xs-12">
                         <h1>{{userNote.title}}</h1>
                     </div>
                 </button>
-                <!-- <div class="col-xs-12">
-                    <h4>{{userNote.body}}</h4>
-                </div> -->
             </div>
         </div>
 
@@ -113,12 +110,13 @@
                             <h4>{{userNote.title}}</h4>
                             <div class="form-group">
                                 <label for="note-body"></label>
-                                <textarea type="text" name="note-body" class="form-control" rows="5" placeholder="Add note..." required v-model="note.body">{{userNote.body}}</textarea>
+                                    <textarea type="text" name="note-body" class="form-control" rows="5" required v-model="note.body">{{userNote.body}}</textarea>
                             </div>
-
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button @click="removeNote(activeNote)"class="btn btn-danger pull-right" type="button" data-dismiss="modal">Delete Note</button>
+                                <button type="button" class="btn btn-default" @click="updateNote" data-dismiss="modal">Save Note</button>
+                            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
                         </div>
                     </div>
 
@@ -149,7 +147,11 @@
             },
             userNotes() {
                 return this.$store.state.userNotes
-            }
+            },
+            activeNote() {
+                return this.$store.state.activeNote
+            },
+            
         },
         methods: {
             logout() {
@@ -157,7 +159,17 @@
             },
             createNote() {
                 this.$store.dispatch('createNote', this.note)
-            }
+            },
+            updateNote() {
+                this.$store.dispatch('updateNote', this.note)
+            },
+            removeNote(activeNote){
+                this.$store.dispatch('deleteNote', activeNote)
+            },
+            setActiveNote(userNote) {
+                debugger
+                this.$store.dispatch('getNotebyNoteId', userNote)
+            },
         }
     }
 

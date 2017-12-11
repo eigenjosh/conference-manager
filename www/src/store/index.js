@@ -27,7 +27,8 @@ var store = new vuex.Store({
     events: [],
     activeEvent: {},
     userNotes: [{}],
-    activeActivity: {}
+    activeActivity: {},
+    activeNote: {}
   },
   mutations: {
 
@@ -82,6 +83,12 @@ var store = new vuex.Store({
     // SET USER NOTES
     setUserNotes(state, data) {
       state.userNotes = data
+    },
+
+    // SET ACTIVE NOTE
+    setActiveNote(state, note) {
+      state.activeNote = {}
+      state.activeNote = note
     }
   },
   actions: {
@@ -89,6 +96,7 @@ var store = new vuex.Store({
     //***LOGIN AND REGISTER***
 
     //LOGIN
+
     login({ commit, dispatch }, payload) {
       debugger
       auth.post('login', payload)
@@ -103,6 +111,7 @@ var store = new vuex.Store({
     },
 
     //REGISTER
+
     register({ commit, dispatch }, payload) {
 
       auth.post('register', payload)
@@ -115,6 +124,7 @@ var store = new vuex.Store({
     },
 
     //AUTHENTICATE
+
     authenticate({ commit, dispatch }) {
       auth('authenticate')
         .then(res => {
@@ -127,6 +137,7 @@ var store = new vuex.Store({
     },
 
     //LOGOUT
+
     logout({ commit, dispatch }) {
       auth.delete('logout')
         .then((user) => {
@@ -139,20 +150,25 @@ var store = new vuex.Store({
     //*** EVENTS/ACTIVITIES ***/
 
     //GET ALL EVENTS
+
     getAllEvents({ commit, dispatch }) {
       api('/events')
         .then(res => {
           commit('setEvents', res.data.data)
         })
     },
+
     //GET ACTIVITIES BY EVENT ID
+
     getActivities({ commit, dispatch }, event) {
       api('/events/' + event._id + '/activites')
         .then(res => {
           commit('setSchedule', activities)
         })
     },
+
     //GET EVENTS BY LOCATION
+
     findEvents({ commit, dispatch }, location) {
       api(`/findevents/${location}`)
         .then(res => {
@@ -164,7 +180,8 @@ var store = new vuex.Store({
         })
     },
 
-    //CREATE NEW EVENT
+    // CREATE NEW EVENT
+
     createEvent({ commit, dispatch }, event) {
       api.post('events/', event)
         .then(res => {
@@ -175,6 +192,8 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
+
+    // GET ACTIVITY BY ID
     getActivityById({ commit, dispatch }, activity) {
       api('activities/' + activity._id)
         .then(res => {
@@ -184,6 +203,8 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
+
+    // GET EVENT BY ID
     getEventById({ commit, dispatch }, event) {
       api('events/' + event._id)
         .then(res => {
@@ -193,6 +214,8 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
+
+    // ADD ACTIVITY
     addActivity({ commit, dispatch }, payload) {
       debugger
       api.post('activities', payload)
@@ -222,6 +245,41 @@ var store = new vuex.Store({
       api.get('usernotes')
         .then(res => {
           commit('setUserNotes', res.data.data)
+        })
+    },
+
+    //UPDATE NOTE
+    updateNote({commit, dispatch}, note) {
+      api.post('notes', note)
+      .then(res => {
+        dispatch('getAllUserNotes')
+      })
+      .catch(err => {
+        commit('handleError', err)
+      })
+    },
+
+    //DELETE NOTE
+    deleteNote({commit, dispatch}, note){
+      api.delete('notes/' + note._id)
+      .then(res => {
+        dispatch('getAllUserNotes')
+      })
+      .catch(err => {
+        commit('handleError', err)
+      })
+    },
+
+    // GET NOTE BY NOTE ID
+    getNotebyNoteId({ commit, dispatch }, note) {
+      debugger
+      api('notes/' + note._id)
+        .then(res => {
+          commit('setActiveNote', res.data.data)
+          // dispatch('getAllUserNotes', note)
+        })
+        .catch(err => {
+          commit('handleError', err)
         })
     },
 
