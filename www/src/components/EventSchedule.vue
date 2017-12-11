@@ -214,7 +214,8 @@
             }
         },
         mounted() {
-            //this.$store.dispatch('getEventById', this.event)
+            // this.$store.dispatch('getEventById', this.activeEvent)
+            this.$store.dispatch('getActivities', this.activeEvent)
         },
         computed: {
             activeEvent() {
@@ -226,9 +227,7 @@
             schedule() {
                 return this.$store.state.schedule
             },
-            // activeEvent(){
-            //     return this.$store.state.activeEvent
-            // }
+            
         },
         methods: {
             submitLogin() {

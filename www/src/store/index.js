@@ -36,7 +36,6 @@ var store = new vuex.Store({
     //SET USER
     setUser(state, user) {
       state.activeUser = user
-      console.log(state.user)
     },
 
     //HANDLE ERROR
@@ -46,12 +45,14 @@ var store = new vuex.Store({
 
     //SET & DISPLAY SCHEDULE
     setSchedule(state, activities) {
+      debugger
+      var schedule={}
       activities = activities.sort((a, b) => {
         return Date.parse(a.date) - Date.parse(b.date)
       })
       activities.forEach(activity => {
-        if (!state.schedule.hasOwnProperty(activity.date)) {
-          state.schedule[activity.date] = {}
+        if (!schedule.hasOwnProperty(activity.date)) {
+          schedule[activity.date] = {}
         }
       })
       activities = activities.sort((a, b) => {
@@ -59,11 +60,12 @@ var store = new vuex.Store({
       })
       activities.forEach(activity => {
         if (!state.schedule[activity.date].hasOwnProperty(activity.startTime)) {
-          state.schedule[activity.date][activity.startTime] = [activity]
+          schedule[activity.date][activity.startTime] = [activity]
         } else {
-          state.schedule[activity.date][activity.startTime].push(activity)
+          schedule[activity.date][activity.startTime].push(activity)
         }
       })
+      vue.set(state.schedule, schedule)
 
     },
 
@@ -130,10 +132,10 @@ var store = new vuex.Store({
       auth('authenticate')
         .then(res => {
           commit('setUser', res.data.data)
-
+         
         })
-        .catch(() => {
-
+        .catch((err) => {
+          commit('handleError', err) 
         })
     },
 
@@ -162,9 +164,10 @@ var store = new vuex.Store({
     //GET ACTIVITIES BY EVENT ID
 
     getActivities({ commit, dispatch }, event) {
-      api('/events/' + event._id + '/activites')
+      debugger
+      api('/events/' + event._id + '/activities')
         .then(res => {
-          commit('setSchedule', activities)
+          commit('setSchedule', res.data.data)
         })
     },
 
@@ -207,6 +210,7 @@ var store = new vuex.Store({
 
     // GET EVENT BY ID
     getEventById({ commit, dispatch }, event) {
+      debugger
       api('events/' + event._id)
         .then(res => {
           commit('setActiveEvent', res.data.data)
@@ -219,10 +223,11 @@ var store = new vuex.Store({
     // ADD ACTIVITY
     addActivity({ commit, dispatch }, payload) {
       debugger
-      api.post('activities', payload)
+      payload.activity.eventId = payload.eventId
+      api.post('activities', payload.activity)
         .then(res => {
           console.log(res)
-          dispatch('getActivities', { _id: activity.eventId })
+          dispatch('getActivities', { _id: payload.activity.eventId })
         })
         .catch(err => {
           commit('handleError', err)

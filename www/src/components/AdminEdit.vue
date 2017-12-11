@@ -206,7 +206,7 @@
             }
         },
         mounted(){
-            // this.$store.dispatch('getActivitesByEventId', this.event)
+            this.$store.dispatch('getActivities', this.event)
             this.date = new Date().toJSON().split('T')[0];
         },
         computed: {
@@ -226,7 +226,7 @@
         methods: {
             addActivity(){
                 debugger
-                this.$store.dispatch('addActivity', {activity: this.activity, creatorId: this.user._id, eventId: this.event._id})
+                this.$store.dispatch('addActivity', {activity: this.activity, eventId: this.event._id})
             },
             setActiveActivity(activity){
                 
