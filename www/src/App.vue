@@ -11,6 +11,9 @@ export default {
   name: 'app',
   components:{
     Error
+  },
+  mounted(){
+    this.$store.dispatch('authenticate')
   }
 }
 </script>
