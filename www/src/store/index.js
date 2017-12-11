@@ -46,7 +46,7 @@ var store = new vuex.Store({
     //SET & DISPLAY SCHEDULE
     setSchedule(state, activities) {
       debugger
-      var schedule={}
+      var schedule = {}
       activities = activities.sort((a, b) => {
         return Date.parse(a.date) - Date.parse(b.date)
       })
@@ -85,6 +85,7 @@ var store = new vuex.Store({
 
     // SET USER NOTES
     setUserNotes(state, data) {
+      debugger
       state.userNotes = data
     },
 
@@ -132,10 +133,10 @@ var store = new vuex.Store({
       auth('authenticate')
         .then(res => {
           commit('setUser', res.data.data)
-         
+
         })
         .catch((err) => {
-          commit('handleError', err) 
+          commit('handleError', err)
         })
     },
 
@@ -255,25 +256,15 @@ var store = new vuex.Store({
     },
 
     //UPDATE NOTE
-    updateNote({commit, dispatch}, note) {
-      api.post('notes', note)
-      .then(res => {
-        dispatch('getAllUserNotes')
-      })
-      .catch(err => {
-        commit('handleError', err)
-      })
-    },
-
-    //DELETE NOTE
-    deleteNote({commit, dispatch}, note){
-      api.delete('notes/' + note._id)
-      .then(res => {
-        dispatch('getAllUserNotes')
-      })
-      .catch(err => {
-        commit('handleError', err)
-      })
+    updateNote({ commit, dispatch }, note) {
+      api.put('notes/' + note._id, note)
+        .then(res => {
+          commit('setUserNotes', note)
+          dispatch('getAllUserNotes', note)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
     },
 
     // GET NOTE BY NOTE ID
@@ -282,6 +273,16 @@ var store = new vuex.Store({
         .then(res => {
           commit('setActiveNote', res.data.data)
           // dispatch('getAllUserNotes', note)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    //DELETE NOTE
+    deleteNote({ commit, dispatch }, note) {
+      api.delete('notes/' + note._id)
+        .then(res => {
+          dispatch('getAllUserNotes')
         })
         .catch(err => {
           commit('handleError', err)

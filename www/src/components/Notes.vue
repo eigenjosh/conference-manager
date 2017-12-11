@@ -117,8 +117,7 @@
                         </div>
                         <div class="modal-footer">
                                 <button @click="removeNote(activeNote)"class="btn btn-danger pull-right" type="button" data-dismiss="modal">Delete Note</button>
-                                <button type="button" class="btn btn-default" @click="updateNote" data-dismiss="modal">Save Note</button>
-                            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                                <button type="button" class="btn btn-default" @click="updateNote(activeNote)" data-dismiss="modal">Save Note</button>
                         </div>
                     </div>
 
@@ -161,9 +160,12 @@
             },
             createNote() {
                 this.$store.dispatch('createNote', this.note)
+                this.note = ''
             },
-            updateNote() {
-                this.$store.dispatch('updateNote', this.note)
+            updateNote(activeNote) {
+                debugger
+                activeNote.body = this.note.body
+                this.$store.dispatch('updateNote', activeNote)
             },
             removeNote(activeNote){
                 this.$store.dispatch('deleteNote', activeNote)
