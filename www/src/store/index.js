@@ -132,10 +132,10 @@ var store = new vuex.Store({
       auth('authenticate')
         .then(res => {
           commit('setUser', res.data.data)
-         
+
         })
         .catch((err) => {
-          commit('handleError', err) 
+          commit('handleError', err)
         })
     },
 
@@ -226,7 +226,6 @@ var store = new vuex.Store({
 
     // ADD ACTIVITY
     addActivity({ commit, dispatch }, payload) {
-      debugger
       payload.activity.eventId = payload.eventId
       api.post('activities', payload.activity)
         .then(res => {
@@ -259,34 +258,33 @@ var store = new vuex.Store({
     },
 
     //UPDATE NOTE
-    updateNote({commit, dispatch}, note) {
-      api.post('notes', note)
-      .then(res => {
-        dispatch('getAllUserNotes')
-      })
-      .catch(err => {
-        commit('handleError', err)
-      })
-    },
-
-    //DELETE NOTE
-    deleteNote({commit, dispatch}, note){
-      api.delete('notes/' + note._id)
-      .then(res => {
-        dispatch('getAllUserNotes')
-      })
-      .catch(err => {
-        commit('handleError', err)
-      })
+    updateNote({ commit, dispatch }, note) {
+      api.put('notes/' + note._id, note)
+        .then(res => {
+          commit('setUserNotes', note)
+          dispatch('getAllUserNotes', note)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
     },
 
     // GET NOTE BY NOTE ID
     getNotebyNoteId({ commit, dispatch }, note) {
-      debugger
       api('notes/' + note._id)
         .then(res => {
           commit('setActiveNote', res.data.data)
           // dispatch('getAllUserNotes', note)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    //DELETE NOTE
+    deleteNote({ commit, dispatch }, note) {
+      api.delete('notes/' + note._id)
+        .then(res => {
+          dispatch('getAllUserNotes')
         })
         .catch(err => {
           commit('handleError', err)

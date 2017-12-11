@@ -83,6 +83,7 @@
             </div>
         </div>
 
+        <!-- DISPLAY USER NOTES -->
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
@@ -100,23 +101,23 @@
             </div>
         </div>
 
-        <div v-for="userNote in userNotes" class="modal-notes">
+        <!-- DISPLAY ACTIVE NOTE -->
+        <div class="modal-notes">
             <div id="myModal2" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4>{{userNote.title}}</h4>
+                            <h4>{{activeNote.title}}</h4>
                             <div class="form-group">
                                 <label for="note-body"></label>
-                                    <textarea type="text" name="note-body" class="form-control" rows="5" required v-model="note.body">{{userNote.body}}</textarea>
+                                    <textarea type="text" name="note-body" class="form-control" rows="5" required v-model="note.body">{{activeNote.body}}</textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
                                 <button @click="removeNote(activeNote)"class="btn btn-danger pull-right" type="button" data-dismiss="modal">Delete Note</button>
-                                <button type="button" class="btn btn-default" @click="updateNote" data-dismiss="modal">Save Note</button>
-                            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                                <button type="button" class="btn btn-default" @click="updateNote(activeNote)" data-dismiss="modal">Save Note</button>
                         </div>
                     </div>
 
@@ -159,15 +160,17 @@
             },
             createNote() {
                 this.$store.dispatch('createNote', this.note)
+                this.note = ''
             },
-            updateNote() {
-                this.$store.dispatch('updateNote', this.note)
+            updateNote(activeNote) {
+                activeNote.body = this.note.body
+                this.$store.dispatch('updateNote', activeNote)
             },
             removeNote(activeNote){
                 this.$store.dispatch('deleteNote', activeNote)
             },
             setActiveNote(userNote) {
-                debugger
+                this.note.body = userNote.body
                 this.$store.dispatch('getNotebyNoteId', userNote)
             },
         }
