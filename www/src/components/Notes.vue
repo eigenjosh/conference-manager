@@ -108,16 +108,18 @@
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4>{{activeNote.title}}</h4>
+                            <button type="button" class="close" @click="updateNote(activeNote)" data-dismiss="modal">&times;</button>
+                            <button @click="removeNote(activeNote)" class="btn btn-danger btn-xs pull-left" type="button" data-dismiss="modal">Delete Note</button>
+                            <div class="title-head">
+                                <h4>{{activeNote.title}}</h4>
+                            </div>
                             <div class="form-group">
                                 <label for="note-body"></label>
-                                    <textarea type="text" name="note-body" class="form-control" rows="5" required v-model="note.body">{{activeNote.body}}</textarea>
+                                <textarea type="text" name="note-body" class="form-control" rows="5" required v-model="note.body">{{activeNote.body}}</textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
-                                <button @click="removeNote(activeNote)"class="btn btn-danger pull-right" type="button" data-dismiss="modal">Delete Note</button>
-                                <button type="button" class="btn btn-default" @click="updateNote(activeNote)" data-dismiss="modal">Save Note</button>
+                            <button type="button" class="btn btn-default" @click="updateNote(activeNote)" data-dismiss="modal">Save Note</button>
                         </div>
                     </div>
 
@@ -152,7 +154,7 @@
             activeNote() {
                 return this.$store.state.activeNote
             },
-            
+
         },
         methods: {
             logout() {
@@ -160,13 +162,14 @@
             },
             createNote() {
                 this.$store.dispatch('createNote', this.note)
-                this.note = ''
+                this.note = {}
             },
             updateNote(activeNote) {
                 activeNote.body = this.note.body
                 this.$store.dispatch('updateNote', activeNote)
+                this.note = {}
             },
-            removeNote(activeNote){
+            removeNote(activeNote) {
                 this.$store.dispatch('deleteNote', activeNote)
             },
             setActiveNote(userNote) {
@@ -184,6 +187,10 @@
     }
 
     .container {
+        text-align: center;
+    }
+
+    .title-head {
         text-align: center;
     }
 </style>
