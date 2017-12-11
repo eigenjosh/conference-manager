@@ -163,7 +163,6 @@
                 this.note = ''
             },
             updateNote(activeNote) {
-                debugger
                 activeNote.body = this.note.body
                 this.$store.dispatch('updateNote', activeNote)
             },

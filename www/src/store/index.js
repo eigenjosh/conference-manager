@@ -85,7 +85,6 @@ var store = new vuex.Store({
 
     // SET USER NOTES
     setUserNotes(state, data) {
-      debugger
       state.userNotes = data
     },
 
@@ -223,7 +222,6 @@ var store = new vuex.Store({
 
     // ADD ACTIVITY
     addActivity({ commit, dispatch }, payload) {
-      debugger
       payload.activity.eventId = payload.eventId
       api.post('activities', payload.activity)
         .then(res => {
