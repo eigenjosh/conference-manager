@@ -215,7 +215,7 @@
         },
         mounted() {
             // this.$store.dispatch('getEventById', this.activeEvent)
-            this.$store.dispatch('getActivities', this.activeEvent)
+            // this.$store.dispatch('getActivities', this.activeEvent)
         },
         computed: {
             activeEvent() {

@@ -46,7 +46,7 @@ var store = new vuex.Store({
     //SET & DISPLAY SCHEDULE
     setSchedule(state, activities) {
       debugger
-      var schedule={}
+      var schedule = {}
       activities = activities.sort((a, b) => {
         return Date.parse(a.date) - Date.parse(b.date)
       })
@@ -59,13 +59,13 @@ var store = new vuex.Store({
         return parseInt(a.startTime) - parseInt(b.startTime)
       })
       activities.forEach(activity => {
-        if (!state.schedule[activity.date].hasOwnProperty(activity.startTime)) {
+        if (!schedule[activity.date].hasOwnProperty(activity.startTime)) {
           schedule[activity.date][activity.startTime] = [activity]
         } else {
           schedule[activity.date][activity.startTime].push(activity)
         }
       })
-      vue.set(state.schedule, schedule)
+      state.schedule = schedule
 
     },
 
@@ -169,6 +169,9 @@ var store = new vuex.Store({
         .then(res => {
           commit('setSchedule', res.data.data)
         })
+        .catch(err => {
+          commit('handleError', err)
+        })
     },
 
     //GET EVENTS BY LOCATION
@@ -214,6 +217,7 @@ var store = new vuex.Store({
       api('events/' + event._id)
         .then(res => {
           commit('setActiveEvent', res.data.data)
+          dispatch('getActivities', event)
         })
         .catch(err => {
           commit('handleError', err)
