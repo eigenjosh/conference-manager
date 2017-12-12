@@ -81,7 +81,8 @@ module.exports = {
     method(req, res, next) {
       let action = 'Add User Event'
       Users.findOneAndUpdate({ _id: req.session.uid }, req.body)
-        .then(data => {
+        .then(user => {
+          user.events.push(req.body._id)
           return res.send(handleResponse(action, { message: 'Successfully added event to user.' }))
         })
         .catch(error => {
