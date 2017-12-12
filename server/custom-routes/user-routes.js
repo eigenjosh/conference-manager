@@ -42,7 +42,10 @@ module.exports = {
       let action = 'Find User Activities'
       Users.find({ _id: req.session.uid })
         .then(user => {
-          res.send(handleResponse(action, user.activities))
+          Activities.find({ _id: { $in: user[0].activities} })
+            .then(activities => {
+              res.send(handleResponse(action, activities))
+            })
         }).catch(error => {
           return next(handleResponse(action, null, error))
         })
