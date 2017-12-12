@@ -138,7 +138,7 @@ var store = new vuex.Store({
     //LOGIN
 
     login({ commit, dispatch }, payload) {
-      debugger
+      
       auth.post('login', payload)
         .then(res => {
           console.log("successful login")
@@ -201,7 +201,7 @@ var store = new vuex.Store({
     //GET ACTIVITIES BY EVENT ID
 
     getActivities({ commit, dispatch }, event) {
-      debugger
+      
       api('/events/' + event._id + '/activities')
         .then(res => {
           commit('setSchedule', res.data.data)
@@ -273,7 +273,7 @@ var store = new vuex.Store({
 
     // GET EVENT BY ID
     getEventById({ commit, dispatch }, event) {
-      debugger
+      
       api('events/' + event._id)
         .then(res => {
           commit('setActiveEvent', res.data.data)
@@ -374,7 +374,7 @@ var store = new vuex.Store({
     },
     addToMyEvents({commit, dispatch}, payload){
       payload.user.events.push(payload.event._id)
-      debugger
+      
       api.put('/user-events', payload.user)
         .then(res =>{
           console.log('this event has been added')
@@ -385,9 +385,13 @@ var store = new vuex.Store({
         })
     },
     getMySchedule({commit, dispatch}, event){
+      debugger
       api('/user-events/' + event._id + '/activities')
         .then(res => {
           commit('setMyActivities', res.data.data)
+        })
+        .catch(err=>{
+          commit('handleError', err)
         })
     },
 

@@ -73,7 +73,7 @@
                 </nav>
                 <div class="row">
                     <div class="col-xs-2" v-for="e in myEvents">
-                        <button class="btn btn-default" @click="getMySchedule">{{e.name}}</button>
+                        <button class="btn btn-default" @click="getMySchedule(e)">{{e.name}}</button>
                     </div>
                 </div>
 
@@ -97,15 +97,16 @@
             }
         },
         mounted(){
-            debugger
+            
             this.$store.dispatch('getMyEvents')
         },
         methods:{
             logout(){
                 this.$store.dispatch('logout')
             },
-            getMySchedule(){
-                this.$store.dispatch('getMySchedule', event)
+            getMySchedule(e){
+                debugger
+                this.$store.dispatch('getMySchedule', e)
             }
         }
     }
