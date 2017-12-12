@@ -16,7 +16,7 @@ module.exports = {
         }
     },
     getEventsByLocation: {
-        path: '/findevents/:location',
+        path: '/find-events/:location',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find Activities By Location'
@@ -29,7 +29,7 @@ module.exports = {
         }
     },
     getEventsByProperties: {
-        path: '/findevents?city=:city&state=:state&zip=:zip&venue=:venue',
+        path: '/find-events?city=:city&state=:state&zip=:zip&venue=:venue',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find Activities By Properties'

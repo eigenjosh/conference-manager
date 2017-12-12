@@ -26,6 +26,7 @@ var store = new vuex.Store({
     schedule: {},
     userSchedule: {},
     events: [],
+    myEvents: [],
     activeEvent: {},
     userNotes: [{}],
     activeActivity: {},
@@ -73,6 +74,10 @@ var store = new vuex.Store({
     setEvents(state, data) {
       state.events = data
       console.log(state.events)
+    },
+    setMyEvents(state, data) {
+      state.myEvents = data
+      console.log(state.myEvents)
     },
     setActiveEvent(state, data) {
       state.activeEvent = {}
@@ -178,10 +183,23 @@ var store = new vuex.Store({
     //GET EVENTS BY LOCATION
 
     findEvents({ commit, dispatch }, location) {
-      api(`/findevents/${location}`)
+      api(`/find-events/${location}`)
         .then(res => {
           console.log('res to findEvents: ', res)
           commit('setEvents', res.data.data)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
+     //GET MY EVENTS (USER)
+
+     getMyEvents({ commit, dispatch }) {
+      api(`/user-events`)
+        .then(res => {
+          console.log('res to getMyEvents: ', res)
+          commit('setMyEvents', res.data.data)
         })
         .catch(err => {
           commit('handleError', err)
@@ -262,7 +280,7 @@ var store = new vuex.Store({
 
     // GET ALL USER NOTES
     getAllUserNotes({ commit, dispatch }) {
-      api.get('usernotes')
+      api.get('user-notes')
         .then(res => {
           commit('setUserNotes', res.data.data)
         })

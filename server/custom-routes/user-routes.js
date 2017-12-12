@@ -24,7 +24,9 @@ module.exports = {
       let action = 'Find User Events'
       Users.find({ _id: req.session.uid })
         .then(user => {
-          Events.find({ _id: { $in: user.events } })
+          console.log('user: ', user[0])
+          console.log('user events: ', user[0].events)
+          Events.find({ _id: { $in: user[0].events } })
             .then(events => {
               res.send(handleResponse(action, events))
             })

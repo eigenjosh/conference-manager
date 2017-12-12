@@ -72,7 +72,7 @@
                     <!-- /.container-fluid -->
                 </nav>
                 <div class="row">
-                    <div class="col-xs-2" v-for="e in activeUser.events">
+                    <div class="col-xs-2" v-for="e in myEvents">
                         <button class="btn">{{e.name}}</button>
                     </div>
                 </div>
@@ -91,10 +91,14 @@
         computed:{
             activeUser(){
                 return this.$store.state.activeUser
+            },
+            myEvents(){
+                return this.$store.state.myEvents
             }
         },
         mounted(){
-
+            debugger
+            this.$store.dispatch('getMyEvents')
         },
         methods:{
             logout(){
