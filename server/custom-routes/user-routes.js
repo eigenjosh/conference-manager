@@ -5,7 +5,7 @@ let Users = require('../models/user')
 
 module.exports = {
   userNotes: {
-    path: '/usernotes',
+    path: '/user-notes',
     reqType: 'get',
     method(req, res, next) {
       let action = 'Find User Notes'
@@ -18,7 +18,7 @@ module.exports = {
     }
   },
   userEvents: {
-    path: '/userevents',
+    path: '/user-events',
     reqType: 'get',
     method(req, res, next) {
       let action = 'Find User Events'
@@ -31,7 +31,7 @@ module.exports = {
     }
   },
   userActivities: {
-    path: '/useractivities',
+    path: '/user-activities',
     reqType: 'get',
     method(req, res, next) {
       let action = 'Find User Activities'
@@ -44,45 +44,14 @@ module.exports = {
     }
   },
 
-  //TODO: Figure out how to best handle adding/deleting events and activities from array on user
-
-  addUserActivity: {
-    path: '/useractivities',
-    reqType: 'put',
-    method(req, res, next) {
-      let action = 'Add User Activity'
-      Users.findOneAndUpdate({ _id: req.session.uid }, req.body)
-        .then(data => {
-          return res.send(handleResponse(action, { message: 'Successfully added activity to user.' }))
-        })
-        .catch(error => {
-          return next(handleResponse(action, null, error))
-        })
-    }
-  },
-  removeUserActivity: {
-    path: '/useractivities/:activityId',
-    reqType: 'put',
-    method(req, res, next) {
-      let action = 'Remove User Activity'
-      Users.findOneAndUpdate({ _id: req.session.uid }, req.body)
-        .then(data => {
-          return res.send(handleResponse(action, { message: 'Successfully removed activity from user.' }))
-        })
-        .catch(error => {
-          return next(handleResponse(action, null, error))
-        })
-    }
-  },
-
-  addUserEvent: {
+  editUserEvents: {
     path: '/user-events',
     reqType: 'put',
     method(req, res, next) {
       let action = 'Add User Event'
       Users.findOneAndUpdate({ _id: req.session.uid }, req.body)
         .then(user => {
-          return res.send(handleResponse(action, { message: 'Successfully added event to user.' }))
+          return res.send(handleResponse(action, { message: 'Successfully updated user events.' }))
         })
         .catch(error => {
           return next(handleResponse(action, null, error))
@@ -90,21 +59,14 @@ module.exports = {
     }
   },
 
-  removeUserEvent: {
-    path: '/user-events/:eventId',
+  editUserActivities: {
+    path: '/user-activities',
     reqType: 'put',
     method(req, res, next) {
-      let action = 'Remove User Event'
-      Users.find({ _id: req.session.uid })
-        .then(user => {
-          user.activities = user.activities.filter(function (activity) {
-            return !(activity.eventId == req.params.eventId)
-          })
-          //need another .then before update?
-          user.update()
-            .then(data => {
-              return res.send(handleResponse(action, { message: 'Successfully removed event from user.' }))
-            })
+      let action = 'Add User Activity'
+      Users.findOneAndUpdate({ _id: req.session.uid }, req.body)
+        .then(data => {
+          return res.send(handleResponse(action, { message: 'Successfully updated user activities.' }))
         })
         .catch(error => {
           return next(handleResponse(action, null, error))
@@ -112,29 +74,8 @@ module.exports = {
     }
   },
 
-
-  // filter activities by user and event server-side instead of on frontend:
-  userActivitiesByEventId: {
-    path: '/userevents/:eventId/activities',
-    reqType: 'get',
-    method(req, res, next) {
-      let action = 'Find User Activities By Event'
-      Users.find({ _id: req.session.uid })
-        .then(user => {
-          Activities.find({ eventId: req.params.eventId, _id: { $in: user.activities } })
-            .then(activities => {
-              res.send(handleResponse(action, activities))
-            })
-            .catch(error => {
-              return next(handleResponse(action, null, error))
-            })
-        }).catch(error => {
-          return next(handleResponse(action, null, error))
-        })
-    }
-  },
   adminEvents: {
-    path: '/adminevents',
+    path: '/admin-events',
     reqType: 'get',
     method(req, res, next) {
       let action = 'Find Events Created By Admin'
@@ -146,8 +87,9 @@ module.exports = {
         })
     }
   },
+
   adminActivities: {
-    path: '/adminactivities',
+    path: '/admin-activities',
     reqType: 'get',
     method(req, res, next) {
       let action = 'Find Activities Created By Admin'
@@ -160,8 +102,6 @@ module.exports = {
     }
   }
 }
-
-
 
 function handleResponse(action, data, error) {
   var response = {
