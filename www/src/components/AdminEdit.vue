@@ -82,7 +82,7 @@
                                 <label for="room">Room:</label>
                                 <input type="text" name="room" class="form-control" placeholder="Room number" required v-model='activity.location'>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group date">
                                 <label for="date">Date:</label>
                                 <input type="date" name="date" class="form-control" placeholder="date" :min="date"required v-model='activity.date'>
                             </div>
@@ -237,7 +237,7 @@
                                     <label for="room">Room:</label>
                                     <textarea type="text" name="room" class="form-control" placeholder="Room number" required rows="1" v-model='activity.location'>{{activeActivity.location}}</textarea>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group date">
                                     <label for="date">Date:</label>
                                     <input type="date" name="date" class="form-control" placeholder="date" :min="date"required v-model='activity.date'>
                                 </div>
@@ -386,7 +386,7 @@
                 </div>
                 <div class="row" v-for="(activitiesList, time) in schedule[date]">
                     <div class="col-xs-1 col-xs-offset-1">
-                        <h3>{{time}}</h3>
+                        <h3>{{time[0]}}{{time[1]}}:{{time[2]}}{{time[3]}}</h3>
                     </div>
                     <div class="col-xs-12 col-md-3" v-for="activity in activitiesList">
                         <button data-toggle="modal" data-target="#myModalDetails" @click="setActiveActivity(activity)"class="btn btn-primary activities">
@@ -415,9 +415,7 @@
                    startTime: '',
                    endTime: '',
                    capacity: '',
-                   speakerName: '',
-                //    creatorId: this.user._id,
-                //    eventId: this.event._id
+                   speakerName: ''
                }
 
             }
@@ -444,6 +442,7 @@
             addActivity(){
                 debugger
                 this.$store.dispatch('addActivity', {activity: this.activity, eventId: this.event._id})
+                this.activity = {}
             },
             setActiveActivity(activity){
                 this.$store.dispatch('getActivityById', activity)
@@ -461,6 +460,9 @@
     }
     .time{
         width: 100px;
+    }
+    .date{
+        width: 250px;
     }
     
     
