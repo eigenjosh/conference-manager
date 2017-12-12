@@ -166,7 +166,7 @@
                     <button class="btn btn-primary btn-lg">Join Event</button>
                 </div>
                 <div class="col-xs-6 text-right" v-else>
-                    <router-link :to="{name: 'adminEdit'}">
+                    <router-link :to="{path: '/admin-edit/' + activeEvent._id}">
                         <button class="btn btn-warning btn-lg">Edit Schedule</button>
                     </router-link>
                 </div>
@@ -214,7 +214,7 @@
             }
         },
         mounted() {
-            // this.$store.dispatch('getEventById', this.activeEvent)
+            this.$store.dispatch('getEventById', {_id: this.$route.params.id})
             // this.$store.dispatch('getActivities', this.activeEvent)
         },
         computed: {
@@ -227,6 +227,7 @@
             schedule() {
                 return this.$store.state.schedule
             },
+            
             
         },
         methods: {

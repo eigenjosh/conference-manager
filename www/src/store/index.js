@@ -235,6 +235,16 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
+    editActivity({commit, dispatch}, activity){
+      api.put('activities/'+ activity._id , activity)
+        .then(res => {
+          commit('setActiveActivity', res.data.data)
+          dispatch('getActivities', {_id: activity.eventId})
+        })
+        .catch(err=>{
+          commit('handleError', err)
+        })
+    },
 
     // CREATE NOTE
     createNote({ commit, dispatch }, note) {

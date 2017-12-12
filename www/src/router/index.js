@@ -34,9 +34,9 @@ export default new Router({
       component: FindEvents
     },
     {
-      path: '/event-schedule',
+      path: '/event-schedule/:id',
       name: 'eventSchedule',
-      component: EventSchedule
+      component: EventSchedule,
     },
     {
       path: '/my-schedule',
@@ -44,7 +44,7 @@ export default new Router({
       component: MySchedule
     },
     {
-    path: '/admin-edit',
+    path: '/admin-edit/:id',
     name: 'adminEdit',
     component: AdminEdit
   },

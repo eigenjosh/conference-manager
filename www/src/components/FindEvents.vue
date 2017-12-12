@@ -296,10 +296,7 @@
                     password: ''
                 }
             },
-            setActiveEvent(event){
-                debugger
-                this.$store.dispatch('getEventById', event)
-            },
+            
             findEvents() {
                 this.$store.dispatch('findEvents', this.search.location)
                 this.search.location = ''

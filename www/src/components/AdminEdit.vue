@@ -89,7 +89,7 @@
                         <!-- START TIME -->
                             <div class="form-group time">
                                     <label for="sel1">Start Time</label>
-                                    <select class="form-control" required v-model="activity.startTime">
+                                    <select class="form-control" required @change="setTime" v-model="activity.startTime">
                                       <option value="0000">12:00 AM</option>
                                       <option value="0030">12:30 AM</option>
                                       <option value="0100">1:00 AM</option>
@@ -143,7 +143,7 @@
                         <!-- END TIME -->
                             <div class="form-group time">
                                     <label for="sel1">End Time</label>
-                                    <select class="form-control" v-model="activity.endTime">
+                                    <select class="form-control"  v-model="activity.endTime">
                                       <option value="0000">12:00 AM</option>
                                       <option value="0030">12:30 AM</option>
                                       <option value="0100">1:00 AM</option>
@@ -227,11 +227,11 @@
                             <form class="form">
                                 <div class="form-group">
                                     <label for="name">Name:</label>
-                                    <textarea type="text" name="name" class="form-control" placeholder="Name" rows="1" required v-model='activity.name'>{{activeActivity.name}}</textarea>
+                                    <textarea type="text" name="name" class="form-control" placeholder="Name" rows="1" required v-model='activity.name'>{{activity.name}}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description:</label>
-                                    <textarea type="text" name="description" class="form-control" rows="5"placeholder="Whats this for?" required v-model='activity.description'>{{activeActivity.description}}</textarea>
+                                    <textarea type="text" name="description" class="form-control" rows="5"placeholder="Whats this for?" required v-model='activity.description'>{{activity.description}}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="room">Room:</label>
@@ -351,14 +351,15 @@
                                   </div>
                                 <div class="form-group">
                                     <label for="capacity">Number of Seats:</label>
-                                    <textarea type="number" name="capacity" class="form-control" placeholder="Number of Seats Available" rows="1" v-model='activity.capacity'>{{activeActivity.capacity}}</textarea>
+                                    <input type="number" name="capacity" class="form-control" :placeholder="activeActivity.capacity" v-model='activity.capacity'>
                                 </div>
                                 <div class="form-group">
                                         <label for="speakerName">Speaker Name:</label>
                                         <textarea type="text" name="speakerName" class="form-control" placeholder="Speaker Name" v-model='activity.speakerName'>{{activeActivity.speakerName}}</textarea>
                                     </div>
                                 <div class="form-group">
-                                    <button class="btn btn-submit btn-success" @click="addActivity" data-dismiss="modal" type="submit">Submit</button>
+                                    <button class="btn btn-submit btn-success" @click="editActivity" data-dismiss="modal" type="submit">Save Changes</button>
+                                    <button class="btn btn-danger">Delete</button>
                                 </div>
                             </form>
                         </div>
@@ -421,7 +422,7 @@
             }
         },
         mounted(){
-            this.$store.dispatch('getActivities', this.event)
+            this.$store.dispatch('getEventById', {_id: this.$route.params.id})
             this.date = new Date().toJSON().split('T')[0];
         },
         computed: {
@@ -446,9 +447,18 @@
             },
             setActiveActivity(activity){
                 this.$store.dispatch('getActivityById', activity)
+                this.activity = activity
             },
             logout() {
                 this.$store.dispatch('logout')
+            },
+            setTime(){
+                if(this.activity.endTime == null){
+                    this.activity.endTime = this.activity.startTime
+                }
+            },
+            editActivity(){
+                this.$store.dispatch('editActivity', this.activity)
             }
         }
     }
