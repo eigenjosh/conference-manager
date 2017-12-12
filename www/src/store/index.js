@@ -72,29 +72,29 @@ var store = new vuex.Store({
     },
     //SET MYSCHEDULE
 
-    // setMySchedule(state, activities) {
-    //   var schedule = {}
-    //   activities = activities.sort((a, b) => {
-    //     return Date.parse(a.date) - Date.parse(b.date)
-    //   })
-    //   activities.forEach(activity => {
-    //     if (!schedule.hasOwnProperty(activity.date)) {
-    //       schedule[activity.date] = {}
-    //     }
-    //   })
-    //   activities = activities.sort((a, b) => {
-    //     return parseInt(a.startTime) - parseInt(b.startTime)
-    //   })
-    //   activities.forEach(activity => {
-    //     if (!schedule[activity.date].hasOwnProperty(activity.startTime)) {
-    //       schedule[activity.date][activity.startTime] = [activity]
-    //     } else {
-    //       schedule[activity.date][activity.startTime].push(activity)
-    //     }
-    //   })
-    //   state.schedule = schedule
+    setUserSchedule(state, activities) {
+      var schedule = {}
+      activities = activities.sort((a, b) => {
+        return Date.parse(a.date) - Date.parse(b.date)
+      })
+      activities.forEach(activity => {
+        if (!schedule.hasOwnProperty(activity.date)) {
+          schedule[activity.date] = {}
+        }
+      })
+      activities = activities.sort((a, b) => {
+        return parseInt(a.startTime) - parseInt(b.startTime)
+      })
+      activities.forEach(activity => {
+        if (!schedule[activity.date].hasOwnProperty(activity.startTime)) {
+          schedule[activity.date][activity.startTime] = [activity]
+        } else {
+          schedule[activity.date][activity.startTime].push(activity)
+        }
+      })
+      state.userSchedule = schedule
 
-    // },
+    },
 
 
     //SET EVENTS
@@ -106,10 +106,10 @@ var store = new vuex.Store({
       state.myEvents = data
       console.log(state.myEvents)
     },
-    setMyActivities(state, data) {
-      state.myActivities = data
-      console.log(state.myActivities)
-    },
+    // setMyActivities(state, data) {
+    //   state.myActivities = data
+    //   console.log(state.myActivities)
+    // },
     setActiveEvent(state, data) {
       state.activeEvent = {}
       state.activeEvent = data
@@ -388,7 +388,8 @@ var store = new vuex.Store({
       debugger
       api('/user-events/' + event._id + '/activities')
         .then(res => {
-          commit('setMyActivities', res.data.data)
+          commit('setUserSchedule', res.data.data)
+          commit('setActiveEvent', event)
         })
         .catch(err=>{
           commit('handleError', err)

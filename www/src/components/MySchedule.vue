@@ -72,15 +72,19 @@
                     <!-- /.container-fluid -->
                 </nav>
                 <div class="row">
-                    <div class="col-xs-2" v-for="e in myEvents">
-                        <button class="btn btn-default" @click="getMySchedule(e)">{{e.name}}</button>
+                    <div class="col-xs-4" v-for="e in myEvents">
+                        <button class="btn btn-default btn-text" @click="getMySchedule(e)">{{e.name}}</button>
                     </div>
+                </div>
+                <div class="row">
+                    <userSchedule></userSchedule>
                 </div>
 
     </div>
 </template>
 
 <script>
+    import userSchedule from './UserSchedule'
     export default {
         name: "mySchedule",
         data(){
@@ -108,10 +112,18 @@
                 debugger
                 this.$store.dispatch('getMySchedule', e)
             }
+        },
+        components:{
+            userSchedule
         }
     }
 </script>
 
 <style>
-
+   .btn-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    }
+    
 </style>
