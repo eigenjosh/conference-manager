@@ -163,7 +163,8 @@
                     <!-- <h2>{{activeEvent.name}}</h2> -->
                 </div>
                 <div class="col-xs-6 text-right" v-if="activeUser._id != activeEvent.creatorId">
-                    <button class="btn btn-primary btn-lg">Join Event</button>
+                    <button class="btn btn-primary btn-lg" @click="addToMyEvents">Join Event</button>
+                    <h3 v-if="joined">This event has been added to your events</h3>
                 </div>
                 <div class="col-xs-6 text-right" v-else>
                     <router-link :to="{path: '/admin-edit/' + activeEvent._id}">
@@ -209,7 +210,8 @@
                 login: {
                     email: '',
                     password: ''
-                }
+                },
+                joined: false
 
             }
         },
@@ -250,7 +252,14 @@
             },
             logout() {
                 this.$store.dispatch('logout')
-            }
+            },
+            addToMyEvents(){
+                debugger
+                if(!this.activeUser.events.includes(this.activeEvent._id)){
+                    this.$store.dispatch('addToMyEvents', {event: this.activeEvent, user:this.activeUser})
+                }
+                this.joined = true
+            },
         }
     }
 </script>

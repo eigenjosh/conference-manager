@@ -29,7 +29,8 @@ var store = new vuex.Store({
     activeEvent: {},
     userNotes: [{}],
     activeActivity: {},
-    activeNote: {}
+    activeNote: {},
+    
   },
   mutations: {
 
@@ -91,7 +92,8 @@ var store = new vuex.Store({
     setActiveNote(state, note) {
       state.activeNote = {}
       state.activeNote = note
-    }
+    },
+    
   },
   actions: {
 
@@ -296,6 +298,18 @@ var store = new vuex.Store({
           dispatch('getAllUserNotes')
         })
         .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    addToMyEvents({commit, dispatch}, payload){
+      payload.user.events.push(payload.event._id)
+      debugger
+      api.put('/user-events', payload.user)
+        .then(res =>{
+          console.log('this event has been added')
+          dispatch('authenticate')
+        })
+        .catch(err=>{
           commit('handleError', err)
         })
     },

@@ -76,13 +76,12 @@ module.exports = {
   },
 
   addUserEvent: {
-    path: '/userevents',
+    path: '/user-events',
     reqType: 'put',
     method(req, res, next) {
       let action = 'Add User Event'
       Users.findOneAndUpdate({ _id: req.session.uid }, req.body)
         .then(user => {
-          user.events.push(req.body._id)
           return res.send(handleResponse(action, { message: 'Successfully added event to user.' }))
         })
         .catch(error => {
@@ -90,8 +89,9 @@ module.exports = {
         })
     }
   },
+
   removeUserEvent: {
-    path: '/userevents/:eventId',
+    path: '/user-events/:eventId',
     reqType: 'put',
     method(req, res, next) {
       let action = 'Remove User Event'
