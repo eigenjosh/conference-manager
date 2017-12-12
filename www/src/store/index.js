@@ -45,7 +45,6 @@ var store = new vuex.Store({
 
     //SET & DISPLAY SCHEDULE
     setSchedule(state, activities) {
-      debugger
       var schedule = {}
       activities = activities.sort((a, b) => {
         return Date.parse(a.date) - Date.parse(b.date)

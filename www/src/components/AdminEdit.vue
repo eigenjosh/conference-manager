@@ -86,14 +86,121 @@
                                 <label for="date">Date:</label>
                                 <input type="date" name="date" class="form-control" placeholder="date" :min="date"required v-model='activity.date'>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="startTime">Start Time:</label>
                                 <input type="text" name="startTime" class="form-control" placeholder="Start Time" required v-model='activity.startTime'>
                             </div>
                             <div class="form-group">
                                 <label for="endTime">End Time:</label>
                                 <input type="text" name="endTime" class="form-control" placeholder="End Time" required v-model='activity.endTime'>
-                            </div>
+                            </div> -->
+                            <div class="form-group time">
+                                    <label for="sel1">Start Time</label>
+                                    <select class="form-control" required v-model="activity.startTime">
+                                      <option value="0000">12:00 AM</option>
+                                      <option value="0030">12:30 AM</option>
+                                      <option value="0100">1:00 AM</option>
+                                      <option value="0130">1:30 AM</option>
+                                      <option value="0200">2:00 AM</option>
+                                      <option value="0230">2:30 AM</option>
+                                      <option value="0300">3:00 AM</option>
+                                      <option value="0330">3:30 AM</option>
+                                      <option value="0400">4:00 AM</option>
+                                      <option value="0430">4:30 AM</option>
+                                      <option value="0500">5:00 AM</option>
+                                      <option value="0530">5:30 AM</option>
+                                      <option value="0600">6:00 AM</option>
+                                      <option value="0630">6:30 AM</option>
+                                      <option value="0700">7:00 AM</option>
+                                      <option value="0730">7:30 AM</option>
+                                      <option value="0800">8:00 AM</option>
+                                      <option value="0830">8:30 AM</option>
+                                      <option value="0900">9:00 AM</option>
+                                      <option value="0930">9:30 AM</option>
+                                      <option value="1000">10:00 AM</option>
+                                      <option value="1030">10:30 AM</option>
+                                      <option value="1100">11:00 AM</option>
+                                      <option value="1130">11:30 AM</option>
+                                      <option value="1200">12:00 PM</option>
+                                      <option value="1230">12:30 PM</option>
+                                      <option value="1300">1:00 PM</option>
+                                      <option value="1330">1:30 PM</option>
+                                      <option value="1400">2:00 PM</option>
+                                      <option value="1430">2:30 PM</option>
+                                      <option value="1500">3:00 PM</option>
+                                      <option value="1530">3:30 PM</option>
+                                      <option value="1600">4:00 PM</option>
+                                      <option value="1630">4:30 PM</option>
+                                      <option value="1700">5:00 PM</option>
+                                      <option value="1730">5:30 PM</option>
+                                      <option value="1800">6:00 PM</option>
+                                      <option value="1830">6:30 PM</option>
+                                      <option value="1900">7:00 PM</option>
+                                      <option value="1930">7:30 PM</option>
+                                      <option value="2000">8:00 PM</option>
+                                      <option value="2030">8:30 PM</option>
+                                      <option value="2100">9:00 PM</option>
+                                      <option value="2130">9:30 PM</option>
+                                      <option value="2200">10:00 PM</option>
+                                      <option value="2230">10:30 PM</option>
+                                      <option value="2300">11:00 PM</option>
+                                      <option value="2330">11:30 PM</option>
+                                    </select>
+                              </div>
+                        
+                            <div class="form-group time">
+                                    <label for="sel1">End Time</label>
+                                    <select class="form-control" v-model="activity.endTime">
+                                      <option value="0000">12:00 AM</option>
+                                      <option value="0030">12:30 AM</option>
+                                      <option value="0100">1:00 AM</option>
+                                      <option value="0130">1:30 AM</option>
+                                      <option value="0200">2:00 AM</option>
+                                      <option value="0230">2:30 AM</option>
+                                      <option value="0300">3:00 AM</option>
+                                      <option value="0330">3:30 AM</option>
+                                      <option value="0400">4:00 AM</option>
+                                      <option value="0430">4:30 AM</option>
+                                      <option value="0500">5:00 AM</option>
+                                      <option value="0530">5:30 AM</option>
+                                      <option value="0600">6:00 AM</option>
+                                      <option value="0630">6:30 AM</option>
+                                      <option value="0700">7:00 AM</option>
+                                      <option value="0730">7:30 AM</option>
+                                      <option value="0800">8:00 AM</option>
+                                      <option value="0830">8:30 AM</option>
+                                      <option value="0900">9:00 AM</option>
+                                      <option value="0930">9:30 AM</option>
+                                      <option value="1000">10:00 AM</option>
+                                      <option value="1030">10:30 AM</option>
+                                      <option value="1100">11:00 AM</option>
+                                      <option value="1130">11:30 AM</option>
+                                      <option value="1200">12:00 PM</option>
+                                      <option value="1230">12:30 PM</option>
+                                      <option value="1300">1:00 PM</option>
+                                      <option value="1330">1:30 PM</option>
+                                      <option value="1400">2:00 PM</option>
+                                      <option value="1430">2:30 PM</option>
+                                      <option value="1500">3:00 PM</option>
+                                      <option value="1530">3:30 PM</option>
+                                      <option value="1600">4:00 PM</option>
+                                      <option value="1630">4:30 PM</option>
+                                      <option value="1700">5:00 PM</option>
+                                      <option value="1730">5:30 PM</option>
+                                      <option value="1800">6:00 PM</option>
+                                      <option value="1830">6:30 PM</option>
+                                      <option value="1900">7:00 PM</option>
+                                      <option value="1930">7:30 PM</option>
+                                      <option value="2000">8:00 PM</option>
+                                      <option value="2030">8:30 PM</option>
+                                      <option value="2100">9:00 PM</option>
+                                      <option value="2130">9:30 PM</option>
+                                      <option value="2200">10:00 PM</option>
+                                      <option value="2230">10:30 PM</option>
+                                      <option value="2300">11:00 PM</option>
+                                      <option value="2330">11:30 PM</option>
+                                    </select>
+                              </div>
                             <div class="form-group">
                                 <label for="capacity">Number of Seats:</label>
                                 <input type="number" name="capacity" class="form-control" placeholder="Number of Seats Available" v-model='activity.capacity'>
@@ -114,12 +221,165 @@
 
             </div>
         </div>
-
-        <!-- SIGN UP MODAL -->
         <div id="myModalDetails" class="modal fade" role="dialog">
                 <div class="modal-dialog">
     
                     <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Activity</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form">
+                                <div class="form-group">
+                                    <label for="name">Name:</label>
+                                    <textarea type="text" name="name" class="form-control" placeholder="Name" rows="1" required v-model='activity.name'>{{activeActivity.name}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description:</label>
+                                    <textarea type="text" name="description" class="form-control" rows="5"placeholder="Whats this for?" required v-model='activity.description'>{{activeActivity.description}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="room">Room:</label>
+                                    <textarea type="text" name="room" class="form-control" placeholder="Room number" required rows="1" v-model='activity.location'>{{activeActivity.location}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="date">Date:</label>
+                                    <input type="date" name="date" class="form-control" placeholder="date" :min="date"required v-model='activity.date'>
+                                </div>
+                                <div class="form-group time">
+                                        <label for="sel1">Start Time</label>
+                                        <select class="form-control" required v-model="activity.startTime">
+                                          <option value="0000">12:00 AM</option>
+                                          <option value="0030">12:30 AM</option>
+                                          <option value="0100">1:00 AM</option>
+                                          <option value="0130">1:30 AM</option>
+                                          <option value="0200">2:00 AM</option>
+                                          <option value="0230">2:30 AM</option>
+                                          <option value="0300">3:00 AM</option>
+                                          <option value="0330">3:30 AM</option>
+                                          <option value="0400">4:00 AM</option>
+                                          <option value="0430">4:30 AM</option>
+                                          <option value="0500">5:00 AM</option>
+                                          <option value="0530">5:30 AM</option>
+                                          <option value="0600">6:00 AM</option>
+                                          <option value="0630">6:30 AM</option>
+                                          <option value="0700">7:00 AM</option>
+                                          <option value="0730">7:30 AM</option>
+                                          <option value="0800">8:00 AM</option>
+                                          <option value="0830">8:30 AM</option>
+                                          <option value="0900">9:00 AM</option>
+                                          <option value="0930">9:30 AM</option>
+                                          <option value="1000">10:00 AM</option>
+                                          <option value="1030">10:30 AM</option>
+                                          <option value="1100">11:00 AM</option>
+                                          <option value="1130">11:30 AM</option>
+                                          <option value="1200">12:00 PM</option>
+                                          <option value="1230">12:30 PM</option>
+                                          <option value="1300">1:00 PM</option>
+                                          <option value="1330">1:30 PM</option>
+                                          <option value="1400">2:00 PM</option>
+                                          <option value="1430">2:30 PM</option>
+                                          <option value="1500">3:00 PM</option>
+                                          <option value="1530">3:30 PM</option>
+                                          <option value="1600">4:00 PM</option>
+                                          <option value="1630">4:30 PM</option>
+                                          <option value="1700">5:00 PM</option>
+                                          <option value="1730">5:30 PM</option>
+                                          <option value="1800">6:00 PM</option>
+                                          <option value="1830">6:30 PM</option>
+                                          <option value="1900">7:00 PM</option>
+                                          <option value="1930">7:30 PM</option>
+                                          <option value="2000">8:00 PM</option>
+                                          <option value="2030">8:30 PM</option>
+                                          <option value="2100">9:00 PM</option>
+                                          <option value="2130">9:30 PM</option>
+                                          <option value="2200">10:00 PM</option>
+                                          <option value="2230">10:30 PM</option>
+                                          <option value="2300">11:00 PM</option>
+                                          <option value="2330">11:30 PM</option>
+                                        </select>
+                                  </div>
+                            
+                                <div class="form-group time">
+                                        <label for="sel1">End Time</label>
+                                        <select class="form-control" v-model="activity.endTime">
+                                          <option value="0000">12:00 AM</option>
+                                          <option value="0030">12:30 AM</option>
+                                          <option value="0100">1:00 AM</option>
+                                          <option value="0130">1:30 AM</option>
+                                          <option value="0200">2:00 AM</option>
+                                          <option value="0230">2:30 AM</option>
+                                          <option value="0300">3:00 AM</option>
+                                          <option value="0330">3:30 AM</option>
+                                          <option value="0400">4:00 AM</option>
+                                          <option value="0430">4:30 AM</option>
+                                          <option value="0500">5:00 AM</option>
+                                          <option value="0530">5:30 AM</option>
+                                          <option value="0600">6:00 AM</option>
+                                          <option value="0630">6:30 AM</option>
+                                          <option value="0700">7:00 AM</option>
+                                          <option value="0730">7:30 AM</option>
+                                          <option value="0800">8:00 AM</option>
+                                          <option value="0830">8:30 AM</option>
+                                          <option value="0900">9:00 AM</option>
+                                          <option value="0930">9:30 AM</option>
+                                          <option value="1000">10:00 AM</option>
+                                          <option value="1030">10:30 AM</option>
+                                          <option value="1100">11:00 AM</option>
+                                          <option value="1130">11:30 AM</option>
+                                          <option value="1200">12:00 PM</option>
+                                          <option value="1230">12:30 PM</option>
+                                          <option value="1300">1:00 PM</option>
+                                          <option value="1330">1:30 PM</option>
+                                          <option value="1400">2:00 PM</option>
+                                          <option value="1430">2:30 PM</option>
+                                          <option value="1500">3:00 PM</option>
+                                          <option value="1530">3:30 PM</option>
+                                          <option value="1600">4:00 PM</option>
+                                          <option value="1630">4:30 PM</option>
+                                          <option value="1700">5:00 PM</option>
+                                          <option value="1730">5:30 PM</option>
+                                          <option value="1800">6:00 PM</option>
+                                          <option value="1830">6:30 PM</option>
+                                          <option value="1900">7:00 PM</option>
+                                          <option value="1930">7:30 PM</option>
+                                          <option value="2000">8:00 PM</option>
+                                          <option value="2030">8:30 PM</option>
+                                          <option value="2100">9:00 PM</option>
+                                          <option value="2130">9:30 PM</option>
+                                          <option value="2200">10:00 PM</option>
+                                          <option value="2230">10:30 PM</option>
+                                          <option value="2300">11:00 PM</option>
+                                          <option value="2330">11:30 PM</option>
+                                        </select>
+                                  </div>
+                                <div class="form-group">
+                                    <label for="capacity">Number of Seats:</label>
+                                    <textarea type="number" name="capacity" class="form-control" placeholder="Number of Seats Available" rows="1" v-model='activity.capacity'>{{activeActivity.capacity}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                        <label for="speakerName">Speaker Name:</label>
+                                        <textarea type="text" name="speakerName" class="form-control" placeholder="Speaker Name" v-model='activity.speakerName'>{{activeActivity.speakerName}}</textarea>
+                                    </div>
+                                <div class="form-group">
+                                    <button class="btn btn-submit btn-success" @click="addActivity" data-dismiss="modal" type="submit">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        <!-- SIGN UP MODAL -->
+        <!-- <div id="myModalDetails" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+    
+                   
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -148,7 +408,7 @@
                     </div>
     
                 </div>
-            </div>
+            </div> -->
 
 
 
@@ -243,4 +503,9 @@
     .activities {
         width: 100%;
     }
+    .time{
+        width: 100px;
+    }
+    
+    
 </style>
