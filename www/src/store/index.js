@@ -27,6 +27,7 @@ var store = new vuex.Store({
     userSchedule: {},
     events: [],
     myEvents: [],
+    myActivities:[],
     activeEvent: {},
     userNotes: [{}],
     activeActivity: {},
@@ -69,6 +70,32 @@ var store = new vuex.Store({
       state.schedule = schedule
 
     },
+    //SET MYSCHEDULE
+
+    // setMySchedule(state, activities) {
+    //   var schedule = {}
+    //   activities = activities.sort((a, b) => {
+    //     return Date.parse(a.date) - Date.parse(b.date)
+    //   })
+    //   activities.forEach(activity => {
+    //     if (!schedule.hasOwnProperty(activity.date)) {
+    //       schedule[activity.date] = {}
+    //     }
+    //   })
+    //   activities = activities.sort((a, b) => {
+    //     return parseInt(a.startTime) - parseInt(b.startTime)
+    //   })
+    //   activities.forEach(activity => {
+    //     if (!schedule[activity.date].hasOwnProperty(activity.startTime)) {
+    //       schedule[activity.date][activity.startTime] = [activity]
+    //     } else {
+    //       schedule[activity.date][activity.startTime].push(activity)
+    //     }
+    //   })
+    //   state.schedule = schedule
+
+    // },
+
 
     //SET EVENTS
     setEvents(state, data) {
@@ -78,6 +105,10 @@ var store = new vuex.Store({
     setMyEvents(state, data) {
       state.myEvents = data
       console.log(state.myEvents)
+    },
+    setMyActivities(state, data) {
+      state.myActivities = data
+      console.log(state.myActivities)
     },
     setActiveEvent(state, data) {
       state.activeEvent = {}
@@ -205,7 +236,17 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
+    getMyActivities({ commit, dispatch }) {
+      api(`/user-activities`)
+        .then(res => {
+          console.log('res to getMyActivities: ', res)
+          commit('setMyActivities', res.data.data)
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+   
     // CREATE NEW EVENT
 
     createEvent({ commit, dispatch }, event) {
@@ -254,6 +295,18 @@ var store = new vuex.Store({
         .catch(err => {
           commit('handleError', err)
         })
+    },
+    addToMySchedule({commit, dispatch}, payload){
+      payload.user.activities.push(payload.activity._id)
+      api.put('/user-activities', payload.user)
+        .then(res =>{
+          console.log('activity has been added')
+          dispatch('authenticate')
+        })
+        .catch(err=>{
+          commit('handleError', err)
+        })
+      
     },
     editActivity({commit, dispatch}, activity){
       api.put('activities/'+ activity._id , activity)
@@ -329,6 +382,12 @@ var store = new vuex.Store({
         })
         .catch(err=>{
           commit('handleError', err)
+        })
+    },
+    getMySchedule({commit, dispatch}, event){
+      api('/user-events/' + event._id + '/activities')
+        .then(res => {
+          commit('setMyActivities', res.data.data)
         })
     },
 

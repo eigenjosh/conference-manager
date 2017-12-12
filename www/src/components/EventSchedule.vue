@@ -171,7 +171,9 @@
                             <h3>{{activeActivity.description}}</h3>
                             <h4>Seats Available: {{activeActivity.capacity}}</h4>
                         </div>
-                        <button class="btn btn-success">Add to My Schedule</button>
+                        <div v-if="activeUser.events.includes(activeEvent._id)">
+                            <button v-if="!activeUser.activities.includes(activeActivity._id)" @click="addToMySchedule" class="btn btn-success">Add to My Schedule</button>
+                        </div>
                     </div>
     
                 </div>
@@ -183,7 +185,7 @@
                     <!-- <h2>{{activeEvent.name}}</h2> -->
                 </div>
                 <div class="col-xs-6 text-right" v-if="activeUser._id != activeEvent.creatorId">
-                    <button class="btn btn-primary btn-lg" @click="addToMyEvents">Join Event</button>
+                    <button v-if="!activeUser.events.includes(activeEvent._id)"class="btn btn-primary btn-lg" @click="addToMyEvents">Join Event</button>
                     <h3 v-if="joined">This event has been added to your events</h3>
                 </div>
                 <div class="col-xs-6 text-right" v-else>
@@ -298,6 +300,9 @@
                 this.$store.dispatch('getActivityById', activity)
                 this.activity = activity
             },
+            addToMySchedule(){
+                this.$store.dispatch('addToMySchedule', {activity: this.activeActivity, user:this.activeUser})
+            }
         }
     }
 </script>
