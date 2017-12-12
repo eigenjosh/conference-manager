@@ -51,7 +51,22 @@ module.exports = {
         })
     }
   },
-
+  userActivitiesByEventId: {
+    path: '/user-events/:eventId/activities',
+    reqType: 'get',
+    method(req, res, next) {
+      let action = 'Find User Activities by Event Id'
+      Users.find({ _id: req.session.uid })
+        .then(user => {
+          Activities.find({ _id: { $in: user[0].activities}, eventId: req.params.eventId })
+            .then(activities => {
+              res.send(handleResponse(action, activities))
+            })
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
   editUserEvents: {
     path: '/user-events',
     reqType: 'put',
