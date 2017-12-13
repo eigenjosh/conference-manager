@@ -124,8 +124,8 @@ module.exports = {
             .then(notes => {
               console.log('notes: ', notes)
               for (var i = 0; i < notes.length; i++) {
-                console.log('note before update: ', note)
                 var note = notes[i]
+                console.log('note before update: ', note)
                 note.eventId = null
                 delete note.eventId
                 note.update()

@@ -139,8 +139,7 @@
                     zip: '',
                     startDate: '',
                     endDate: ''
-                }
-
+                },
             }
         },
         mounted() {
