@@ -456,21 +456,6 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-<<<<<<< HEAD
-    deleteActivity({ commit, dispatch }, activity) {
-      debugger
-      api.delete('activities/' + activity._id)
-        .then(res => {
-          console.log("delete request:", res)
-          dispatch('getActivities', {_id: res.data.data.eventId})
-        })
-        .catch(err => {
-          commit('handleError', err)
-        })
-    },
-=======
-
->>>>>>> 4f1f52de2f7e0bdf979082a9dadd1442bca1319f
     addToMyEvents({ commit, dispatch }, payload) {
       payload.user.events.push(payload.event._id)
 
