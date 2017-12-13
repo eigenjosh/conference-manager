@@ -469,7 +469,7 @@ var store = new vuex.Store({
     },
 
     //VARIOUS DELETES
-    
+
     deleteEvent({ commit, dispatch }, event) {
       api.delete('events/' + event._id)
         .then(res => {
@@ -500,16 +500,18 @@ var store = new vuex.Store({
     },
 
     removeFromMyEvents({ commit, dispatch }, payload) {
+      var removedEvent
       for (var i = 0; i < payload.user.events.length; i++) {
         var event = payload.user.events[i]
         if (event._id == payload.event._id) {
           payload.user.event.splice(i, 1)
+          var removedEvent = event
           break
         }
       }
       for (var i = 0; i < payload.user.activities.length; i++) {
         var activity = payload.user.activities[i]
-        if (activity.eventId == payload.event._id) {
+        if (activity.eventId == removedEvent._id) {
           payload.user.activities.splice(i, 1)
           i--
         }
