@@ -44,31 +44,24 @@
                             </router-link>
                         </li>
                     </ul>
-
-
-                    <!-- SEARCH BAR -->
-
                     <ul class="nav navbar-nav navbar-right">
-                        <!-- LOGIN BUTTON -->
-
-                        <!-- Trigger the LOGIN modal -->
-                        <!-- Trigger the SIGN UP modal -->
-
-
-
                     </ul>
                 </div>
-                <!-- /.navbar-collapse -->
             </div>
-            <!-- /.container-fluid -->
         </nav>
-        <div class="row">
-            <div class="col-xs-4" v-for="e in myEvents">
-                <button class="btn btn-default btn-text" @click="getMySchedule(e)">{{e.name}}</button>
-            </div>
+        <h1>My Schedule</h1>
+        <div v-if="myEvents.length == 0" class="header">
+            <h3>Looks like you have not added any activities to your schedule yet! Join an event and click "add to my schedule" to see them here!</h3>
         </div>
-        <div class="row">
-            <userSchedule></userSchedule>
+        <div v-else class="display">
+            <div class="row">
+                <div class="col-xs-4" v-for="e in myEvents">
+                    <button class="btn btn-default btn-text" @click="getMySchedule(e)">{{e.name}}</button>
+                </div>
+            </div>
+            <div class="row">
+                <userSchedule></userSchedule>
+            </div>
         </div>
 
     </div>

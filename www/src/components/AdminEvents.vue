@@ -107,10 +107,15 @@
         </div>
         <div class="container">
             <div v-if="events.length == 0">
-                <h3>You have not created any events. If you wish to create a new event, please <a data-toggle="modal" data-target="#myModal3">click here</a> </h3>
+                <h3>You have not created any events. If you wish to create a new event, please
+                    <a data-toggle="modal" data-target="#myModal3">click here</a>
+                </h3>
             </div>
-            <div v-else v-for="event in events" class="row ">
-                <aEvent :event="event"></aEvent>
+            <div v-else class="admin-header">
+                <h1>Events I've Created</h1>
+                <div v-for="event in events" class="row ">
+                    <aEvent :event="event"></aEvent>
+                </div>
             </div>
 
         </div>
@@ -143,15 +148,15 @@
             this.date = new Date().toJSON().split('T')[0];
             this.$store.dispatch('getCreatedEvents')
         },
-        computed:{
-            events(){
+        computed: {
+            events() {
                 return this.$store.state.adminEvents
             },
             activeUser() {
                 return this.$store.state.activeUser
             },
         },
-        components:{
+        components: {
             AEvent
         },
         methods: {
@@ -159,7 +164,6 @@
                 this.$store.dispatch('logout')
             },
             createEvent() {
-                //console.log(this.event)
                 this.$store.dispatch('createEvent', this.event)
                 this.event = {
                     name: '',
