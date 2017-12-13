@@ -27,14 +27,14 @@ var store = new vuex.Store({
     userSchedule: {},
     events: [],
     myEvents: [],
-    myActivities:[],
+    myActivities: [],
     activeEvent: {},
     userNotes: [{}],
     activeActivity: {},
     activeNote: {},
     timeSlots: [
-     "12:00 AM",
-     "12:30 AM",
+      "12:00 AM",
+      "12:30 AM",
       "1:00 AM",
       "1:30 AM",
       "2:00 AM",
@@ -53,12 +53,12 @@ var store = new vuex.Store({
       "8:30 AM",
       "9:00 AM",
       "9:30 AM",
-     "10:00 AM",
-     "10:30 AM",
-     "11:00 AM",
-     "11:30 AM",
-     "12:00 PM",
-     "12:30 PM",
+      "10:00 AM",
+      "10:30 AM",
+      "11:00 AM",
+      "11:30 AM",
+      "12:00 PM",
+      "12:30 PM",
       "1:00 PM",
       "1:30 PM",
       "2:00 PM",
@@ -77,12 +77,12 @@ var store = new vuex.Store({
       "8:30 PM",
       "9:00 PM",
       "9:30 PM",
-     "10:00 PM",
-     "10:30 PM",
-     "11:00 PM",
-     "11:30 PM"
+      "10:00 PM",
+      "10:30 PM",
+      "11:00 PM",
+      "11:30 PM"
     ],
-    
+
   },
   mutations: {
 
@@ -90,18 +90,18 @@ var store = new vuex.Store({
     setUser(state, user) {
       state.activeUser = user
     },
-    resetState(state){
+    resetState(state) {
       state.error = {},
-      state.activeUser = {},
-      state.schedule = {},
-      state.userSchedule = {},
-      state.events = [],
-      state.myEvents= [],
-     state.myActivities=[],
-      state.activeEvent={},
-      state.userNotes= [{}],
-      state.activeActivity= {},
-      state.activeNote= {}
+        state.activeUser = {},
+        state.schedule = {},
+        state.userSchedule = {},
+        state.events = [],
+        state.myEvents = [],
+        state.myActivities = [],
+        state.activeEvent = {},
+        state.userNotes = [{}],
+        state.activeActivity = {},
+        state.activeNote = {}
     },
 
 
@@ -197,7 +197,7 @@ var store = new vuex.Store({
       state.activeNote = {}
       state.activeNote = note
     },
-    
+
   },
   actions: {
 
@@ -206,7 +206,7 @@ var store = new vuex.Store({
     //LOGIN
 
     login({ commit, dispatch }, payload) {
-      
+
       auth.post('login', payload)
         .then(res => {
           console.log("successful login")
@@ -250,7 +250,7 @@ var store = new vuex.Store({
       auth.delete('logout')
         .then((user) => {
           user = {}
-          
+
           commit('setUser', user)
           commit('resetState')
           router.push({ name: 'Home' })
@@ -258,7 +258,7 @@ var store = new vuex.Store({
     },
 
     //*** EVENTS/ACTIVITIES ***/
-  
+
     //GET ALL EVENTS
 
     getAllEvents({ commit, dispatch }) {
@@ -271,7 +271,7 @@ var store = new vuex.Store({
     //GET ACTIVITIES BY EVENT ID
 
     getActivities({ commit, dispatch }, event) {
-      
+
       api('/events/' + event._id + '/activities')
         .then(res => {
           commit('setSchedule', res.data.data)
@@ -294,9 +294,9 @@ var store = new vuex.Store({
         })
     },
 
-     //GET MY EVENTS (USER)
+    //GET MY EVENTS (USER)
 
-     getMyEvents({ commit, dispatch }) {
+    getMyEvents({ commit, dispatch }) {
       api(`/user-events`)
         .then(res => {
           console.log('res to getMyEvents: ', res)
@@ -316,7 +316,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-   
+
     // CREATE NEW EVENT
 
     createEvent({ commit, dispatch }, event) {
@@ -343,7 +343,7 @@ var store = new vuex.Store({
 
     // GET EVENT BY ID
     getEventById({ commit, dispatch }, event) {
-      
+
       api('events/' + event._id)
         .then(res => {
           commit('setActiveEvent', res.data.data)
@@ -366,25 +366,25 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    addToMySchedule({commit, dispatch}, payload){
+    addToMySchedule({ commit, dispatch }, payload) {
       payload.user.activities.push(payload.activity._id)
       api.put('/user-activities', payload.user)
-        .then(res =>{
+        .then(res => {
           console.log('activity has been added')
           dispatch('authenticate')
         })
-        .catch(err=>{
+        .catch(err => {
           commit('handleError', err)
         })
-      
+
     },
-    editActivity({commit, dispatch}, activity){
-      api.put('activities/'+ activity._id , activity)
+    editActivity({ commit, dispatch }, activity) {
+      api.put('activities/' + activity._id, activity)
         .then(res => {
           commit('setActiveActivity', res.data.data)
-          dispatch('getActivities', {_id: activity.eventId})
+          dispatch('getActivities', { _id: activity.eventId })
         })
-        .catch(err=>{
+        .catch(err => {
           commit('handleError', err)
         })
     },
@@ -445,25 +445,83 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    addToMyEvents({commit, dispatch}, payload){
+    addToMyEvents({ commit, dispatch }, payload) {
       payload.user.events.push(payload.event._id)
-      
+
       api.put('/user-events', payload.user)
-        .then(res =>{
+        .then(res => {
           console.log('this event has been added')
           dispatch('authenticate')
         })
-        .catch(err=>{
+        .catch(err => {
           commit('handleError', err)
         })
     },
-    getMySchedule({commit, dispatch}, event){
+    getMySchedule({ commit, dispatch }, event) {
       api('/user-events/' + event._id + '/activities')
         .then(res => {
           commit('setUserSchedule', res.data.data)
           commit('setActiveEvent', event)
         })
-        .catch(err=>{
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
+    //VARIOUS DELETES
+
+    deleteEvent({ commit, dispatch }, event) {
+      api.delete('events/' + event._id)
+        .then(res => {
+          console.log('res to delete event: ', res.data.data)
+          dispatch('getAllEvents')
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
+    removeFromMySchedule({ commit, dispatch }, payload) {
+      for (var i = 0; i < payload.user.activities.length; i++) {
+        var activity = payload.user.activities[i]
+        if (activity._id == payload.activity._id) {
+          payload.user.activities.splice(i, 1)
+          break
+        }
+      }
+      api.put('/user-activities', payload.user)
+        .then(res => {
+          console.log('activity has been removed from user schedule')
+          dispatch('authenticate')
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+
+    removeFromMyEvents({ commit, dispatch }, payload) {
+      var removedEvent
+      for (var i = 0; i < payload.user.events.length; i++) {
+        var event = payload.user.events[i]
+        if (event._id == payload.event._id) {
+          payload.user.events.splice(i, 1)
+          var removedEvent = event
+          break
+        }
+      }
+      for (var i = 0; i < payload.user.activities.length; i++) {
+        var activity = payload.user.activities[i]
+        if (activity.eventId == removedEvent._id) {
+          payload.user.activities.splice(i, 1)
+          i--
+        }
+      }
+      api.put('/user-events', payload.user)
+        .then(res => {
+          console.log('this event has been removed from user events')
+          dispatch('authenticate')
+        })
+        .catch(err => {
           commit('handleError', err)
         })
     },

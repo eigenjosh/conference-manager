@@ -18,7 +18,7 @@
                         <!-- <h4>Seats Available: {{activeActivity.capacity}}</h4> -->
                     </div>
                     <div>
-                        <button v-if="checkActivityId(userNotes)" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#notepad">Edit My Note</button>
+                        <button v-if="isCreated" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#notepad" @click="setActiveNote">Edit My Note</button>
                         <button v-else class="btn btn-primary" data-dismiss="modal" data-toggle="modal" @click="saveNote" data-target="#notepad">Take Note</button>
                     </div>
                     <div class="modal-footer">
@@ -69,7 +69,7 @@
                     <h3>{{time[0]}}{{time[1]}}:{{time[2]}}{{time[3]}}</h3>
                 </div>
                 <div class="col-xs-12 col-md-3" v-for="activity in activitiesList">
-                    <button class="btn btn-primary activities" @click="setActiveActivity(activity)" data-toggle="modal" data-target="#myActDetails">
+                    <button class="btn btn-primary activities" @click="setActiveActivity(activity, userNotes)" data-toggle="modal" data-target="#myActDetails">
                         <h5>{{activity.date}} {{activity.startTime}} - {{activity.endTime}}</h5>
                         <h4>{{activity.name}}</h4>
                     </button>
@@ -87,7 +87,8 @@
                 note: {
                     title: '',
                     body: ''
-                }
+                },
+                isCreated: false
 
             }
         },
@@ -112,18 +113,24 @@
         },
         mounted() {
             this.$store.dispatch('getAllUserNotes', this.note.creatorId)
+            this.$store.dispatch('getMySchedule', this.activeEvent)
         },
         methods: {
-            setActiveActivity(activity) {
+            setActiveActivity(activity, userNotes) {
+                
                 this.$store.dispatch('getActivityById', activity)
+                this.isCreated = false
+                for (var i = 0; i < userNotes.length; i++) {
+                    var note = userNotes[i]
+                    if (note.activityId == activity._id) {
+                        return this.isCreated = true
+                    }
+                }
             },
             saveNote() {
-                debugger
+                
                 this.note.title = this.activeActivity.name
                 this.note.body = ' '
-                // if(this.userNote.includes(this.activeActivity._id)){
-                //     this.$store.dispatch('getNotebyNoteId')
-                // }
                 this.note.activityId = this.activeActivity._id
                 this.$store.dispatch('createNote', this.note)
             },
@@ -132,16 +139,19 @@
                 this.$store.dispatch('updateNote', activeNote)
                 this.note = {}
             },
-            checkActivityId(userNotes) {
-                var out = false
-                for (var i = 0; i < userNotes.length; i++) {
-                    var userNote = userNotes[i]
-                    if (userNotes.activityId == this.activeActivity._id){
-                        return out = true
+            setActiveNote(){
+                var activeNote
+                for(var i=0; i<this.userNotes.length; i++){
+                    var note = this.userNotes[i]
+                    if(note.activityId == this.activeActivity._id){
+                        activeNote = note
                     }
                 }
-
+                this.$store.dispatch('getNotebyNoteId', activeNote)
+                this.note.body = activeNote.body
             }
+            
+            
         },
 
     }
