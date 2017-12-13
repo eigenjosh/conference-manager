@@ -188,7 +188,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-6">
-                    <!-- <h2>{{activeEvent.name}}</h2> -->
+                    <h2>{{activeEvent.name}}</h2>
                 </div>
                 <div class="col-xs-6 text-right" v-if="activeUser._id != activeEvent.creatorId">
                     <button v-if="!activeUser.events.includes(activeEvent._id)" class="btn btn-primary btn-lg" @click="addToMyEvents">Join Event</button>

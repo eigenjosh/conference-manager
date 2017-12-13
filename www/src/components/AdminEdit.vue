@@ -76,7 +76,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
-                                <textarea type="text" name="description" class="form-control" rows="5"placeholder="Whats this for?" required v-model='activity.description'></textarea>
+                                <textarea type="text" name="description" class="form-control" rows="5" placeholder="Whats this for?" required v-model='activity.description'></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="room">Room:</label>
@@ -84,31 +84,31 @@
                             </div>
                             <div class="form-group date">
                                 <label for="date">Date:</label>
-                                <input type="date" name="date" class="form-control" placeholder="date" :min="date"required v-model='activity.date'>
+                                <input type="date" name="date" class="form-control" placeholder="date" :min="date" required v-model='activity.date'>
                             </div>
-                        <!-- START TIME -->
+                            <!-- START TIME -->
                             <div class="form-group time">
-                                    <label for="sel1">Start Time</label>
-                                    <select class="form-control" required @change="setTime" v-model="activity.startTime">
-                                      <option :value="startSlot" v-for="startSlot in timeSlots">{{startSlot}}</option>
-                                    </select>
-                              </div>
-                        <!-- END TIME -->
+                                <label for="sel1">Start Time</label>
+                                <select class="form-control" required @change="setTime" v-model="activity.startTime">
+                                    <option :value="startSlot" v-for="startSlot in timeSlots">{{startSlot}}</option>
+                                </select>
+                            </div>
+                            <!-- END TIME -->
                             <div class="form-group time">
-                                    <label for="sel1">End Time</label>
-                                    <select class="form-control"  v-model="activity.endTime">
-                                        <option :value="endSlot" v-for="endSlot in timeSlots">{{endSlot}}</option>
+                                <label for="sel1">End Time</label>
+                                <select class="form-control" v-model="activity.endTime">
+                                    <option :value="endSlot" v-for="endSlot in timeSlots">{{endSlot}}</option>
 
-                                    </select>
-                              </div>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for="capacity">Number of Seats:</label>
                                 <input type="number" name="capacity" class="form-control" placeholder="Number of Seats Available" v-model='activity.capacity'>
                             </div>
                             <div class="form-group">
-                                    <label for="speakerName">Speaker Name:</label>
-                                    <input type="text" name="speakerName" class="form-control" placeholder="Speaker Name" v-model='activity.speakerName'>
-                                </div>
+                                <label for="speakerName">Speaker Name:</label>
+                                <input type="text" name="speakerName" class="form-control" placeholder="Speaker Name" v-model='activity.speakerName'>
+                            </div>
                             <div class="form-group">
                                 <button class="btn btn-submit btn-success" @click="addActivity" data-dismiss="modal" type="submit">Submit</button>
                             </div>
@@ -122,67 +122,67 @@
             </div>
         </div>
         <div id="myModalDetails" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-    
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Edit Activity</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form class="form">
-                                <div class="form-group">
-                                    <label for="name">Name:</label>
-                                    <textarea type="text" name="name" class="form-control" placeholder="Name" rows="1" required v-model='activity.name'>{{activity.name}}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Description:</label>
-                                    <textarea type="text" name="description" class="form-control" rows="5"placeholder="Whats this for?" required v-model='activity.description'>{{activity.description}}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="room">Room:</label>
-                                    <textarea type="text" name="room" class="form-control" placeholder="Room number" required rows="1" v-model='activity.location'>{{activeActivity.location}}</textarea>
-                                </div>
-                                <div class="form-group date">
-                                    <label for="date">Date:</label>
-                                    <input type="date" name="date" class="form-control" placeholder="date" :min="date"required v-model='activity.date'>
-                                </div>
-                            <!-- START TIME -->
-                                <div class="form-group time">
-                                        <label for="sel1">Start Time</label>
-                                        <select class="form-control" required v-model="activity.startTime">
-                                          <option :value="startSlot" v-for="startSlot in timeSlots">{{startSlot}}</option>
-                                        </select>
-                                  </div>
-                            <!-- END TIME -->
-                                <div class="form-group time">
-                                        <label for="sel1">End Time</label>
-                                        <select class="form-control" v-model="activity.endTime">
-                                          <option :value="endSlot" v-for="endSlot in timeSlots">{{endSlot}}</option>
-                                        </select>
-                                  </div>
-                                <div class="form-group">
-                                    <label for="capacity">Number of Seats:</label>
-                                    <input type="number" name="capacity" class="form-control" :placeholder="activeActivity.capacity" v-model='activity.capacity'>
-                                </div>
-                                <div class="form-group">
-                                        <label for="speakerName">Speaker Name:</label>
-                                        <textarea type="text" name="speakerName" class="form-control" placeholder="Speaker Name" v-model='activity.speakerName'>{{activeActivity.speakerName}}</textarea>
-                                    </div>
-                                <div class="form-group">
-                                    <button class="btn btn-submit btn-success" @click="editActivity" data-dismiss="modal" type="submit">Save Changes</button>
-                                    <button class="btn btn-danger" data-dismiss="modal" @click="deleteActivity">Delete</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Edit Activity</h4>
                     </div>
-    
+                    <div class="modal-body">
+                        <form class="form">
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <textarea type="text" name="name" class="form-control" placeholder="Name" rows="1" required v-model='activity.name'>{{activity.name}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description:</label>
+                                <textarea type="text" name="description" class="form-control" rows="5" placeholder="Whats this for?" required v-model='activity.description'>{{activity.description}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="room">Room:</label>
+                                <textarea type="text" name="room" class="form-control" placeholder="Room number" required rows="1" v-model='activity.location'>{{activeActivity.location}}</textarea>
+                            </div>
+                            <div class="form-group date">
+                                <label for="date">Date:</label>
+                                <input type="date" name="date" class="form-control" placeholder="date" :min="date" required v-model='activity.date'>
+                            </div>
+                            <!-- START TIME -->
+                            <div class="form-group time">
+                                <label for="sel1">Start Time</label>
+                                <select class="form-control" required v-model="activity.startTime">
+                                    <option :value="startSlot" v-for="startSlot in timeSlots">{{startSlot}}</option>
+                                </select>
+                            </div>
+                            <!-- END TIME -->
+                            <div class="form-group time">
+                                <label for="sel1">End Time</label>
+                                <select class="form-control" v-model="activity.endTime">
+                                    <option :value="endSlot" v-for="endSlot in timeSlots">{{endSlot}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="capacity">Number of Seats:</label>
+                                <input type="number" name="capacity" class="form-control" :placeholder="activeActivity.capacity" v-model='activity.capacity'>
+                            </div>
+                            <div class="form-group">
+                                <label for="speakerName">Speaker Name:</label>
+                                <textarea type="text" name="speakerName" class="form-control" placeholder="Speaker Name" v-model='activity.speakerName'>{{activeActivity.speakerName}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-submit btn-success" @click="editActivity" data-dismiss="modal" type="submit">Save Changes</button>
+                                <button class="btn btn-danger" data-dismiss="modal" @click="deleteActivity">Delete</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
+
             </div>
+        </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-6">
@@ -190,6 +190,7 @@
                 </div>
 
                 <div class="col-xs-6 text-right">
+                    <button class="btn btn-danger btn" @click="deleteEvent">Delete Event</button>
                     <button class="btn btn-warning btn" data-toggle="modal" data-target="#myModalAdd">Add Activity</button>
                     <button class="btn btn-success btn">Post Schedule</button>
                 </div>
@@ -203,7 +204,7 @@
                         <h3>{{time}}</h3>
                     </div>
                     <div class="col-xs-12 col-md-3" v-for="activity in activitiesList">
-                        <button data-toggle="modal" data-target="#myModalDetails" @click="setActiveActivity(activity)"class="btn btn-primary activities">
+                        <button data-toggle="modal" data-target="#myModalDetails" @click="setActiveActivity(activity)" class="btn btn-primary activities">
                             <h5>{{activity.date}} {{activity.startTime}} - {{activity.endTime}}</h5>
                             <h4>{{activity.name}}</h4>
                             <i class="fa fa-pencil pull-right" aria-hidden="true"></i>
@@ -221,25 +222,25 @@
         data() {
             return {
                 date: Date,
-               activity:{
-                   name: '',
-                   description: '',
-                   location: '',
-                   date: '',
-                   startTime: '',
-                   endTime: '',
-                   capacity: '',
-                   speakerName: ''
-               }
+                activity: {
+                    name: '',
+                    description: '',
+                    location: '',
+                    date: '',
+                    startTime: '',
+                    endTime: '',
+                    capacity: '',
+                    speakerName: ''
+                }
 
             }
         },
-        mounted(){
-            this.$store.dispatch('getEventById', {_id: this.$route.params.id})
+        mounted() {
+            this.$store.dispatch('getEventById', { _id: this.$route.params.id })
             this.date = new Date().toJSON().split('T')[0];
         },
         computed: {
-            activeActivity(){
+            activeActivity() {
                 return this.$store.state.activeActivity
             },
             user() {
@@ -248,36 +249,39 @@
             schedule() {
                 return this.$store.state.schedule
             },
-            event(){
+            event() {
                 return this.$store.state.activeEvent
             },
-            timeSlots(){
+            timeSlots() {
                 return this.$store.state.timeSlots
             }
         },
         methods: {
-            addActivity(){
-                this.$store.dispatch('addActivity', {activity: this.activity, eventId: this.event._id})
+            addActivity() {
+                this.$store.dispatch('addActivity', { activity: this.activity, eventId: this.event._id })
                 this.activity = {}
             },
-            setActiveActivity(activity){
+            setActiveActivity(activity) {
                 this.$store.dispatch('getActivityById', activity)
                 this.activity = activity
             },
             logout() {
                 this.$store.dispatch('logout')
             },
-            setTime(){
-                if(this.activity.startTime == null){
+            setTime() {
+                if (this.activity.startTime == null) {
                     this.activity.startTime = this.$store.state.timeSlots[0]
                 }
             },
-            editActivity(){
+            editActivity() {
                 this.$store.dispatch('editActivity', this.activity)
             },
-            deleteActivity(){
+            deleteActivity() {
                 debugger
                 this.$store.dispatch('deleteActivity', this.activity)
+            },
+            deleteEvent(){
+                this.$store.dispatch('deleteEvent', this.event)
             }
         }
     }
@@ -287,12 +291,12 @@
     .activities {
         width: 100%;
     }
-    .time{
+
+    .time {
         width: 100px;
     }
-    .date{
+
+    .date {
         width: 250px;
     }
-    
-    
 </style>
