@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from 'components/Home'
-import AdminEvent from 'components/AdminEvent'
+import AdminEvents from 'components/AdminEvents'
 import Notes from 'components/Notes'
 import FindEvents from 'components/FindEvents'
 import EventSchedule from 'components/EventSchedule'
@@ -19,9 +19,9 @@ export default new Router({
       component: Home
     },
     {
-      path: '/admin-event',
-      name: 'adminEvent',
-      component: AdminEvent
+      path: '/admin-events',
+      name: 'adminEvents',
+      component: AdminEvents
     },
     {
       path: '/user-notes',

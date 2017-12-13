@@ -29,8 +29,8 @@
                     <ul>
                         <li>
 
-                            <router-link :to="{name: 'findEvents'}">
-                                <button type="button" class="btn btn-default">Find Events</button>
+                            <router-link :to="{name: 'Home'}">
+                                <button type="button" class="btn btn-default">Home</button>
                             </router-link>
                         </li>
                         <!-- <li>
@@ -41,6 +41,11 @@
                             </li> -->
 
                         <div v-if="activeUser.hasOwnProperty('name')">
+                            <li>
+                                <router-link :to="{name: 'adminEvents'}">
+                                    <button type="button" class="btn btn-default">Events I've Created</button>
+                                </router-link>
+                            </li>
                             <li>
 
                                 <router-link :to="{name:'mySchedule'}">
@@ -296,7 +301,7 @@
                     password: ''
                 }
             },
-            
+
             findEvents() {
                 this.$store.dispatch('findEvents', this.search.location)
                 this.search.location = ''
@@ -338,8 +343,7 @@
 </script>
 
 <style scoped>
-    
-    .event-btn{
+    .event-btn {
         width: 100%;
     }
 </style>

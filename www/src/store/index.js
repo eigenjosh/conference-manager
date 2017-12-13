@@ -32,6 +32,7 @@ var store = new vuex.Store({
     userNotes: [{}],
     activeActivity: {},
     activeNote: {},
+    adminEvents:[],
     timeSlots: [
       "12:00 AM",
       "12:30 AM",
@@ -101,7 +102,8 @@ var store = new vuex.Store({
         state.activeEvent = {},
         state.userNotes = [{}],
         state.activeActivity = {},
-        state.activeNote = {}
+        state.activeNote = {},
+        state.adminEvents =[]
     },
 
 
@@ -197,6 +199,10 @@ var store = new vuex.Store({
       state.activeNote = {}
       state.activeNote = note
     },
+    setAdminEvents(state, data){
+      console.log(data)
+      state.adminEvents.push(data)
+    }
 
   },
   actions: {
@@ -495,6 +501,17 @@ var store = new vuex.Store({
           dispatch('authenticate')
         })
         .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    getCreatedEvents({commit, dispatch}){
+     
+      api('/admin-events')
+        .then(res =>{
+          console.log(res)
+          commit('setAdminEvents', res.data.data)
+        })
+        .catch(err=>{
           commit('handleError', err)
         })
     },

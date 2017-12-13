@@ -34,16 +34,16 @@
                                 <button type="button" class="btn btn-default">Find Events</button>
                             </router-link>
                         </li>
-                        <!-- <li>
-
-                            <router-link :to="{name: 'eventSchedule'}">
-                                <button type="button" class="btn btn-default">Event Schedule</button>
-                            </router-link>
-                        </li> -->
-
+                        
                         <div v-if="activeUser.hasOwnProperty('name')">
                             <li>
-
+    
+                                <router-link :to="{name: 'adminEvents'}">
+                                    <button type="button" class="btn btn-default">Events I've Created</button>
+                                </router-link>
+                            </li>
+                            <li>
+                                
                                 <router-link :to="{name:'mySchedule'}">
                                     <button type="button" class="btn btn-default">My Schedule</button>
                                 </router-link>
