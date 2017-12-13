@@ -276,9 +276,9 @@ var store = new vuex.Store({
 
     //GET ACTIVITIES BY EVENT ID
 
-    getActivities({ commit, dispatch }, event) {
+    getActivities({ commit, dispatch }, payload) {
 
-      api('/events/' + event._id + '/activities')
+      api('/events/' + payload._id + '/activities')
         .then(res => {
           commit('setSchedule', res.data.data)
         })
@@ -349,11 +349,11 @@ var store = new vuex.Store({
 
     // GET EVENT BY ID
     getEventById({ commit, dispatch }, event) {
-
+      debugger
       api('events/' + event._id)
         .then(res => {
           commit('setActiveEvent', res.data.data)
-          dispatch('getActivities', event)
+          dispatch('getActivities', {_id: event._id})
         })
         .catch(err => {
           commit('handleError', err)
@@ -447,6 +447,17 @@ var store = new vuex.Store({
       api.delete('notes/' + note._id)
         .then(res => {
           dispatch('getAllUserNotes')
+        })
+        .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    deleteActivity({ commit, dispatch }, activity) {
+      debugger
+      api.delete('activities/' + activity._id)
+        .then(res => {
+          console.log("delete request:", res)
+          dispatch('getActivities', {_id: res.data.data.eventId})
         })
         .catch(err => {
           commit('handleError', err)

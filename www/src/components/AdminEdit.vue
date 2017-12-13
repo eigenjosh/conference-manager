@@ -172,7 +172,7 @@
                                     </div>
                                 <div class="form-group">
                                     <button class="btn btn-submit btn-success" @click="editActivity" data-dismiss="modal" type="submit">Save Changes</button>
-                                    <button class="btn btn-danger">Delete</button>
+                                    <button class="btn btn-danger" data-dismiss="modal" @click="deleteActivity">Delete</button>
                                 </div>
                             </form>
                         </div>
@@ -274,6 +274,10 @@
             },
             editActivity(){
                 this.$store.dispatch('editActivity', this.activity)
+            },
+            deleteActivity(){
+                debugger
+                this.$store.dispatch('deleteActivity', this.activity)
             }
         }
     }
