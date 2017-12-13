@@ -41,7 +41,8 @@
                             </form>
                         </div>
                         <div>
-                           <button class="btn btn-primary" data-dismiss="modal" @click="saveNote">Save Notes</button>
+                           <button class="btn btn-primary" data-dismiss="modal" @click="saveNote">Save Note</button>
+                           
                         </div>
                         <div class="modal-footer">
                             <button>Add to My Schedule</button>
@@ -109,6 +110,7 @@
             saveNote(){
                 this.note.title = this.activeActivity.name
                 this.$store.dispatch('createNote', this.note)
+                
             }
         },
 

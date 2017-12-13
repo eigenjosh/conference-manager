@@ -40,6 +40,19 @@ var store = new vuex.Store({
     setUser(state, user) {
       state.activeUser = user
     },
+    resetState(state){
+      state.error = {},
+      state.activeUser = {},
+      state.schedule = {},
+      state.userSchedule = {},
+      state.events = [],
+      state.myEvents= [],
+     state.myActivities=[],
+      state.activeEvent={},
+      state.userNotes= [{}],
+      state.activeActivity= {},
+      state.activeNote= {}
+    },
 
     //HANDLE ERROR
     handleError(state, err) {
@@ -182,7 +195,9 @@ var store = new vuex.Store({
       auth.delete('logout')
         .then((user) => {
           user = {}
+          
           commit('setUser', user)
+          commit('resetState')
           router.push({ name: 'Home' })
         })
     },
