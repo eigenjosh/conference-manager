@@ -385,7 +385,6 @@ var store = new vuex.Store({
         })
     },
     getMySchedule({commit, dispatch}, event){
-      debugger
       api('/user-events/' + event._id + '/activities')
         .then(res => {
           commit('setUserSchedule', res.data.data)
