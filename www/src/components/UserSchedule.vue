@@ -113,6 +113,7 @@
         },
         mounted() {
             this.$store.dispatch('getAllUserNotes', this.note.creatorId)
+            this.$store.dispatch('getMySchedule', this.activeEvent)
         },
         methods: {
             setActiveActivity(activity, userNotes) {
