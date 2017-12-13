@@ -37,11 +37,11 @@
                         </div>
                         <div class="modal-body">
                             <form type="submit">
-                                <textarea name="myNotes"  cols="70" rows="15"></textarea>
+                                <textarea name="myNotes"  cols="70" rows="15" v-model="note.body">{{note.body}}</textarea>
                             </form>
                         </div>
                         <div>
-                           <button class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#notepad">Take Notes</button>
+                           <button class="btn btn-primary" data-dismiss="modal" @click="saveNote">Save Notes</button>
                         </div>
                         <div class="modal-footer">
                             <button>Add to My Schedule</button>
@@ -81,7 +81,10 @@
         name: 'userSchedule',
         data() {
             return {
-
+                note:{
+                    title: '',
+                    body: ''
+                }
             }
         },
         computed: {
@@ -102,6 +105,10 @@
         methods: {
             setActiveActivity(activity) {
                 this.$store.dispatch('getActivityById', activity)
+            },
+            saveNote(){
+                this.note.title = this.activeActivity.name
+                this.$store.dispatch('createNote', this.note)
             }
         },
 
