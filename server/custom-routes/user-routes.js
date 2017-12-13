@@ -112,7 +112,7 @@ module.exports = {
   },
 
   deleteAdminEvents: {
-    path: '/admin-events:eventId',
+    path: '/admin-events/:eventId',
     reqType: 'delete',
     method(req, res, next) {
       let action = 'Delete Event Created By Admin'
