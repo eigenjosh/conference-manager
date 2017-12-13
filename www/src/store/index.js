@@ -139,6 +139,7 @@ var store = new vuex.Store({
 
     // SET ACTIVE NOTE
     setActiveNote(state, note) {
+      debugger
       state.activeNote = {}
       state.activeNote = note
     },
@@ -336,10 +337,12 @@ var store = new vuex.Store({
 
     // CREATE NOTE
     createNote({ commit, dispatch }, note) {
+      debugger
       api.post('notes', note)
         .then(res => {
           console.log(res)
           dispatch('getAllUserNotes')
+          dispatch('getNotebyNoteId', res.data.data)
         })
         .catch(err => {
           commit('handleError', err)
@@ -368,6 +371,7 @@ var store = new vuex.Store({
 
     // GET NOTE BY NOTE ID
     getNotebyNoteId({ commit, dispatch }, note) {
+      debugger
       api('notes/' + note._id)
         .then(res => {
           commit('setActiveNote', res.data.data)

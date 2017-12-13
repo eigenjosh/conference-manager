@@ -109,7 +109,6 @@
                 this.$store.dispatch('logout')
             },
             getMySchedule(e){
-                debugger
                 this.$store.dispatch('getMySchedule', e)
             }
         },
