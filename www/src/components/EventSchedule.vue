@@ -42,6 +42,12 @@
                         <div v-if="activeUser.hasOwnProperty('name')">
                             <li>
 
+                                <router-link :to="{name: 'adminEvents'}">
+                                    <button type="button" class="btn btn-default">Events I've Created</button>
+                                </router-link>
+                            </li>
+                            <li>
+
                                 <router-link :to="{name:'mySchedule'}">
                                     <button type="button" class="btn btn-default">My Schedule</button>
                                 </router-link>
@@ -156,28 +162,28 @@
             </div>
         </div>
         <div id="addActivity" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-    
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">{{activeActivity.name}}</h4>
-                        </div>
-                        <div class="modal-body">
-                            <h5>{{activeActivity.date}}  {{activeActivity.startTime}}-{{activeActivity.endTime}}</h5>
-                            <h5>ROOM:{{activeActivity.location}}</h5>
-                            <h2>Speaker: {{activeActivity.speakerName}}</h2>
-                            <h3>{{activeActivity.description}}</h3>
-                            <h4>Seats Available: {{activeActivity.capacity}}</h4>
-                        </div>
-                        <div v-if="activeUser.events.includes(activeEvent._id)">
-                            <button v-if="!activeUser.activities.includes(activeActivity._id)" @click="addToMySchedule" class="btn btn-success">Add to My Schedule</button>
-                        </div>
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{activeActivity.name}}</h4>
                     </div>
-    
+                    <div class="modal-body">
+                        <h5>{{activeActivity.date}} {{activeActivity.startTime}}-{{activeActivity.endTime}}</h5>
+                        <h5>ROOM:{{activeActivity.location}}</h5>
+                        <h2>Speaker: {{activeActivity.speakerName}}</h2>
+                        <h3>{{activeActivity.description}}</h3>
+                        <h4>Seats Available: {{activeActivity.capacity}}</h4>
+                    </div>
+                    <div v-if="activeUser.events.includes(activeEvent._id)">
+                        <button v-if="!activeUser.activities.includes(activeActivity._id)" @click="addToMySchedule" class="btn btn-success">Add to My Schedule</button>
+                    </div>
                 </div>
+
             </div>
+        </div>
 
         <div class="container-fluid">
             <div class="row">
@@ -185,7 +191,7 @@
                     <!-- <h2>{{activeEvent.name}}</h2> -->
                 </div>
                 <div class="col-xs-6 text-right" v-if="activeUser._id != activeEvent.creatorId">
-                    <button v-if="!activeUser.events.includes(activeEvent._id)"class="btn btn-primary btn-lg" @click="addToMyEvents">Join Event</button>
+                    <button v-if="!activeUser.events.includes(activeEvent._id)" class="btn btn-primary btn-lg" @click="addToMyEvents">Join Event</button>
                     <h3 v-if="joined">This event has been added to your events</h3>
                 </div>
                 <div class="col-xs-6 text-right" v-else>
@@ -235,21 +241,21 @@
                     password: ''
                 },
                 joined: false,
-                activity:{
-                   name: '',
-                   description: '',
-                   location: '',
-                   date: '',
-                   startTime: '',
-                   endTime: '',
-                   capacity: '',
-                   speakerName: ''
-               }
+                activity: {
+                    name: '',
+                    description: '',
+                    location: '',
+                    date: '',
+                    startTime: '',
+                    endTime: '',
+                    capacity: '',
+                    speakerName: ''
+                }
 
             }
         },
         mounted() {
-            this.$store.dispatch('getEventById', {_id: this.$route.params.id})
+            this.$store.dispatch('getEventById', { _id: this.$route.params.id })
             // this.$store.dispatch('getActivities', this.activeEvent)
         },
         computed: {
@@ -262,11 +268,11 @@
             schedule() {
                 return this.$store.state.schedule
             },
-            activeActivity(){
+            activeActivity() {
                 return this.$store.state.activeActivity
             },
-            
-            
+
+
         },
         methods: {
             submitLogin() {
@@ -289,19 +295,19 @@
             logout() {
                 this.$store.dispatch('logout')
             },
-            addToMyEvents(){
+            addToMyEvents() {
                 debugger
-                if(!this.activeUser.events.includes(this.activeEvent._id)){
-                    this.$store.dispatch('addToMyEvents', {event: this.activeEvent, user:this.activeUser})
+                if (!this.activeUser.events.includes(this.activeEvent._id)) {
+                    this.$store.dispatch('addToMyEvents', { event: this.activeEvent, user: this.activeUser })
                 }
                 this.joined = true
             },
-            setActiveActivity(activity){
+            setActiveActivity(activity) {
                 this.$store.dispatch('getActivityById', activity)
                 this.activity = activity
             },
-            addToMySchedule(){
-                this.$store.dispatch('addToMySchedule', {activity: this.activeActivity, user:this.activeUser})
+            addToMySchedule() {
+                this.$store.dispatch('addToMySchedule', { activity: this.activeActivity, user: this.activeUser })
             }
         }
     }

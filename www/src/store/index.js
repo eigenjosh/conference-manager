@@ -200,8 +200,8 @@ var store = new vuex.Store({
       state.activeNote = note
     },
     setAdminEvents(state, data){
-      console.log(data)
-      state.adminEvents.push(data)
+      console.log()
+      state.adminEvents = data
     }
 
   },
@@ -413,6 +413,7 @@ var store = new vuex.Store({
     getAllUserNotes({ commit, dispatch }) {
       api.get('user-notes')
         .then(res => {
+          console.log(res)
           commit('setUserNotes', res.data.data)
         })
     },
@@ -508,7 +509,8 @@ var store = new vuex.Store({
      
       api('/admin-events')
         .then(res =>{
-          console.log(res)
+          console.log('res to get created: ', res)
+          console.log('res.data.data of get created: ', res.data.data)
           commit('setAdminEvents', res.data.data)
         })
         .catch(err=>{
