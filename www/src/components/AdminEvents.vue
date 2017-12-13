@@ -106,8 +106,10 @@
             </div>
         </div>
         <div class="container">
-
-            <div v-for="event in events" class="row ">
+            <div v-if="events.length == 0">
+                <h3>You have not created any events. If you wish to create a new event, please <a data-toggle="modal" data-target="#myModal3">click here</a> </h3>
+            </div>
+            <div v-else v-for="event in events" class="row ">
                 <aEvent :event="event"></aEvent>
             </div>
 
