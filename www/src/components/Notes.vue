@@ -90,13 +90,20 @@
 
         <!-- DISPLAY USER NOTES -->
         <div class="container-fluid">
-            <div class="row">
+            <div v-if="!userNotes.activityId" class="row">
                 <div class="col-xs-12">
                     <h2 class="text-center">
-                        <h1>User Notes</h1>
+                        <h1>General User Notes</h1>
                     </h2>
                 </div>
             </div>
+            <div v-else class="row">
+                    <div class="col-xs-12">
+                        <h2 class="text-center">
+                            <h1>Notes on Activities</h1>
+                        </h2>
+                    </div>
+                </div>
             <div v-for="userNote in userNotes" class="row well">
                 <button type="button" @click="setActiveNote(userNote)" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal2">
                     <div class="col-xs-12">
@@ -142,7 +149,8 @@
                 note: {
                     title: '',
                     body: ''
-                }
+                },
+                onActivity: false
             }
         },
         mounted() {
