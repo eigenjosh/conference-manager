@@ -312,6 +312,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
+
     getMyActivities({ commit, dispatch }) {
       api(`/user-activities`)
         .then(res => {
@@ -330,6 +331,7 @@ var store = new vuex.Store({
         .then(res => {
           console.log('res to create event: ', res.data.data)
           dispatch('getAllEvents')
+          dispatch('getCreatedEvents')
         })
         .catch(err => {
           commit('handleError', err)
@@ -372,6 +374,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
+
     addToMySchedule({ commit, dispatch }, payload) {
       payload.user.activities.push(payload.activity._id)
       api.put('/user-activities', payload.user)
@@ -384,6 +387,7 @@ var store = new vuex.Store({
         })
 
     },
+
     editActivity({ commit, dispatch }, activity) {
       api.put('activities/' + activity._id, activity)
         .then(res => {
@@ -452,6 +456,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
+
     addToMyEvents({ commit, dispatch }, payload) {
       payload.user.events.push(payload.event._id)
 
@@ -464,6 +469,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
+
     getMySchedule({ commit, dispatch }, event) {
       api('/user-events/' + event._id + '/activities')
         .then(res => {
@@ -505,8 +511,8 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
+
     getCreatedEvents({commit, dispatch}){
-     
       api('/admin-events')
         .then(res =>{
           console.log('res to get created: ', res)

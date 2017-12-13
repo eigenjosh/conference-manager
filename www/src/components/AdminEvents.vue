@@ -164,7 +164,6 @@
                 this.$store.dispatch('logout')
             },
             createEvent() {
-                //console.log(this.event)
                 this.$store.dispatch('createEvent', this.event)
                 this.event = {
                     name: '',
