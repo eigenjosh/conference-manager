@@ -111,6 +111,35 @@ module.exports = {
     }
   },
 
+  deleteAdminEvents: {
+    path: '/admin-events:eventId',
+    reqType: 'delete',
+    method(req, res, next) {
+      let action = 'Delete Event Created By Admin'
+      var eventData = {"error": "Event data not set."}
+      Events.findOneAndRemove({ _id: req.params.eventId })
+        .then(event => {
+          var eventData = event
+          Notes.find({ _id: req.params.eventId })
+            .then(notes => {
+              console.log('notes: ', notes)
+              for (var i = 0; i < notes.length; i++) {
+                console.log('note before update: ', note)
+                var note = notes[i]
+                note.eventId = null
+                delete note.eventId
+                note.update()
+                console.log('note after update: ', note)
+              }
+            }).then(()=>{
+              res.send(handleResponse(action, eventData))
+            })
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
+
   adminActivities: {
     path: '/admin-activities',
     reqType: 'get',
