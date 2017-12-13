@@ -504,7 +504,7 @@ var store = new vuex.Store({
       for (var i = 0; i < payload.user.events.length; i++) {
         var event = payload.user.events[i]
         if (event._id == payload.event._id) {
-          payload.user.event.splice(i, 1)
+          payload.user.events.splice(i, 1)
           var removedEvent = event
           break
         }
