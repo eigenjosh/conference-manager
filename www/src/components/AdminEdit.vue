@@ -257,7 +257,6 @@
         },
         methods: {
             addActivity(){
-                debugger
                 this.$store.dispatch('addActivity', {activity: this.activity, eventId: this.event._id})
                 this.activity = {}
             },
@@ -269,12 +268,12 @@
                 this.$store.dispatch('logout')
             },
             setTime(){
-                this.activity.startTime = this.startSlot
-                this.activity.endTime = this.endSlot
+                if(this.activity.startTime == null){
+                    this.activity.startTime = this.$store.state.timeSlots[0]
+                }
             },
             editActivity(){
                 this.$store.dispatch('editActivity', this.activity)
-                this.activity = {}
             }
         }
     }

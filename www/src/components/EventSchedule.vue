@@ -122,7 +122,7 @@
                         </p>
                     </div>
                     <div class="modal-body">
-                        <form id="login" class="form">
+                        <form id="register" class="form">
                             <div class="form-group">
                                 <label for="firstName">First Name:</label>
                                 <input type="firstName" name="firstName" class="form-control" placeholder="First Name" required v-model="signUp.firstName">
