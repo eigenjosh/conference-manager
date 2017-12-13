@@ -192,7 +192,7 @@
                 <div class="col-xs-6 text-right">
                     <button class="btn btn-danger btn" @click="deleteEvent">Delete Event</button>
                     <button class="btn btn-warning btn" data-toggle="modal" data-target="#myModalAdd">Add Activity</button>
-                    <button class="btn btn-success btn">Post Schedule</button>
+                    <button class="btn btn-success btn" @click="publish">Publish</button>
                 </div>
             </div>
             <div class="row" v-for="(timeDict, date) in schedule">
@@ -282,6 +282,11 @@
             },
             deleteEvent(){
                 this.$store.dispatch('deleteEvent', this.event)
+
+            },
+            publish(){
+                this.event.published = true
+                this.$store.dispatch('publishEvent', this.event)
             }
         }
     }

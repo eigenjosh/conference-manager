@@ -456,7 +456,6 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-<<<<<<< HEAD
     deleteActivity({ commit, dispatch }, activity) {
       debugger
       api.delete('activities/' + activity._id)
@@ -468,8 +467,6 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-=======
->>>>>>> adc918c5384d63ea0a17b9f702b854cf34f7ef50
     addToMyEvents({ commit, dispatch }, payload) {
       payload.user.events.push(payload.event._id)
 
@@ -497,9 +494,11 @@ var store = new vuex.Store({
     //VARIOUS DELETES
 
     deleteEvent({ commit, dispatch }, event) {
+      debugger
       api.delete('events/' + event._id)
         .then(res => {
           console.log('res to delete event: ', res.data.data)
+          router.push('/admin-events')
           dispatch('getAllEvents')
         })
         .catch(err => {
@@ -560,6 +559,15 @@ var store = new vuex.Store({
           dispatch('authenticate')
         })
         .catch(err => {
+          commit('handleError', err)
+        })
+    },
+    publishEvent({commit, dispatch}, event){
+      api.put('/events/' + event._id, event)
+        .then(res=>{
+          dispatch('getAllEvents')
+        })
+        .catch(err=>{
           commit('handleError', err)
         })
     },
