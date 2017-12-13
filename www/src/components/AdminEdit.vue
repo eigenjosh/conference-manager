@@ -90,14 +90,14 @@
                             <div class="form-group time">
                                     <label for="sel1">Start Time</label>
                                     <select class="form-control" required @change="setTime" v-model="activity.startTime">
-                                      <option :value="startTime" v-for="startTime in timeSlots">{{startTime}}</option>
+                                      <option :value="startSlot" v-for="startSlot in timeSlots">{{startSlot}}</option>
                                     </select>
                               </div>
                         <!-- END TIME -->
                             <div class="form-group time">
                                     <label for="sel1">End Time</label>
                                     <select class="form-control"  v-model="activity.endTime">
-                                        <option value="endTime" v-for="endTime in timeSlots">{{endTime}}</option>
+                                        <option :value="endSlot" v-for="endSlot in timeSlots">{{endSlot}}</option>
 
                                     </select>
                               </div>
@@ -152,14 +152,14 @@
                                 <div class="form-group time">
                                         <label for="sel1">Start Time</label>
                                         <select class="form-control" required v-model="activity.startTime">
-                                          <option value="startSlot" v-for="startTime in timeSlots">12:00 AM</option>
+                                          <option :value="startSlot" v-for="startSlot in timeSlots">{{startSlot}}</option>
                                         </select>
                                   </div>
                             <!-- END TIME -->
                                 <div class="form-group time">
                                         <label for="sel1">End Time</label>
                                         <select class="form-control" v-model="activity.endTime">
-                                          <option value="endTime" v-for="endTime in timeSlots">{{endTime}}}</option>
+                                          <option :value="endSlot" v-for="endSlot in timeSlots">{{endSlot}}</option>
                                         </select>
                                   </div>
                                 <div class="form-group">
@@ -198,9 +198,9 @@
                 <div class="col-xs-12 ">
                     <h3>{{date}}</h3>
                 </div>
-                <div class="row" v-for="(activitiesList, time) in schedule[date]">
+                <div class="row" v-for="(activitiesList, time) in timeDict">
                     <div class="col-xs-1 col-xs-offset-1">
-                        <h3>{{time[0]}}{{time[1]}}:{{time[2]}}{{time[3]}}</h3>
+                        <h3>{{time}}</h3>
                     </div>
                     <div class="col-xs-12 col-md-3" v-for="activity in activitiesList">
                         <button data-toggle="modal" data-target="#myModalDetails" @click="setActiveActivity(activity)"class="btn btn-primary activities">
@@ -269,12 +269,12 @@
                 this.$store.dispatch('logout')
             },
             setTime(){
-                if(this.activity.endTime == null){
-                    this.activity.endTime = this.activity.startTime
-                }
+                this.activity.startTime = this.startSlot
+                this.activity.endTime = this.endSlot
             },
             editActivity(){
                 this.$store.dispatch('editActivity', this.activity)
+                this.activity = {}
             }
         }
     }
