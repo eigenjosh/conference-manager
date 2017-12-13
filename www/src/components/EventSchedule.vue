@@ -206,7 +206,7 @@
                 </div>
                 <div class="row" v-for="(activitiesList, time) in schedule[date]">
                     <div class="col-xs-1 col-xs-offset-1">
-                        <h3>{{time[0]}}{{time[1]}}:{{time[2]}}{{time[3]}}</h3>
+                            <h3>{{time}}</h3>
                     </div>
                     <div class="col-xs-12 col-md-3" v-for="activity in activitiesList">
                         <button data-toggle="modal" data-target="#addActivity" @click="setActiveActivity(activity)" class="btn btn-primary activities">
