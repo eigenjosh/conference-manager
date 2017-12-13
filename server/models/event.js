@@ -1,5 +1,6 @@
 var models = require('../config/constants').models
 let mongoose = require('mongoose')
+var Activities = require('./activity')
 let ObjectId = mongoose.Schema.ObjectId
 
 /*{
@@ -28,6 +29,12 @@ var schema = new mongoose.Schema({
   created: { type: Number, default: Date.now() },
   creatorId: {type: ObjectId, ref: models.user.name, required: true},
   published: { type: Boolean, default: false, required: true },
+});
+
+schema.pre('remove', function (next) {
+  console.log('schema.pre in event')
+  Activities.remove({ eventId: this._id }).exec()
+  next()
 });
 
 module.exports = mongoose.model(models.event.name, schema);
