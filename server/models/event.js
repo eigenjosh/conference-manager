@@ -31,6 +31,8 @@ var schema = new mongoose.Schema({
   published: { type: Boolean, default: false, required: true },
 });
 
+schema.index({'$**': 'text'})
+
 schema.pre('remove', function (next) {
   console.log('schema.pre in event')
   Activities.remove({ eventId: this._id }).exec()

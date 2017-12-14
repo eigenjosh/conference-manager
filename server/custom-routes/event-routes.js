@@ -28,6 +28,7 @@ module.exports = {
             })
         }
       },
+      /*
     getPublishedEventsByLocation: {
         path: '/find-events/:location',
         reqType: 'get',
@@ -41,6 +42,21 @@ module.exports = {
                 })
         }
     },
+    */
+    getPublishedEventsBySearchTerms: {
+        path: '/find-events/:query',
+        reqType: 'get',
+        method(req, res, next) {
+            let action = 'Find Activities By Search Terms'
+            Events.find({$text: {$search: req.params.query}})
+                .then(events => {
+                    res.send(handleResponse(action, events))
+                }).catch(error => {
+                    return next(handleResponse(action, null, error))
+                })
+        }
+    },
+    /*
     getEventsByProperties: {
         path: '/find-events?city=:city&state=:state&zip=:zip&venue=:venue',
         reqType: 'get',
@@ -62,6 +78,7 @@ module.exports = {
                 })
         }
     }
+    */
 }
 
 function handleResponse(action, data, error) {

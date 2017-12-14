@@ -32,58 +32,12 @@ var store = new vuex.Store({
     userNotes: [{}],
     activeActivity: {},
     activeNote: {},
-    adminEvents:[],
+    adminEvents: [],
     timeSlots: [
-      "12:00 AM",
-      "12:30 AM",
-      "1:00 AM",
-      "1:30 AM",
-      "2:00 AM",
-      "2:30 AM",
-      "3:00 AM",
-      "3:30 AM",
-      "4:00 AM",
-      "4:30 AM",
-      "5:00 AM",
-      "5:30 AM",
-      "6:00 AM",
-      "6:30 AM",
-      "7:00 AM",
-      "7:30 AM",
-      "8:00 AM",
-      "8:30 AM",
-      "9:00 AM",
-      "9:30 AM",
-      "10:00 AM",
-      "10:30 AM",
-      "11:00 AM",
-      "11:30 AM",
-      "12:00 PM",
-      "12:30 PM",
-      "1:00 PM",
-      "1:30 PM",
-      "2:00 PM",
-      "2:30 PM",
-      "3:00 PM",
-      "3:30 PM",
-      "4:00 PM",
-      "4:30 PM",
-      "5:00 PM",
-      "5:30 PM",
-      "6:00 PM",
-      "6:30 PM",
-      "7:00 PM",
-      "7:30 PM",
-      "8:00 PM",
-      "8:30 PM",
-      "9:00 PM",
-      "9:30 PM",
-      "10:00 PM",
-      "10:30 PM",
-      "11:00 PM",
-      "11:30 PM"
-    ],
-
+      "12:00 AM", "12:30 AM", "1:00 AM", "1:30 AM", "2:00 AM", "2:30 AM", "3:00 AM", "3:30 AM", "4:00 AM", "4:30 AM", "5:00 AM", "5:30 AM", "6:00 AM", "6:30 AM", "7:00 AM", "7:30 AM", "8:00 AM", "8:30 AM", "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM", "9:00 PM", "9:30 PM", "10:00 PM", "10:30 PM", "11:00 PM", "11:30 PM"],
+    locations: {
+      Alabama: "AL", Alaska: "AK", AmericanSamoa: "AS", Arizona: "AZ", Arkansas: "AR", California: "CA", Colorado: "CO", Connecticut: "CT", Delaware: "DE", DistrictofColumbia: "DC", Florida: "FL", Georgia: "GA", Guam: "GU", Hawaii: "HI", Idaho: "ID", Illinois: "IL", Indiana: "IN", Iowa: "IA", Kansas: "KS", Kentucky: "KY", Louisiana: "LA", Maine: "ME", MarshallIslands: "MH", Maryland: "MD", Massachusetts: "MA", Michigan: "MI", Micronesia: "FM", Minnesota: "MN", Mississippi: "MS", Missouri: "MO", Montana: "MT", Nebraska: "NE", Nevada: "NV", NewHampshire: "NH", NewJersey: "NJ", NewMexico: "NM", NewYork: "NY", NorthCarolina: "NC", NorthDakota: "ND", NorthernMarianas: "MP", Ohio: "OH", Oklahoma: "OK", Oregon: "OR", Palau: "PW", Pennsylvania: "PA", PuertoRico: "PR", RhodeIsland: "RI", SouthCarolina: "SC", SouthDakota: "SD", Tennessee: "TN", Texas: "TX", Utah: "UT", Vermont: "VT", Virginia: "VA", VirginIslands: "VI", Washington: "WA", WestVirginia: "WV", Wisconsin: "WI", Wyoming: "WY"
+    },
   },
   mutations: {
 
@@ -103,7 +57,7 @@ var store = new vuex.Store({
         state.userNotes = [{}],
         state.activeActivity = {},
         state.activeNote = {},
-        state.adminEvents =[]
+        state.adminEvents = []
     },
 
 
@@ -195,11 +149,11 @@ var store = new vuex.Store({
 
     // SET ACTIVE NOTE
     setActiveNote(state, note) {
-      
+
       state.activeNote = {}
       state.activeNote = note
     },
-    setAdminEvents(state, data){
+    setAdminEvents(state, data) {
       console.log()
       state.adminEvents = data
     }
@@ -337,16 +291,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    editEvent({commit, dispatch}, event){
-      debugger
-      api.put('/events/' + event._id, event)
-        .then(res =>{
-          dispatch('getEventById', {_id: event._id})
-        })
-        .catch(err =>{
-          commit('handleError', err)
-        })
-    },
+
     // GET ACTIVITY BY ID
     getActivityById({ commit, dispatch }, activity) {
       api('activities/' + activity._id)
@@ -360,11 +305,11 @@ var store = new vuex.Store({
 
     // GET EVENT BY ID
     getEventById({ commit, dispatch }, event) {
-      debugger
+
       api('events/' + event._id)
         .then(res => {
           commit('setActiveEvent', res.data.data)
-          dispatch('getActivities', {_id: event._id})
+          dispatch('getActivities', { _id: event._id })
         })
         .catch(err => {
           commit('handleError', err)
@@ -410,7 +355,7 @@ var store = new vuex.Store({
 
     // CREATE NOTE
     createNote({ commit, dispatch }, note) {
-      
+
       api.post('notes', note)
         .then(res => {
           console.log(res)
@@ -445,7 +390,7 @@ var store = new vuex.Store({
 
     // GET NOTE BY NOTE ID
     getNotebyNoteId({ commit, dispatch }, note) {
-      
+
       api('notes/' + note._id)
         .then(res => {
           commit('setActiveNote', res.data.data)
@@ -466,11 +411,11 @@ var store = new vuex.Store({
         })
     },
     deleteActivity({ commit, dispatch }, activity) {
-      
+
       api.delete('activities/' + activity._id)
         .then(res => {
           console.log("delete request:", res)
-          dispatch('getActivities', {_id: res.data.data.eventId})
+          dispatch('getActivities', { _id: res.data.data.eventId })
         })
         .catch(err => {
           commit('handleError', err)
@@ -503,7 +448,7 @@ var store = new vuex.Store({
     //VARIOUS DELETES
 
     deleteEvent({ commit, dispatch }, event) {
-      
+
       api.delete('events/' + event._id)
         .then(res => {
           console.log('res to delete event: ', res.data.data)
@@ -533,14 +478,14 @@ var store = new vuex.Store({
         })
     },
 
-    getCreatedEvents({commit, dispatch}){
+    getCreatedEvents({ commit, dispatch }) {
       api('/admin-events')
-        .then(res =>{
+        .then(res => {
           console.log('res to get created: ', res)
           console.log('res.data.data of get created: ', res.data.data)
           commit('setAdminEvents', res.data.data)
         })
-        .catch(err=>{
+        .catch(err => {
           commit('handleError', err)
         })
     },
@@ -571,12 +516,12 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    publishEvent({commit, dispatch}, event){
+    publishEvent({ commit, dispatch }, event) {
       api.put('/events/' + event._id, event)
-        .then(res=>{
+        .then(res => {
           dispatch('getAllEvents')
         })
-        .catch(err=>{
+        .catch(err => {
           commit('handleError', err)
         })
     },
@@ -584,11 +529,12 @@ var store = new vuex.Store({
     //HANDLE ERROR
     handleError({ commit, dispatch }, err) {
       commit('handleError', err)
-    },
+    }
 
-  },
+  }
 
 })
+
 
 
 export default store
