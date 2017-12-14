@@ -33,13 +33,14 @@
             }
         },
         mounted() {
-
+           
         },
         methods:{
             setActiveEvent(event){
                 
                 this.$store.dispatch('getEventById', event)
-            },
+            }
+            
         }
     }
 </script>

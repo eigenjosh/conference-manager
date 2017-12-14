@@ -72,7 +72,7 @@ var store = new vuex.Store({
     setSchedule(state, activities) {
       var schedule = {}
       activities = activities.sort((a, b) => {
-        return Date.toLocaleString(a.date) - Date.toLocaleString(b.date)
+        return a.date.toLocaleString('en-US') - b.date.toLocaleString('en-US')
       })
       activities.forEach(activity => {
         if (!schedule.hasOwnProperty(activity.date)) {

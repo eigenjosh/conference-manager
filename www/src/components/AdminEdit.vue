@@ -84,7 +84,8 @@
                             </div>
                             <div class="form-group date">
                                 <label for="date">Date:</label>
-                                <input type="date" name="date" class="form-control" placeholder="date" :min="activeEvent.startDate" :max="activeEvent.endDate" required v-model='activity.date'>
+                                <input type="date" name="date" class="form-control" placeholder="date" :min="activeEvent.startDate" :max="activeEvent.endDate"
+                                    required v-model='activity.date'>
                             </div>
                             <!-- START TIME -->
                             <div class="form-group time">
@@ -230,8 +231,7 @@
                                         <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
                                     </select>
                                 </div>
-                                <textarea type="number" name="zip" class="form-control" placeholder="Venue Zip" rows="1"
-                                    v-model="event.zip" required>{{activeEvent.zip}}</textarea>
+                                <textarea type="number" name="zip" class="form-control" placeholder="Venue Zip" rows="1" v-model="event.zip" required>{{activeEvent.zip}}</textarea>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-submit btn-success" data-dismiss="modal" @click="editEvent" type="submit">Edit Event</button>
@@ -286,7 +286,7 @@
         name: 'adminEdit',
         data() {
             return {
-                date: Date,
+                date: Date.toLocaleString('en-US'),
                 activity: {
                     name: '',
                     description: '',
@@ -313,7 +313,9 @@
         },
         mounted() {
             this.$store.dispatch('getEventById', { _id: this.$route.params.id })
-            this.date = new Date().toJSON().split('T')[0];
+            this.date = new Date().toLocaleString('en-US');
+            this.date = this.date.split(',')[0]
+            console.log(this.date)
         },
         computed: {
             activeActivity() {
@@ -338,6 +340,11 @@
         },
         methods: {
             addActivity() {
+                debugger
+                var parts = this.activity.date.split('-')
+                let date = new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2])).toLocaleString('en-US');
+                date = date.split(',')[0]
+                this.activity.date = date
                 this.$store.dispatch('addActivity', { activity: this.activity, eventId: this.activeEvent._id })
                 this.activity = {}
             },
@@ -354,10 +361,13 @@
                 }
             },
             editActivity() {
+                var parts = this.activity.date.split('-')
+                let date = new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2])).toLocaleString('en-US');
+                date = date.split(',')[0]
+                this.activity.date = date
                 this.$store.dispatch('editActivity', this.activity)
             },
             deleteActivity() {
-
                 this.$store.dispatch('deleteActivity', this.activity)
             },
             deleteEvent() {
@@ -378,7 +388,10 @@
                 this.event = activeEvent
             },
             editEvent() {
-
+                var parts = this.event.date.split('-')
+                let date = new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2])).toLocaleString('en-US');
+                date = date.split(',')[0]
+                this.event.date = date
                 this.$store.dispatch('editEvent', this.event)
             }
         }
