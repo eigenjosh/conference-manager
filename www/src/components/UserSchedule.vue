@@ -22,7 +22,7 @@
                         <button v-else class="btn btn-primary" data-dismiss="modal" data-toggle="modal" @click="saveNote" data-target="#notepad">Take Note</button>
                     </div>
                     <div class="modal-footer">
-                        <button>Add to My Schedule</button>
+                        <button class="btn btn-danger" @click="removeActivity" data-dismiss="modal">Remove from Schedule</button>
                     </div>
                 </div>
 
@@ -56,8 +56,11 @@
 
 
         <div class="row">
-            <div class="col-xs-12">
-                <h2>{{activeEvent.name}}</h2>
+            <div class="col-xs-12 event well" v-if="activeUser.events.includes(activeEvent._id)">
+                <router-link :to="{path: 'event-schedule/' + activeEvent._id}">
+                    <h2>{{activeEvent.name}}</h2>
+                </router-link>
+                <button class="btn btn-danger remove" @click="removeEvent">REMOVE EVENT FROM MY SCHEDULE</button>
             </div>
         </div>
         <div class="row" v-for="(timeDict, date) in userSchedule">
@@ -97,6 +100,7 @@
                 return this.$store.state.userSchedule
             },
             activeEvent() {
+
                 return this.$store.state.activeEvent
             },
             activeActivity() {
@@ -107,6 +111,9 @@
             },
             userNotes() {
                 return this.$store.state.userNotes
+            },
+            activeUser(){
+                return this.$store.state.activeUser
             }
 
 
@@ -149,7 +156,16 @@
                 }
                 this.$store.dispatch('getNotebyNoteId', activeNote)
                 this.note.body = activeNote.body
+            },
+            removeActivity(){
+                debugger
+                this.$store.dispatch('removeFromMySchedule', {user: this.activeUser, event: this.activeEvent, activity: this.activeActivity})
+            },
+            removeEvent(){
+                debugger
+                this.$store.dispatch('removeFromMyEvents', {user: this.activeUser, event: this.activeEvent})
             }
+            
             
             
         },
@@ -160,5 +176,11 @@
 <style>
     .notepad textarea {
         width: 100%;
+    }
+    .remove{
+        display:none;
+    }
+    .event:hover .remove{
+        display: inline-block;
     }
 </style>

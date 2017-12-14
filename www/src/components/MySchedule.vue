@@ -85,14 +85,15 @@
             }
         },
         mounted() {
-
             this.$store.dispatch('getMyEvents')
+            this.$store.dispatch('getMySchedule', {event: {}})
         },
         methods: {
             logout() {
                 this.$store.dispatch('logout')
             },
             getMySchedule(e) {
+                debugger
                 this.$store.dispatch('getMySchedule', e)
             }
         },

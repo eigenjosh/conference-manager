@@ -520,9 +520,10 @@ var store = new vuex.Store({
     },
 
     removeFromMySchedule({ commit, dispatch }, payload) {
+      debugger
       for (var i = 0; i < payload.user.activities.length; i++) {
         var activity = payload.user.activities[i]
-        if (activity._id == payload.activity._id) {
+        if (activity == payload.activity._id) {
           payload.user.activities.splice(i, 1)
           break
         }
@@ -531,6 +532,7 @@ var store = new vuex.Store({
         .then(res => {
           console.log('activity has been removed from user schedule')
           dispatch('authenticate')
+          dispatch('getMySchedule', payload.event)
         })
         .catch(err => {
           commit('handleError', err)
@@ -550,10 +552,11 @@ var store = new vuex.Store({
     },
 
     removeFromMyEvents({ commit, dispatch }, payload) {
+      debugger
       var removedEvent
       for (var i = 0; i < payload.user.events.length; i++) {
         var event = payload.user.events[i]
-        if (event._id == payload.event._id) {
+        if (event == payload.event._id) {
           payload.user.events.splice(i, 1)
           var removedEvent = event
           break
@@ -570,6 +573,7 @@ var store = new vuex.Store({
         .then(res => {
           console.log('this event has been removed from user events')
           dispatch('authenticate')
+          dispatch('getMyEvents')
         })
         .catch(err => {
           commit('handleError', err)
