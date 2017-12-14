@@ -105,7 +105,7 @@
                 </div>
             </div>
             <h3>Activity Notes</h3>
-            <div v-for="userNote in userNotes" class="container-fluid">
+            <div v-for="userNote in userNotes">
                 <div v-if="userNote.activityId" class="row">
                     <div class="col-xs-12">
                         <button type="button" @click="setActiveNote(userNote)" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal2">
