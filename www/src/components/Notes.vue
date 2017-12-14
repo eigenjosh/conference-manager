@@ -16,6 +16,7 @@
                     </button>
                     <a class="navbar-brand">Confer</a>
                     <div class="text-right">
+                        <p class="navbar-brand">Welcome {{activeUser.name}}</p>
                         <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Create Note</button>
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>
@@ -101,7 +102,6 @@
                     </div>
                 </div>
                 <div v-else class="else">
-                    
                 </div>
             </div>
             <h3>Activity Notes</h3>
@@ -116,7 +116,6 @@
                     </div>
                 </div>
                 <div v-else class="else">
-                    
                 </div>
             </div>
         </div>

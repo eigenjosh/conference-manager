@@ -13,13 +13,9 @@
                     </button>
                     <a class="navbar-brand">Confer</a>
                     <div class="text-right">
+                        <p class="navbar-brand">Welcome {{user.name}}</p>
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>
-                    <!-- <div class="text-right" v-else>
-                            <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Login</button>
-                            <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
-                        </div> -->
-                    <!-- Trigger the SIGN UP modal -->
                 </div>
 
                 <!-- MENU DROWDOWN -->
@@ -84,7 +80,8 @@
                             </div>
                             <div class="form-group date">
                                 <label for="date">Date:</label>
-                                <input type="date" name="date" class="form-control" placeholder="date" :min="activeEvent.startDate" :max="activeEvent.endDate" required v-model='activity.date'>
+                                <input type="date" name="date" class="form-control" placeholder="date" :min="activeEvent.startDate" :max="activeEvent.endDate"
+                                    required v-model='activity.date'>
                             </div>
                             <!-- START TIME -->
                             <div class="form-group time">
@@ -230,8 +227,7 @@
                                         <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
                                     </select>
                                 </div>
-                                <textarea type="number" name="zip" class="form-control" placeholder="Venue Zip" rows="1"
-                                    v-model="event.zip" required>{{activeEvent.zip}}</textarea>
+                                <textarea type="number" name="zip" class="form-control" placeholder="Venue Zip" rows="1" v-model="event.zip" required>{{activeEvent.zip}}</textarea>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-submit btn-success" data-dismiss="modal" @click="editEvent" type="submit">Edit Event</button>

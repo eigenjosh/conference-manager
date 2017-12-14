@@ -13,6 +13,7 @@
                     </button>
                     <router-link to="Home" class="navbar-brand">Confer</router-link>
                     <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
+                        <p class="navbar-brand">Welcome {{activeUser.name}}</p>
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>
                     <div class="text-right" v-else>
