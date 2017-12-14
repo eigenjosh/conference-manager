@@ -337,7 +337,16 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
+    editEvent({commit, dispatch}, event){
+      debugger
+      api.put('/events/' + event._id, event)
+        .then(res =>{
+          dispatch('getEventById', {_id: event._id})
+        })
+        .catch(err =>{
+          commit('handleError', err)
+        })
+    },
     // GET ACTIVITY BY ID
     getActivityById({ commit, dispatch }, activity) {
       api('activities/' + activity._id)
@@ -351,7 +360,7 @@ var store = new vuex.Store({
 
     // GET EVENT BY ID
     getEventById({ commit, dispatch }, event) {
-      
+      debugger
       api('events/' + event._id)
         .then(res => {
           commit('setActiveEvent', res.data.data)
