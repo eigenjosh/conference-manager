@@ -461,9 +461,10 @@ var store = new vuex.Store({
     },
 
     removeFromMySchedule({ commit, dispatch }, payload) {
+      debugger
       for (var i = 0; i < payload.user.activities.length; i++) {
         var activity = payload.user.activities[i]
-        if (activity._id == payload.activity._id) {
+        if (activity == payload.activity._id) {
           payload.user.activities.splice(i, 1)
           break
         }
@@ -472,6 +473,7 @@ var store = new vuex.Store({
         .then(res => {
           console.log('activity has been removed from user schedule')
           dispatch('authenticate')
+          dispatch('getMySchedule', payload.event)
         })
         .catch(err => {
           commit('handleError', err)
