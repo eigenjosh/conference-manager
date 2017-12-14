@@ -220,7 +220,7 @@
                                 <label for="address">Address:</label>
                                 <input type="text" name="address" class="form-control" placeholder="Venue Address" v-model="event.address" required>
                                 <input type="text" name="city" class="form-control" placeholder="Venue City" v-model="event.city" required>
-                                <div class="form-group">
+                                <div class="form-group state">
                                     <label for="state">Venue State</label>
                                     <select class="form-control state" v-model="event.state">
                                         <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
@@ -297,7 +297,7 @@
                 return this.$store.state.events
             },
             locations(){
-                return this.$store.state.events
+                return this.$store.state.locations
             }
         },
         methods: {
