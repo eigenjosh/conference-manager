@@ -357,7 +357,8 @@
                 this.$store.dispatch('deleteActivity', this.activity)
             },
             deleteEvent() {
-                this.$store.dispatch('deleteEvent', this.actieEvent)
+                debugger
+                this.$store.dispatch('deleteEvent', this.activeEvent)
 
             },
             publish() {

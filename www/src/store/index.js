@@ -452,7 +452,7 @@ var store = new vuex.Store({
     //VARIOUS DELETES
 
     deleteEvent({ commit, dispatch }, event) {
-
+      debugger
       api.delete('events/' + event._id)
         .then(res => {
           console.log('res to delete event: ', res.data.data)
