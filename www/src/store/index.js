@@ -195,7 +195,7 @@ var store = new vuex.Store({
 
     // SET ACTIVE NOTE
     setActiveNote(state, note) {
-      debugger
+      
       state.activeNote = {}
       state.activeNote = note
     },
@@ -351,7 +351,7 @@ var store = new vuex.Store({
 
     // GET EVENT BY ID
     getEventById({ commit, dispatch }, event) {
-      debugger
+      
       api('events/' + event._id)
         .then(res => {
           commit('setActiveEvent', res.data.data)
@@ -401,7 +401,7 @@ var store = new vuex.Store({
 
     // CREATE NOTE
     createNote({ commit, dispatch }, note) {
-      debugger
+      
       api.post('notes', note)
         .then(res => {
           console.log(res)
@@ -436,7 +436,7 @@ var store = new vuex.Store({
 
     // GET NOTE BY NOTE ID
     getNotebyNoteId({ commit, dispatch }, note) {
-      debugger
+      
       api('notes/' + note._id)
         .then(res => {
           commit('setActiveNote', res.data.data)
@@ -457,7 +457,7 @@ var store = new vuex.Store({
         })
     },
     deleteActivity({ commit, dispatch }, activity) {
-      debugger
+      
       api.delete('activities/' + activity._id)
         .then(res => {
           console.log("delete request:", res)
@@ -494,7 +494,7 @@ var store = new vuex.Store({
     //VARIOUS DELETES
 
     deleteEvent({ commit, dispatch }, event) {
-      debugger
+      
       api.delete('events/' + event._id)
         .then(res => {
           console.log('res to delete event: ', res.data.data)

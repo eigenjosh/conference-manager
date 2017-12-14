@@ -37,7 +37,7 @@
         },
         methods:{
             setActiveEvent(event){
-                debugger
+                
                 this.$store.dispatch('getEventById', event)
             },
         }

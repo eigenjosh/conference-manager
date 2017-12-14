@@ -272,7 +272,7 @@
         },
         methods: {
             submitLogin() {
-                debugger
+                
                 this.$store.dispatch('login', this.login)
                 this.login = {
                     email: '',

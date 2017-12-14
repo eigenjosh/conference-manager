@@ -276,7 +276,7 @@
         },
         methods: {
             submitLogin() {
-                debugger
+                
                 this.$store.dispatch('login', this.login)
                 this.login = {
                     email: '',
@@ -296,7 +296,7 @@
                 this.$store.dispatch('logout')
             },
             addToMyEvents() {
-                debugger
+                
                 if (!this.activeUser.events.includes(this.activeEvent._id)) {
                     this.$store.dispatch('addToMyEvents', { event: this.activeEvent, user: this.activeUser })
                 }

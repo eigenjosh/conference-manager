@@ -277,7 +277,7 @@
                 this.$store.dispatch('editActivity', this.activity)
             },
             deleteActivity() {
-                debugger
+                
                 this.$store.dispatch('deleteActivity', this.activity)
             },
             deleteEvent(){
