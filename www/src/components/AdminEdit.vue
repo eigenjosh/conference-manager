@@ -374,7 +374,6 @@
                 this.event = activeEvent
             },
             editEvent() {
-
                 this.$store.dispatch('editEvent', this.event)
             }
         }

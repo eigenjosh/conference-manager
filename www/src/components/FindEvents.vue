@@ -68,13 +68,6 @@
                     <!-- SEARCH BAR -->
 
                     <ul class="nav navbar-nav navbar-right">
-                        <!-- LOGIN BUTTON -->
-
-                        <!-- Trigger the LOGIN modal -->
-                        <!-- Trigger the SIGN UP modal -->
-
-
-
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
