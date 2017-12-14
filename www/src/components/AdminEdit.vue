@@ -84,7 +84,7 @@
                             </div>
                             <div class="form-group date">
                                 <label for="date">Date:</label>
-                                <input type="date" name="date" class="form-control" placeholder="date" :min="activeEvent.startDate" :max="activeEvent.endDate"required v-model='activity.date'>
+                                <input type="date" name="date" class="form-control" placeholder="date" :min="activeEvent.startDate" :max="activeEvent.endDate" required v-model='activity.date'>
                             </div>
                             <!-- START TIME -->
                             <div class="form-group time">
