@@ -384,13 +384,10 @@
                 this.event = activeEvent
             },
             editEvent() {
-<<<<<<< HEAD
                 var parts = this.event.date.split('-')
                 let date = new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2])).toLocaleString('en-US');
                 date = date.split(',')[0]
                 this.event.date = date
-=======
->>>>>>> 05d2da0ecbb7dad9027bfbc43c0f9e8b60a10e69
                 this.$store.dispatch('editEvent', this.event)
             }
         }
