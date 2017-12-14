@@ -220,7 +220,12 @@
                                 <label for="address">Address:</label>
                                 <input type="text" name="address" class="form-control" placeholder="Venue Address" v-model="event.address" required>
                                 <input type="text" name="city" class="form-control" placeholder="Venue City" v-model="event.city" required>
-                                <input type="text" name="state" class="form-control" placeholder="Venue State" v-model="event.state" required>
+                                <div class="form-group">
+                                    <label for="state">Venue State</label>
+                                    <select class="form-control state" v-model="event.state">
+                                        <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
+                                    </select>
+                                </div>
                                 <input type="text" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.zip" required>
                             </div>
                             <div class="form-group">
@@ -290,11 +295,14 @@
             },
             events() {
                 return this.$store.state.events
+            },
+            locations(){
+                return this.$store.state.events
             }
         },
         methods: {
             submitLogin() {
-                
+
                 this.$store.dispatch('login', this.login)
                 this.login = {
                     email: '',

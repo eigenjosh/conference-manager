@@ -158,11 +158,9 @@
                 this.note.body = activeNote.body
             },
             removeActivity(){
-                debugger
                 this.$store.dispatch('removeFromMySchedule', {user: this.activeUser, event: this.activeEvent, activity: this.activeActivity})
             },
             removeEvent(){
-                debugger
                 this.$store.dispatch('removeFromMyEvents', {user: this.activeUser, event: this.activeEvent})
             }
             

@@ -520,7 +520,6 @@ var store = new vuex.Store({
     },
 
     removeFromMySchedule({ commit, dispatch }, payload) {
-      debugger
       for (var i = 0; i < payload.user.activities.length; i++) {
         var activity = payload.user.activities[i]
         if (activity == payload.activity._id) {
@@ -552,7 +551,6 @@ var store = new vuex.Store({
     },
 
     removeFromMyEvents({ commit, dispatch }, payload) {
-      debugger
       var removedEvent
       for (var i = 0; i < payload.user.events.length; i++) {
         var event = payload.user.events[i]
