@@ -179,7 +179,7 @@
                     </div>
                     <div v-if="activeUser && activeUser.events">
                         <div v-if="activeUser.events.includes(activeEvent._id)">
-                            <button v-if="!activeUser.activities.includes(activeActivity._id)" @click="addToMySchedule" class="btn btn-success">Add to My Schedule</button>
+                            <button v-if="!activeUser.activities.includes(activeActivity._id) && activeActivity.capacity > 0" @click="addToMySchedule" class="btn btn-success">Add to My Schedule</button>
                         </div>
                     </div>
                 </div>
