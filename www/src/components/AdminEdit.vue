@@ -183,17 +183,74 @@
 
             </div>
         </div>
+
+
+        <!-- EDIT EVENT STUFF -->
+        <div id="myModal3" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+    
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Event</h4>
+    
+                        </div>
+                        <div class="modal-body">
+                            <form id="createEvent" class="form">
+                                <div class="form-group">
+                                    <label for="eventName">Event Name</label>
+                                    <textarea type="text" name="eventName" class="form-control" placeholder="Whats the event called?" rows="1" required v-model="event.name"
+                                        required>{{activeEvent.name}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea type="text" name="description" class="form-control" rows="5" placeholder="What is this event for?" required v-model="event.description">{{activeEvent.description}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="startDate">Start Date:</label>
+                                    <input type="date" name="startDate" class="form-control" placeholder="Start Date" :min="date" required v-model="event.startDate"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="endDate">End Date:</label>
+                                    <input type="date" name="endDate" class="form-control" placeholder="End Date" :min="event.startDate" required v-model="event.endDate">
+                                </div>
+                                <div class="form-group">
+                                    <label for="venue">Venue:</label>
+                                    <textarea type="text" name="venue" class="form-control" placeholder="Venue" rows="1" required v-model="event.venue">{{event.venue}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address:</label>
+                                    <textarea type="text" name="address" class="form-control" placeholder="Venue Address" rows="1" v-model="event.address" required>{{activeEvent.address}}</textarea>
+                                    <textarea type="text" name="city" class="form-control" placeholder="Venue City" rows="1" v-model="event.city" required>{{activeEvent.city}}</textarea>
+                                    <textarea type="text" name="state" class="form-control" placeholder="Venue State" rows="1" v-model="event.state" required>{{activeEvent.state}}</textarea>
+                                    <textarea type="number" name="zip" class="form-control" placeholder="Venue Zip" rows="1" v-model="event.zip" required>{{activeEvent.zip}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-submit btn-success" data-dismiss="modal" @click="editEvent" type="submit">Edit Event</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-6">
-                    <h2>{{event.name}}</h2>
+                <div class="col-xs-6 well" data-toggle="modal" data-target="#myModal3" @click="setActiveEvent(activeEvent)">
+                    <h1>{{activeEvent.name}}</h1><i class="fa fa-pencil fa-2x " aria-hidden="true"></i>
                 </div>
 
                 <div class="col-xs-6 text-right">
                     <button class="btn btn-danger btn" @click="deleteEvent">Delete Event</button>
                     <button class="btn btn-warning btn" data-toggle="modal" data-target="#myModalAdd">Add Activity</button>
-                    <button v-if="!event.published" class="btn btn-success" @click="publish">Publish</button>
-                    <button v-else="event.published" class="btn btn-success" @click="unPublish">Make Private</button>
+                    <button v-if="!activeEvent.published" class="btn btn-success" @click="publish">Publish</button>
+                    <button v-else="activeEvent.published" class="btn btn-success" @click="unPublish">Make Private</button>
                 </div>
             </div>
             <div class="row" v-for="(timeDict, date) in schedule">
@@ -232,6 +289,17 @@
                     endTime: '',
                     capacity: '',
                     speakerName: ''
+                },
+                event: {
+                    name: '',
+                    description: '',
+                    venue: '',
+                    address: '',
+                    city: '',
+                    state: '',
+                    zip: '',
+                    startDate: '',
+                    endDate: ''
                 }
 
             }
@@ -250,8 +318,9 @@
             schedule() {
                 return this.$store.state.schedule
             },
-            event() {
+            activeEvent() {
                 return this.$store.state.activeEvent
+                
             },
             timeSlots() {
                 return this.$store.state.timeSlots
@@ -259,7 +328,7 @@
         },
         methods: {
             addActivity() {
-                this.$store.dispatch('addActivity', { activity: this.activity, eventId: this.event._id })
+                this.$store.dispatch('addActivity', { activity: this.activity, eventId: this.activeEvent._id })
                 this.activity = {}
             },
             setActiveActivity(activity) {
@@ -282,16 +351,25 @@
                 this.$store.dispatch('deleteActivity', this.activity)
             },
             deleteEvent(){
-                this.$store.dispatch('deleteEvent', this.event)
+                this.$store.dispatch('deleteEvent', this.actieEvent)
 
             },
             publish(){
-                this.event.published = true
-                this.$store.dispatch('publishEvent', this.event)
+                this.activeEvent.published = true
+                this.$store.dispatch('publishEvent', this.activeEvent)
             },
             unPublish(){
-                this.event.published = false
-                this.$store.dispatch('publishEvent', this.event)
+                this.activeEvent.published = false
+                this.$store.dispatch('publishEvent', this.activeEvent)
+            },
+            setActiveEvent(activeEvent){
+                debugger
+                this.$store.dispatch('getEventById', activeEvent)
+                this.event = activeEvent
+            },
+            editEvent(){
+
+                this.$store.dispatch('editEvent', this.event)
             }
         }
     }
