@@ -350,6 +350,13 @@
 </script>
 
 <style>
+    /* .home {
+        background-image: url('https://i.imgur.com/Nbi7bYI.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center
+    } */
+    
     .main-pic {
         background-image: url('https://images.pexels.com/photos/34092/pexels-photo.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb');
         background-repeat: no-repeat;
