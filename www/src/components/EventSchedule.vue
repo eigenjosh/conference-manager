@@ -11,7 +11,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand">Confer</a>
+                    <router-link to="Home" class="navbar-brand">Confer</router-link>
                     <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>

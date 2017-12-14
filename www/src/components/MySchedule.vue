@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div class="my-schedule">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -11,7 +11,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand">Confer</a>
+                    <router-link to="Home" class="navbar-brand">Confer</router-link>
                     <div class="text-right">
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>
