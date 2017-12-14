@@ -300,8 +300,9 @@
                 this.$store.dispatch('logout')
             },
             createEvent() {
+                debugger
                 //console.log(this.event)
-                this.$store.dispatch('createEvent', this.event)
+                this.$store.dispatch('createEvent', {event: this.event, user: this.activeUser})
                 this.event = {
                     name: '',
                     description: '',

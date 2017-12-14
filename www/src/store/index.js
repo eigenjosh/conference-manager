@@ -281,12 +281,14 @@ var store = new vuex.Store({
 
     // CREATE NEW EVENT
 
-    createEvent({ commit, dispatch }, event) {
-      api.post('events/', event)
+    createEvent({ commit, dispatch }, payload) {
+      debugger
+      api.post('events/', payload.event)
         .then(res => {
           console.log('res to create event: ', res.data.data)
           dispatch('getAllEvents')
           dispatch('getCreatedEvents')
+          dispatch('addToMyEvents', {user: payload.user, event: res.data.data})
         })
         .catch(err => {
           commit('handleError', err)
