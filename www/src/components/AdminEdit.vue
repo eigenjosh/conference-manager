@@ -225,7 +225,7 @@
                                     <textarea type="text" name="address" class="form-control" placeholder="Venue Address" rows="1" v-model="event.address" required>{{activeEvent.address}}</textarea>
                                     <textarea type="text" name="city" class="form-control" placeholder="Venue City" rows="1" v-model="event.city" required>{{activeEvent.city}}</textarea>
                                     <textarea type="text" name="state" class="form-control" placeholder="Venue State" rows="1" v-model="event.state" required>{{activeEvent.state}}</textarea>
-                                    <input type="number" name="zip" class="form-control" placeholder="Venue Zip" rows="1" v-model="event.zip" required>
+                                    <textarea type="number" name="zip" class="form-control" placeholder="Venue Zip" rows="1" v-model="event.zip" required>{{activeEvent.zip}}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-submit btn-success" data-dismiss="modal" @click="editEvent" type="submit">Edit Event</button>

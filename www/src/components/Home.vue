@@ -34,16 +34,16 @@
                                 <button type="button" class="btn btn-default">Find Events</button>
                             </router-link>
                         </li>
-                        
+
                         <div v-if="activeUser.hasOwnProperty('name')">
                             <li>
-    
+
                                 <router-link :to="{name: 'adminEvents'}">
                                     <button type="button" class="btn btn-default">Events I've Created</button>
                                 </router-link>
                             </li>
                             <li>
-                                
+
                                 <router-link :to="{name:'mySchedule'}">
                                     <button type="button" class="btn btn-default">My Schedule</button>
                                 </router-link>
@@ -168,7 +168,7 @@
 
             </div>
         </div>
-        
+
         <!-- Create new event modal -->
         <div id="myModal3" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -208,7 +208,12 @@
                                 <label for="address">Address:</label>
                                 <input type="text" name="address" class="form-control" placeholder="Venue Address" v-model="event.address" required>
                                 <input type="text" name="city" class="form-control" placeholder="Venue City" v-model="event.city" required>
-                                <input type="text" name="state" class="form-control" placeholder="Venue State" v-model="event.state" required>
+                                <div class="form-group state">
+                                    <label for="state">Venue State</label>
+                                    <select class="form-control state" v-model="event.state">
+                                        <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
+                                    </select>
+                                </div>
                                 <input type="text" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.zip" required>
                             </div>
                             <div class="form-group">
@@ -268,11 +273,14 @@
         computed: {
             activeUser() {
                 return this.$store.state.activeUser
+            },
+            locations() {
+                return this.$store.state.locations
             }
         },
         methods: {
             submitLogin() {
-                
+
                 this.$store.dispatch('login', this.login)
                 this.login = {
                     email: '',
@@ -359,6 +367,9 @@
         .navbar-nav>li>a {
             padding-top: 10px;
             padding-bottom: 10px;
+        }
+        .state{
+            width: 50%
         }
     }
 </style>
