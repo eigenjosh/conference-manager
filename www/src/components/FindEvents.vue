@@ -11,8 +11,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand">Confer</a>
+                    <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
                     <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
+                        <p class="navbar-brand">Welcome {{activeUser.name}}</p>
                         <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>
@@ -67,13 +68,6 @@
                     <!-- SEARCH BAR -->
 
                     <ul class="nav navbar-nav navbar-right">
-                        <!-- LOGIN BUTTON -->
-
-                        <!-- Trigger the LOGIN modal -->
-                        <!-- Trigger the SIGN UP modal -->
-
-
-
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -88,7 +82,7 @@
                     <input type="text" name="text" class="form-control" placeholder="Location" required v-model='search.location'>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-submit btn-success" type="submit">Submit</button>
+                    <button class="btn btn-submit btn-success" type="submit">Search</button>
                 </div>
                 <div class="form-group">
                     <button type="button" class="btn btn-danger" @click="getAllEvents">View All Events</button>

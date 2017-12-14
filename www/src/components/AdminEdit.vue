@@ -11,15 +11,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand">Confer</a>
+                    <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
                     <div class="text-right">
+                        <p class="navbar-brand">Welcome {{user.name}}</p>
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>
-                    <!-- <div class="text-right" v-else>
-                            <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Login</button>
-                            <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
-                        </div> -->
-                    <!-- Trigger the SIGN UP modal -->
                 </div>
 
                 <!-- MENU DROWDOWN -->
@@ -388,10 +384,13 @@
                 this.event = activeEvent
             },
             editEvent() {
+<<<<<<< HEAD
                 var parts = this.event.date.split('-')
                 let date = new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2])).toLocaleString('en-US');
                 date = date.split(',')[0]
                 this.event.date = date
+=======
+>>>>>>> 05d2da0ecbb7dad9027bfbc43c0f9e8b60a10e69
                 this.$store.dispatch('editEvent', this.event)
             }
         }

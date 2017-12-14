@@ -12,8 +12,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand">Confer</a>
+                    <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
                     <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
+                        <p class="navbar-brand">Welcome {{activeUser.name}}</p>
                         <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>
@@ -82,7 +83,8 @@
         <div class="jumbotron main-pic">
             <div class="row">
                 <div class="col-xs-12">
-                    <h1>Welcome to Confer: A Conference Manager Application designed to dynamically handle schedules for events.</h1>
+                    <h1>CONFER</h1>
+                    <h3>Digital Conference Manager</h3>
                 </div>
             </div>
         </div>
@@ -357,15 +359,23 @@
 </script>
 
 <style>
+    /* .home {
+        background-image: url('https://i.imgur.com/Nbi7bYI.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center
+    } */
+    
     .main-pic {
-        background-image: url('http://www.memorymakersevents.com/my_uploads/2017/10/conferencea-.jpg');
+        background-image: url('https://images.pexels.com/photos/34092/pexels-photo.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb');
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
     }
 
     .jumbotron {
-        color: whitesmoke;
+        font-family: 'Abril Fatface', cursive;
+        color: white;
         text-shadow: 0px 0px 10px black;
     }
 

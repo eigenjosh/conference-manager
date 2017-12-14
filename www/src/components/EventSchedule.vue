@@ -11,8 +11,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <router-link to="Home" class="navbar-brand">Confer</router-link>
+                    <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
                     <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
+                        <p class="navbar-brand">Welcome {{activeUser.name}}</p>
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>
                     <div class="text-right" v-else>
@@ -161,6 +162,8 @@
 
             </div>
         </div>
+
+        <!-- ADD ACTIVITY MODAL -->
         <div id="addActivity" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
@@ -179,7 +182,8 @@
                     </div>
                     <div v-if="activeUser && activeUser.events">
                         <div v-if="activeUser.events.includes(activeEvent._id)">
-                            <button v-if="!activeUser.activities.includes(activeActivity._id) && activeActivity.capacity > 0" @click="addToMySchedule" class="btn btn-success">Add to My Schedule</button>
+                            <button v-if="!activeUser.activities.includes(activeActivity._id) && activeActivity.capacity > 0" @click="addToMySchedule"
+                                class="btn btn-success">Add to My Schedule</button>
                         </div>
                     </div>
                 </div>
@@ -189,43 +193,49 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-6">
-                    <h2>{{activeEvent.name}}</h2>
-                </div>
-                <div v-if="activeUser && activeUser.events">
-                    <div class="col-xs-6 text-right" v-if="activeUser._id != activeEvent.creatorId">
-                        <button v-if="!activeUser.events.includes(activeEvent._id)" class="btn btn-primary btn-lg" @click="addToMyEvents">Join Event</button>
-                        <h3 v-if="joined">This event has been added to your events</h3>
-                    </div>
-                    <div class="col-xs-6 text-right" v-else>
-                        <router-link :to="{path: '/admin-edit/' + activeEvent._id}">
-                            <button class="btn btn-warning btn-lg">Edit Schedule</button>
-                        </router-link>
-                    </div>
-                    <div class="col-xs-6 text-right">
-                            <router-link :to="{name: 'mySchedule'}">
-                                <button class="btn btn-success btn-lg">View My Schedule</button>
-                            </router-link>
-                        </div>
+                <div class="col-xs-12">
+                    <h1>{{activeEvent.name}}</h1>
                 </div>
             </div>
-            <div class="row" v-for="(timeDict, date) in schedule">
-                <div class="col-xs-12 ">
-                    <h3>{{date}}</h3>
+            <div class="row">
+                <div class="col-xs-offset-3 col-xs-6 well">
+                    <h3>{{activeEvent.description}}</h3>
                 </div>
-                <div class="row" v-for="(activitiesList, time) in schedule[date]">
-                    <div class="col-xs-1 col-xs-offset-1">
-                        <h3>{{time}}</h3>
-                    </div>
-                    <div class="col-xs-12 col-md-3" v-for="activity in activitiesList">
-                        <button data-toggle="modal" data-target="#addActivity" @click="setActiveActivity(activity)" class="btn btn-primary activities">
-                            <h5>{{activity.date}} {{activity.startTime}} - {{activity.endTime}}</h5>
-                            <h4>{{activity.name}}</h4>
-                        </button>
-                    </div>
+            </div>
+            <div v-if="activeUser && activeUser.events">
+                <div class="col-xs-6 text-right" v-if="activeUser._id != activeEvent.creatorId">
+                    <button v-if="!activeUser.events.includes(activeEvent._id)" class="btn btn-primary btn-lg" @click="addToMyEvents">Join Event</button>
+                    <h3 v-if="joined">This event has been added to your events</h3>
+                </div>
+                <div class="col-xs-6 text-right" v-else>
+                    <router-link :to="{path: '/admin-edit/' + activeEvent._id}">
+                        <button class="btn btn-warning btn-lg">Edit Schedule</button>
+                    </router-link>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <router-link :to="{name: 'mySchedule'}">
+                        <button class="btn btn-success btn-lg">View My Schedule</button>
+                    </router-link>
                 </div>
             </div>
         </div>
+        <div class="row" v-for="(timeDict, date) in schedule">
+            <div class="col-xs-12 ">
+                <h3>{{date}}</h3>
+            </div>
+            <div class="row" v-for="(activitiesList, time) in schedule[date]">
+                <div class="col-xs-1 col-xs-offset-1">
+                    <h3>{{time}}</h3>
+                </div>
+                <div class="col-xs-12 col-md-3" v-for="activity in activitiesList">
+                    <button data-toggle="modal" data-target="#addActivity" @click="setActiveActivity(activity)" class="btn btn-primary activities">
+                        <h5>{{activity.date}} {{activity.startTime}} - {{activity.endTime}}</h5>
+                        <h4>{{activity.name}}</h4>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     </div>
