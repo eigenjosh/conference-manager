@@ -13,7 +13,7 @@
                     </button>
                     <a class="navbar-brand">Confer</a>
                     <div class="text-right">
-                        <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3">Create Event</button>
+                        <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>
                     <!-- Trigger the SIGN UP modal -->
@@ -101,7 +101,7 @@
                                 <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" data-dismiss="modal" @click="createEvent" type="submit" >Create New Event</button>
+                                <button class="btn btn-submit btn-success" data-dismiss="modal" @click="createEvent" :disabled="!this.validator.form" type="submit" >Create New Event</button>
                             </div>
                         </form>
                     </div>
@@ -115,7 +115,7 @@
         <div class="container">
             <div v-if="events.length == 0">
                 <h3>You have not created any events. If you wish to create a new event, please
-                    <a data-toggle="modal" data-target="#myModal3">click here</a>
+                    <a data-toggle="modal" data-target="#myModal3" @click="validateForm">click here</a>
                 </h3>
             </div>
             <div v-else class="admin-header">
@@ -210,7 +210,7 @@
                         endDate: ''
                     }
                 }
-                this.validateForm()
+                
             }
         }
 
