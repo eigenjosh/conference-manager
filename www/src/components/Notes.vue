@@ -84,35 +84,42 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
-
             </div>
         </div>
 
         <!-- DISPLAY USER NOTES -->
-        <div class="container-fluid">
-            <div v-if="!userNotes.activityId" class="row">
-                <div class="col-xs-12">
-                    <h2 class="text-center">
-                        <h1>General User Notes</h1>
-                    </h2>
+        <div class="draw-notes">
+            <h3>General Notes</h3>
+            <div v-for="userNote in userNotes">
+                <div v-if="!userNote.activityId" class="row">
+                    <div class="col-xs-12">
+                        <button type="button" @click="setActiveNote(userNote)" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal2">
+                            <div class="col-xs-12">
+                                <h1>{{userNote.title}}</h1>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div v-else class="else">
+                    
                 </div>
             </div>
-            <div v-else class="row">
+            <h3>Activity Notes</h3>
+            <div v-for="userNote in userNotes" class="container-fluid">
+                <div v-if="userNote.activityId" class="row">
                     <div class="col-xs-12">
-                        <h2 class="text-center">
-                            <h1>Notes on Activities</h1>
-                        </h2>
+                        <button type="button" @click="setActiveNote(userNote)" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal2">
+                            <div class="col-xs-12">
+                                <h1>{{userNote.title}}</h1>
+                            </div>
+                        </button>
                     </div>
                 </div>
-            <div v-for="userNote in userNotes" class="row well">
-                <button type="button" @click="setActiveNote(userNote)" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal2">
-                    <div class="col-xs-12">
-                        <h1>{{userNote.title}}</h1>
-                    </div>
-                </button>
+                <div v-else class="else">
+                    
+                </div>
             </div>
         </div>
-
         <!-- DISPLAY ACTIVE NOTE -->
         <div class="modal-notes">
             <div id="myModal2" class="modal fade" role="dialog">
@@ -134,7 +141,6 @@
                             <button type="button" class="btn btn-default" @click="updateNote(activeNote)" data-dismiss="modal">Save Note</button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -188,7 +194,7 @@
             setActiveNote(userNote) {
                 this.note.body = userNote.body
                 this.$store.dispatch('getNotebyNoteId', userNote)
-            },
+            }
         }
     }
 
