@@ -56,10 +56,11 @@
 
 
         <div class="row">
-            <div class="col-xs-12" v-if="activeUser.events.includes(activeEvent._id)">
+            <div class="col-xs-12 event well" v-if="activeUser.events.includes(activeEvent._id)">
                 <router-link :to="{path: 'event-schedule/' + activeEvent._id}">
                     <h2>{{activeEvent.name}}</h2>
                 </router-link>
+                <button class="btn btn-danger remove" @click="removeEvent">REMOVE EVENT FROM MY SCHEDULE</button>
             </div>
         </div>
         <div class="row" v-for="(timeDict, date) in userSchedule">
@@ -159,7 +160,12 @@
             removeActivity(){
                 debugger
                 this.$store.dispatch('removeFromMySchedule', {user: this.activeUser, event: this.activeEvent, activity: this.activeActivity})
+            },
+            removeEvent(){
+                debugger
+                this.$store.dispatch('removeFromMyEvents', {user: this.activeUser, event: this.activeEvent})
             }
+            
             
             
         },
@@ -170,5 +176,11 @@
 <style>
     .notepad textarea {
         width: 100%;
+    }
+    .remove{
+        display:none;
+    }
+    .event:hover .remove{
+        display: inline-block;
     }
 </style>

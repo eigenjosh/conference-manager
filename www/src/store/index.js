@@ -493,10 +493,11 @@ var store = new vuex.Store({
     },
 
     removeFromMyEvents({ commit, dispatch }, payload) {
+      debugger
       var removedEvent
       for (var i = 0; i < payload.user.events.length; i++) {
         var event = payload.user.events[i]
-        if (event._id == payload.event._id) {
+        if (event == payload.event._id) {
           payload.user.events.splice(i, 1)
           var removedEvent = event
           break
@@ -513,6 +514,7 @@ var store = new vuex.Store({
         .then(res => {
           console.log('this event has been removed from user events')
           dispatch('authenticate')
+          dispatch('getMyEvents')
         })
         .catch(err => {
           commit('handleError', err)
