@@ -229,7 +229,7 @@
                                         <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
                                     </select>
                                 </div>
-                                <input type="text" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
+                                <input type="number" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
                                 <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p>
                             </div>
                             <div class="form-group">
