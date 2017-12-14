@@ -15,7 +15,20 @@ module.exports = {
                 })
         }
     },
-    getEventsByLocation: {
+    getPublishedEvents: {
+        path: '/find-events',
+        reqType: 'get',
+        method(req, res, next) {
+          let action = 'Find Published Events'
+          Events.find({ published: true})
+            .then(events => {
+              res.send(handleResponse(action, events))
+            }).catch(error => {
+              return next(handleResponse(action, null, error))
+            })
+        }
+      },
+    getPublishedEventsByLocation: {
         path: '/find-events/:location',
         reqType: 'get',
         method(req, res, next) {
