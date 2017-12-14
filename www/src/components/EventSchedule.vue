@@ -316,6 +316,8 @@
                 this.activity = activity
             },
             addToMySchedule() {
+                this.activeActivity.capacity--
+                this.$store.dispatch('editActivity', this.activeActivity)
                 this.$store.dispatch('addToMySchedule', { activity: this.activeActivity, user: this.activeUser })
             }
         }

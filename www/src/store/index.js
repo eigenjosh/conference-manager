@@ -402,9 +402,10 @@ var store = new vuex.Store({
     },
 
     editActivity({ commit, dispatch }, activity) {
+      debugger
       api.put('activities/' + activity._id, activity)
         .then(res => {
-          commit('setActiveActivity', res.data.data)
+          commit('setActiveActivity', activity)
           dispatch('getActivities', { _id: activity.eventId })
         })
         .catch(err => {

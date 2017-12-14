@@ -158,6 +158,8 @@
                 this.note.body = activeNote.body
             },
             removeActivity(){
+                this.activeActivity.capacity++
+                this.$store.dispatch('editActivity', this.activeActivity)
                 this.$store.dispatch('removeFromMySchedule', {user: this.activeUser, event: this.activeEvent, activity: this.activeActivity})
             },
             removeEvent(){
