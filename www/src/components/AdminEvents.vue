@@ -101,7 +101,7 @@
                                 <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" data-dismiss="modal" @click="createEvent" type="submit" :disabled="!this.validator.form">Create New Event</button>
+                                <button class="btn btn-submit btn-success" data-dismiss="modal" @click="createEvent" type="submit" >Create New Event</button>
                             </div>
                         </form>
                     </div>
@@ -197,7 +197,7 @@
             createEvent() {
                 this.validateForm()
                 if (this.validator.form) {
-                    this.$store.dispatch('createEvent', this.event)
+                    this.$store.dispatch('createEvent', {event: this.event, user:this.activeUser})
                     this.event = {
                         name: '',
                         description: '',
