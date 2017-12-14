@@ -73,7 +73,26 @@ function API(model, schema) {
         return next(handleResponse(action, null, error))
       })
   }
+  
+  function remove(req, res, next) {
+    var action = actions.remove
+    var id = req.params.id || req.query.id || '';
 
+    if (!id) {
+      return next(handleResponse(action, null, { error: { message: 'Invalid request no id provided' } }))
+    }
+
+    schema.findById({ _id: id }).then(function (data) {
+      data.remove().then(function(data) {
+        return res.send(handleResponse(action, data))
+      })
+      
+    })
+      .catch(error => {
+        return next(handleResponse(action, null, error))
+      })
+  }
+  /*
   function remove(req, res, next) {
     var action = actions.remove
     var id = req.params.id || req.query.id || '';
@@ -89,7 +108,7 @@ function API(model, schema) {
         return next(handleResponse(action, null, error))
       })
   }
-
+  */
   function handleResponse(action, data, error) {
     var response = {
       schemaType: model.name,
