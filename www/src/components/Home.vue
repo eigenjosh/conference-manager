@@ -14,7 +14,7 @@
                     </button>
                     <a class="navbar-brand">Confer</a>
                     <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
-                        <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3">Create Event</button>
+                        <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>
                     <div class="text-right" v-else>
@@ -326,21 +326,22 @@
                 this.$store.dispatch('logout')
             },
             createEvent() {
-                debugger
-                //console.log(this.event)
-                this.$store.dispatch('createEvent', {event: this.event, user: this.activeUser})
-                this.event = {
-                    name: '',
-                    description: '',
-                    venue: '',
-                    address: '',
-                    city: '',
-                    state: '',
-                    zip: '',
-                    startDate: '',
-                    endDate: ''
+                this.validateForm()
+                if (this.validator.form) {
+                    this.$store.dispatch('createEvent', {event: this.event, user:this.activeUser})
+                    this.event = {
+                        name: '',
+                        description: '',
+                        venue: '',
+                        address: '',
+                        city: '',
+                        state: '',
+                        zip: '',
+                        startDate: '',
+                        endDate: ''
+                    }
                 }
-
+                
             }
         }
     }
