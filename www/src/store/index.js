@@ -72,7 +72,7 @@ var store = new vuex.Store({
     setSchedule(state, activities) {
       var schedule = {}
       activities = activities.sort((a, b) => {
-        return Date.parse(a.date) - Date.parse(b.date)
+        return Date.toLocaleString(a.date) - Date.toLocaleString(b.date)
       })
       activities.forEach(activity => {
         if (!schedule.hasOwnProperty(activity.date)) {
@@ -97,7 +97,7 @@ var store = new vuex.Store({
     setUserSchedule(state, activities) {
       var schedule = {}
       activities = activities.sort((a, b) => {
-        return Date.parse(a.date) - Date.parse(b.date)
+        return Date.toLocaleString(a.date) - Date.toLocaleString(b.date)
       })
       activities.forEach(activity => {
         if (!schedule.hasOwnProperty(activity.date)) {
