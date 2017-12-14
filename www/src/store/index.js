@@ -268,7 +268,7 @@ var store = new vuex.Store({
     //GET ALL EVENTS
 
     getAllEvents({ commit, dispatch }) {
-      api('/events')
+      api('/find-events')
         .then(res => {
           commit('setEvents', res.data.data)
         })
