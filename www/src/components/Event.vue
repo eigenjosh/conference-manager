@@ -6,6 +6,7 @@
                     <h2>{{event.name}}</h2>
                     <h3>{{event.startDate}} - {{event.endDate}}</h3>
                     <h3>{{event.description}}</h3>
+                    <h3>{{event.venue}}</h3>
                     <h5>{{event.address}}</h5>
                     <h5>{{event.city}}, {{event.state}}</h5>
                     <h6>Created
