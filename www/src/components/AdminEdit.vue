@@ -94,13 +94,13 @@
                             <!-- START TIME -->
                             <div class="form-group time">
                                 <label for="sel1">Start Time</label>
-                                <select class="form-control" required @change="setTime" v-model="activity.startTime">
+                                <select class="form-control" required v-model="activity.startTime" @change="timeClickHandler">
                                     <option :value="startSlot" v-for="startSlot in timeSlots">{{startSlot}}</option>
                                 </select>
                             </div>
                             <!-- END TIME -->
                             <div class="form-group time">
-                                <label for="sel1">End Time</label>
+                                <label for="sel2">End Time</label>
                                 <select class="form-control" v-model="activity.endTime" @change="validateActivityForm">
                                     <option :value="endSlot" v-for="endSlot in timeSlots">{{endSlot}}</option>
                                 </select>
@@ -115,7 +115,7 @@
                                 <input type="text" name="speakerName" class="form-control" placeholder="Speaker Name" v-model='activity.speakerName'>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" @click="addActivity" data-dismiss="modal" type="submit">Submit</button>
+                                <button class="btn btn-submit btn-success" @click="addActivity" data-dismiss="modal" type="submit" :disabled="!this.validator.activityForm">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -157,13 +157,13 @@
                             <!-- START TIME -->
                             <div class="form-group time">
                                 <label for="sel1">Start Time</label>
-                                <select class="form-control" required v-model="activity.startTime">
+                                <select class="form-control" required v-model="activity.startTime" @change="timeClickHandler">
                                     <option :value="startSlot" v-for="startSlot in timeSlots">{{startSlot}}</option>
                                 </select>
                             </div>
                             <!-- END TIME -->
                             <div class="form-group time">
-                                <label for="sel1">End Time</label>
+                                <label for="sel2">End Time</label>
                                 <select class="form-control" v-model="activity.endTime" @change="validateActivityForm">
                                     <option :value="endSlot" v-for="endSlot in timeSlots">{{endSlot}}</option>
                                 </select>
@@ -178,7 +178,7 @@
                                 <textarea type="text" name="speakerName" class="form-control" placeholder="Speaker Name" v-model='activity.speakerName'>{{activeActivity.speakerName}}</textarea>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" @click="editActivity" data-dismiss="modal" type="submit">Save Changes</button>
+                                <button class="btn btn-submit btn-success" @click="editActivity" data-dismiss="modal" type="submit" :disabled="!this.validator.activityForm">Save Changes</button>
                                 <button class="btn btn-danger" data-dismiss="modal" @click="deleteActivity">Delete</button>
                             </div>
                         </form>
@@ -222,7 +222,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="endDate">End Date:</label>
-                                <input type="date" name="endDate" class="form-control" placeholder="End Date" :min="event.startDate" required v-model="event.endDate" @change="validateEventForm">
+                                <input type="date" name="endDate" class="form-control" placeholder="End Date" :min="event.startDate" required v-model="event.endDate"
+                                    @change="validateEventForm">
                                 <p class="error-message text-left text-danger" v-if="!this.validator.endDate">End date must be the same as or later than the start date.</p>
                             </div>
                             <div class="form-group">
@@ -249,7 +250,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" data-dismiss="modal" @click="editEvent" type="submit">Edit Event</button>
+                                <button class="btn btn-submit btn-success" data-dismiss="modal" @click="editEvent" type="submit" :disabled="!this.validator.eventForm">Edit Event</button>
                             </div>
                         </form>
                     </div>
@@ -315,6 +316,16 @@
                     capacity: '',
                     speakerName: ''
                 },
+                originalActivityModel: {
+                    name: '',
+                    description: '',
+                    location: '',
+                    date: '',
+                    startTime: '',
+                    endTime: '',
+                    capacity: '',
+                    speakerName: ''
+                },
                 event: {
                     name: '',
                     description: '',
@@ -369,25 +380,29 @@
         },
         methods: {
             eventFormClickHandler() {
-                this.setActiveEvent(this.activeEvent); 
-                this.validateEventForm(); 
+                this.setActiveEvent(this.activeEvent);
+                this.validateEventForm();
             },
             activityFormClickHandler(activity) {
-                this.setActiveActivity(activity); 
-                this.validateActivityForm(); 
+                this.setActiveActivity(activity);
+                this.validateActivityForm();
+            },
+            timeClickHandler() {
+                console.log('in time click handler')
+                this.setTime();
+                this.validateActivityForm();
             },
             validateDate() {
                 this.validator.date = (new Date(this.activity.date).getTime() >= new Date(this.activeEvent.startDate).getTime() && new Date(this.activity.date).getTime() <= new Date(this.activeEvent.endDate).getTime())
-                console.log(this.activity.date)
-                console.log(this.event)
-                console.log(this.event.startDate)
-                console.log(new Date(this.activity.date).getTime())
-                console.log(new Date(this.event.startDate).getTime())
-                console.log(new Date(this.activity.date).getTime())
-                console.log(new Date(this.event.endDate).getTime())
+                console.log('activity.date: ', this.activity.date)
+                console.log('event: ', this.event)
+                console.log('event.startDate: ', this.event.startDate)
+                console.log('activeEvent.startDate: ', this.activeEvent.startDate)
             },
             validateEndTime() {
                 this.validator.endTime = (this.timeSlots.indexOf(this.activity.endTime) > this.timeSlots.indexOf(this.activity.startTime))
+                console.log(this.activity.endTime)
+                console.log(this.activity.startTime)
             },
             validateActivityForm() {
                 this.validateDate()
@@ -418,6 +433,12 @@
                     let newDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2])).toLocaleString('en-US');
                     return newDate.split(',')[0]
                 }
+            },
+            setActivityModel() {
+                this.originalActivityModel = this.activity
+            },
+            resetActivityModel() {
+                this.activity = this.originalActivityModel 
             },
             addActivity() {
                 this.validateActivityForm()
