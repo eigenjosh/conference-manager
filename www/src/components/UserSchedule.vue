@@ -10,9 +10,9 @@
                         <h4 class="modal-title">{{activeActivity.name}}</h4>
                     </div>
                     <div class="modal-body">
-                        <h5>Date:{{activeActivity.date}} Times:{{activeActivity.startTime}}-{{activeActivity.endTime}}</h5>
+                        <h5>Date:{{formatDateForDisplay(activeActivity.date)}} Times:{{activeActivity.startTime}}-{{activeActivity.endTime}}</h5>
                         <h4>ROOM:{{activeActivity.location}}</h4>
-                        <h4> Seats Available: {{activeActivity.capacity}}</h4>
+                        <h4 v-if="activeActivity.capacity"> Seats Available: {{activeActivity.capacity}}</h4>
                         <h2>Speaker: {{activeActivity.speakerName}}</h2>
                         <h3>{{activeActivity.description}}</h3>
                         <!-- <h4>Seats Available: {{activeActivity.capacity}}</h4> -->
@@ -65,15 +65,15 @@
         </div>
         <div class="row" v-for="(timeDict, date) in userSchedule">
             <div class="col-xs-12 ">
-                <h3>{{date}}</h3>
+                <h3>{{formatDateForDisplay(date)}}</h3>
             </div>
             <div class="row" v-for="(activitiesList, time) in userSchedule[date]">
                 <div class="col-xs-1 col-xs-offset-1">
-                        <h3>{{time}}</h3>
+                    <h3>{{time}}</h3>
                 </div>
                 <div class="col-xs-12 col-md-3" v-for="activity in activitiesList">
                     <button class="btn btn-primary activities" @click="setActiveActivity(activity, userNotes)" data-toggle="modal" data-target="#myActDetails">
-                        <h5>{{activity.date}} {{activity.startTime}} - {{activity.endTime}}</h5>
+                        <h5>{{formatDateForDisplay(activity.date)}} {{activity.startTime}} - {{activity.endTime}}</h5>
                         <h4>{{activity.name}}</h4>
                     </button>
                 </div>
@@ -112,7 +112,7 @@
             userNotes() {
                 return this.$store.state.userNotes
             },
-            activeUser(){
+            activeUser() {
                 return this.$store.state.activeUser
             }
 
@@ -123,8 +123,14 @@
             this.$store.dispatch('getMySchedule', this.activeEvent)
         },
         methods: {
+            formatDateForDisplay(date) {
+                if (date) {
+                    var parts = date.split('-')
+                    let newDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2])).toLocaleString('en-US');
+                    return newDate.split(',')[0]
+                }
+            },
             setActiveActivity(activity, userNotes) {
-                
                 this.$store.dispatch('getActivityById', activity)
                 this.isCreated = false
                 for (var i = 0; i < userNotes.length; i++) {
@@ -135,7 +141,7 @@
                 }
             },
             saveNote() {
-                
+
                 this.note.title = this.activeActivity.name
                 this.note.body = ' '
                 this.note.activityId = this.activeActivity._id
@@ -146,28 +152,30 @@
                 this.$store.dispatch('updateNote', activeNote)
                 this.note = {}
             },
-            setActiveNote(){
+            setActiveNote() {
                 var activeNote
-                for(var i=0; i<this.userNotes.length; i++){
+                for (var i = 0; i < this.userNotes.length; i++) {
                     var note = this.userNotes[i]
-                    if(note.activityId == this.activeActivity._id){
+                    if (note.activityId == this.activeActivity._id) {
                         activeNote = note
                     }
                 }
                 this.$store.dispatch('getNotebyNoteId', activeNote)
                 this.note.body = activeNote.body
             },
-            removeActivity(){
-                this.activeActivity.capacity++
-                this.$store.dispatch('editActivity', this.activeActivity)
-                this.$store.dispatch('removeFromMySchedule', {user: this.activeUser, event: this.activeEvent, activity: this.activeActivity})
+            removeActivity() {
+                if (this.activeActivity.capacity) {
+                    this.activeActivity.capacity++
+                    this.$store.dispatch('editActivity', this.activeActivity)
+                }
+                this.$store.dispatch('removeFromMySchedule', { user: this.activeUser, event: this.activeEvent, activity: this.activeActivity })
             },
-            removeEvent(){
-                this.$store.dispatch('removeFromMyEvents', {user: this.activeUser, event: this.activeEvent})
+            removeEvent() {
+                this.$store.dispatch('removeFromMyEvents', { user: this.activeUser, event: this.activeEvent })
             }
-            
-            
-            
+
+
+
         },
 
     }
@@ -177,10 +185,12 @@
     .notepad textarea {
         width: 100%;
     }
-    .remove{
-        display:none;
+
+    .remove {
+        display: none;
     }
-    .event:hover .remove{
+
+    .event:hover .remove {
         display: inline-block;
     }
 </style>

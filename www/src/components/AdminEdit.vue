@@ -99,7 +99,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="capacity">Number of Seats:</label>
+                                <label for="capacity">Number of Seats (optional):</label>
                                 <input type="number" name="capacity" class="form-control" placeholder="Number of Seats Available" v-model='activity.capacity'>
                             </div>
                             <div class="form-group">
@@ -160,8 +160,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="capacity">Number of Seats:</label>
-                                <input type="number" name="capacity" class="form-control" :placeholder="activeActivity.capacity" v-model='activity.capacity'>
+                                <label for="capacity">Number of Seats (optional):</label>
+                                <input type="number" name="capacity" class="form-control" :min="0" :max="1000" :placeholder="activeActivity.capacity" v-model='activity.capacity'>
                             </div>
                             <div class="form-group">
                                 <label for="speakerName">Speaker Name:</label>
@@ -258,7 +258,7 @@
             </div>
             <div class="row" v-for="(timeDict, date) in schedule">
                 <div class="col-xs-12 ">
-                    <h3>{{date}}</h3>
+                    <h3>{{formatDateForDisplay(date)}}</h3>
                 </div>
                 <div class="row" v-for="(activitiesList, time) in timeDict">
                     <div class="col-xs-1 col-xs-offset-1">
@@ -266,7 +266,7 @@
                     </div>
                     <div class="col-xs-12 col-md-3" v-for="activity in activitiesList">
                         <button data-toggle="modal" data-target="#myModalDetails" @click="setActiveActivity(activity)" class="btn btn-primary activities">
-                            <h5>{{activity.date}} {{activity.startTime}} - {{activity.endTime}}</h5>
+                            <h5>{{formatDateForDisplay(activity.date)}} {{activity.startTime}} - {{activity.endTime}}</h5>
                             <h4>{{activity.name}}</h4>
                             <i class="fa fa-pencil pull-right" aria-hidden="true"></i>
                         </button>
@@ -282,7 +282,7 @@
         name: 'adminEdit',
         data() {
             return {
-                date: Date.toLocaleString('en-US'),
+                date: Date,
                 activity: {
                     name: '',
                     description: '',
@@ -309,9 +309,7 @@
         },
         mounted() {
             this.$store.dispatch('getEventById', { _id: this.$route.params.id })
-            this.date = new Date().toLocaleString('en-US');
-            this.date = this.date.split(',')[0]
-            console.log(this.date)
+            this.date = new Date().toJSON().split('T')[0];
         },
         computed: {
             activeActivity() {
@@ -335,12 +333,14 @@
             }
         },
         methods: {
+            formatDateForDisplay(date) {
+                if (date) {
+                    var parts = date.split('-')
+                    let newDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2])).toLocaleString('en-US');
+                    return newDate.split(',')[0]
+                }
+            },
             addActivity() {
-                debugger
-                var parts = this.activity.date.split('-')
-                let date = new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2])).toLocaleString('en-US');
-                date = date.split(',')[0]
-                this.activity.date = date
                 this.$store.dispatch('addActivity', { activity: this.activity, eventId: this.activeEvent._id })
                 this.activity = {}
             },
@@ -357,10 +357,6 @@
                 }
             },
             editActivity() {
-                var parts = this.activity.date.split('-')
-                let date = new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2])).toLocaleString('en-US');
-                date = date.split(',')[0]
-                this.activity.date = date
                 this.$store.dispatch('editActivity', this.activity)
             },
             deleteActivity() {
@@ -384,10 +380,6 @@
                 this.event = activeEvent
             },
             editEvent() {
-                var parts = this.event.date.split('-')
-                let date = new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2])).toLocaleString('en-US');
-                date = date.split(',')[0]
-                this.event.date = date
                 this.$store.dispatch('editEvent', this.event)
             }
         }

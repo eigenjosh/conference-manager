@@ -174,15 +174,15 @@
                         <h4 class="modal-title">{{activeActivity.name}}</h4>
                     </div>
                     <div class="modal-body">
-                        <h5>{{activeActivity.date}} {{activeActivity.startTime}}-{{activeActivity.endTime}}</h5>
+                        <h5>{{formatDateForDisplay(activeActivity.date)}} {{activeActivity.startTime}}-{{activeActivity.endTime}}</h5>
                         <h5>ROOM:{{activeActivity.location}}</h5>
                         <h2>Speaker: {{activeActivity.speakerName}}</h2>
                         <h3>{{activeActivity.description}}</h3>
-                        <h4>Seats Available: {{activeActivity.capacity}}</h4>
+                        <h4 v-if="activeActivity.capacity">Seats Available: {{activeActivity.capacity}}</h4>
                     </div>
                     <div v-if="activeUser && activeUser.events">
                         <div v-if="activeUser.events.includes(activeEvent._id)">
-                            <button v-if="!activeUser.activities.includes(activeActivity._id) && activeActivity.capacity > 0" @click="addToMySchedule"
+                            <button v-if="!activeUser.activities.includes(activeActivity._id) && (activeActivity.capacity > 0 || !activeActivity.capacity)" @click="addToMySchedule"
                                 class="btn btn-success">Add to My Schedule</button>
                         </div>
                     </div>
@@ -221,7 +221,7 @@
         </div>
         <div class="row" v-for="(timeDict, date) in schedule">
             <div class="col-xs-12 ">
-                <h3>{{date}}</h3>
+                <h3>{{formatDateForDisplay(date)}}</h3>
             </div>
             <div class="row" v-for="(activitiesList, time) in schedule[date]">
                 <div class="col-xs-1 col-xs-offset-1">
@@ -229,7 +229,7 @@
                 </div>
                 <div class="col-xs-12 col-md-3" v-for="activity in activitiesList">
                     <button data-toggle="modal" data-target="#addActivity" @click="setActiveActivity(activity)" class="btn btn-primary activities">
-                        <h5>{{activity.date}} {{activity.startTime}} - {{activity.endTime}}</h5>
+                        <h5>{{formatDateForDisplay(activity.date)}} {{activity.startTime}} - {{activity.endTime}}</h5>
                         <h4>{{activity.name}}</h4>
                     </button>
                 </div>
@@ -294,6 +294,13 @@
 
         },
         methods: {
+            formatDateForDisplay(date) {
+                if (date) {
+                    var parts = date.split('-')
+                    let newDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2])).toLocaleString('en-US');
+                    return newDate.split(',')[0]
+                }
+            },
             submitLogin() {
 
                 this.$store.dispatch('login', this.login)
@@ -315,7 +322,6 @@
                 this.$store.dispatch('logout')
             },
             addToMyEvents() {
-
                 if (!this.activeUser.events.includes(this.activeEvent._id)) {
                     this.$store.dispatch('addToMyEvents', { event: this.activeEvent, user: this.activeUser })
                 }
@@ -326,8 +332,10 @@
                 this.activity = activity
             },
             addToMySchedule() {
-                this.activeActivity.capacity--
-                this.$store.dispatch('editActivity', this.activeActivity)
+                if (this.activeActivity.capacity) {
+                    this.activeActivity.capacity--
+                    this.$store.dispatch('editActivity', this.activeActivity)
+                }
                 this.$store.dispatch('addToMySchedule', { activity: this.activeActivity, user: this.activeUser })
             }
         }

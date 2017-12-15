@@ -4,7 +4,7 @@
             <router-link :to="{path: 'event-schedule/' + event._id}">
                 <button class="btn btn-default event-btn word-wrap" @click="setActiveEvent(event)">
                     <h2>{{event.name}}</h2>
-                    <h3>{{event.startDate}} - {{event.endDate}}</h3>
+                    <h3>{{formatDateForDisplay(event.startDate)}} - {{formatDateForDisplay(event.endDate)}}</h3>
                     <h3>{{event.description}}</h3>
                     <h3>{{event.venue}}</h3>
                     <h5>{{event.address}}</h5>
@@ -36,6 +36,13 @@
             console.log(this.event)
         },
         methods: {
+            formatDateForDisplay(date) {
+                if (date) {
+                    var parts = date.split('-')
+                    let newDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2])).toLocaleString('en-US');
+                    return newDate.split(',')[0]
+                }
+            },
             setActiveEvent(event) {
 
                 this.$store.dispatch('getEventById', event)

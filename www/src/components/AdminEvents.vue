@@ -196,14 +196,6 @@
                 this.$store.dispatch('logout')
             },
             createEvent() {
-                var parts = this.event.startDate.split('-')
-                let startDate = new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2])).toLocaleString('en-US');
-                startDate = startDate.split(',')[0]
-                this.event.startDate = startDate
-                var parts = this.event.endDate.split('-')
-                let endDate = new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2])).toLocaleString('en-US');
-                endDate = endDate.split(',')[0]
-                this.event.endDate = endDate
                 this.validateForm()
                 if (this.validator.form) {
                     this.$store.dispatch('createEvent', {event: this.event, user:this.activeUser})
