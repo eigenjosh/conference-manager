@@ -117,7 +117,7 @@
     }
 </script>
 
-<style scoped>
+<style>
     .btn-text {
         overflow: hidden;
         text-overflow: ellipsis;
