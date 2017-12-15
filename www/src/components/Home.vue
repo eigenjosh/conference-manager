@@ -221,6 +221,12 @@
                                 </div>
                                 <input type="number" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
                                 <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p>
+                                <div class="form-group">
+                                    <label for="timeZone">Time Zone</label>
+                                    <select class="form-control" v-model="event.timeZone">
+                                        <option :value="timeZone" v-for="zone in timeZones">{{zone}}</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-submit btn-success" data-dismiss="modal" @click="createEvent" type="submit" :disabled="!this.validator.form">Create New Event</button>
@@ -266,7 +272,8 @@
                     state: '',
                     zip: '',
                     startDate: '',
-                    endDate: ''
+                    endDate: '',
+                    timeZone: ''
                 },
                 validator: {
                     zip: false,
@@ -288,6 +295,9 @@
             },
             locations() {
                 return this.$store.state.locations
+            },
+            timeZones(){
+                return this.$store.state.timeZones
             }
         },
         methods: {

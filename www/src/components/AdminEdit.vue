@@ -235,6 +235,12 @@
                                     </select>
                                 </div>
                                 <textarea type="number" name="zip" class="form-control" placeholder="Venue Zip" rows="1" v-model="event.zip" required>{{activeEvent.zip}}</textarea>
+                                <div class="form-group">
+                                    <label for="timeZone">Time Zone</label>
+                                    <select class="form-control" v-model="event.timeZone">
+                                        <option :value="timeZone" v-for="zone in timeZones">{{zone}}</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-submit btn-success" data-dismiss="modal" @click="editEvent" type="submit">Edit Event</button>
@@ -312,7 +318,8 @@
                     state: '',
                     zip: '',
                     startDate: '',
-                    endDate: ''
+                    endDate: '',
+                    timeZone: ''
                 }
 
             }
@@ -340,6 +347,9 @@
             },
             locations() {
                 return this.$store.state.locations
+            },
+            timeZones(){
+                return this.$store.state.timeZones
             }
         },
         methods: {

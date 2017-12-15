@@ -24,6 +24,7 @@ var schema = new mongoose.Schema({
   city: { type: String, required: true },
   state: { type: String, required: true },
   zip: { type: String, required: true },
+  timeZone: { type: String },
   startDate: { type: String, required: true },
   endDate: { type: String, required: true },
   created: { type: Number, default: Date.now() },
