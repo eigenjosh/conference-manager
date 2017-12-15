@@ -1,85 +1,57 @@
 <template>
-    <div class="home">
+    <div class="home container-fluid">
         <!-- BEGINNING OF NAVBAR -->
         <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                        aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
-                    <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
-                        <p class="navbar-brand">Welcome {{activeUser.name}}</p>
-                        <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
-                        <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
-                    </div>
-                    <div class="text-right" v-else>
-                        <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Login</button>
-                        <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
-                    </div>
-                    <!-- Trigger the SIGN UP modal -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
+                <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
+                    <p class="navbar-brand">Welcome {{activeUser.name}}</p>
+                    <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
+                    <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                 </div>
+                <div class="text-right" v-else>
+                    <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Login</button>
+                    <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
+                </div>
+            </div>
 
-                <!-- MENU DROWDOWN -->
-                <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
-
-                    <ul>
+            <!-- MENU DROWDOWN -->
+            <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
+                <ul>
+                    <li>
+                        <router-link :to="{name: 'findEvents'}">
+                            <button type="button" class="btn btn-default">Find Events</button>
+                        </router-link>
+                    </li>
+                    <div v-if="activeUser.hasOwnProperty('name')">
                         <li>
-
-                            <router-link :to="{name: 'findEvents'}">
-                                <button type="button" class="btn btn-default">Find Events</button>
+                            <router-link :to="{name: 'adminEvents'}">
+                                <button type="button" class="btn btn-default">Events I've Created</button>
                             </router-link>
                         </li>
-
-                        <div v-if="activeUser.hasOwnProperty('name')">
-                            <li>
-
-                                <router-link :to="{name: 'adminEvents'}">
-                                    <button type="button" class="btn btn-default">Events I've Created</button>
-                                </router-link>
-                            </li>
-                            <li>
-
-                                <router-link :to="{name:'mySchedule'}">
-                                    <button type="button" class="btn btn-default">My Schedule</button>
-                                </router-link>
-                            </li>
-                            <li>
-
-                                <router-link :to="{name:'userNotes'}">
-                                    <button type="button" class="btn btn-default">My Notes</button>
-                                </router-link>
-                            </li>
-
-                        </div>
-
-                    </ul>
-
-
-                    <!-- SEARCH BAR -->
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- LOGIN BUTTON -->
-
-                        <!-- Trigger the LOGIN modal -->
-                        <!-- Trigger the SIGN UP modal -->
-
-
-
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
+                        <li>
+                            <router-link :to="{name:'mySchedule'}">
+                                <button type="button" class="btn btn-default">My Schedule</button>
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link :to="{name:'userNotes'}">
+                                <button type="button" class="btn btn-default">My Notes</button>
+                            </router-link>
+                        </li>
+                    </div>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                </ul>
             </div>
-            <!-- /.container-fluid -->
         </nav>
-
-        <!-- END OF NAVBAR -->
-
         <div class="jumbotron main-pic">
             <div class="row">
                 <div class="col-xs-12">
@@ -88,6 +60,7 @@
                 </div>
             </div>
         </div>
+
         <!-- LOGIN MODAL -->
 
         <div id="myModal" class="modal fade" role="dialog">
@@ -118,7 +91,6 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -237,10 +209,48 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
-
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-md-3 col-md-offset-1 well">
+                <h3>Create</h3>
+                <div class="thumbnail">
+                    <a>
+                        <img src="" alt="">
+                    </a>
+                    <div class="caption">
+                        <h5>Caption</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 well">
+                <h3>Your Own</h3>
+                <div class="thumbnail">
+                    <a>
+                        <img src="" alt="">
+                    </a>
+                    <div class="caption">
+                        <h5>Caption</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 well screenshot">
+                <h3>Caption</h3>
+                <div class="thumbnail">
+                    <a>
+                        <img src="" alt="">
+                    </a>
+                    <div class="caption">
+                        <h5>Caption</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row jumbotron">
+            <div class="col-md-6 col-md-offset-3 text-justify">
+                <h3>Welcome to Confer, the digital conference manager that eases the stress on planning your next event.</h3>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -296,7 +306,7 @@
             locations() {
                 return this.$store.state.locations
             },
-            timeZones(){
+            timeZones() {
                 return this.$store.state.timeZones
             }
         },
@@ -361,12 +371,12 @@
 </script>
 
 <style>
-    /* .home {
-        background-image: url('https://i.imgur.com/Nbi7bYI.jpg');
+    .home {
+        background-image: url('https://bhubaneswarlive.com/wp-content/uploads/2016/11/Savin-NY-Website-Background-Web.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center
-    } */
+    }
 
     .main-pic {
         background-image: url('https://images.pexels.com/photos/34092/pexels-photo.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb');
