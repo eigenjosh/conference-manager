@@ -32,10 +32,10 @@ function logger(req, res, next) {
 app.use(session)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.static(__dirname + '/../../www/dist'))
 app.use('*', logger)
 app.use('*', cors(corsOptions))
 app.use('/', Auth)
-app.use(express.static(__dirname + '/../../www/dist'))
 
 
 // LOCKS API TO REQUIRE USER AUTH
