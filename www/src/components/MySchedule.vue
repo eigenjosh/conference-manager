@@ -56,6 +56,7 @@
         </div>
         <div v-else class="display">
             <div class="row">
+                    <button class="btn btn-default" @click="getMyActivities">View All Activities</button>
                 <div class="col-xs-4" v-for="e in myEvents">
                     <button class="btn btn-default btn-text" @click="getMySchedule(e)">{{e.name}}</button>
                 </div>
@@ -83,6 +84,9 @@
             },
             myEvents() {
                 return this.$store.state.myEvents
+            },
+            activeEvent(){
+                return this.$store.state.activeEvent
             }
         },
         mounted() {
@@ -95,6 +99,11 @@
             },
             getMySchedule(e) {
                 this.$store.dispatch('getMySchedule', e)
+            },
+            getMyActivities(){
+                debugger
+                this.activeEvent = {}
+                this.$store.dispatch('getMyActivities')
             }
         },
         components: {

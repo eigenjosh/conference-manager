@@ -73,7 +73,7 @@ var store = new vuex.Store({
     setSchedule(state, activities) {
       var schedule = {}
       activities = activities.sort((a, b) => {
-        return a.date - b.date
+        return Date.parse(a.date) - Date.parse(b.date)
       })
       activities.forEach(activity => {
         if (!schedule.hasOwnProperty(activity.date)) {
@@ -98,7 +98,7 @@ var store = new vuex.Store({
     setUserSchedule(state, activities) {
       var schedule = {}
       activities = activities.sort((a, b) => {
-        return a.date - b.date
+        return Date.parse(a.date) - Date.parse(b.date)
       })
       activities.forEach(activity => {
         if (!schedule.hasOwnProperty(activity.date)) {
@@ -270,10 +270,11 @@ var store = new vuex.Store({
     },
 
     getMyActivities({ commit, dispatch }) {
+      debugger
       api(`/user-activities`)
         .then(res => {
           console.log('res to getMyActivities: ', res)
-          commit('setMyActivities', res.data.data)
+          commit('setUserSchedule', res.data.data)
         })
         .catch(err => {
           commit('handleError', err)
@@ -345,7 +346,15 @@ var store = new vuex.Store({
         })
 
     },
-
+    editEvent({commit, dispatch}, event){
+      api.put('events/' + event._id, event)
+        .then(res=>{
+          commit('setActiveEvent', event)
+        })
+        .catch(err=>{
+          commit('handleError', err)
+        })
+    },
     editActivity({ commit, dispatch }, activity) {
       debugger
       api.put('activities/' + activity._id, activity)

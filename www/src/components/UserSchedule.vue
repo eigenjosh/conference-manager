@@ -60,11 +60,11 @@
                 <router-link :to="{path: 'event-schedule/' + activeEvent._id}">
                     <h2>{{activeEvent.name}}</h2>
                 </router-link>
-                <button class="btn btn-danger remove" @click="removeEvent">REMOVE EVENT FROM MY SCHEDULE</button>
+                <button class="btn btn-danger btn-sm pull-right remove" @click="removeEvent">REMOVE EVENT FROM MY SCHEDULE</button>
             </div>
         </div>
         <div class="row" v-for="(timeDict, date) in userSchedule">
-            <div class="col-xs-12 ">
+            <div class="col-xs-12 text-left">
                 <h3>{{formatDateForDisplay(date)}}</h3>
             </div>
             <div class="row" v-for="(activitiesList, time) in userSchedule[date]">
@@ -185,11 +185,19 @@
     .notepad textarea {
         width: 100%;
     }
-
+    /* .date{
+        padding-left: 20px;
+        
+    } */
     .remove {
         display: none;
     }
-
+    .event{
+        height: 130px;
+    }
+    .event button{
+        margin-right: 20px;
+    }
     .event:hover .remove {
         display: inline-block;
     }
