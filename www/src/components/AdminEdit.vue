@@ -126,7 +126,7 @@
 
             </div>
         </div>
-        <div id="myModalDetails" class="modal fade" role="dialog">
+        <div id="myModalDetails" class="modal fade" role="dialog" @click="setActiveActivity(activeActivity)">
             <div class="modal-dialog">
 
                 <!-- Modal content-->
@@ -184,7 +184,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" @click="setActiveActivity(activeActivity)">Close</button>
                     </div>
                 </div>
 
@@ -316,16 +316,6 @@
                     capacity: '',
                     speakerName: ''
                 },
-                originalActivityModel: {
-                    name: '',
-                    description: '',
-                    location: '',
-                    date: '',
-                    startTime: '',
-                    endTime: '',
-                    capacity: '',
-                    speakerName: ''
-                },
                 event: {
                     name: '',
                     description: '',
@@ -366,7 +356,6 @@
             },
             activeEvent() {
                 return this.$store.state.activeEvent
-
             },
             timeSlots() {
                 return this.$store.state.timeSlots
@@ -434,12 +423,6 @@
                     return newDate.split(',')[0]
                 }
             },
-            setActivityModel() {
-                this.originalActivityModel = this.activity
-            },
-            resetActivityModel() {
-                this.activity = this.originalActivityModel 
-            },
             addActivity() {
                 this.validateActivityForm()
                 if (this.validator.activityForm) {
@@ -457,6 +440,7 @@
                 }
             },
             setActiveActivity(activity) {
+                console.log('setActiveActivity fired.')
                 this.$store.dispatch('getActivityById', activity)
                 this.activity = activity
             },
