@@ -126,7 +126,7 @@
 
             </div>
         </div>
-        <div id="myModalDetails" class="modal fade" role="dialog" @click="setActiveActivity(activeActivity)">
+        <div id="myModalDetails" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
                 <!-- Modal content-->
@@ -184,7 +184,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" @click="setActiveActivity(activeActivity)">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
 
