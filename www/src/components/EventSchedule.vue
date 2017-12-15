@@ -199,7 +199,11 @@
             </div>
             <div class="row">
                 <div class="col-xs-offset-3 col-xs-6 well">
+                    <h3>{{formatDateForDisplay(activeEvent.startDate)}} - {{formatDateForDisplay(activeEvent.endDate)}}</h3>
                     <h3>{{activeEvent.description}}</h3>
+                    <h3>{{activeEvent.venue}}</h3>
+                    <h5>{{activeEvent.address}}</h5>
+                    <h5>{{activeEvent.city}}, {{activeEvent.state}}--{{activeEvent.timeZone}}</h5>
                 </div>
             </div>
             <div v-if="activeUser && activeUser.events">
