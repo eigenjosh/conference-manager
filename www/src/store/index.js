@@ -38,6 +38,7 @@ var store = new vuex.Store({
     locations: {
       "Alaska": "AK", "Alabama": "AL", "Arkansas": "AR", "American Samoa": "AS", "Arizona": "AZ", "California": "CA", "Colorado": "CO", "Connecticut": "CT", "District of Columbia": "DC", "Delaware": "DE", "Florida": "FL", "Micronesia": "FM", "Georgia": "GA", "Guam": "GU", "Hawaii": "HI", "Iowa": "IA", "Idaho": "ID", "Illinois": "IL", "Indiana": "IN", "Kansas": "KS", "Kentucky": "KY", "Louisiana": "LA", "Massachusetts": "MA", "Maryland": "MD", "Maine": "ME", "Marshall Islands": "MH", "Michigan": "MI", "Minnesota": "MN", "Missouri": "MO", "Northern Marianas": "MP", "Mississippi": "MS", "Montana": "MT", "North Carolina": "NC", "North Dakota": "ND", "Nebraska": "NE", "New Hampshire": "NH", "New Jersey": "NJ", "New Mexico": "NM", "Nevada": "NV", "New York": "NY", "Ohio": "OH", "Oklahoma": "OK", "Oregon": "OR", "Pennsylvania": "PA", "Rhode Island": "RI", "Puerto Rico": "PR", "Palau": "PW", "South Carolina": "SC", "South Dakota": "SD", "Tennessee": "TN", "Texas": "TX", "Utah": "UT", "Virginia": "VA", "Virgin Islands": "VI", "Vermont": "VT", "Washington": "WA", "West Virginia": "WV", "Wisconsin": "WI", "Wyoming": "WY"
     },
+    timeZones:["Hawaii", "Alaska", "Pacific", "Mountain", "Central", "Eastern"]
 
   },
   mutations: {
