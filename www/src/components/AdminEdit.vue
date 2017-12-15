@@ -31,17 +31,24 @@
                                 <button type="button" class="btn btn-default">Find Events</button>
                             </router-link>
                         </li>
-                        <li>
-                            <router-link :to="{name:'mySchedule'}">
-                                <button type="button" class="btn btn-default">My Schedule</button>
-                            </router-link>
-                        </li>
-                        <li>
+                        <div v-if="user.hasOwnProperty('name')">
+                            <li>
+                                <router-link :to="{name: 'adminEvents'}">
+                                    <button type="button" class="btn btn-default">Events I've Created</button>
+                                </router-link>
+                            </li>
+                        </div>
+                            <li>
+                                <router-link :to="{name:'mySchedule'}">
+                                    <button type="button" class="btn btn-default">My Schedule</button>
+                                </router-link>
+                            </li>
+                            <li>
 
-                            <router-link :to="{name:'userNotes'}">
-                                <button type="button" class="btn btn-default">My Notes</button>
-                            </router-link>
-                        </li>
+                                <router-link :to="{name:'userNotes'}">
+                                    <button type="button" class="btn btn-default">My Notes</button>
+                                </router-link>
+                            </li>
                     </ul>
                     <!-- SEARCH BAR -->
                     <ul class="nav navbar-nav navbar-right">
@@ -49,10 +56,10 @@
                         <!-- Trigger the LOGIN modal -->
                         <!-- Trigger the SIGN UP modal -->
                     </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
                 </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container-fluid -->
+                <!-- /.container-fluid -->
         </nav>
         <!-- add new activity modal -->
         <div id="myModalAdd" class="modal fade" role="dialog">
@@ -254,6 +261,9 @@
                     <button class="btn btn-warning btn" data-toggle="modal" data-target="#myModalAdd">Add Activity</button>
                     <button v-if="!activeEvent.published" class="btn btn-success" @click="publish">Publish</button>
                     <button v-else="activeEvent.published" class="btn btn-success" @click="unPublish">Make Private</button>
+                    <router-link :to="{path: '/event-schedule/' + activeEvent._id}">
+                        <button class="btn btn-default event-btn word-wrap" @click="setActiveEvent(event)">Go To Event</button>
+                    </router-link>
                 </div>
             </div>
             <div class="row" v-for="(timeDict, date) in schedule">
@@ -274,7 +284,7 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
 </template>
 
 <script>
