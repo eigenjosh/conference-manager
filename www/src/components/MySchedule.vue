@@ -50,6 +50,7 @@
                 </div>
             </div>
         </nav>
+        
         <h1>My Schedule</h1>
         <div v-if="myEvents.length == 0" class="header">
             <h3>Looks like you have not added any activities to your schedule yet! Join an event and click "add to my schedule" to see them here!</h3>
@@ -65,7 +66,7 @@
                 <userSchedule></userSchedule>
             </div>
         </div>
-
+    
     </div>
 </template>
 

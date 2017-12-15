@@ -234,7 +234,7 @@
                 <div class="col-xs-12 col-md-9" >
                         <div class="row button-list">
                             <div class="col-xs-12 col-md-4" v-for="activity in activitiesList">
-                                <button class="btn btn-primary activities" @click="setActiveActivity(activity, userNotes)" data-toggle="modal" data-target="#myActDetails">
+                                <button class="btn btn-primary activities" @click="setActiveActivity(activity)" data-toggle="modal" data-target="#addActivity">
                                     <h5>{{formatDateForDisplay(activity.date)}} {{activity.startTime}} - {{activity.endTime}}</h5>
                                     <h4>{{activity.name}}</h4>
                                 </button>
