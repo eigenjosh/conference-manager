@@ -80,7 +80,7 @@ var store = new vuex.Store({
         }
       })
       activities = activities.sort((a, b) => {
-        return parseInt(a.startTime) - parseInt(b.startTime)
+        return state.timeSlots.indexOf(a.startTime) - state.timeSlots.indexOf(b.startTime)
       })
       activities.forEach(activity => {
         if (!schedule[activity.date].hasOwnProperty(activity.startTime)) {
@@ -105,7 +105,7 @@ var store = new vuex.Store({
         }
       })
       activities = activities.sort((a, b) => {
-        return parseInt(a.startTime) - parseInt(b.startTime)
+        return state.timeSlots.indexOf(a.startTime) - state.timeSlots.indexOf(b.startTime)
       })
       activities.forEach(activity => {
         if (!schedule[activity.date].hasOwnProperty(activity.startTime)) {
