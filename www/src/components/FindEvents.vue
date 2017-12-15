@@ -228,7 +228,7 @@
                                 <div class="form-group">
                                     <label for="timeZone">Time Zone</label>
                                     <select class="form-control" v-model="event.timeZone">
-                                        <option :value="timeZone" v-for="zone in timeZones">{{zone}}</option>
+                                        <option :value="timeZone" v-for="timeZone in timeZones">{{timeZone}}</option>
                                     </select>
                                 </div>
                             </div>
