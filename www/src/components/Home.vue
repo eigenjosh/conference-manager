@@ -1,5 +1,5 @@
 <template>
-    <div class="home container-fluid">
+    <div class="home container-fluid parralax">
         <!-- BEGINNING OF NAVBAR -->
         <nav class="navbar navbar-default">
             <div class="navbar-header">
@@ -52,7 +52,7 @@
                 </ul>
             </div>
         </nav>
-        <div class="jumbotron main-pic">
+        <div class="jumbotron main-heading main-pic">
             <div class="row">
                 <div class="col-xs-12">
                     <h1>CONFER</h1>
@@ -211,44 +211,43 @@
                 </div>
             </div>
         </div>
+
+        <div class="jumbotron second-pic">
+        </div>
         <div class="row">
             <div class="col-md-3 col-md-offset-1 well">
-                <h3>Create</h3>
+                <h3></h3>
                 <div class="thumbnail">
                     <a>
-                        <img src="" alt="">
+                        <img src="https://thumbs.dreamstime.com/t/coaching-mentoring-seminar-meeting-conference-business-concept-60792479.jpg" alt="">
                     </a>
                     <div class="caption">
-                        <h5>Caption</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 well">
-                <h3>Your Own</h3>
-                <div class="thumbnail">
-                    <a>
-                        <img src="" alt="">
-                    </a>
-                    <div class="caption">
-                        <h5>Caption</h5>
+                        <h5></h5>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 well screenshot">
-                <h3>Caption</h3>
+                <h3></h3>
                 <div class="thumbnail">
                     <a>
-                        <img src="" alt="">
+                        <img src="https://thumbs.dreamstime.com/t/business-people-conference-meeting-boardroom-working-concept-conversation-51218569.jpg"
+                            alt="">
                     </a>
                     <div class="caption">
-                        <h5>Caption</h5>
+                        <h5></h5>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row jumbotron">
-            <div class="col-md-6 col-md-offset-3 text-justify">
-                <h3>Welcome to Confer, the digital conference manager that eases the stress on planning your next event.</h3>
+            <div class="col-md-3 well screenshot">
+                <h3></h3>
+                <div class="thumbnail">
+                    <a>
+                        <img src="https://static.pexels.com/photos/7096/people-woman-coffee-meeting.jpg" alt="">
+                    </a>
+                    <div class="caption">
+                        <h5></h5>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -378,6 +377,29 @@
         background-position: center
     }
 
+    .well {
+        background: rgb(127, 127, 127)
+    }
+
+    .navbar {
+        background: rgb(255, 255, 249);
+        color: black;
+    }
+
+    .parallax {
+        /* The image used */
+        background-image: url("https://images.pexels.com/photos/34092/pexels-photo.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb");
+
+        /* Set a specific height */
+        height: 500px;
+
+        /* Create the parallax scrolling effect */
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
     .main-pic {
         background-image: url('https://images.pexels.com/photos/34092/pexels-photo.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb');
         background-repeat: no-repeat;
@@ -385,14 +407,31 @@
         background-position: center;
     }
 
-    .jumbotron {
+    .main-heading {
         font-family: 'Abril Fatface', cursive;
+        text-shadow: 0px 0px 15px black;
         color: white;
-        text-shadow: 0px 0px 10px black;
+    }
+
+    .second-pic {
+        margin-top: 300px;
+        height: 300px;
+        background-image: url('https://i.pinimg.com/originals/50/1f/1a/501f1a19290e28cd676605f9acf36d03.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .info-text {
+        font-family: 'Source Sans Pro', sans-serif;
     }
 
     .btn-default {
         width: 100%;
+    }
+
+    .screenshot {
+        margin-left: 50px;
     }
 
     .navbar ul {
