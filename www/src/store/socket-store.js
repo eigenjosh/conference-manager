@@ -2,6 +2,7 @@ import vue from 'vue'
 import io from 'socket.io-client'
 let socket = {}
 
+
 export default {
     state: {
         connectedUsers: {},
@@ -31,7 +32,7 @@ export default {
     },
     actions: {
         initSocket({ commit, dispatch }, user) {
-            socket = io('//localhost:3000')
+            socket = io(baseUrl)
             socket.on('CONNECTED', (data) => {
                 socket.emit('setUser', user)
                 console.log(data)

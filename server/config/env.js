@@ -1,6 +1,6 @@
 // LOCAL DEV VARIABLES
 let env = {
-	NODE_ENV: 'development',
+	NODE_ENV: 'production',
 	PORT: 3000,
 	DBPROTOCOL: 'mongodb',
 	DBUSERNAME: 'admin',
