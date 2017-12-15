@@ -177,7 +177,7 @@
                         <h5>{{formatDateForDisplay(activeActivity.date)}} {{activeActivity.startTime}}-{{activeActivity.endTime}}</h5>
                         <h5>ROOM:{{activeActivity.location}}</h5>
                         <h2>Speaker: {{activeActivity.speakerName}}</h2>
-                        <h3>{{activeActivity.description}}</h3>
+                        <div><h3>{{activeActivity.description}}</h3></div>
                         <h4 v-if="activeActivity.capacity">Seats Available: {{activeActivity.capacity}}</h4>
                     </div>
                     <div v-if="activeUser && activeUser.events">
@@ -362,5 +362,8 @@
 
     .success-text {
         color: blue;
+    }
+    .description{
+        width: 50%;
     }
 </style>

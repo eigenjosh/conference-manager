@@ -79,7 +79,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
-                                <textarea type="text" name="description" class="form-control" rows="5" placeholder="Whats this for?" required v-model='activity.description'></textarea>
+                                <textarea type="text" name="description" maxlength="500"class="form-control" rows="5" placeholder="Whats this for?" required v-model='activity.description'></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="room">Room:</label>
@@ -143,7 +143,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
-                                <textarea type="text" name="description" class="form-control" rows="5" placeholder="Whats this for?" required v-model='activity.description'>{{activity.description}}</textarea>
+                                <textarea type="text" name="description" maxlength="500" class="form-control" rows="5" placeholder="Whats this for?" required v-model='activity.description'>{{activity.description}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="room">Room:</label>
