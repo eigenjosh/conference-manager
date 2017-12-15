@@ -369,7 +369,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .home {
         background-image: url('https://bhubaneswarlive.com/wp-content/uploads/2016/11/Savin-NY-Website-Background-Web.jpg');
         background-size: cover;
