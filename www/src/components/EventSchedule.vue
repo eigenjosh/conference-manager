@@ -207,19 +207,17 @@
                 </div>
             </div>
             <div v-if="activeUser && activeUser.events">
-                <div class="col-xs-6 text-right" v-if="activeUser._id != activeEvent.creatorId">
+                <div class="col-xs-4 col-xs-offset-7 text-right" v-if="activeUser._id != activeEvent.creatorId">
                     <button v-if="!activeUser.events.includes(activeEvent._id)" class="btn btn-primary btn-lg" @click="addToMyEvents">Join Event</button>
                     <h3 v-if="joined">This event has been added to your events</h3>
                 </div>
-                <div class="col-xs-6 text-right" v-else>
+                <div class="col-xs-4 col-xs-offset-7 text-right" v-else>
                     <router-link :to="{path: '/admin-edit/' + activeEvent._id}">
                         <button class="btn btn-warning btn-lg">Edit Schedule</button>
                     </router-link>
-                </div>
-                <div class="col-xs-6 text-right">
                     <router-link :to="{name: 'mySchedule'}">
-                        <button class="btn btn-success btn-lg">View My Schedule</button>
-                    </router-link>
+                            <button class="btn btn-success btn-lg">View My Schedule</button>
+                        </router-link>
                 </div>
             </div>
         </div>
