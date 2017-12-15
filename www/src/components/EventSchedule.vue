@@ -182,18 +182,15 @@
                     </div>
                     <div v-if="activeUser && activeUser.events">
                         <div v-if="activeUser.events.includes(activeEvent._id)">
-                            <button v-if="!activeUser.activities.includes(activeActivity._id) && (activeActivity.capacity > 0 || !activeActivity.capacity)" @click="addToMySchedule"
-                                class="btn btn-success">Add to My Schedule</button>
-                            <h4 class="danger-text" v-else-if="activeActivity.capacity == 0">This activity is currently full</h4>
-                        </div>
-                        <div v-if="activeUser.activities.includes(activeActivity._id)">
-                            <h4 class="success-text">This activity is in your schedule</h4>
                             <button v-if="!activeUser.activities.includes(activeActivity._id) && (activeActivity.capacity > 0 || !activeActivity.capacity)"
                                 @click="addToMySchedule" class="btn btn-success">Add to My Schedule</button>
+                            <h4 class="danger-text" v-else-if="activeActivity.capacity == 0 && activeActivity.capacity">This activity is currently full</h4>
+                            </div>
+                        <div v-if="activeUser.activities.includes(activeActivity._id)">
+                            <h4 class="success-text">This activity is in your schedule</h4>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -237,16 +234,16 @@
                 <div class="col-xs-6 col-xs-offset-1 col-md-1 time-col">
                     <h3>{{time}}</h3>
                 </div>
-                <div class="col-xs-12 col-md-9" >
-                        <div class="row button-list">
-                            <div class="col-xs-12 col-md-4" v-for="activity in activitiesList">
-                                <button class="btn btn-primary activities" @click="setActiveActivity(activity)" data-toggle="modal" data-target="#addActivity">
-                                    <h5>{{formatDateForDisplay(activity.date)}} {{activity.startTime}} - {{activity.endTime}}</h5>
-                                    <h4>{{activity.name}}</h4>
-                                </button>
-                            </div>
+                <div class="col-xs-12 col-md-9">
+                    <div class="row button-list">
+                        <div class="col-xs-12 col-md-4" v-for="activity in activitiesList">
+                            <button class="btn btn-primary activities" @click="setActiveActivity(activity)" data-toggle="modal" data-target="#addActivity">
+                                <h5>{{formatDateForDisplay(activity.date)}} {{activity.startTime}} - {{activity.endTime}}</h5>
+                                <h4>{{activity.name}}</h4>
+                            </button>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
@@ -360,9 +357,11 @@
     .activities {
         width: 100%;
     }
+
     .danger-text {
         color: red;
     }
+
     .success-text {
         color: blue;
     }
