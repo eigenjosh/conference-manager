@@ -188,6 +188,8 @@
                         </div>
                         <div v-if="activeUser.activities.includes(activeActivity._id)">
                             <h4 class="success-text">This activity is in your schedule</h4>
+                            <button v-if="!activeUser.activities.includes(activeActivity._id) && (activeActivity.capacity > 0 || !activeActivity.capacity)"
+                                @click="addToMySchedule" class="btn btn-success">Add to My Schedule</button>
                         </div>
                     </div>
                 </div>
@@ -228,19 +230,23 @@
             </div>
         </div>
         <div class="row" v-for="(timeDict, date) in schedule">
-            <div class="col-xs-12 ">
+            <div class="col-xs-12 date-col">
                 <h3>{{formatDateForDisplay(date)}}</h3>
             </div>
             <div class="row" v-for="(activitiesList, time) in schedule[date]">
-                <div class="col-xs-1 col-xs-offset-1">
+                <div class="col-xs-6 col-xs-offset-1 col-md-1 time-col">
                     <h3>{{time}}</h3>
                 </div>
-                <div class="col-xs-12 col-md-3" v-for="activity in activitiesList">
-                    <button data-toggle="modal" data-target="#addActivity" @click="setActiveActivity(activity)" class="btn btn-primary activities">
-                        <h5>{{formatDateForDisplay(activity.date)}} {{activity.startTime}} - {{activity.endTime}}</h5>
-                        <h4>{{activity.name}}</h4>
-                    </button>
-                </div>
+                <div class="col-xs-12 col-md-9" >
+                        <div class="row button-list">
+                            <div class="col-xs-12 col-md-4" v-for="activity in activitiesList">
+                                <button class="btn btn-primary activities" @click="setActiveActivity(activity, userNotes)" data-toggle="modal" data-target="#myActDetails">
+                                    <h5>{{formatDateForDisplay(activity.date)}} {{activity.startTime}} - {{activity.endTime}}</h5>
+                                    <h4>{{activity.name}}</h4>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>

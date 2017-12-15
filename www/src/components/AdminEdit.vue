@@ -151,7 +151,7 @@
                             </div>
                             <div class="form-group date">
                                 <label for="date">Date:</label>
-                                <input type="date" name="date" class="form-control" placeholder="date" :min="date" required v-model='activity.date' @change="validateActivityForm">
+                                <input type="date" name="date" class="form-control" placeholder="date" :min="date" :max="activeEvent.endDate" required v-model='activity.date' @change="validateActivityForm">
                                 <p class="error-message text-left text-danger" v-if="!this.validator.date">Date must be during the event.</p>
                             </div>
                             <!-- START TIME -->
@@ -179,7 +179,7 @@
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-submit btn-success" @click="editActivity" data-dismiss="modal" type="submit" :disabled="!this.validator.activityForm">Save Changes</button>
-                                <button class="btn btn-danger" data-dismiss="modal" @click="deleteActivity">Delete</button>
+                                <button class="btn btn-danger" data-dismiss="modal" @click="deleteActivity" :disabled="!this.validator.activityForm">Delete</button>
                             </div>
                         </form>
                     </div>
@@ -280,19 +280,23 @@
                 </div>
             </div>
             <div class="row" v-for="(timeDict, date) in schedule">
-                <div class="col-xs-12 ">
+                <div class="col-xs-12 date-col text-left">
                     <h3>{{formatDateForDisplay(date)}}</h3>
                 </div>
                 <div class="row" v-for="(activitiesList, time) in timeDict">
-                    <div class="col-xs-1 col-xs-offset-1">
+                    <div class="col-xs-6 col-xs-offset-1 col-md-1 time-col">
                         <h3>{{time}}</h3>
                     </div>
-                    <div class="col-xs-12 col-md-3" v-for="activity in activitiesList">
-                        <button data-toggle="modal" data-target="#myModalDetails" @click="activityFormClickHandler(activity)" class="btn btn-primary activities">
-                            <h5>{{formatDateForDisplay(activity.date)}} {{activity.startTime}} - {{activity.endTime}}</h5>
-                            <h4>{{activity.name}}</h4>
-                            <i class="fa fa-pencil pull-right" aria-hidden="true" @click="validateActivityForm"></i>
-                        </button>
+                    <div class="col-xs-12 col-md-9">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4" v-for="activity in activitiesList">
+                                <button data-toggle="modal" data-target="#myModalDetails" @click="activityFormClickHandler(activity)" class="btn btn-primary activities">
+                                    <h5>{{formatDateForDisplay(activity.date)}} {{activity.startTime}} - {{activity.endTime}}</h5>
+                                    <h4>{{activity.name}}</h4>
+                                    <i class="fa fa-pencil pull-right" aria-hidden="true" @click="validateActivityForm"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
