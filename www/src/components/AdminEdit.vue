@@ -38,17 +38,17 @@
                                 </router-link>
                             </li>
                         </div>
-                            <li>
-                                <router-link :to="{name:'mySchedule'}">
-                                    <button type="button" class="btn btn-default">My Schedule</button>
-                                </router-link>
-                            </li>
-                            <li>
+                        <li>
+                            <router-link :to="{name:'mySchedule'}">
+                                <button type="button" class="btn btn-default">My Schedule</button>
+                            </router-link>
+                        </li>
+                        <li>
 
-                                <router-link :to="{name:'userNotes'}">
-                                    <button type="button" class="btn btn-default">My Notes</button>
-                                </router-link>
-                            </li>
+                            <router-link :to="{name:'userNotes'}">
+                                <button type="button" class="btn btn-default">My Notes</button>
+                            </router-link>
+                        </li>
                     </ul>
                     <!-- SEARCH BAR -->
                     <ul class="nav navbar-nav navbar-right">
@@ -56,10 +56,10 @@
                         <!-- Trigger the LOGIN modal -->
                         <!-- Trigger the SIGN UP modal -->
                     </ul>
-                    </div>
-                    <!-- /.navbar-collapse -->
                 </div>
-                <!-- /.container-fluid -->
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
         </nav>
         <!-- add new activity modal -->
         <div id="myModalAdd" class="modal fade" role="dialog">
@@ -290,7 +290,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 </template>
 
 <script>
@@ -320,6 +320,15 @@
                     startDate: '',
                     endDate: '',
                     timeZone: ''
+                },
+                validator: {
+                    date: false,
+                    endTime: false,
+                    activityForm: false,
+                    zip: false,
+                    startDate: false,
+                    endDate: false,
+                    eventForm: false
                 }
 
             }
@@ -348,11 +357,39 @@
             locations() {
                 return this.$store.state.locations
             },
-            timeZones(){
+            timeZones() {
                 return this.$store.state.timeZones
             }
         },
         methods: {
+            validateDate() {
+                this.validator.date = (new Date(this.activity.date).getTime() >= new Date(this.event.startDate).getTime() && new Date(this.event.endDate).getTime() <= new Date(this.event.startDate).getTime())
+            },
+            validateEndTime() {
+                this.validator.endTime = (new Date(this.activity.endTime).getTime() > new Date(this.activity.startTime).getTime())
+            },
+            validateActivityForm() {
+                this.validateDate()
+                this.validateEndTime()
+                this.validator.activityForm = (this.validator.date && this.validator.endTime)
+                console.log('validator: ', this.validator)
+            },
+            validateZip() {
+                this.validator.zip = (this.event.zip.length == 5)
+            },
+            validateStartDate() {
+                this.validator.startDate = (new Date(this.event.startDate).getTime() >= new Date(this.date).getTime())
+            },
+            validateEndDate() {
+                this.validator.endDate = (new Date(this.event.endDate).getTime() >= new Date(this.event.startDate).getTime())
+            },
+            validateEventForm() {
+                this.validateZip()
+                this.validateStartDate()
+                this.validateEndDate()
+                this.validator.eventForm = (this.validator.zip && this.validator.startDate && this.validator.endDate)
+                console.log('validator: ', this.validator)
+            },
             formatDateForDisplay(date) {
                 if (date) {
                     var parts = date.split('-')
@@ -400,7 +437,22 @@
                 this.event = activeEvent
             },
             editEvent() {
-                this.$store.dispatch('editEvent', this.event)
+                this.validateForm()
+                if (this.validator.form) {
+                    this.$store.dispatch('editEvent', this.event)
+                    this.event = {
+                        name: '',
+                        description: '',
+                        venue: '',
+                        address: '',
+                        city: '',
+                        state: '',
+                        zip: '',
+                        startDate: '',
+                        endDate: '',
+                        timeZone: ''
+                    }
+                }
             }
         }
     }
