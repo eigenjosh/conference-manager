@@ -75,7 +75,7 @@
                         <form class="form">
                             <div class="form-group">
                                 <label for="name">Name:</label>
-                                <input type="text" name="name" class="form-control" placeholder="Name" required v-model='activity.name'>
+                                <input type="text" name="name" maxlength="100" class="form-control" placeholder="Name" required v-model='activity.name'>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
@@ -83,7 +83,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="room">Room:</label>
-                                <input type="text" name="room" class="form-control" placeholder="Room number" required v-model='activity.location'>
+                                <input type="text" name="room" class="form-control" maxlength="30" placeholder="Room number" required v-model='activity.location'>
                             </div>
                             <div class="form-group date">
                                 <label for="date">Date:</label>
@@ -112,7 +112,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="speakerName">Speaker Name:</label>
-                                <input type="text" name="speakerName" class="form-control" placeholder="Speaker Name" v-model='activity.speakerName'>
+                                <input type="text" name="speakerName" class="form-control" maxlength="30" placeholder="Speaker Name" v-model='activity.speakerName'>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-submit btn-success" @click="addActivity" data-dismiss="modal" type="submit" :disabled="!this.validator.activityForm">Submit</button>
@@ -139,7 +139,7 @@
                         <form class="form">
                             <div class="form-group">
                                 <label for="name">Name:</label>
-                                <textarea type="text" name="name" class="form-control" placeholder="Name" rows="1" required v-model='activity.name'>{{activity.name}}</textarea>
+                                <textarea type="text" maxlength="100"name="name" class="form-control" placeholder="Name" rows="1" required v-model='activity.name'>{{activity.name}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
@@ -147,7 +147,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="room">Room:</label>
-                                <textarea type="text" name="room" class="form-control" placeholder="Room number" required rows="1" v-model='activity.location'>{{activeActivity.location}}</textarea>
+                                <textarea type="text" name="room" maxlength="30"class="form-control" placeholder="Room number" required rows="1" v-model='activity.location'>{{activeActivity.location}}</textarea>
                             </div>
                             <div class="form-group date">
                                 <label for="date">Date:</label>
@@ -175,7 +175,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="speakerName">Speaker Name:</label>
-                                <textarea type="text" name="speakerName" class="form-control" placeholder="Speaker Name" v-model='activity.speakerName'>{{activeActivity.speakerName}}</textarea>
+                                <textarea type="text" maxlength="30" name="speakerName" class="form-control" placeholder="Speaker Name" v-model='activity.speakerName'>{{activeActivity.speakerName}}</textarea>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-submit btn-success" @click="editActivity" data-dismiss="modal" type="submit" :disabled="!this.validator.activityForm">Save Changes</button>
