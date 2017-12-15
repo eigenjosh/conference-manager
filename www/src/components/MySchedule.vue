@@ -50,27 +50,46 @@
                 </div>
             </div>
         </nav>
-        
+
         <h1 class="sched-title">My Schedule</h1>
-        <button class="btn view-all" @click="getMyActivities">View All Activities</button>
+        <!-- <button class="btn view-all" @click="getMyActivities">View All Activities</button> -->
         <div v-if="myEvents.length == 0" class="header">
-            <h3>Looks like you have not added any activities to your schedule yet! Join an event and click "add to my schedule" to see them here!</h3>
+            <h3>Looks like you have not added any activities to your schedule yet! Join an event and click "add to my schedule"
+                to see them here!</h3>
         </div>
         <div v-else class="display">
             <div class="row">
-                <div class="col-xs-12 col-md-6 col-md-offset-3">
+
+                <div class="col-xs-12">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger">Choose Schedule to View</button>
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a @click="getMyActivities">View All Activities</a>
+                            </li>
+                            <li v-for="e in myEvents">
+                                <a @click="getMySchedule(e)">{{e.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div class="col-xs-12 col-md-6 col-md-offset-3">
                     <div class="row">
                         <div class="col-xs-12 col-md-3" v-for="e in myEvents">
                                 <button class="btn  btn-event" @click="getMySchedule(e)">{{e.name}}</button>          
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="row">
                 <userSchedule></userSchedule>
             </div>
         </div>
-    
+
     </div>
 </template>
 
@@ -90,13 +109,13 @@
             myEvents() {
                 return this.$store.state.myEvents
             },
-            activeEvent(){
+            activeEvent() {
                 return this.$store.state.activeEvent
             }
         },
         mounted() {
             this.$store.dispatch('getMyEvents')
-            this.$store.dispatch('getMySchedule', {event: {}})
+            this.$store.dispatch('getMySchedule', { event: {} })
         },
         methods: {
             logout() {
@@ -105,7 +124,7 @@
             getMySchedule(e) {
                 this.$store.dispatch('getMySchedule', e)
             },
-            getMyActivities(){
+            getMyActivities() {
                 debugger
                 this.activeEvent = {}
                 this.$store.dispatch('getMyActivities')
@@ -123,42 +142,50 @@
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-    .my-schedule{
+
+    .my-schedule {
         background-color: rgba(203, 204, 180, 0.541);
         height: 100vh;
     }
-    .view-all{
+
+    .view-all {
         background-color: rgba(127, 127, 113, 0.746);
-        width:20%;
+        width: 20%;
         color: whitesmoke;
         margin-bottom: 5px;
     }
-    .btn-event{
+
+    .btn-event {
         background-color: rgba(127, 127, 113, 0.746);
-        color:whitesmoke;
+        color: whitesmoke;
         width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-    .navbar{
+
+    .navbar {
         background: rgba(127, 127, 113, 0.746);
     }
-    .navbar .navbar-brand{
+
+    .navbar .navbar-brand {
         color: #FFFFF9;
     }
-    .navbar .navbar-header .navbar-toggle .icon-bar{
+
+    .navbar .navbar-header .navbar-toggle .icon-bar {
         background: #FFFFF9;
     }
-    .sched-title{
+
+    .sched-title {
         color: #7F7F7F;
         font-size: 50px;
         text-shadow: 0px 0px 5px #FFFFF9;
     }
-    .nav-drop-btn{
+
+    .nav-drop-btn {
         width: 90%;
         background-color: #FFFFF9;
-        margin:2px;
+        margin: 2px;
         color: rgba(127, 127, 113, 0.746)
     }
 </style>
