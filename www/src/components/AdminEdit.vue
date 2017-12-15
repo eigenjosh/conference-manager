@@ -38,17 +38,17 @@
                                 </router-link>
                             </li>
                         </div>
-                            <li>
-                                <router-link :to="{name:'mySchedule'}">
-                                    <button type="button" class="btn btn-default">My Schedule</button>
-                                </router-link>
-                            </li>
-                            <li>
+                        <li>
+                            <router-link :to="{name:'mySchedule'}">
+                                <button type="button" class="btn btn-default">My Schedule</button>
+                            </router-link>
+                        </li>
+                        <li>
 
-                                <router-link :to="{name:'userNotes'}">
-                                    <button type="button" class="btn btn-default">My Notes</button>
-                                </router-link>
-                            </li>
+                            <router-link :to="{name:'userNotes'}">
+                                <button type="button" class="btn btn-default">My Notes</button>
+                            </router-link>
+                        </li>
                     </ul>
                     <!-- SEARCH BAR -->
                     <ul class="nav navbar-nav navbar-right">
@@ -56,10 +56,10 @@
                         <!-- Trigger the LOGIN modal -->
                         <!-- Trigger the SIGN UP modal -->
                     </ul>
-                    </div>
-                    <!-- /.navbar-collapse -->
                 </div>
-                <!-- /.container-fluid -->
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
         </nav>
         <!-- add new activity modal -->
         <div id="myModalAdd" class="modal fade" role="dialog">
@@ -88,7 +88,8 @@
                             <div class="form-group date">
                                 <label for="date">Date:</label>
                                 <input type="date" name="date" class="form-control" placeholder="date" :min="activeEvent.startDate" :max="activeEvent.endDate"
-                                    required v-model='activity.date'>
+                                    required v-model='activity.date' @change="validateActivityForm">
+                                <p class="error-message text-left text-danger" v-if="!this.validator.date">Date must be during the event.</p>
                             </div>
                             <!-- START TIME -->
                             <div class="form-group time">
@@ -100,10 +101,10 @@
                             <!-- END TIME -->
                             <div class="form-group time">
                                 <label for="sel1">End Time</label>
-                                <select class="form-control" v-model="activity.endTime">
+                                <select class="form-control" v-model="activity.endTime" @change="validateActivityForm">
                                     <option :value="endSlot" v-for="endSlot in timeSlots">{{endSlot}}</option>
-
                                 </select>
+                                <p class="error-message text-left text-danger" v-if="!this.validator.endTime">End time must be later than start time.</p>
                             </div>
                             <div class="form-group">
                                 <label for="capacity">Number of Seats (optional):</label>
@@ -150,7 +151,8 @@
                             </div>
                             <div class="form-group date">
                                 <label for="date">Date:</label>
-                                <input type="date" name="date" class="form-control" placeholder="date" :min="date" required v-model='activity.date'>
+                                <input type="date" name="date" class="form-control" placeholder="date" :min="date" required v-model='activity.date' @change="validateActivityForm">
+                                <p class="error-message text-left text-danger" v-if="!this.validator.date">Date must be during the event.</p>
                             </div>
                             <!-- START TIME -->
                             <div class="form-group time">
@@ -162,9 +164,10 @@
                             <!-- END TIME -->
                             <div class="form-group time">
                                 <label for="sel1">End Time</label>
-                                <select class="form-control" v-model="activity.endTime">
+                                <select class="form-control" v-model="activity.endTime" @change="validateActivityForm">
                                     <option :value="endSlot" v-for="endSlot in timeSlots">{{endSlot}}</option>
                                 </select>
+                                <p class="error-message text-left text-danger" v-if="!this.validator.endTime">End time must be later than start time.</p>
                             </div>
                             <div class="form-group">
                                 <label for="capacity">Number of Seats (optional):</label>
@@ -214,11 +217,13 @@
                             <div class="form-group">
                                 <label for="startDate">Start Date:</label>
                                 <input type="date" name="startDate" class="form-control" placeholder="Start Date" :min="date" required v-model="event.startDate"
-                                    required>
+                                    required @change="validateEventForm">
+                                <p class="error-message text-left text-danger" v-if="!this.validator.startDate">Start date must be today or later.</p>
                             </div>
                             <div class="form-group">
                                 <label for="endDate">End Date:</label>
-                                <input type="date" name="endDate" class="form-control" placeholder="End Date" :min="event.startDate" required v-model="event.endDate">
+                                <input type="date" name="endDate" class="form-control" placeholder="End Date" :min="event.startDate" required v-model="event.endDate" @change="validateEventForm">
+                                <p class="error-message text-left text-danger" v-if="!this.validator.endDate">End date must be the same as or later than the start date.</p>
                             </div>
                             <div class="form-group">
                                 <label for="venue">Venue:</label>
@@ -234,7 +239,8 @@
                                         <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
                                     </select>
                                 </div>
-                                <textarea type="number" name="zip" class="form-control" placeholder="Venue Zip" rows="1" v-model="event.zip" required>{{activeEvent.zip}}</textarea>
+                                <textarea type="number" name="zip" class="form-control" placeholder="Venue Zip" rows="1" v-model="event.zip" required @change="validateEventForm">{{activeEvent.zip}}</textarea>
+                                <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p>
                                 <div class="form-group">
                                     <label for="timeZone">Time Zone</label>
                                     <select class="form-control" v-model="event.timeZone">
@@ -257,14 +263,14 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-6 well" data-toggle="modal" data-target="#myModal3" @click="setActiveEvent(activeEvent)">
+                <div class="col-xs-6 well" data-toggle="modal" data-target="#myModal3" @click="eventFormClickHandler">
                     <h1>{{activeEvent.name}}</h1>
                     <i class="fa fa-pencil fa-2x " aria-hidden="true"></i>
                 </div>
 
                 <div class="col-xs-6 text-right">
                     <button class="btn btn-danger btn" @click="deleteEvent">Delete Event</button>
-                    <button class="btn btn-warning btn" data-toggle="modal" data-target="#myModalAdd">Add Activity</button>
+                    <button class="btn btn-warning btn" data-toggle="modal" data-target="#myModalAdd" @click="validateActivityForm">Add Activity</button>
                     <button v-if="!activeEvent.published" class="btn btn-success" @click="publish">Publish</button>
                     <button v-else="activeEvent.published" class="btn btn-success" @click="unPublish">Make Private</button>
                     <router-link :to="{path: '/event-schedule/' + activeEvent._id}">
@@ -281,16 +287,16 @@
                         <h3>{{time}}</h3>
                     </div>
                     <div class="col-xs-12 col-md-3" v-for="activity in activitiesList">
-                        <button data-toggle="modal" data-target="#myModalDetails" @click="setActiveActivity(activity)" class="btn btn-primary activities">
+                        <button data-toggle="modal" data-target="#myModalDetails" @click="activityFormClickHandler(activity)" class="btn btn-primary activities">
                             <h5>{{formatDateForDisplay(activity.date)}} {{activity.startTime}} - {{activity.endTime}}</h5>
                             <h4>{{activity.name}}</h4>
-                            <i class="fa fa-pencil pull-right" aria-hidden="true"></i>
+                            <i class="fa fa-pencil pull-right" aria-hidden="true" @click="validateActivityForm"></i>
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 </template>
 
 <script>
@@ -320,6 +326,15 @@
                     startDate: '',
                     endDate: '',
                     timeZone: ''
+                },
+                validator: {
+                    date: false,
+                    endTime: false,
+                    activityForm: false,
+                    zip: false,
+                    startDate: false,
+                    endDate: false,
+                    eventForm: false
                 }
 
             }
@@ -348,11 +363,55 @@
             locations() {
                 return this.$store.state.locations
             },
-            timeZones(){
+            timeZones() {
                 return this.$store.state.timeZones
             }
         },
         methods: {
+            eventFormClickHandler() {
+                this.setActiveEvent(this.activeEvent); 
+                this.validateEventForm(); 
+            },
+            activityFormClickHandler(activity) {
+                this.setActiveActivity(activity); 
+                this.validateActivityForm(); 
+            },
+            validateDate() {
+                this.validator.date = (new Date(this.activity.date).getTime() >= new Date(this.activeEvent.startDate).getTime() && new Date(this.activity.date).getTime() <= new Date(this.activeEvent.endDate).getTime())
+                console.log(this.activity.date)
+                console.log(this.event)
+                console.log(this.event.startDate)
+                console.log(new Date(this.activity.date).getTime())
+                console.log(new Date(this.event.startDate).getTime())
+                console.log(new Date(this.activity.date).getTime())
+                console.log(new Date(this.event.endDate).getTime())
+            },
+            validateEndTime() {
+                this.validator.endTime = (this.timeSlots.indexOf(this.activity.endTime) > this.timeSlots.indexOf(this.activity.startTime))
+            },
+            validateActivityForm() {
+                this.validateDate()
+                this.validateEndTime()
+                this.validator.activityForm = (this.validator.date && this.validator.endTime)
+                console.log('validator: ', this.validator)
+            },
+            validateZip() {
+                this.validator.zip = (this.event.zip.length == 5)
+            },
+            validateStartDate() {
+                this.validator.startDate = (new Date(this.event.startDate).getTime() >= new Date(this.date).getTime())
+            },
+            validateEndDate() {
+                this.validator.endDate = (new Date(this.event.endDate).getTime() >= new Date(this.event.startDate).getTime())
+            },
+            validateEventForm() {
+                this.validateZip()
+                this.validateStartDate()
+                this.validateEndDate()
+                this.validator.eventForm = (this.validator.zip && this.validator.startDate && this.validator.endDate)
+                console.log('validator: ', this.validator)
+                console.log('event: ', this.event)
+            },
             formatDateForDisplay(date) {
                 if (date) {
                     var parts = date.split('-')
@@ -361,8 +420,20 @@
                 }
             },
             addActivity() {
-                this.$store.dispatch('addActivity', { activity: this.activity, eventId: this.activeEvent._id })
-                this.activity = {}
+                this.validateActivityForm()
+                if (this.validator.activityForm) {
+                    this.$store.dispatch('addActivity', { activity: this.activity, eventId: this.activeEvent._id })
+                    this.activity = {
+                        name: '',
+                        description: '',
+                        location: '',
+                        date: '',
+                        startTime: '',
+                        endTime: '',
+                        capacity: '',
+                        speakerName: ''
+                    }
+                }
             },
             setActiveActivity(activity) {
                 this.$store.dispatch('getActivityById', activity)
@@ -377,7 +448,10 @@
                 }
             },
             editActivity() {
-                this.$store.dispatch('editActivity', this.activity)
+                this.validateActivityForm()
+                if (this.validator.activityForm) {
+                    this.$store.dispatch('editActivity', this.activity)
+                }
             },
             deleteActivity() {
                 this.$store.dispatch('deleteActivity', this.activity)
@@ -400,7 +474,10 @@
                 this.event = activeEvent
             },
             editEvent() {
-                this.$store.dispatch('editEvent', this.event)
+                this.validateEventForm()
+                if (this.validator.eventForm) {
+                    this.$store.dispatch('editEvent', this.event)
+                }
             }
         }
     }
