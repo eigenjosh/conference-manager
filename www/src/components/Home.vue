@@ -158,7 +158,7 @@
                         <form id="createEvent" class="form">
                             <div class="form-group">
                                 <label for="eventName">Event Name</label>
-                                <input type="text" name="eventName" maxlength="70"class="form-control" placeholder="Whats the event called?" required v-model="event.name"
+                                <input type="text" name="eventName" maxlength="40"class="form-control" placeholder="Whats the event called?" required v-model="event.name"
                                     required>
                             </div>
                             <div class="form-group">

@@ -75,7 +75,7 @@
                         <form class="form">
                             <div class="form-group">
                                 <label for="name">Name:</label>
-                                <input type="text" name="name" maxlength="100" class="form-control" placeholder="Name" required v-model='activity.name'>
+                                <input type="text" name="name" maxlength="70" class="form-control" placeholder="Name" required v-model='activity.name'>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
@@ -139,7 +139,7 @@
                         <form class="form">
                             <div class="form-group">
                                 <label for="name">Name:</label>
-                                <textarea type="text" maxlength="100"name="name" class="form-control" placeholder="Name" rows="1" required v-model='activity.name'>{{activity.name}}</textarea>
+                                <textarea type="text" maxlength="70"name="name" class="form-control" placeholder="Name" rows="1" required v-model='activity.name'>{{activity.name}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
@@ -207,7 +207,7 @@
                         <form id="createEvent" class="form">
                             <div class="form-group">
                                 <label for="eventName">Event Name</label>
-                                <textarea type="text" name="eventName" maxlength="70"class="form-control" placeholder="Whats the event called?" rows="1" required v-model="event.name"
+                                <textarea type="text" name="eventName" maxlength="40"class="form-control" placeholder="Whats the event called?" rows="1" required v-model="event.name"
                                     required>{{activeEvent.name}}</textarea>
                             </div>
                             <div class="form-group">
