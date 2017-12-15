@@ -151,7 +151,7 @@
                             </div>
                             <div class="form-group date">
                                 <label for="date">Date:</label>
-                                <input type="date" name="date" class="form-control" placeholder="date" :min="date" required v-model='activity.date' @change="validateActivityForm">
+                                <input type="date" name="date" class="form-control" placeholder="date" :min="date" :max="activeEvent.endDate" required v-model='activity.date' @change="validateActivityForm">
                                 <p class="error-message text-left text-danger" v-if="!this.validator.date">Date must be during the event.</p>
                             </div>
                             <!-- START TIME -->
@@ -179,7 +179,7 @@
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-submit btn-success" @click="editActivity" data-dismiss="modal" type="submit" :disabled="!this.validator.activityForm">Save Changes</button>
-                                <button class="btn btn-danger" data-dismiss="modal" @click="deleteActivity">Delete</button>
+                                <button class="btn btn-danger" data-dismiss="modal" @click="deleteActivity" :disabled="!this.validator.activityForm">Delete</button>
                             </div>
                         </form>
                     </div>
