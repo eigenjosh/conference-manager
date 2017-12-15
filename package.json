@@ -1,5 +1,5 @@
 {
-  "name": "confer",
+  "name": "confer-alpha",
   "version": "1.0.0",
   "description": "The server for vue-kanban",
   "main": "index.js",
@@ -25,5 +25,15 @@
   "engines": {
     "node": "^8.0.0",
     "npm": "^5.0.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eigenjosh/conference-manager.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eigenjosh/conference-manager/issues"
+  },
+  "homepage": "https://github.com/eigenjosh/conference-manager#readme"
 }
