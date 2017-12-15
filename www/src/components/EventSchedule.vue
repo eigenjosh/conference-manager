@@ -95,11 +95,11 @@
                         <form id="login" class="form">
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" name="email" class="form-control" placeholder="Email" required v-model='login.email'>
+                                <input type="email" maxlength="57"name="email" class="form-control" placeholder="Email" required v-model='login.email'>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
-                                <input type="password" name="password" class="form-control" placeholder="password" required v-model='login.password'>
+                                <input type="password" maxlength="20" name="password" class="form-control" placeholder="password" required v-model='login.password'>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-submit btn-success" @click="submitLogin" data-dismiss="modal" type="submit">Submit</button>
@@ -132,23 +132,23 @@
                         <form id="register" class="form">
                             <div class="form-group">
                                 <label for="firstName">First Name:</label>
-                                <input type="firstName" name="firstName" class="form-control" placeholder="First Name" required v-model="signUp.firstName">
+                                <input type="firstName" name="firstName" maxlength="20" class="form-control" placeholder="First Name" required v-model="signUp.firstName">
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Last Name:</label>
-                                <input type="lastName" name="lastName" class="form-control" placeholder="Last Name" required v-model="signUp.lastName">
+                                <input type="lastName" name="lastName" maxlength="20" class="form-control" placeholder="Last Name" required v-model="signUp.lastName">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" name="email" class="form-control" placeholder="Email" required v-model="signUp.email">
+                                <input type="email" name="email" maxlength="57" class="form-control" placeholder="Email" required v-model="signUp.email">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
-                                <input type="password" name="password" class="form-control" placeholder="password" required v-model="signUp.password">
+                                <input type="password" name="password" maxlength="20" class="form-control" placeholder="password" required v-model="signUp.password">
                             </div>
                             <div class="form-group">
                                 <label for="reEnterPassword">Re-enter Password:</label>
-                                <input type="password" name="reEnterPassword" class="form-control" placeholder="Re Enter Password" v-model="signUp.rPassword">
+                                <input type="password" name="reEnterPassword" maxlength="20" class="form-control" placeholder="Re Enter Password" v-model="signUp.rPassword">
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-submit btn-success" data-dismiss="modal" type="submit" @click="submitRegister">Submit</button>

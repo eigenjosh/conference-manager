@@ -67,12 +67,12 @@
                         <form id="createEvent" class="form">
                             <div class="form-group">
                                 <label for="eventName">Event Name</label>
-                                <input type="text" name="eventName" class="form-control" placeholder="Whats the event called?" required v-model="event.name"
+                                <input type="text" maxlength="70" name="eventName" class="form-control" placeholder="Whats the event called?" required v-model="event.name"
                                     required>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea type="text" name="description" class="form-control" rows="5" placeholder="What is this event for?" required v-model="event.description"></textarea>
+                                <textarea type="text" name="description" maxlength="300"class="form-control" rows="5" placeholder="What is this event for?" required v-model="event.description"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="startDate">Start Date:</label>
@@ -86,19 +86,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="venue">Venue:</label>
-                                <input type="text" name="venue" class="form-control" placeholder="Venue" required v-model="event.venue">
+                                <input type="text" name="venue" class="form-control" maxlength="40" placeholder="Venue" required v-model="event.venue">
                             </div>
                             <div class="form-group">
                                 <label for="address">Address:</label>
-                                <input type="text" name="address" class="form-control" placeholder="Venue Address" v-model="event.address" required>
-                                <input type="text" name="city" class="form-control" placeholder="Venue City" v-model="event.city" required>
+                                <input type="text" name="address" class="form-control" maxlength="30"placeholder="Venue Address" v-model="event.address" required>
+                                <input type="text" name="city" class="form-control" maxlength="30"placeholder="Venue City" v-model="event.city" required>
                                 <div class="form-group state">
                                     <label for="state">Venue State</label>
                                     <select class="form-control state" v-model="event.state">
                                         <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
                                     </select>
                                 </div>
-                                <input type="number" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
+                                <input type="number" maxlength="5" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
                                 <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p>
                                 <div class="form-group">
                                     <label for="timeZone">Time Zone</label>

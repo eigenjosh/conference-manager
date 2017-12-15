@@ -75,7 +75,7 @@
                         <form class="form">
                             <div class="form-group">
                                 <label for="name">Name:</label>
-                                <input type="text" name="name" maxlength="100" class="form-control" placeholder="Name" required v-model='activity.name'>
+                                <input type="text" name="name" maxlength="70" class="form-control" placeholder="Name" required v-model='activity.name'>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
@@ -139,7 +139,7 @@
                         <form class="form">
                             <div class="form-group">
                                 <label for="name">Name:</label>
-                                <textarea type="text" maxlength="100"name="name" class="form-control" placeholder="Name" rows="1" required v-model='activity.name'>{{activity.name}}</textarea>
+                                <textarea type="text" maxlength="70"name="name" class="form-control" placeholder="Name" rows="1" required v-model='activity.name'>{{activity.name}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
@@ -207,12 +207,12 @@
                         <form id="createEvent" class="form">
                             <div class="form-group">
                                 <label for="eventName">Event Name</label>
-                                <textarea type="text" name="eventName" class="form-control" placeholder="Whats the event called?" rows="1" required v-model="event.name"
+                                <textarea type="text" name="eventName" maxlength="40"class="form-control" placeholder="Whats the event called?" rows="1" required v-model="event.name"
                                     required>{{activeEvent.name}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea type="text" name="description" class="form-control" rows="5" placeholder="What is this event for?" required v-model="event.description">{{activeEvent.description}}</textarea>
+                                <textarea type="text" name="description" maxlength="300"class="form-control" rows="5" placeholder="What is this event for?" required v-model="event.description">{{activeEvent.description}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="startDate">Start Date:</label>
@@ -228,19 +228,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="venue">Venue:</label>
-                                <textarea type="text" name="venue" class="form-control" placeholder="Venue" rows="1" required v-model="event.venue">{{event.venue}}</textarea>
+                                <textarea type="text" name="venue" maxlength="40" class="form-control" placeholder="Venue" rows="1" required v-model="event.venue">{{event.venue}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="address">Address:</label>
-                                <textarea type="text" name="address" class="form-control" placeholder="Venue Address" rows="1" v-model="event.address" required>{{activeEvent.address}}</textarea>
-                                <textarea type="text" name="city" class="form-control" placeholder="Venue City" rows="1" v-model="event.city" required>{{activeEvent.city}}</textarea>
+                                <textarea type="text" name="address" maxlength="75" class="form-control" placeholder="Venue Address" rows="1" v-model="event.address" required>{{activeEvent.address}}</textarea>
+                                <textarea type="text" name="city" maxlength="70" class="form-control" placeholder="Venue City" rows="1" v-model="event.city" required>{{activeEvent.city}}</textarea>
                                 <div class="form-group state">
                                     <label for="state">Venue State</label>
                                     <select class="form-control state" v-model="event.state">
                                         <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
                                     </select>
                                 </div>
-                                <textarea type="number" name="zip" class="form-control" placeholder="Venue Zip" rows="1" v-model="event.zip" required @change="validateEventForm">{{activeEvent.zip}}</textarea>
+                                <textarea type="number" maxlength="5" name="zip" class="form-control" placeholder="Venue Zip" rows="1" v-model="event.zip" required @change="validateEventForm">{{activeEvent.zip}}</textarea>
                                 <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p>
                                 <div class="form-group">
                                     <label for="timeZone">Time Zone</label>

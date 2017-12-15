@@ -108,11 +108,11 @@
                         <form id="login" class="form">
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" name="email" class="form-control" placeholder="Email" required v-model='login.email'>
+                                <input type="email" name="email" maxlength="57"class="form-control" placeholder="Email" required v-model='login.email'>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
-                                <input type="password" name="password" class="form-control" placeholder="password" required v-model='login.password'>
+                                <input type="password" name="password" maxlength="20"class="form-control" placeholder="password" required v-model='login.password'>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-submit btn-success" @click="submitLogin" data-dismiss="modal" type="submit">Submit</button>
@@ -145,23 +145,23 @@
                         <form id="register" class="form">
                             <div class="form-group">
                                 <label for="firstName">First Name:</label>
-                                <input type="firstName" name="firstName" class="form-control" placeholder="First Name" required v-model="signUp.firstName">
+                                <input type="firstName" name="firstName" maxlength="20" class="form-control" placeholder="First Name" required v-model="signUp.firstName">
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Last Name:</label>
-                                <input type="lastName" name="lastName" class="form-control" placeholder="Last Name" required v-model="signUp.lastName">
+                                <input type="lastName" name="lastName" maxlength="20" class="form-control" placeholder="Last Name" required v-model="signUp.lastName">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" name="email" class="form-control" placeholder="Email" required v-model="signUp.email">
+                                <input type="email" name="email" maxlength="57"class="form-control" placeholder="Email" required v-model="signUp.email">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
-                                <input type="password" name="password" class="form-control" placeholder="password" required v-model="signUp.password">
+                                <input type="password" name="password" maxlength="20" class="form-control" placeholder="password" required v-model="signUp.password">
                             </div>
                             <div class="form-group">
                                 <label for="reEnterPassword">Re-enter Password:</label>
-                                <input type="password" name="reEnterPassword" class="form-control" placeholder="Re Enter Password" v-model="signUp.rPassword">
+                                <input type="password" name="reEnterPassword" maxlength="20" class="form-control" placeholder="Re Enter Password" v-model="signUp.rPassword">
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-submit btn-success" data-dismiss="modal" type="submit" @click="submitRegister">Submit</button>
@@ -190,12 +190,12 @@
                         <form id="createEvent" class="form">
                             <div class="form-group">
                                 <label for="eventName">Event Name</label>
-                                <input type="text" name="eventName" class="form-control" placeholder="Whats the event called?" required v-model="event.name"
+                                <input type="text" name="eventName" maxlength="40"class="form-control" placeholder="Whats the event called?" required v-model="event.name"
                                     required>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea type="text" name="description" class="form-control" rows="5" placeholder="What is this event for?" required v-model="event.description"></textarea>
+                                <textarea type="text" name="description" maxlength="300"class="form-control" rows="5" placeholder="What is this event for?" required v-model="event.description"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="startDate">Start Date:</label>
@@ -211,19 +211,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="venue">Venue:</label>
-                                <input type="text" name="venue" class="form-control" placeholder="Venue" required v-model="event.venue">
+                                <input type="text" name="venue" class="form-control" maxlength="30"placeholder="Venue" required v-model="event.venue">
                             </div>
                             <div class="form-group">
                                 <label for="address">Address:</label>
-                                <input type="text" name="address" class="form-control" placeholder="Venue Address" v-model="event.address" required>
-                                <input type="text" name="city" class="form-control" placeholder="Venue City" v-model="event.city" required>
+                                <input type="text" name="address" class="form-control" maxlength="75" placeholder="Venue Address" v-model="event.address" required>
+                                <input type="text" name="city" maxlength="75" class="form-control" placeholder="Venue City" v-model="event.city" required>
                                 <div class="form-group state">
                                     <label for="state">Venue State</label>
                                     <select class="form-control state" v-model="event.state">
                                         <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
                                     </select>
                                 </div>
-                                <input type="number" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
+                                <input type="number"maxlength="5" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
                                 <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p>
                                 <div class="form-group">
                                     <label for="timeZone">Time Zone</label>

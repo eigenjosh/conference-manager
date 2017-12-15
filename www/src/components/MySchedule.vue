@@ -1,7 +1,7 @@
 <template>
-    <div class="my-schedule">
+    <div class="my-schedule container-fluid">
         <nav class="navbar navbar-default">
-            <div class="container-fluid">
+            <div>
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
@@ -26,22 +26,22 @@
                     <ul>
                         <li>
                             <router-link :to="{name:'Home'}">
-                                <button type="button" class="btn btn-default">Home</button>
+                                <button type="button" class="btn nav-drop-btn">Home</button>
                             </router-link>
                         </li>
                         <li>
                             <router-link :to="{name: 'findEvents'}">
-                                <button type="button" class="btn btn-default">Find Events</button>
+                                <button type="button" class="btn nav-drop-btn">Find Events</button>
                             </router-link>
                         </li>
                         <li>
                             <router-link :to="{name: 'adminEvents'}">
-                                <button type="button" class="btn btn-default">Events I've Created</button>
+                                <button type="button" class="btn nav-drop-btn">Events I've Created</button>
                             </router-link>
                         </li>
                         <li>
                             <router-link :to="{name:'userNotes'}">
-                                <button type="button" class="btn btn-default">My Notes</button>
+                                <button type="button" class="btn nav-drop-btn">My Notes</button>
                             </router-link>
                         </li>
                     </ul>
@@ -51,15 +51,19 @@
             </div>
         </nav>
         
-        <h1>My Schedule</h1>
+        <h1 class="sched-title">My Schedule</h1>
+        <button class="btn view-all" @click="getMyActivities">View All Activities</button>
         <div v-if="myEvents.length == 0" class="header">
             <h3>Looks like you have not added any activities to your schedule yet! Join an event and click "add to my schedule" to see them here!</h3>
         </div>
         <div v-else class="display">
             <div class="row">
-                    <button class="btn btn-default" @click="getMyActivities">View All Activities</button>
-                <div class="col-xs-4" v-for="e in myEvents">
-                    <button class="btn btn-default btn-text" @click="getMySchedule(e)">{{e.name}}</button>
+                <div class="col-xs-12 col-md-6 col-md-offset-3">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-3" v-for="e in myEvents">
+                                <button class="btn  btn-event" @click="getMySchedule(e)">{{e.name}}</button>          
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -118,5 +122,43 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+    }
+    .my-schedule{
+        background-color: rgba(203, 204, 180, 0.541);
+        height: 100vh;
+    }
+    .view-all{
+        background-color: rgba(127, 127, 113, 0.746);
+        width:20%;
+        color: whitesmoke;
+        margin-bottom: 5px;
+    }
+    .btn-event{
+        background-color: rgba(127, 127, 113, 0.746);
+        color:whitesmoke;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .navbar{
+        background: rgba(127, 127, 113, 0.746);
+    }
+    .navbar .navbar-brand{
+        color: #FFFFF9;
+    }
+    .navbar .navbar-header .navbar-toggle .icon-bar{
+        background: #FFFFF9;
+    }
+    .sched-title{
+        color: #7F7F7F;
+        font-size: 50px;
+        text-shadow: 0px 0px 5px #FFFFF9;
+    }
+    .nav-drop-btn{
+        width: 90%;
+        background-color: #FFFFF9;
+        margin:2px;
+        color: rgba(127, 127, 113, 0.746)
     }
 </style>

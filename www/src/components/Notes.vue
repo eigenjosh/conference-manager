@@ -73,7 +73,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="title">Note Title:</label>
-                            <input type="text" name="title" class="form-control" placeholder="Title..." required v-model='note.title'>
+                            <input type="text" name="title" maxlength="40"class="form-control" placeholder="Title..." required v-model='note.title'>
                         </div>
                         <div class="form-group">
                             <label for="note-body"></label>

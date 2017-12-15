@@ -57,10 +57,10 @@
 
         <div class="row">
             <div class="col-xs-12 event well" v-if="activeUser.events.includes(activeEvent._id)">
-                <router-link :to="{path: 'event-schedule/' + activeEvent._id}">
-                    <h2>{{activeEvent.name}}</h2>
-                </router-link>
-                <button class="btn btn-danger btn-sm pull-right remove" @click="removeEvent">REMOVE EVENT FROM MY SCHEDULE</button>
+                <router-link :to="{path: 'event-schedule/' + activeEvent._id}" class="event-name">
+                    <button class="btn event-name-btn"><h2>{{activeEvent.name}}</h2></button>
+                </router-link><br>
+                <button class="btn btn-danger btn-sm remove" @click="removeEvent">REMOVE EVENT FROM MY SCHEDULE</button>
             </div>
         </div>
         <div class="row" v-for="(timeDict, date) in userSchedule">
@@ -74,7 +74,7 @@
                 <div class="col-xs-12 col-md-9" >
                     <div class="row button-list">
                         <div class="col-xs-12 col-md-4" v-for="activity in activitiesList">
-                            <button class="btn btn-primary activities" @click="setActiveActivity(activity, userNotes)" data-toggle="modal" data-target="#myActDetails">
+                            <button class="btn  activities" @click="setActiveActivity(activity, userNotes)" data-toggle="modal" data-target="#myActDetails">
                                 <h5>{{formatDateForDisplay(activity.date)}} {{activity.startTime}} - {{activity.endTime}}</h5>
                                 <h4>{{activity.name}}</h4>
                             </button>
@@ -192,14 +192,17 @@
 
     .date-col{
         padding-left: 40px;
-        border-bottom: 1px solid black;
-        border-top: 1px solid black;
-        background: rgba(0, 0, 0, 0.664);
+        border-bottom: 1px solid #7F7F71;
+        border-top: 1px solid #7F7F71;
+        background: #7F7F71;
         color:whitesmoke;
     }
     .time-col{
         border-right: 1px solid black;
         border-bottom: 1px solid black;
+    }
+    .well:hover .remove{
+        display:inline-block;
     }
     .remove {
         display: none;
@@ -207,6 +210,8 @@
     .activities{
         margin-top:5px;
         margin-bottom: 5px;
+        background-color:#CBCCB4;
+        color: rgba(12, 12, 12, 0.657);
     }
     .event {
         height: 130px;
@@ -214,8 +219,22 @@
     .event button {
         margin-right: 20px;
     }
+    .well{
+        margin-top:5px;
+        background-color:rgba(203, 204, 180, 0);
+        border-top: 1px solid #CBCCB4;
+    }
+    .well h2{
+        color: whitesmoke;
+    }
+    .event-name-btn{
+        background-color: rgba(127, 127, 113, 0.746);
+        color: whitesmoke;
 
-    .event:hover .remove {
-        display: inline-block;
+        
+    }
+    .event-name:hover{
+        text-decoration: none;
+        text-shadow: 0px 0px 15px #7F7F7F
     }
 </style>
