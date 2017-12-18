@@ -104,7 +104,6 @@
                 return this.$store.state.userSchedule
             },
             activeEvent() {
-
                 return this.$store.state.activeEvent
             },
             activeActivity() {

@@ -109,9 +109,9 @@
             myEvents() {
                 return this.$store.state.myEvents
             },
-            activeEvent() {
-                return this.$store.state.activeEvent
-            }
+            // activeEvent() {
+            //     return this.$store.state.activeEvent
+            // }
         },
         mounted() {
             this.$store.dispatch('getMyEvents')
@@ -126,7 +126,7 @@
             },
             getMyActivities() {
                 debugger
-                this.activeEvent = {}
+                // this.activeEvent = {}
                 this.$store.dispatch('getMyActivities')
             }
         },
