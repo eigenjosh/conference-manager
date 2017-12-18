@@ -27,7 +27,7 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eigenjosh/conference-manager.git"
+    "url": "git+https://github.com/eigenjosh/conference-manager/tree/build-prelim"
   },
   "license": "ISC",
   "bugs": {
