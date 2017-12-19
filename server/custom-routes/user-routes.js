@@ -82,7 +82,6 @@ module.exports = {
     }
   },
   // Unfinished, needs testing:
-  /*
   deleteUserEvents: {
     path: '/user-events/:eventId',
     reqType: 'put',
@@ -90,12 +89,19 @@ module.exports = {
       let action = 'Remove User Event'
       Activities.find({ eventId: req.params.eventId })
         .then(activities => {
+          for (var i = 0; i < activities.length; i++) {
+            var activity = activities[i]
+            if (activity.capacity > 0) {
+              activity.capacity--
+              activity.update()
+            }
+          }
           Users.find({ _id: req.session.uid })
             .then(user => {
               user.activities = user.activities.filter((activity)=>{
                 return !activities.includes(activity)
               })
-              user.update() // need another promise here?
+              user.update()
               return res.send(handleResponse(action, { message: 'Successfully updated user events.' }))
             })
         })
@@ -104,7 +110,7 @@ module.exports = {
         })
     }
   },
-  */
+  
   editUserActivities: {
     path: '/user-activities',
     reqType: 'put',
