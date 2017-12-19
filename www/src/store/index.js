@@ -506,15 +506,16 @@ var store = new vuex.Store({
     },
 
     removeFromMyEvents({ commit, dispatch }, payload) {
-      var removedEvent
-      for (var i = 0; i < payload.user.events.length; i++) {
-        var event = payload.user.events[i]
-        if (event == payload.event._id) {
-          payload.user.events.splice(i, 1)
-          removedEvent = event
-          break
-        }
-      }
+      debugger
+      // var removedEvent
+      // for (var i = 0; i < payload.user.events.length; i++) {
+      //   var event = payload.user.events[i]
+      //   if (event == payload.event._id) {
+      //     payload.user.events.splice(i, 1)
+      //     removedEvent = event
+      //     break
+      //   }
+      // }
       /*
       for (var i = 0; i < payload.user.activities.length; i++) {
         var activity = payload.user.activities[i]
@@ -527,25 +528,25 @@ var store = new vuex.Store({
 
       //Need to account for newly open seats in activities when users delete events
 
-      var removedActivities = []
-      for (var date in payload.userSchedule) {
-        for (var time in payload.userSchedule[date]) {
-          var activities = payload.userSchedule[date][time]
-          for(var i = 0; i < activities.length; i++) {
-            var activity = activities[i]
-            if (activity.eventId == removedEvent) {
-              removedActivities.push(activity._id)
-            }
-          }
-        }
-      }
-      console.log('user activities: ', payload.user.activities)
-      console.log('removed activity ids: ', removedActivities)
-      payload.user.activities = payload.user.activities.filter((activity) => {
-        return !removedActivities.includes(activity)
-      })
-      console.log('user activities post-filter: ', payload.user.activities)
-      api.put('/user-events', payload.user)
+      // var removedActivities = []
+      // for (var date in payload.userSchedule) {
+      //   for (var time in payload.userSchedule[date]) {
+      //     var activities = payload.userSchedule[date][time]
+      //     for(var i = 0; i < activities.length; i++) {
+      //       var activity = activities[i]
+      //       if (activity.eventId == removedEvent) {
+      //         removedActivities.push(activity._id)
+      //       }
+      //     }
+      //   }
+      // }
+      // console.log('user activities: ', payload.user.activities)
+      // console.log('removed activity ids: ', removedActivities)
+      // payload.user.activities = payload.user.activities.filter((activity) => {
+      //   return !removedActivities.includes(activity)
+      // })
+      // console.log('user activities post-filter: ', payload.user.activities)
+      api.put('/user-events/' + payload.event._id)
         .then(res => {
           console.log('this event has been removed from user events')
           dispatch('authenticate')
