@@ -187,6 +187,7 @@ var store = new vuex.Store({
         .then(res => {
           console.log("successful login")
           commit('setUser', res.data.data)
+          dispatch('initSocket', res.data.data)
         })
         .catch(err => {
           commit('handleError', err)
@@ -201,6 +202,7 @@ var store = new vuex.Store({
       auth.post('register', payload)
         .then(res => {
           commit('setUser', res.data.data)
+          dispatch('initSocket', res.data.data)
         })
         .catch((err) => {
           { commit('handleError', err) }
@@ -213,6 +215,7 @@ var store = new vuex.Store({
       auth('authenticate')
         .then(res => {
           commit('setUser', res.data.data)
+          dispatch('initSocket', res.data.data)
 
         })
         .catch((err) => {

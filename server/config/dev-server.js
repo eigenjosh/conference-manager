@@ -85,7 +85,7 @@ io.on('connection', function (socket) {
 
     socket.emit('CONNECTED', {
         socket: socket.id,
-        message: 'Welcome to the Jungle',
+        message: 'you made it to sockets',
         connectedUsers
     })
 
