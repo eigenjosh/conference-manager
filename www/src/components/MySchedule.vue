@@ -1,6 +1,6 @@
 <template>
     <div class="my-schedule container-fluid">
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-inverse">
             <div>
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -13,7 +13,7 @@
                     </button>
                     <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
                     <div class="text-right">
-                        <p class="navbar-brand">Welcome {{activeUser.name}}</p>
+                        <p class="navbar-text">Welcome {{activeUser.name}}</p>
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>
 
@@ -26,22 +26,22 @@
                     <ul>
                         <li>
                             <router-link :to="{name:'Home'}">
-                                <button type="button" class="btn nav-drop-btn">Home</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">Home</button>
                             </router-link>
                         </li>
                         <li>
                             <router-link :to="{name: 'findEvents'}">
-                                <button type="button" class="btn nav-drop-btn">Find Events</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">Find Events</button>
                             </router-link>
                         </li>
                         <li>
                             <router-link :to="{name: 'adminEvents'}">
-                                <button type="button" class="btn nav-drop-btn">Events I've Created</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">Events I've Created</button>
                             </router-link>
                         </li>
                         <li>
                             <router-link :to="{name:'userNotes'}">
-                                <button type="button" class="btn nav-drop-btn">My Notes</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">My Notes</button>
                             </router-link>
                         </li>
                     </ul>
@@ -62,8 +62,9 @@
 
                 <div class="col-xs-12">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-danger">Choose Schedule to View</button>
-                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <!-- <button type="button" class="btn btn-default">Choose Schedule to View</button> -->
+                        <button type="button" class="btn btn-default-picker dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <h3>Choose Schedule to View</h3>
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
@@ -143,10 +144,10 @@
         white-space: nowrap;
     }
 
-    .my-schedule {
+    /* .my-schedule {
         background-color: rgba(203, 204, 180, 0.541);
         height: 100vh;
-    }
+    } */
 
     .view-all {
         background-color: rgba(127, 127, 113, 0.746);
@@ -165,19 +166,20 @@
     }
 
     .navbar {
-        background: rgba(127, 127, 113, 0.746);
+        background: black;
+        font: white;
     }
-
+/* 
     .navbar .navbar-brand {
         color: #FFFFF9;
     }
 
     .navbar .navbar-header .navbar-toggle .icon-bar {
         background: #FFFFF9;
-    }
+    } */
 
     .sched-title {
-        color: #7F7F7F;
+        color: black;
         font-size: 50px;
         text-shadow: 0px 0px 5px #FFFFF9;
     }
@@ -186,6 +188,10 @@
         width: 90%;
         background-color: #FFFFF9;
         margin: 2px;
-        color: rgba(127, 127, 113, 0.746)
+        font: black;
+    }
+
+    .btn-default-picker {
+        background-color: lightgray;
     }
 </style>

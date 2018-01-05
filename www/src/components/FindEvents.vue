@@ -1,6 +1,6 @@
 <template>
     <div class="find-events">
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -13,7 +13,7 @@
                     </button>
                     <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
                     <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
-                        <p class="navbar-brand">Welcome {{activeUser.name}}</p>
+                        <p class="navbar-text">Welcome {{activeUser.name}}</p>
                         <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>
@@ -31,7 +31,7 @@
                         <li>
 
                             <router-link :to="{name: 'Home'}">
-                                <button type="button" class="btn btn-default">Home</button>
+                                <button type="button" class="btn nav-drop-btn btn-default">Home</button>
                             </router-link>
                         </li>
                         <!-- <li>
@@ -44,19 +44,19 @@
                         <div v-if="activeUser.hasOwnProperty('name')">
                             <li>
                                 <router-link :to="{name: 'adminEvents'}">
-                                    <button type="button" class="btn btn-default">Events I've Created</button>
+                                    <button type="button" class="btn nav-drop-btn btn-default">Events I've Created</button>
                                 </router-link>
                             </li>
                             <li>
 
                                 <router-link :to="{name:'mySchedule'}">
-                                    <button type="button" class="btn btn-default">My Schedule</button>
+                                    <button type="button" class="btn nav-drop-btn btn-default">My Schedule</button>
                                 </router-link>
                             </li>
                             <li>
 
                                 <router-link :to="{name:'userNotes'}">
-                                    <button type="button" class="btn btn-default">My Notes</button>
+                                    <button type="button" class="btn nav-drop-btn btn-default">My Notes</button>
                                 </router-link>
                             </li>
 

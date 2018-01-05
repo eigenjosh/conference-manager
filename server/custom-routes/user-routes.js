@@ -81,7 +81,6 @@ module.exports = {
         })
     }
   },
-
   deleteUserEvents: {
     path: '/user-events/:eventId',
     reqType: 'put',
