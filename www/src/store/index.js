@@ -128,7 +128,7 @@ var store = new vuex.Store({
       debugger
       var i = state.events.findIndex(e => e._id == data.event._id)
       if (i > -1) {
-        state.events[i] = data.event
+       vue.set(state.events, state.events[i], data.event)
       }else{
         state.events.push(data.event)
       }
