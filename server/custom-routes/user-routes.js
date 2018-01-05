@@ -67,7 +67,6 @@ module.exports = {
         })
     }
   },
-  /*
   editUserEvents: {
     path: '/user-events',
     reqType: 'put',
@@ -82,44 +81,45 @@ module.exports = {
         })
     }
   },
-  */
-  // Unfinished, needs testing:
+
   deleteUserEvents: {
     path: '/user-events/:eventId',
     reqType: 'put',
     method(req, res, next) {
       let action = 'Remove User Event'
-      console.log("begun!");
-      Activities.find({ eventId: req.params.eventId })
-        .then(activities => {
-          var activityIdsToRemove = []
-          console.log('activities: ', activities)
-          for (var i = 0; i < activities.length; i++) {
-            var activity = activities[i]
-            if (activity.capacity > 0) {
-              activity.capacity--
-              activityIdsToRemove.push(activity._id)
-              activity.update()
-            }
-          }
-          console.log('activity Ids to remove: ', activities)
-          Users.find({ _id: req.session.uid })
-            .then(user => {
-              console.log('user: ', user[0])
-              console.log('user event Ids pre-remove: ', user[0].events)
-              console.log('user activity Ids pre-remove: ', user[0].activities)
-              user[0].activities = user[0].activities.filter((activityId)=>{
-                return !activityIdsToRemove.includes(activityId)
-              })
-              user[0].events = user[0].events.filter((eventId)=>{
-                return !(eventId == req.params.eventId)
-              })
-              user[0].update()
-              console.log('user event Ids post-remove: ', user[0].events)
-              console.log('user activity Ids post-remove: ', user[0].activities)
-              return res.send(handleResponse(action, { message: 'Successfully updated user events.' }))
-            })
-            .catch(error => {
+      Users.find({ _id: req.session.uid })
+        .then(users => {
+          var user = users[0]
+          Events.find({ _id: {$in: user.events } })
+            .then(events => {
+              var updatedEventIds = []
+              for (var i = 0; i < events.length; i++) {
+                if (!(events[i]._id == req.params.eventId)) {
+                  updatedEventIds.push(events[i]._id)
+                }
+              }
+              user.events = updatedEventIds
+              Activities.find({ _id: {$in: user.activities}})
+                .then(activities => {
+                  var updatedActivityIds = []
+                  for (var i = 0; i < activities.length; i++) {
+                    if (activities[i].eventId != req.params.eventId) {
+                      updatedActivityIds.push(activities[i]._id)
+                    } else {
+                      if (activities[i].capacity >= 0) {
+                        activities[i].capacity++
+                        activities[i].save()
+                      }
+                    }
+                  }
+                  user.activities = updatedActivityIds
+                  user.save()
+                  return res.send(handleResponse(action, { message: 'Successfully updated user events.' }))
+                })
+                .catch(error => {
+                  return next(handleResponse(action, null, error))
+                })
+            }).catch(error => {
               return next(handleResponse(action, null, error))
             })
         })
@@ -128,7 +128,7 @@ module.exports = {
         })
     }
   },
-  
+
   editUserActivities: {
     path: '/user-activities',
     reqType: 'put',
