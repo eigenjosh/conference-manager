@@ -1,7 +1,7 @@
 <template>
     <div class="home container-fluid parralax">
         <!-- BEGINNING OF NAVBAR -->
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-inverse">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
                     aria-expanded="false">
@@ -12,7 +12,7 @@
                 </button>
                 <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
                 <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
-                    <p class="navbar-brand">Welcome {{activeUser.name}}</p>
+                    <p class="navbar-text">Welcome {{activeUser.name}}</p>
                     <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
                     <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                 </div>
@@ -27,23 +27,23 @@
                 <ul>
                     <li>
                         <router-link :to="{name: 'findEvents'}">
-                            <button type="button" class="btn btn-default">Find Events</button>
+                            <button type="button" class="btn btn-default nav-drop-btn">Find Events</button>
                         </router-link>
                     </li>
                     <div v-if="activeUser.hasOwnProperty('name')">
                         <li>
                             <router-link :to="{name: 'adminEvents'}">
-                                <button type="button" class="btn btn-default">Events I've Created</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">Events I've Created</button>
                             </router-link>
                         </li>
                         <li>
                             <router-link :to="{name:'mySchedule'}">
-                                <button type="button" class="btn btn-default">My Schedule</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">My Schedule</button>
                             </router-link>
                         </li>
                         <li>
                             <router-link :to="{name:'userNotes'}">
-                                <button type="button" class="btn btn-default">My Notes</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">My Notes</button>
                             </router-link>
                         </li>
                     </div>
@@ -60,14 +60,13 @@
                 </div>
             </div>
         </div>
-<div class="row">
-    <div class="col-xs-12">
-        <h3>A digital conference website that centralizes your information in one place.
-                A digital conference website that centralizes your information in one place.
-                A digital conference website that centralizes your information in one place.
-                A digital conference website that centralizes your information in one place. </h3>
-    </div>
-</div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>A digital conference website that centralizes your information in one place. A digital conference website
+                    that centralizes your information in one place. A digital conference website that centralizes your information
+                    in one place. A digital conference website that centralizes your information in one place. </h3>
+            </div>
+        </div>
         <!-- LOGIN MODAL -->
 
         <div id="myModal" class="modal fade" role="dialog">
@@ -83,7 +82,7 @@
                         <form id="login" class="form">
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" maxlength="57"name="email" class="form-control" placeholder="Email" required v-model='login.email'>
+                                <input type="email" maxlength="57" name="email" class="form-control" placeholder="Email" required v-model='login.email'>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
@@ -119,11 +118,11 @@
                         <form id="register" class="form">
                             <div class="form-group">
                                 <label for="firstName">First Name:</label>
-                                <input type="firstName" name="firstName" maxlength="20"class="form-control" placeholder="First Name" required v-model="signUp.firstName">
+                                <input type="firstName" name="firstName" maxlength="20" class="form-control" placeholder="First Name" required v-model="signUp.firstName">
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Last Name:</label>
-                                <input type="lastName" name="lastName" maxlength="20"class="form-control" placeholder="Last Name" required v-model="signUp.lastName">
+                                <input type="lastName" name="lastName" maxlength="20" class="form-control" placeholder="Last Name" required v-model="signUp.lastName">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
@@ -165,12 +164,13 @@
                         <form id="createEvent" class="form">
                             <div class="form-group">
                                 <label for="eventName">Event Name</label>
-                                <input type="text" name="eventName" maxlength="40"class="form-control" placeholder="Whats the event called?" required v-model="event.name"
+                                <input type="text" name="eventName" maxlength="40" class="form-control" placeholder="Whats the event called?" required v-model="event.name"
                                     required>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea type="text" name="description" maxlength="300"class="form-control" rows="5" placeholder="What is this event for?" required v-model="event.description"></textarea>
+                                <textarea type="text" name="description" maxlength="300" class="form-control" rows="5" placeholder="What is this event for?"
+                                    required v-model="event.description"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="startDate">Start Date:</label>
@@ -186,19 +186,20 @@
                             </div>
                             <div class="form-group">
                                 <label for="venue">Venue:</label>
-                                <input type="text" name="venue" class="form-control" maxlength="40"placeholder="Venue" required v-model="event.venue">
+                                <input type="text" name="venue" class="form-control" maxlength="40" placeholder="Venue" required v-model="event.venue">
                             </div>
                             <div class="form-group">
                                 <label for="address">Address:</label>
-                                <input type="text" name="address" class="form-control" maxlength="75" placeholder="Venue Address" v-model="event.address" required>
-                                <input type="text" name="city" class="form-control" maxlength="75"placeholder="Venue City" v-model="event.city" required>
+                                <input type="text" name="address" class="form-control" maxlength="75" placeholder="Venue Address" v-model="event.address"
+                                    required>
+                                <input type="text" name="city" class="form-control" maxlength="75" placeholder="Venue City" v-model="event.city" required>
                                 <div class="form-group state">
                                     <label for="state">Venue State</label>
                                     <select class="form-control state" v-model="event.state">
                                         <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
                                     </select>
                                 </div>
-                                <input type="number" name="zip" maxlength="5"class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
+                                <input type="number" name="zip" maxlength="5" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
                                 <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p>
                                 <div class="form-group">
                                     <label for="timeZone">Time Zone</label>
@@ -389,23 +390,23 @@
     }
 
     .navbar {
-        background: rgb(255, 255, 249);
-        color: black;
+        background: black;
+        font: white;
     }
 
-    .parallax {
-        /* The image used */
+    /* .parallax {
+        The image used
         background-image: url("https://images.pexels.com/photos/34092/pexels-photo.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb");
 
-        /* Set a specific height */
+        Set a specific height
         height: 500px;
 
-        /* Create the parallax scrolling effect */
+        Create the parallax scrolling effect
         background-attachment: fixed;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-    }
+    } */
 
     .main-pic {
         background-image: url('https://images.pexels.com/photos/34092/pexels-photo.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb');
@@ -476,5 +477,12 @@
         .state {
             width: 50%
         }
+        .nav-drop-btn {
+            width: 90%;
+            background-color: #FFFFF9;
+            margin: 2px;
+            font: black;
+        }
+
     }
 </style>

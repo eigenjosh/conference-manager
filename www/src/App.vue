@@ -25,11 +25,58 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    
+
   }
+
   .word-wrap {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  } 
+  }
+
+  .navbar-inverse .navbar-brand {
+    color: white;
+  }
+
+  .navbar {
+    background: black;
+    font: white;
+  }
+
+  .nav-drop-btn {
+    width: 90%;
+    background-color: #FFFFF9;
+    margin: 2px;
+    font: black;
+  }
+
+  .navbar-brand {
+    font-size: 50px;
+  }
+
+  .navbar-inverse .navbar-text {
+    color: white;
+    font-size: 20px;
+  }
+
+  .date-col {
+    padding-left: 40px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    background: black;
+    color: white;
+  }
+
+  .activities {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: lightslategrey;
+    color: white;
+  }
+  .event-name-btn {
+    background-color: darkslategrey;
+    height: 100%;
+    width: 100%;
+    /* color: black; */
+}
 </style>

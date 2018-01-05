@@ -7,14 +7,15 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">{{activeActivity.name}}</h4>
+                        <h2 class="modal-title">{{activeActivity.name}}</h2>
                     </div>
                     <div class="modal-body">
-                        <h5>Date:{{formatDateForDisplay(activeActivity.date)}} Times:{{activeActivity.startTime}}-{{activeActivity.endTime}}</h5>
-                        <h4>ROOM:{{activeActivity.location}}</h4>
+                        <h5>{{formatDateForDisplay(activeActivity.date)}}</h5>
+                        <h5>{{activeActivity.startTime}} - {{activeActivity.endTime}}</h5>
+                        <h4>Room: {{activeActivity.location}}</h4>
                         <h4 v-if="activeActivity.capacity"> Seats Available: {{activeActivity.capacity}}</h4>
-                        <h2>Speaker: {{activeActivity.speakerName}}</h2>
-                        <h3>{{activeActivity.description}}</h3>
+                        <h4>Speaker: {{activeActivity.speakerName}}</h4>
+                        <h4>{{activeActivity.description}}</h4>
                         <!-- <h4>Seats Available: {{activeActivity.capacity}}</h4> -->
                     </div>
                     <div>
@@ -22,7 +23,16 @@
                         <button v-else class="btn btn-primary" data-dismiss="modal" data-toggle="modal" @click="saveNote" data-target="#notepad">Take Note</button>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-danger" @click="removeActivity" data-dismiss="modal">Remove from Schedule</button>
+                            <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <button @click="removeEvent">Remove Activity from My Schedule</button>
+                                    </ul>
+                                </div>
+                        <!-- <button class="btn btn-danger" @click="removeActivity" data-dismiss="modal">Remove from Schedule</button> -->
                     </div>
                 </div>
 
@@ -58,9 +68,28 @@
         <div class="row">
             <div class="col-xs-12 event well" v-if="activeUser.events.includes(activeEvent._id)">
                 <router-link :to="{path: 'event-schedule/' + activeEvent._id}" class="event-name">
-                    <button class="btn event-name-btn"><h2>{{activeEvent.name}}</h2></button>
-                </router-link><br>
-                <button class="btn btn-danger btn-sm remove" @click="removeEvent">REMOVE EVENT FROM MY SCHEDULE</button>
+                    <button class="btn event-name-btn">
+                        <h2>{{activeEvent.name}}</h2>
+                    </button>
+                </router-link>
+                <br>
+                <!-- <button class="btn btn-danger btn-sm remove" @click="removeEvent">REMOVE EVENT FROM MY SCHEDULE</button> -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <button @click="removeEvent">Remove Event from My Schedule</button>
+                    </ul>
+                </div>
+
+
+
             </div>
         </div>
         <div class="row" v-for="(timeDict, date) in userSchedule">
@@ -71,7 +100,7 @@
                 <div class="col-xs-6 col-xs-offset-1 col-md-1 time-col">
                     <h3>{{time}}</h3>
                 </div>
-                <div class="col-xs-12 col-md-9" >
+                <div class="col-xs-12 col-md-9">
                     <div class="row button-list">
                         <div class="col-xs-12 col-md-4" v-for="activity in activitiesList">
                             <button class="btn  activities" @click="setActiveActivity(activity, userNotes)" data-toggle="modal" data-target="#myActDetails">
@@ -189,50 +218,58 @@
         width: 100%;
     }
 
-    .date-col{
+    /* .date-col{
         padding-left: 40px;
         border-bottom: 1px solid #7F7F71;
         border-top: 1px solid #7F7F71;
         background: #7F7F71;
         color:whitesmoke;
-    }
-    .time-col{
+    } */
+
+    .time-col {
         border-right: 1px solid black;
         border-bottom: 1px solid black;
     }
-    .well:hover .remove{
-        display:inline-block;
+
+    .well:hover .remove {
+        display: inline-block;
     }
+
     .remove {
         display: none;
     }
-    .activities{
+
+    /* .activities{
         margin-top:5px;
         margin-bottom: 5px;
         background-color:#CBCCB4;
         color: rgba(12, 12, 12, 0.657);
-    }
+    } */
+
     .event {
         height: 130px;
     }
+
     .event button {
         margin-right: 20px;
     }
-    .well{
-        margin-top:5px;
-        background-color:rgba(203, 204, 180, 0);
+
+    .well {
+        margin-top: 5px;
+        background-color: rgba(203, 204, 180, 0);
         border-top: 1px solid #CBCCB4;
     }
-    .well h2{
+
+    .well h2 {
         color: whitesmoke;
     }
-    .event-name-btn{
+
+    /* .event-name-btn{
         background-color: rgba(127, 127, 113, 0.746);
         color: whitesmoke;
+    } */
 
-        
-    }
-    .event-name:hover{
+    .event-name:hover {
         text-decoration: none;
         text-shadow: 0px 0px 15px #7F7F7F
     }
