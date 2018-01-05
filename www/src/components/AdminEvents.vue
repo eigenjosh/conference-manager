@@ -72,16 +72,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea type="text" name="description" maxlength="300"class="form-control" rows="5" placeholder="What is this event for?" required v-model="event.description"></textarea>
+                                <textarea type="text" name="description" maxlength="300" class="form-control" rows="5" placeholder="What is this event for?"
+                                    required v-model="event.description"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="startDate">Start Date:</label>
-                                <input type="date" name="startDate" class="form-control" placeholder="Start Date" :min="date" v-model="event.startDate" required @change="validateForm">
+                                <input type="date" name="startDate" class="form-control" placeholder="Start Date" :min="date" v-model="event.startDate" required
+                                    @change="validateForm">
                                 <p class="error-message text-left text-danger" v-if="!this.validator.startDate">Start date must be today or later.</p>
                             </div>
                             <div class="form-group">
                                 <label for="endDate">End Date:</label>
-                                <input type="date" name="endDate" class="form-control" placeholder="End Date" :min="event.startDate" required v-model="event.endDate" @change="validateForm">
+                                <input type="date" name="endDate" class="form-control" placeholder="End Date" :min="event.startDate" required v-model="event.endDate"
+                                    @change="validateForm">
                                 <p class="error-message text-left text-danger" v-if="!this.validator.endDate">End date must be the same as or later than the start date.</p>
                             </div>
                             <div class="form-group">
@@ -90,8 +93,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="address">Address:</label>
-                                <input type="text" name="address" class="form-control" maxlength="30"placeholder="Venue Address" v-model="event.address" required>
-                                <input type="text" name="city" class="form-control" maxlength="30"placeholder="Venue City" v-model="event.city" required>
+                                <input type="text" name="address" class="form-control" maxlength="30" placeholder="Venue Address" v-model="event.address"
+                                    required>
+                                <input type="text" name="city" class="form-control" maxlength="30" placeholder="Venue City" v-model="event.city" required>
                                 <div class="form-group state">
                                     <label for="state">Venue State</label>
                                     <select class="form-control state" v-model="event.state">
@@ -108,7 +112,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" data-dismiss="modal" @click="createEvent" :disabled="!this.validator.form" type="submit" >Create New Event</button>
+                                <button class="btn btn-submit btn-success" data-dismiss="modal" @click="createEvent" :disabled="!this.validator.form" type="submit">Create New Event</button>
                             </div>
                         </form>
                     </div>
@@ -178,7 +182,7 @@
             locations() {
                 return this.$store.state.locations
             },
-            timeZones(){
+            timeZones() {
                 return this.$store.state.timeZones
             }
         },
@@ -208,7 +212,7 @@
             createEvent() {
                 this.validateForm()
                 if (this.validator.form) {
-                    this.$store.dispatch('createEvent', {event: this.event, user:this.activeUser})
+                    this.$store.dispatch('createEvent', { event: this.event, user: this.activeUser})
                     this.event = {
                         name: '',
                         description: '',
@@ -221,7 +225,7 @@
                         endDate: ''
                     }
                 }
-                
+
             }
         }
 

@@ -169,7 +169,7 @@
             removeActivity() {
                 if (this.activeActivity.capacity) {
                     this.activeActivity.capacity++
-                    this.$store.dispatch('editActivity', this.activeActivity)
+                    this.$store.dispatch('editActivity', {activity: this.activeActivity, emit:true})
                 }
                 this.$store.dispatch('removeFromMySchedule', { user: this.activeUser, event: this.activeEvent, activity: this.activeActivity })
             },
