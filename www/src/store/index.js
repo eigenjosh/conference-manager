@@ -125,6 +125,7 @@ var store = new vuex.Store({
 
     //SET EVENTS
     addOrUpdateEvent(state, data) {
+      debugger
       var i = state.events.findIndex(e => e._id == data.event._id)
       if (i > -1) {
         state.events[i] = data.event
@@ -375,6 +376,7 @@ var store = new vuex.Store({
       api.put('events/' + payload.event._id, payload.event)
         .then(res => {
           commit('setActiveEvent', payload.event)
+          debugger
           if (payload.emit) {
             payload.mutation = 'addOrUpdateEvent' //what should the other users commit?
             dispatch('emitData', payload)

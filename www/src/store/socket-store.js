@@ -63,7 +63,7 @@ export default {
 
         },
         emitData({ commit, dispatch }, payload) {
-
+            debugger
             if (!payload.mutation) { return console.error("SOCKET ERROR: HEY YOU FORGOT TO ADD A MUTATION", payload) }
 
             socket.emit('update', payload)
