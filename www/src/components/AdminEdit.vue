@@ -430,7 +430,7 @@
             addActivity() {
                 this.validateActivityForm()
                 if (this.validator.activityForm) {
-                    this.$store.dispatch('addActivity', { activity: this.activity, eventId: this.activeEvent._id })
+                    this.$store.dispatch('addActivity', { activity: this.activity, eventId: this.activeEvent._id, emit:true })
                     this.activity = {
                         name: '',
                         description: '',
@@ -459,24 +459,24 @@
             editActivity() {
                 this.validateActivityForm()
                 if (this.validator.activityForm) {
-                    this.$store.dispatch('editActivity', this.activity)
+                    this.$store.dispatch('editActivity', {activity: this.activity, emit: true})
                 }
             },
             deleteActivity() {
-                this.$store.dispatch('deleteActivity', this.activity)
+                this.$store.dispatch('deleteActivity', {activity: this.activity, emit:true})
             },
             deleteEvent() {
                 debugger
-                this.$store.dispatch('deleteEvent', this.activeEvent)
+                this.$store.dispatch('deleteEvent', {event:this.activeEvent, emit:true})
 
             },
             publish() {
                 this.activeEvent.published = true
-                this.$store.dispatch('publishEvent', this.activeEvent)
+                this.$store.dispatch('publishEvent', {event: this.activeEvent, emit:true})
             },
             unPublish() {
                 this.activeEvent.published = false
-                this.$store.dispatch('publishEvent', this.activeEvent)
+                this.$store.dispatch('publishEvent', {event:this.activeEvent, emit:true})
             },
             setActiveEvent(activeEvent) {
                 this.$store.dispatch('getEventById', activeEvent)
@@ -485,7 +485,7 @@
             editEvent() {
                 this.validateEventForm()
                 if (this.validator.eventForm) {
-                    this.$store.dispatch('editEvent', this.event)
+                    this.$store.dispatch('editEvent', {event: this.event, emit:true})
                 }
             }
         }

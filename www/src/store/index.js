@@ -39,7 +39,10 @@ var store = new vuex.Store({
       "Alaska": "AK", "Alabama": "AL", "Arkansas": "AR", "American Samoa": "AS", "Arizona": "AZ", "California": "CA", "Colorado": "CO", "Connecticut": "CT", "District of Columbia": "DC", "Delaware": "DE", "Florida": "FL", "Micronesia": "FM", "Georgia": "GA", "Guam": "GU", "Hawaii": "HI", "Iowa": "IA", "Idaho": "ID", "Illinois": "IL", "Indiana": "IN", "Kansas": "KS", "Kentucky": "KY", "Louisiana": "LA", "Massachusetts": "MA", "Maryland": "MD", "Maine": "ME", "Marshall Islands": "MH", "Michigan": "MI", "Minnesota": "MN", "Missouri": "MO", "Northern Marianas": "MP", "Mississippi": "MS", "Montana": "MT", "North Carolina": "NC", "North Dakota": "ND", "Nebraska": "NE", "New Hampshire": "NH", "New Jersey": "NJ", "New Mexico": "NM", "Nevada": "NV", "New York": "NY", "Ohio": "OH", "Oklahoma": "OK", "Oregon": "OR", "Pennsylvania": "PA", "Rhode Island": "RI", "Puerto Rico": "PR", "Palau": "PW", "South Carolina": "SC", "South Dakota": "SD", "Tennessee": "TN", "Texas": "TX", "Utah": "UT", "Virginia": "VA", "Virgin Islands": "VI", "Vermont": "VT", "Washington": "WA", "West Virginia": "WV", "Wisconsin": "WI", "Wyoming": "WY"
     },
     timeZones: ["Hawaii", "Alaska", "Pacific", "Mountain", "Central", "Eastern"]
-
+    
+  },
+  modules: {
+    socketStore
   },
   mutations: {
 
@@ -121,6 +124,17 @@ var store = new vuex.Store({
 
 
     //SET EVENTS
+    addOrUpdateEvent(state, data) {
+      debugger
+      var i = state.events.findIndex(e => e._id == data.event._id)
+      if (i > -1) {
+        state.events[i] = data.event
+      }else{
+        state.events.push(data.event)
+      }
+
+    },
+   
     setEvents(state, data) {
       state.events = data
       console.log(state.events)
@@ -291,6 +305,13 @@ var store = new vuex.Store({
           dispatch('getAllEvents')
           dispatch('getCreatedEvents')
           dispatch('addToMyEvents', { user: payload.user, event: res.data.data })
+
+          // if (payload.emit) {
+          //   payload.mutation = 'addOrUpdateEvent' //what should the other users commit?
+          //   payload.user = null
+          //   dispatch('emitData', payload)
+          // }
+
         })
         .catch(err => {
           commit('handleError', err)
@@ -328,6 +349,11 @@ var store = new vuex.Store({
         .then(res => {
           console.log(res)
           dispatch('getActivities', { _id: payload.activity.eventId })
+          if (payload.emit) {
+            payload.action = 'getActivities' //what should the other users commit?
+            payload.user = null
+            dispatch('emitData', payload)
+          }
         })
         .catch(err => {
           commit('handleError', err)
@@ -346,21 +372,31 @@ var store = new vuex.Store({
         })
 
     },
-    editEvent({ commit, dispatch }, event) {
-      api.put('events/' + event._id, event)
+    editEvent({ commit, dispatch }, payload) {
+      api.put('events/' + payload.event._id, payload.event)
         .then(res => {
-          commit('setActiveEvent', event)
+          commit('setActiveEvent', payload.event)
+          debugger
+          if (payload.emit) {
+            payload.mutation = 'addOrUpdateEvent' //what should the other users commit?
+            dispatch('emitData', payload)
+          }
         })
         .catch(err => {
           commit('handleError', err)
         })
     },
-    editActivity({ commit, dispatch }, activity) {
+    editActivity({ commit, dispatch }, payload) {
       debugger
-      api.put('activities/' + activity._id, activity)
+      api.put('activities/' + payload.activity._id, payload.activity)
         .then(res => {
-          commit('setActiveActivity', activity)
-          dispatch('getActivities', { _id: activity.eventId })
+          commit('setActiveActivity', payload.activity)
+          dispatch('getActivities', { _id: payload.activity.eventId })
+          if (payload.emit) {
+            payload.action = 'getActivities' //what should the other users commit?
+            payload.user = null
+            dispatch('emitData', payload)
+          }
         })
         .catch(err => {
           commit('handleError', err)
@@ -424,12 +460,16 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    deleteActivity({ commit, dispatch }, activity) {
+    deleteActivity({ commit, dispatch }, payload) {
 
-      api.delete('activities/' + activity._id)
+      api.delete('activities/' + payload.activity._id)
         .then(res => {
           console.log("delete request:", res)
           dispatch('getActivities', { _id: res.data.data.eventId })
+          if (payload.emit) {
+            payload.action = 'getActivities' //what should the other users commit?
+            dispatch('emitData', payload)
+          }
         })
         .catch(err => {
           commit('handleError', err)
@@ -461,13 +501,17 @@ var store = new vuex.Store({
 
     //VARIOUS DELETES
 
-    deleteEvent({ commit, dispatch }, event) {
+    deleteEvent({ commit, dispatch }, payload) {
       debugger
-      api.delete('events/' + event._id)
+      api.delete('events/' + payload.event._id)
         .then(res => {
           console.log('res to delete event: ', res.data.data)
           router.push('/admin-events')
           dispatch('getAllEvents')
+          if (payload.emit) {
+            payload.action = 'getAllEvents' //what should the other users commit?
+            dispatch('emitData', payload)
+          }
         })
         .catch(err => {
           commit('handleError', err)
@@ -556,11 +600,17 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-    publishEvent({ commit, dispatch }, event) {
-      api.put('/events/' + event._id, event)
+    publishEvent({ commit, dispatch }, payload) {
+      api.put('/events/' + payload.event._id, payload.event)
         .then(res => {
           dispatch('getAllEvents')
+          if (payload.emit) {
+            payload.mutation = 'addOrUpdateEvent' //what should the other users commit?
+            payload.user = null
+            dispatch('emitData', payload)
+          }
         })
+
         .catch(err => {
           commit('handleError', err)
         })
