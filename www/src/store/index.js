@@ -38,7 +38,7 @@ var store = new vuex.Store({
     locations: {
       "Alaska": "AK", "Alabama": "AL", "Arkansas": "AR", "American Samoa": "AS", "Arizona": "AZ", "California": "CA", "Colorado": "CO", "Connecticut": "CT", "District of Columbia": "DC", "Delaware": "DE", "Florida": "FL", "Micronesia": "FM", "Georgia": "GA", "Guam": "GU", "Hawaii": "HI", "Iowa": "IA", "Idaho": "ID", "Illinois": "IL", "Indiana": "IN", "Kansas": "KS", "Kentucky": "KY", "Louisiana": "LA", "Massachusetts": "MA", "Maryland": "MD", "Maine": "ME", "Marshall Islands": "MH", "Michigan": "MI", "Minnesota": "MN", "Missouri": "MO", "Northern Marianas": "MP", "Mississippi": "MS", "Montana": "MT", "North Carolina": "NC", "North Dakota": "ND", "Nebraska": "NE", "New Hampshire": "NH", "New Jersey": "NJ", "New Mexico": "NM", "Nevada": "NV", "New York": "NY", "Ohio": "OH", "Oklahoma": "OK", "Oregon": "OR", "Pennsylvania": "PA", "Rhode Island": "RI", "Puerto Rico": "PR", "Palau": "PW", "South Carolina": "SC", "South Dakota": "SD", "Tennessee": "TN", "Texas": "TX", "Utah": "UT", "Virginia": "VA", "Virgin Islands": "VI", "Vermont": "VT", "Washington": "WA", "West Virginia": "WV", "Wisconsin": "WI", "Wyoming": "WY"
     },
-    timeZones:["Hawaii", "Alaska", "Pacific", "Mountain", "Central", "Eastern"]
+    timeZones: ["Hawaii", "Alaska", "Pacific", "Mountain", "Central", "Eastern"]
 
   },
   mutations: {
@@ -290,7 +290,7 @@ var store = new vuex.Store({
           console.log('res to create event: ', res.data.data)
           dispatch('getAllEvents')
           dispatch('getCreatedEvents')
-          dispatch('addToMyEvents', {user: payload.user, event: res.data.data})
+          dispatch('addToMyEvents', { user: payload.user, event: res.data.data })
         })
         .catch(err => {
           commit('handleError', err)
@@ -346,12 +346,12 @@ var store = new vuex.Store({
         })
 
     },
-    editEvent({commit, dispatch}, event){
+    editEvent({ commit, dispatch }, event) {
       api.put('events/' + event._id, event)
-        .then(res=>{
+        .then(res => {
           commit('setActiveEvent', event)
         })
-        .catch(err=>{
+        .catch(err => {
           commit('handleError', err)
         })
     },
@@ -506,15 +506,17 @@ var store = new vuex.Store({
     },
 
     removeFromMyEvents({ commit, dispatch }, payload) {
-      var removedEvent
-      for (var i = 0; i < payload.user.events.length; i++) {
-        var event = payload.user.events[i]
-        if (event == payload.event._id) {
-          payload.user.events.splice(i, 1)
-          var removedEvent = event
-          break
-        }
-      }
+      debugger
+      // var removedEvent
+      // for (var i = 0; i < payload.user.events.length; i++) {
+      //   var event = payload.user.events[i]
+      //   if (event == payload.event._id) {
+      //     payload.user.events.splice(i, 1)
+      //     removedEvent = event
+      //     break
+      //   }
+      // }
+      /*
       for (var i = 0; i < payload.user.activities.length; i++) {
         var activity = payload.user.activities[i]
         if (activity.eventId == removedEvent._id) {
@@ -522,7 +524,29 @@ var store = new vuex.Store({
           i--
         }
       }
-      api.put('/user-events', payload.user)
+      */
+
+      //Need to account for newly open seats in activities when users delete events
+
+      // var removedActivities = []
+      // for (var date in payload.userSchedule) {
+      //   for (var time in payload.userSchedule[date]) {
+      //     var activities = payload.userSchedule[date][time]
+      //     for(var i = 0; i < activities.length; i++) {
+      //       var activity = activities[i]
+      //       if (activity.eventId == removedEvent) {
+      //         removedActivities.push(activity._id)
+      //       }
+      //     }
+      //   }
+      // }
+      // console.log('user activities: ', payload.user.activities)
+      // console.log('removed activity ids: ', removedActivities)
+      // payload.user.activities = payload.user.activities.filter((activity) => {
+      //   return !removedActivities.includes(activity)
+      // })
+      // console.log('user activities post-filter: ', payload.user.activities)
+      api.put('/user-events/' + payload.event._id, payload.event)
         .then(res => {
           console.log('this event has been removed from user events')
           dispatch('authenticate')

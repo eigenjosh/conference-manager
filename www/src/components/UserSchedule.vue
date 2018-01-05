@@ -104,7 +104,6 @@
                 return this.$store.state.userSchedule
             },
             activeEvent() {
-
                 return this.$store.state.activeEvent
             },
             activeActivity() {
@@ -175,7 +174,7 @@
                 this.$store.dispatch('removeFromMySchedule', { user: this.activeUser, event: this.activeEvent, activity: this.activeActivity })
             },
             removeEvent() {
-                this.$store.dispatch('removeFromMyEvents', { user: this.activeUser, event: this.activeEvent })
+                this.$store.dispatch('removeFromMyEvents', { user: this.activeUser, event: this.activeEvent, userSchedule: this.userSchedule })
             }
 
 

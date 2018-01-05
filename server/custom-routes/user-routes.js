@@ -42,7 +42,7 @@ module.exports = {
       let action = 'Find User Activities'
       Users.find({ _id: req.session.uid })
         .then(user => {
-          Activities.find({ _id: { $in: user[0].activities} })
+          Activities.find({ _id: { $in: user[0].activities } })
             .then(activities => {
               res.send(handleResponse(action, activities))
             })
@@ -58,7 +58,7 @@ module.exports = {
       let action = 'Find User Activities by Event Id'
       Users.find({ _id: req.session.uid })
         .then(user => {
-          Activities.find({ _id: { $in: user[0].activities}, eventId: req.params.eventId })
+          Activities.find({ _id: { $in: user[0].activities }, eventId: req.params.eventId })
             .then(activities => {
               res.send(handleResponse(action, activities))
             })
@@ -67,11 +67,12 @@ module.exports = {
         })
     }
   },
+  /*
   editUserEvents: {
     path: '/user-events',
     reqType: 'put',
     method(req, res, next) {
-      let action = 'Add User Event'
+      let action = 'Edit User Events'
       Users.findOneAndUpdate({ _id: req.session.uid }, req.body)
         .then(user => {
           return res.send(handleResponse(action, { message: 'Successfully updated user events.' }))
@@ -81,7 +82,53 @@ module.exports = {
         })
     }
   },
-
+  */
+  // Unfinished, needs testing:
+  deleteUserEvents: {
+    path: '/user-events/:eventId',
+    reqType: 'put',
+    method(req, res, next) {
+      let action = 'Remove User Event'
+      console.log("begun!");
+      Activities.find({ eventId: req.params.eventId })
+        .then(activities => {
+          var activityIdsToRemove = []
+          console.log('activities: ', activities)
+          for (var i = 0; i < activities.length; i++) {
+            var activity = activities[i]
+            if (activity.capacity > 0) {
+              activity.capacity--
+              activityIdsToRemove.push(activity._id)
+              activity.update()
+            }
+          }
+          console.log('activity Ids to remove: ', activities)
+          Users.find({ _id: req.session.uid })
+            .then(user => {
+              console.log('user: ', user[0])
+              console.log('user event Ids pre-remove: ', user[0].events)
+              console.log('user activity Ids pre-remove: ', user[0].activities)
+              user[0].activities = user[0].activities.filter((activityId)=>{
+                return !activityIdsToRemove.includes(activityId)
+              })
+              user[0].events = user[0].events.filter((eventId)=>{
+                return !(eventId == req.params.eventId)
+              })
+              user[0].update()
+              console.log('user event Ids post-remove: ', user[0].events)
+              console.log('user activity Ids post-remove: ', user[0].activities)
+              return res.send(handleResponse(action, { message: 'Successfully updated user events.' }))
+            })
+            .catch(error => {
+              return next(handleResponse(action, null, error))
+            })
+        })
+        .catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
+  
   editUserActivities: {
     path: '/user-activities',
     reqType: 'put',
@@ -116,7 +163,7 @@ module.exports = {
     reqType: 'delete',
     method(req, res, next) {
       let action = 'Delete Event Created By Admin'
-      var eventData = {"error": "Event data not set."}
+      var eventData = { "error": "Event data not set." }
       Events.findOneAndRemove({ _id: req.params.eventId })
         .then(event => {
           var eventData = event
@@ -131,7 +178,7 @@ module.exports = {
                 note.update()
                 console.log('note after update: ', note)
               }
-            }).then(()=>{
+            }).then(() => {
               res.send(handleResponse(action, eventData))
             })
         }).catch(error => {
