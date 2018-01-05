@@ -437,7 +437,7 @@ var store = new vuex.Store({
     },
     addToMyEvents({ commit, dispatch }, payload) {
       payload.user.events.push(payload.event._id)
-
+      debugger
       api.put('/user-events', payload.user)
         .then(res => {
           console.log('this event has been added')
