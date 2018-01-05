@@ -56,6 +56,24 @@ export default {
                     commit(payload.mutation, payload)
                 }
             })
+            socket.on('joinedRoom', room => {
+                console.log('SETTING ROOM')
+                commit('setRoom', room)
+            })
+
+            socket.on('leftRoom', room => {
+                console.log('SETTING ROOM')
+                commit('setRoom', room)
+            })
+
+            socket.on('userLeft', user =>{
+                commit('removeUserFromRoom', user)
+            })
+            
+            socket.on('userJoined', user =>{
+                commit('addUserToRoom', user)
+            })
+
         },
         emitData({ commit, dispatch }, payload) {
             if (!payload.mutation) { return console.error("SOCKET ERROR: HEY YOU FORGOT TO ADD A MUTATION", payload) }
