@@ -67,7 +67,7 @@ module.exports = {
         })
     }
   },
-  /*
+  
   editUserEvents: {
     path: '/user-events',
     reqType: 'put',
@@ -82,7 +82,7 @@ module.exports = {
         })
     }
   },
-  */
+  
   // Unfinished, needs testing:
   deleteUserEvents: {
     path: '/user-events/:eventId',
