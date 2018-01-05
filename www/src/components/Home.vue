@@ -62,7 +62,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <h3>A digital conference website that centralizes your information in one place. A digital conference website
+                <h3>A digital conference website that centralizes your event information in one place. A digital conference website
                     that centralizes your information in one place. A digital conference website that centralizes your information
                     in one place. A digital conference website that centralizes your information in one place. </h3>
             </div>
