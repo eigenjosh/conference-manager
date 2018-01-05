@@ -5,8 +5,8 @@ let env = {
 	DBPROTOCOL: 'mongodb',
 	DBUSERNAME: 'admin',
 	DBPASSWORD: 'horseuber',
-	DBHOST: 'ds044887.mlab.com:44887', //confer: 'ds044907.mlab.com:44907', confer2: 'ds044887.mlab.com:44887'
-	DBNAME: 'confer2', //confer, confer2
+	DBHOST: 'ds143907.mlab.com:43907', //confer: 'ds044907.mlab.com:44907', confer2: 'ds044887.mlab.com:44887' //confer3: ds143907.mlab.com:43907
+	DBNAME: 'confer3', //confer, confer2
 	SERVERNAME: 'dev-server'
 }
 

@@ -546,7 +546,7 @@ var store = new vuex.Store({
       //   return !removedActivities.includes(activity)
       // })
       // console.log('user activities post-filter: ', payload.user.activities)
-      api.put('/user-events/' + payload.event._id)
+      api.put('/user-events/' + payload.event._id, payload.event)
         .then(res => {
           console.log('this event has been removed from user events')
           dispatch('authenticate')

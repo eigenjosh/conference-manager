@@ -67,6 +67,7 @@ module.exports = {
         })
     }
   },
+  /*
   editUserEvents: {
     path: '/user-events',
     reqType: 'put',
@@ -81,28 +82,45 @@ module.exports = {
         })
     }
   },
+  */
   // Unfinished, needs testing:
   deleteUserEvents: {
     path: '/user-events/:eventId',
     reqType: 'put',
     method(req, res, next) {
       let action = 'Remove User Event'
+      console.log("begun!");
       Activities.find({ eventId: req.params.eventId })
         .then(activities => {
+          var activityIdsToRemove = []
+          console.log('activities: ', activities)
           for (var i = 0; i < activities.length; i++) {
             var activity = activities[i]
             if (activity.capacity > 0) {
               activity.capacity--
+              activityIdsToRemove.push(activity._id)
               activity.update()
             }
           }
+          console.log('activity Ids to remove: ', activities)
           Users.find({ _id: req.session.uid })
             .then(user => {
-              user.activities = user.activities.filter((activity)=>{
-                return !activities.includes(activity)
+              console.log('user: ', user[0])
+              console.log('user event Ids pre-remove: ', user[0].events)
+              console.log('user activity Ids pre-remove: ', user[0].activities)
+              user[0].activities = user[0].activities.filter((activityId)=>{
+                return !activityIdsToRemove.includes(activityId)
               })
-              user.update()
+              user[0].events = user[0].events.filter((eventId)=>{
+                return !(eventId == req.params.eventId)
+              })
+              user[0].update()
+              console.log('user event Ids post-remove: ', user[0].events)
+              console.log('user activity Ids post-remove: ', user[0].activities)
               return res.send(handleResponse(action, { message: 'Successfully updated user events.' }))
+            })
+            .catch(error => {
+              return next(handleResponse(action, null, error))
             })
         })
         .catch(error => {
