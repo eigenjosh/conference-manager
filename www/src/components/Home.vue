@@ -60,7 +60,14 @@
                 </div>
             </div>
         </div>
-
+<div class="row">
+    <div class="col-xs-12">
+        <h3>A digital conference website that centralizes your information in one place.
+                A digital conference website that centralizes your information in one place.
+                A digital conference website that centralizes your information in one place.
+                A digital conference website that centralizes your information in one place. </h3>
+    </div>
+</div>
         <!-- LOGIN MODAL -->
 
         <div id="myModal" class="modal fade" role="dialog">
@@ -414,7 +421,7 @@
     }
 
     .second-pic {
-        margin-top: 300px;
+        /* margin-top: 300px; */
         height: 300px;
         background-image: url('https://i.pinimg.com/originals/50/1f/1a/501f1a19290e28cd676605f9acf36d03.jpg');
         background-repeat: no-repeat;
