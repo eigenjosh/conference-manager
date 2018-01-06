@@ -84,7 +84,7 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <button @click="removeEvent">Remove Event from My Schedule</button>
+                        <button  @click="removeEvent">Remove Event from My Schedule</button>
                     </ul>
                 </div>
 

@@ -33,7 +33,7 @@
             }
         },
         mounted() {
-           
+
         },
         methods: {
             formatDateForDisplay(date) {
@@ -46,7 +46,7 @@
             setActiveEvent(event) {
                 this.$store.dispatch('getEventById', event)
             }
-            
+
         }
     }
 </script>

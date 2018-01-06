@@ -125,10 +125,10 @@ var store = new vuex.Store({
 
     //SET EVENTS
     addOrUpdateEvent(state, data) {
-      debugger
+      
       var i = state.events.findIndex(e => e._id == data.event._id)
       if (i > -1) {
-       vue.set(state.events, state.events[i], data.event)
+       vue.set(state.events, i, data.event)
       }else{
         state.events.push(data.event)
       }
@@ -287,7 +287,7 @@ var store = new vuex.Store({
     },
 
     getMyActivities({ commit, dispatch }) {
-      debugger
+      
       api(`/user-activities`)
         .then(res => {
           console.log('res to getMyActivities: ', res)
@@ -301,7 +301,7 @@ var store = new vuex.Store({
     // CREATE NEW EVENT
 
     createEvent({ commit, dispatch }, payload) {
-      debugger
+      
       api.post('events/', payload.event)
         .then(res => {
           console.log('res to create event: ', res.data.data)
@@ -379,7 +379,7 @@ var store = new vuex.Store({
       api.put('events/' + payload.event._id, payload.event)
         .then(res => {
           commit('setActiveEvent', payload.event)
-          debugger
+          
           if (payload.emit) {
             payload.mutation = 'addOrUpdateEvent' //what should the other users commit?
             dispatch('emitData', payload)
@@ -390,16 +390,16 @@ var store = new vuex.Store({
         })
     },
     editActivity({ commit, dispatch }, payload) {
-      debugger
+      
       api.put('activities/' + payload.activity._id, payload.activity)
         .then(res => {
           commit('setActiveActivity', payload.activity)
           dispatch('getActivities', { _id: payload.activity.eventId })
-          if (payload.emit) {
-            payload.action = 'getActivities' //what should the other users commit?
-            payload.user = null
-            dispatch('emitData', payload)
-          }
+          // if (payload.emit) {
+          //   payload.action = 'getActivityById' //what should the other users commit?
+          //   payload.user = null
+          //   dispatch('emitData', payload)
+          // }
         })
         .catch(err => {
           commit('handleError', err)
@@ -480,7 +480,7 @@ var store = new vuex.Store({
     },
     addToMyEvents({ commit, dispatch }, payload) {
       payload.user.events.push(payload.event._id)
-      debugger
+      
       api.put('/user-events', payload.user)
         .then(res => {
           console.log('this event has been added')
@@ -505,7 +505,7 @@ var store = new vuex.Store({
     //VARIOUS DELETES
 
     deleteEvent({ commit, dispatch }, payload) {
-      debugger
+      
       api.delete('events/' + payload.event._id)
         .then(res => {
           console.log('res to delete event: ', res.data.data)
@@ -553,7 +553,7 @@ var store = new vuex.Store({
     },
 
     removeFromMyEvents({ commit, dispatch }, payload) {
-      debugger
+      
       // var removedEvent
       // for (var i = 0; i < payload.user.events.length; i++) {
       //   var event = payload.user.events[i]
@@ -608,7 +608,7 @@ var store = new vuex.Store({
         .then(res => {
           dispatch('getAllEvents')
           if (payload.emit) {
-            payload.mutation = 'addOrUpdateEvent' //what should the other users commit?
+            payload.action = 'getEventById' //what should the other users commit?
             payload.user = null
             dispatch('emitData', payload)
           }

@@ -101,7 +101,7 @@ io.on('connection', function (socket) {
     })
 
     socket.on('update', payload => {
-        socket.emit('receiveUpdate', payload)
+        socket.broadcast.emit('receiveUpdate', payload)
     })
 
     socket.on('joinRoom', roomName => {
