@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -13,7 +13,7 @@
                     </button>
                     <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
                     <div class="text-right">
-                        <p class="navbar-brand">Welcome {{activeUser.name}}</p>
+                        <p class="navbar-text">Welcome {{activeUser.name}}</p>
                         <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>
@@ -26,22 +26,22 @@
                     <ul>
                         <li>
                             <router-link :to="{name: 'Home'}">
-                                <button type="button" class="btn btn-default">Home</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">Home</button>
                             </router-link>
                         </li>
                         <li>
                             <router-link :to="{name: 'findEvents'}">
-                                <button type="button" class="btn btn-default">Find Events</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">Find Events</button>
                             </router-link>
                         </li>
                         <li>
                             <router-link :to="{name:'mySchedule'}">
-                                <button type="button" class="btn btn-default">My Schedule</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">My Schedule</button>
                             </router-link>
                         </li>
                         <li>
                             <router-link :to="{name:'userNotes'}">
-                                <button type="button" class="btn btn-default">My Notes</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">My Notes</button>
                             </router-link>
                         </li>
                     </ul>
@@ -126,11 +126,11 @@
         <div class="container">
             <div v-if="events.length == 0">
                 <h3>You have not created any events. If you wish to create a new event, please
-                    <a data-toggle="modal" data-target="#myModal3" @click="validateForm">click here</a>
+                    <a class="a-pointer" data-toggle="modal" data-target="#myModal3" @click="validateForm">click here</a>
                 </h3>
             </div>
             <div v-else class="admin-header">
-                <h1>Events I've Created</h1>
+                <h1 class="main-headline" style="font-size: 80px">Created Events</h1>
                 <div v-for="event in events" class="row ">
                     <aEvent :event="event"></aEvent>
                 </div>
@@ -212,7 +212,7 @@
             createEvent() {
                 this.validateForm()
                 if (this.validator.form) {
-                    this.$store.dispatch('createEvent', { event: this.event, user: this.activeUser})
+                    this.$store.dispatch('createEvent', { event: this.event, user: this.activeUser })
                     this.event = {
                         name: '',
                         description: '',
@@ -233,3 +233,5 @@
 </script>
 
 <style scoped>
+
+</style>

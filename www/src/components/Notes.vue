@@ -3,7 +3,7 @@
 
         <!-- BEGINNING OF NAVBAR -->
 
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -16,7 +16,7 @@
                     </button>
                     <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
                     <div class="text-right">
-                        <p class="navbar-brand">Welcome {{activeUser.name}}</p>
+                        <p class="navbar-text">Welcome {{activeUser.name}}</p>
                         <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Create Note</button>
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>
@@ -28,23 +28,23 @@
                     <ul>
                         <li>
                             <router-link :to="{name:'Home'}">
-                                <button type="button" class="btn btn-default">Home</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">Home</button>
                             </router-link>
                         </li>
                         <li>
                             <router-link :to="{name: 'adminEvents'}">
-                                <button type="button" class="btn btn-default">Events I've Created</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">Events I've Created</button>
                             </router-link>
                         </li>
                         <li>
                             <router-link :to="{name: 'findEvents'}">
-                                <button type="button" class="btn btn-default">Find Events</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">Find Events</button>
                             </router-link>
                         </li>
 
                         <li>
                             <router-link :to="{name:'mySchedule'}">
-                                <button type="button" class="btn btn-default">My Schedule</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">My Schedule</button>
                             </router-link>
                         </li>
 
@@ -73,7 +73,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="title">Note Title:</label>
-                            <input type="text" name="title" maxlength="40"class="form-control" placeholder="Title..." required v-model='note.title'>
+                            <input type="text" name="title" maxlength="40" class="form-control" placeholder="Title..." required v-model='note.title'>
                         </div>
                         <div class="form-group">
                             <label for="note-body"></label>
@@ -90,32 +90,34 @@
 
         <!-- DISPLAY USER NOTES -->
         <div class="draw-notes">
-            <h3>General Notes</h3>
-            <div v-for="userNote in userNotes">
-                <div v-if="!userNote.activityId" class="row">
-                    <div class="col-xs-12">
-                        <button type="button" @click="setActiveNote(userNote)" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal2">
-                            <div class="col-xs-12">
-                                <h1>{{userNote.title}}</h1>
-                            </div>
-                        </button>
+            <div class="row">
+                <div class="col-xs-6 well">
+                    <h3>General Notes</h3>
+                    <div v-for="userNote in userNotes">
+                        <div v-if="!userNote.activityId" class="row">
+                            <button type="button" @click="setActiveNote(userNote)" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal2">
+                                <div class="col-xs-12">
+                                    <h1>{{userNote.title}}</h1>
+                                </div>
+                            </button>
+                        </div>
+                        <div v-else class="else">
+                        </div>
                     </div>
                 </div>
-                <div v-else class="else">
-                </div>
-            </div>
-            <h3>Activity Notes</h3>
-            <div v-for="userNote in userNotes">
-                <div v-if="userNote.activityId" class="row">
-                    <div class="col-xs-12">
-                        <button type="button" @click="setActiveNote(userNote)" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal2">
-                            <div class="col-xs-12">
-                                <h1>{{userNote.title}}</h1>
-                            </div>
-                        </button>
+                <div class="col-xs-6 well">
+                    <h3>Activity Notes</h3>
+                    <div v-for="userNote in userNotes">
+                        <div v-if="userNote.activityId" class="row">
+                            <button type="button" @click="setActiveNote(userNote)" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal2">
+                                <div class="col-xs-12">
+                                    <h1>{{userNote.title}}</h1>
+                                </div>
+                            </button>
+                        </div>
+                        <div v-else class="else">
+                        </div>
                     </div>
-                </div>
-                <div v-else class="else">
                 </div>
             </div>
         </div>
@@ -211,4 +213,5 @@
     .title-head {
         text-align: center;
     }
+
 </style>

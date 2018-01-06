@@ -20,7 +20,7 @@
 
 <style>
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
@@ -78,5 +78,14 @@
     height: 100%;
     width: 100%;
     /* color: black; */
+}
+
+.main-headline {
+  font-family: 'Abril Fatface', cursive;
+  margin-bottom: 100px;
+}
+
+.a-pointer {
+  cursor: pointer;
 }
 </style>

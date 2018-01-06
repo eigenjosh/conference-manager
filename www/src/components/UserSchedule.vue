@@ -29,7 +29,7 @@
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <button @click="removeEvent">Remove Activity from My Schedule</button>
+                                        <button data-dismiss="modal" @click="removeActivity">Remove Activity from My Schedule</button>
                                     </ul>
                                 </div>
                         <!-- <button class="btn btn-danger" @click="removeActivity" data-dismiss="modal">Remove from Schedule</button> -->
@@ -76,7 +76,7 @@
                 <!-- <button class="btn btn-danger btn-sm remove" @click="removeEvent">REMOVE EVENT FROM MY SCHEDULE</button> -->
             </div>
         </div>
-        <div class="row">
+        <div v-if="activeEvent" class="row">
             <div class="col-xs-1">
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -84,7 +84,7 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <button @click="removeEvent">Remove Event from My Schedule</button>
+                        <button data-dismiss="modal" @click="removeEvent">Remove Event from My Schedule</button>
                     </ul>
                 </div>
 

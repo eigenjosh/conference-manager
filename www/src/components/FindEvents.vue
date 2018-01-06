@@ -34,12 +34,6 @@
                                 <button type="button" class="btn nav-drop-btn btn-default">Home</button>
                             </router-link>
                         </li>
-                        <!-- <li>
-    
-                                <router-link :to="{name: 'eventSchedule'}">
-                                    <button type="button" class="btn btn-default">Event Schedule</button>
-                                </router-link>
-                            </li> -->
 
                         <div v-if="activeUser.hasOwnProperty('name')">
                             <li>
@@ -75,19 +69,27 @@
             <!-- /.container-fluid -->
         </nav>
         <div class="container-fluid">
-            <h1>Find Events</h1>
-            <form id="find-events" class="form" @submit.prevent="findEvents">
-                <div class="form-group">
-                    <label for="location">Location:</label>
-                    <input type="text" name="text" class="form-control" placeholder="Location" required v-model='search.location'>
+            <div class="row">
+                <div class="col-xs-12 main-headline">
+                    <h1 style="font-size: 80px">Find Events</h1>
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-submit btn-success" type="submit">Search</button>
+                <div class="col-xs-offset-4 col-xs-8">
+                    <form id="find-events" class="form" @submit.prevent="findEvents">
+                        <div class="search-form-group">
+                            <!-- <label for="location">Location:</label> -->
+                            <input type="text" name="text" class="form-control" placeholder="Find an Event by Location" required v-model='search.location'>
+                            <button class="btn btn-submit btn-default search-btn" type="submit">Search</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <button type="button" class="btn btn-danger" @click="getAllEvents">View All Events</button>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-lg btn-primary" @click="getAllEvents">View All Events</button>
+                    </div>
                 </div>
-            </form>
+            </div>
             <div v-for="event in events" class="row event-row">
                 <event :event="event"></event>
             </div>
@@ -108,11 +110,11 @@
                         <form id="login" class="form">
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" name="email" maxlength="57"class="form-control" placeholder="Email" required v-model='login.email'>
+                                <input type="email" name="email" maxlength="57" class="form-control" placeholder="Email" required v-model='login.email'>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
-                                <input type="password" name="password" maxlength="20"class="form-control" placeholder="password" required v-model='login.password'>
+                                <input type="password" name="password" maxlength="20" class="form-control" placeholder="password" required v-model='login.password'>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-submit btn-success" @click="submitLogin" data-dismiss="modal" type="submit">Submit</button>
@@ -153,7 +155,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" name="email" maxlength="57"class="form-control" placeholder="Email" required v-model="signUp.email">
+                                <input type="email" name="email" maxlength="57" class="form-control" placeholder="Email" required v-model="signUp.email">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
@@ -190,12 +192,13 @@
                         <form id="createEvent" class="form">
                             <div class="form-group">
                                 <label for="eventName">Event Name</label>
-                                <input type="text" name="eventName" maxlength="40"class="form-control" placeholder="Whats the event called?" required v-model="event.name"
+                                <input type="text" name="eventName" maxlength="40" class="form-control" placeholder="Whats the event called?" required v-model="event.name"
                                     required>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea type="text" name="description" maxlength="300"class="form-control" rows="5" placeholder="What is this event for?" required v-model="event.description"></textarea>
+                                <textarea type="text" name="description" maxlength="300" class="form-control" rows="5" placeholder="What is this event for?"
+                                    required v-model="event.description"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="startDate">Start Date:</label>
@@ -211,11 +214,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="venue">Venue:</label>
-                                <input type="text" name="venue" class="form-control" maxlength="30"placeholder="Venue" required v-model="event.venue">
+                                <input type="text" name="venue" class="form-control" maxlength="30" placeholder="Venue" required v-model="event.venue">
                             </div>
                             <div class="form-group">
                                 <label for="address">Address:</label>
-                                <input type="text" name="address" class="form-control" maxlength="75" placeholder="Venue Address" v-model="event.address" required>
+                                <input type="text" name="address" class="form-control" maxlength="75" placeholder="Venue Address" v-model="event.address"
+                                    required>
                                 <input type="text" name="city" maxlength="75" class="form-control" placeholder="Venue City" v-model="event.city" required>
                                 <div class="form-group state">
                                     <label for="state">Venue State</label>
@@ -223,7 +227,7 @@
                                         <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
                                     </select>
                                 </div>
-                                <input type="number"maxlength="5" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
+                                <input type="number" maxlength="5" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
                                 <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p>
                                 <div class="form-group">
                                     <label for="timeZone">Time Zone</label>
@@ -310,7 +314,7 @@
             locations() {
                 return this.$store.state.locations
             },
-            timeZones(){
+            timeZones() {
                 return this.$store.state.timeZones
             }
         },
@@ -361,7 +365,7 @@
             createEvent() {
                 this.validateForm()
                 if (this.validator.form) {
-                    this.$store.dispatch('createEvent', {event: this.event, user:this.activeUser})
+                    this.$store.dispatch('createEvent', { event: this.event, user: this.activeUser })
                     this.event = {
                         name: '',
                         description: '',
@@ -374,7 +378,7 @@
                         endDate: ''
                     }
                 }
-                
+
             }
         }
     }
@@ -384,4 +388,16 @@
     .event-btn {
         width: 100%;
     }
+
+    .search-form-group {
+        width: 50%;
+        margin-top: 50px;
+    }
+
+    .search-btn {
+        width: 50%;
+        margin-top: 5px;
+        margin-bottom: 50px;
+    }
+
 </style>

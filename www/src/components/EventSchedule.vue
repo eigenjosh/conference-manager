@@ -13,7 +13,7 @@
                     </button>
                     <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
                     <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
-                        <p class="navbar-brand">Welcome {{activeUser.name}}</p>
+                        <p class="navbar-text">Welcome {{activeUser.name}}</p>
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>
                     <div class="text-right" v-else>
@@ -30,7 +30,7 @@
                         <li>
 
                             <router-link :to="{name: 'Home'}">
-                                <button type="button" class="btn btn-default">Home</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">Home</button>
                             </router-link>
                         </li>
                         <li>

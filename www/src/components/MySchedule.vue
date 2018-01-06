@@ -51,7 +51,7 @@
             </div>
         </nav>
 
-        <h1 class="sched-title">My Schedule</h1>
+        <h1 style="font-size: 80px" class="main-headline">My Schedule</h1>
         <!-- <button class="btn view-all" @click="getMyActivities">View All Activities</button> -->
         <div v-if="myEvents.length == 0" class="header">
             <h3>Looks like you have not added any activities to your schedule yet! Join an event and click "add to my schedule"
@@ -70,10 +70,10 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li>
-                                <a @click="getMyActivities">View All Activities</a>
+                                <a class="a-pointer" @click="getMyActivities">View All Activities</a>
                             </li>
                             <li v-for="e in myEvents">
-                                <a @click="getMySchedule(e)">{{e.name}}</a>
+                                <a class="a-pointer" @click="getMySchedule(e)">{{e.name}}</a>
                             </li>
                         </ul>
                     </div>
@@ -178,11 +178,11 @@
         background: #FFFFF9;
     } */
 
-    .sched-title {
+    /* .sched-title {
         color: black;
         font-size: 50px;
         text-shadow: 0px 0px 5px #FFFFF9;
-    }
+    } */
 
     .nav-drop-btn {
         width: 90%;

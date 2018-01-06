@@ -10,7 +10,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
+                <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive">Confer</a>
                 <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
                     <p class="navbar-text">Welcome {{activeUser.name}}</p>
                     <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
@@ -55,8 +55,8 @@
         <div class="jumbotron main-heading main-pic">
             <div class="row">
                 <div class="col-xs-12">
-                    <h1>CONFER</h1>
-                    <h3>Digital Conference Manager</h3>
+                    <h1 style="font-size: 150px">CONFER</h1>
+                    <h3 style="font-size: 30px">Digital Conference Manager</h3>
                 </div>
             </div>
         </div>
