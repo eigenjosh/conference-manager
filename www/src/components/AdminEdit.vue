@@ -79,7 +79,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
-                                <textarea type="text" name="description" maxlength="500"class="form-control" rows="5" placeholder="Whats this for?" required v-model='activity.description'></textarea>
+                                <textarea type="text" name="description" maxlength="500" class="form-control" rows="5" placeholder="Whats this for?" required
+                                    v-model='activity.description'></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="room">Room:</label>
@@ -139,19 +140,21 @@
                         <form class="form">
                             <div class="form-group">
                                 <label for="name">Name:</label>
-                                <textarea type="text" maxlength="70"name="name" class="form-control" placeholder="Name" rows="1" required v-model='activity.name'>{{activity.name}}</textarea>
+                                <textarea type="text" maxlength="70" name="name" class="form-control" placeholder="Name" rows="1" required v-model='activity.name'>{{activity.name}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
-                                <textarea type="text" name="description" maxlength="500" class="form-control" rows="5" placeholder="Whats this for?" required v-model='activity.description'>{{activity.description}}</textarea>
+                                <textarea type="text" name="description" maxlength="500" class="form-control" rows="5" placeholder="Whats this for?" required
+                                    v-model='activity.description'>{{activity.description}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="room">Room:</label>
-                                <textarea type="text" name="room" maxlength="30"class="form-control" placeholder="Room number" required rows="1" v-model='activity.location'>{{activeActivity.location}}</textarea>
+                                <textarea type="text" name="room" maxlength="30" class="form-control" placeholder="Room number" required rows="1" v-model='activity.location'>{{activeActivity.location}}</textarea>
                             </div>
                             <div class="form-group date">
                                 <label for="date">Date:</label>
-                                <input type="date" name="date" class="form-control" placeholder="date" :min="date" :max="activeEvent.endDate" required v-model='activity.date' @change="validateActivityForm">
+                                <input type="date" name="date" class="form-control" placeholder="date" :min="date" :max="activeEvent.endDate" required v-model='activity.date'
+                                    @change="validateActivityForm">
                                 <p class="error-message text-left text-danger" v-if="!this.validator.date">Date must be during the event.</p>
                             </div>
                             <!-- START TIME -->
@@ -207,12 +210,13 @@
                         <form id="createEvent" class="form">
                             <div class="form-group">
                                 <label for="eventName">Event Name</label>
-                                <textarea type="text" name="eventName" maxlength="40"class="form-control" placeholder="Whats the event called?" rows="1" required v-model="event.name"
-                                    required>{{activeEvent.name}}</textarea>
+                                <textarea type="text" name="eventName" maxlength="40" class="form-control" placeholder="Whats the event called?" rows="1"
+                                    required v-model="event.name" required>{{activeEvent.name}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea type="text" name="description" maxlength="300"class="form-control" rows="5" placeholder="What is this event for?" required v-model="event.description">{{activeEvent.description}}</textarea>
+                                <textarea type="text" name="description" maxlength="300" class="form-control" rows="5" placeholder="What is this event for?"
+                                    required v-model="event.description">{{activeEvent.description}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="startDate">Start Date:</label>
@@ -232,15 +236,18 @@
                             </div>
                             <div class="form-group">
                                 <label for="address">Address:</label>
-                                <textarea type="text" name="address" maxlength="75" class="form-control" placeholder="Venue Address" rows="1" v-model="event.address" required>{{activeEvent.address}}</textarea>
-                                <textarea type="text" name="city" maxlength="70" class="form-control" placeholder="Venue City" rows="1" v-model="event.city" required>{{activeEvent.city}}</textarea>
+                                <textarea type="text" name="address" maxlength="75" class="form-control" placeholder="Venue Address" rows="1" v-model="event.address"
+                                    required>{{activeEvent.address}}</textarea>
+                                <textarea type="text" name="city" maxlength="70" class="form-control" placeholder="Venue City" rows="1" v-model="event.city"
+                                    required>{{activeEvent.city}}</textarea>
                                 <div class="form-group state">
                                     <label for="state">Venue State</label>
                                     <select class="form-control state" v-model="event.state">
                                         <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
                                     </select>
                                 </div>
-                                <textarea type="number" maxlength="5" name="zip" class="form-control" placeholder="Venue Zip" rows="1" v-model="event.zip" required @change="validateEventForm">{{activeEvent.zip}}</textarea>
+                                <textarea type="number" maxlength="5" name="zip" class="form-control" placeholder="Venue Zip" rows="1" v-model="event.zip"
+                                    required @change="validateEventForm">{{activeEvent.zip}}</textarea>
                                 <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p>
                                 <div class="form-group">
                                     <label for="timeZone">Time Zone</label>
@@ -264,19 +271,30 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-6 well" data-toggle="modal" data-target="#myModal3" @click="eventFormClickHandler">
-                    <h1>{{activeEvent.name}}</h1>
-                    <i class="fa fa-pencil fa-2x " aria-hidden="true"></i>
+                <div class="col-xs-12 well main-headline" data-toggle="modal" data-target="#myModal3" @click="eventFormClickHandler">
+                    <h1 style="font-size: 80px">{{activeEvent.name}}</h1>
+                    <i class="fa fa-pencil fa-1x " aria-hidden="true"> Click to Edit Event Details</i>
                 </div>
-
-                <div class="col-xs-6 text-right">
-                    <button class="btn btn-danger btn" @click="deleteEvent">Delete Event</button>
-                    <button class="btn btn-warning btn" data-toggle="modal" data-target="#myModalAdd" @click="validateActivityForm">Add Activity</button>
-                    <button v-if="!activeEvent.published" class="btn btn-success" @click="publish">Publish</button>
-                    <button v-else="activeEvent.published" class="btn btn-success" @click="unPublish">Make Private</button>
-                    <router-link :to="{path: '/event-schedule/' + activeEvent._id}">
-                        <button class="btn btn-default event-btn word-wrap" @click="setActiveEvent(event)">Go To Event</button>
-                    </router-link>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="col-xs-3">
+                        <button class="btn btn-default admin-edit-btn" data-toggle="modal" data-target="#myModalAdd" @click="validateActivityForm">Add Activity</button>
+                    </div>
+                    <div class="col-xs-3">
+                        <button v-if="!activeEvent.published" class="btn btn-default admin-edit-btn" @click="publish" data-toggle="tooltip"
+                        data-placement="top" title="Publish event so others can see it!">Publish</button>
+                        <button v-else="activeEvent.published" class="btn btn-default admin-edit-btn" @click="unPublish" data-toggle="tooltip"
+                        data-placement="top" title="Only you can see Private events!">Make Private</button>
+                    </div>
+                    <div class="col-xs-3">
+                        <router-link :to="{path: '/event-schedule/' + activeEvent._id}">
+                            <button class="btn btn-default admin-edit-btn" @click="setActiveEvent(event)">Go To Event Page</button>
+                        </router-link>
+                    </div>
+                    <div class="col-xs-3">
+                            <button class="btn btn-danger delete-admin-edit-btn" @click="deleteEvent">Delete Event</button>
+                        </div>
                 </div>
             </div>
             <div class="row" v-for="(timeDict, date) in schedule">
@@ -293,7 +311,7 @@
                                 <button data-toggle="modal" data-target="#myModalDetails" @click="activityFormClickHandler(activity)" class="btn btn-primary activities">
                                     <h5>{{formatDateForDisplay(activity.date)}} {{activity.startTime}} - {{activity.endTime}}</h5>
                                     <h4>{{activity.name}}</h4>
-                                    <i class="fa fa-pencil pull-right" aria-hidden="true" @click="validateActivityForm"></i>
+                                    <i class="fa fa-pencil fa-1x pull-right" aria-hidden="true" @click="validateActivityForm"> Click to Edit Activity</i>
                                 </button>
                             </div>
                         </div>
@@ -430,7 +448,7 @@
             addActivity() {
                 this.validateActivityForm()
                 if (this.validator.activityForm) {
-                    this.$store.dispatch('addActivity', { activity: this.activity, eventId: this.activeEvent._id, emit:true })
+                    this.$store.dispatch('addActivity', { activity: this.activity, eventId: this.activeEvent._id, emit: true })
                     this.activity = {
                         name: '',
                         description: '',
@@ -459,24 +477,24 @@
             editActivity() {
                 this.validateActivityForm()
                 if (this.validator.activityForm) {
-                    this.$store.dispatch('editActivity', {activity: this.activity, emit: true})
+                    this.$store.dispatch('editActivity', { activity: this.activity, emit: true })
                 }
             },
             deleteActivity() {
-                this.$store.dispatch('deleteActivity', {activity: this.activity, emit:true})
+                this.$store.dispatch('deleteActivity', { activity: this.activity, emit: true })
             },
             deleteEvent() {
                 debugger
-                this.$store.dispatch('deleteEvent', {event:this.activeEvent, emit:true})
+                this.$store.dispatch('deleteEvent', { event: this.activeEvent, emit: true })
 
             },
             publish() {
                 this.activeEvent.published = true
-                this.$store.dispatch('publishEvent', {event: this.activeEvent, emit:true})
+                this.$store.dispatch('publishEvent', { event: this.activeEvent, emit: true })
             },
             unPublish() {
                 this.activeEvent.published = false
-                this.$store.dispatch('publishEvent', {event:this.activeEvent, emit:true})
+                this.$store.dispatch('publishEvent', { event: this.activeEvent, emit: true })
             },
             setActiveEvent(activeEvent) {
                 this.$store.dispatch('getEventById', activeEvent)
@@ -485,7 +503,7 @@
             editEvent() {
                 this.validateEventForm()
                 if (this.validator.eventForm) {
-                    this.$store.dispatch('editEvent', {event: this.event, emit:true})
+                    this.$store.dispatch('editEvent', { event: this.event, emit: true })
                 }
             }
         }
@@ -504,4 +522,17 @@
     .date {
         width: 250px;
     }
+
+    .admin-edit-btn {
+        width: 75%;
+        margin-bottom: 5px;
+        background-color: lightgray;
+        border: black solid 1px;
+    }
+    .delete-admin-edit-btn {
+        width: 75%;
+        margin-bottom: 5px;
+        border: black solid 1px;
+    }
+
 </style>

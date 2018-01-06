@@ -78,19 +78,11 @@
                         </ul>
                     </div>
                 </div>
-                <!-- <div class="col-xs-12 col-md-6 col-md-offset-3">
-                    <div class="row">
-                        <div class="col-xs-12 col-md-3" v-for="e in myEvents">
-                                <button class="btn  btn-event" @click="getMySchedule(e)">{{e.name}}</button>          
-                        </div>
-                    </div>
-                </div> -->
             </div>
             <div class="row">
                 <userSchedule></userSchedule>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -169,20 +161,6 @@
         background: black;
         font: white;
     }
-/* 
-    .navbar .navbar-brand {
-        color: #FFFFF9;
-    }
-
-    .navbar .navbar-header .navbar-toggle .icon-bar {
-        background: #FFFFF9;
-    } */
-
-    /* .sched-title {
-        color: black;
-        font-size: 50px;
-        text-shadow: 0px 0px 5px #FFFFF9;
-    } */
 
     .nav-drop-btn {
         width: 90%;
@@ -193,5 +171,6 @@
 
     .btn-default-picker {
         background-color: lightgray;
+        border: black solid 1px;
     }
 </style>

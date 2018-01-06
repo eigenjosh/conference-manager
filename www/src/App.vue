@@ -73,19 +73,33 @@
     background-color: lightslategrey;
     color: white;
   }
+
   .event-name-btn {
     background-color: darkslategrey;
     height: 100%;
     width: 100%;
     /* color: black; */
-}
+  }
 
-.main-headline {
-  font-family: 'Abril Fatface', cursive;
-  margin-bottom: 100px;
-}
+  .main-headline {
+    font-family: 'Abril Fatface', cursive;
+    margin-bottom: 100px;
+  }
 
-.a-pointer {
-  cursor: pointer;
-}
+  .a-pointer {
+    cursor: pointer;
+  }
+
+  .event-btn {
+    width: 100%;
+    background-color: lightgray;
+    margin-bottom: 10px;
+    border: black 1px solid;
+  }
+
+  .nav-btn-defaults {
+    width: 10%;
+    background-color: lightgray;
+    color: black;
+  }
 </style>

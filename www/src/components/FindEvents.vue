@@ -76,7 +76,6 @@
                 <div class="col-xs-offset-4 col-xs-8">
                     <form id="find-events" class="form" @submit.prevent="findEvents">
                         <div class="search-form-group">
-                            <!-- <label for="location">Location:</label> -->
                             <input type="text" name="text" class="form-control" placeholder="Find an Event by Location" required v-model='search.location'>
                             <button class="btn btn-submit btn-default search-btn" type="submit">Search</button>
                         </div>
@@ -387,6 +386,8 @@
 <style scoped>
     .event-btn {
         width: 100%;
+        background-color: lightgray;
+        margin-bottom: 10px;
     }
 
     .search-form-group {
@@ -399,5 +400,4 @@
         margin-top: 5px;
         margin-bottom: 50px;
     }
-
 </style>

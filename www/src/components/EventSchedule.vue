@@ -59,27 +59,12 @@
                                     <button type="button" class="btn btn-default nav-drop-btn">My Notes</button>
                                 </router-link>
                             </li>
-
                         </div>
-
                     </ul>
-
-
-                    <!-- SEARCH BAR -->
-
                     <ul class="nav navbar-nav navbar-right">
-                        <!-- LOGIN BUTTON -->
-
-                        <!-- Trigger the LOGIN modal -->
-                        <!-- Trigger the SIGN UP modal -->
-
-
-
                     </ul>
                 </div>
-                <!-- /.navbar-collapse -->
             </div>
-            <!-- /.container-fluid -->
         </nav>
 
         <div id="myModal" class="modal fade" role="dialog">
@@ -95,7 +80,7 @@
                         <form id="login" class="form">
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" maxlength="57"name="email" class="form-control" placeholder="Email" required v-model='login.email'>
+                                <input type="email" maxlength="57" name="email" class="form-control" placeholder="Email" required v-model='login.email'>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
@@ -171,23 +156,24 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">{{activeActivity.name}}</h4>
+                        <h2 class="modal-title">{{activeActivity.name}}</h2>
                     </div>
                     <div class="modal-body">
-                        <h5>{{formatDateForDisplay(activeActivity.date)}} {{activeActivity.startTime}}-{{activeActivity.endTime}}</h5>
-                        <h5>ROOM:{{activeActivity.location}}</h5>
-                        <h2>Speaker: {{activeActivity.speakerName}}</h2>
-                        <div><h3>{{activeActivity.description}}</h3></div>
+                        <h5>{{formatDateForDisplay(activeActivity.date)}}</h5>
+                        <h5>{{activeActivity.startTime}} - {{activeActivity.endTime}}</h5>
+                        <h4>Room: {{activeActivity.location}}</h4>
+                        <h4>Speaker: {{activeActivity.speakerName}}</h4>
+                        <h4>{{activeActivity.description}}</h4>
                         <h4 v-if="activeActivity.capacity">Seats Available: {{activeActivity.capacity}}</h4>
                     </div>
                     <div v-if="activeUser && activeUser.events">
                         <div v-if="activeUser.events.includes(activeEvent._id)">
                             <button v-if="!activeUser.activities.includes(activeActivity._id) && (activeActivity.capacity > 0 || !activeActivity.capacity)"
                                 @click="addToMySchedule" class="btn btn-success">Add to My Schedule</button>
-                            <h4 class="danger-text" v-else-if="activeActivity.capacity == 0 && activeActivity.capacity">This activity is currently full</h4>
-                            </div>
+                            <h4 class="danger-text" v-else-if="activeActivity.capacity == 0 && activeActivity.capacity">Activity Full</h4>
+                        </div>
                         <div v-if="activeUser.activities.includes(activeActivity._id)">
-                            <h4 class="success-text">This activity is in your schedule</h4>
+                            <h4 class="success-text">In My Schedule</h4>
                         </div>
                     </div>
                 </div>
@@ -197,30 +183,35 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
-                    <h1>{{activeEvent.name}}</h1>
+                    <h1 class="main-headline" style="font-size: 80px">{{activeEvent.name}}</h1>
+                    <h3 class="well text-center desc-style">{{activeEvent.description}}</h3>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-offset-3 col-xs-6 well">
-                    <h3>{{formatDateForDisplay(activeEvent.startDate)}} - {{formatDateForDisplay(activeEvent.endDate)}}</h3>
-                    <h3>{{activeEvent.description}}</h3>
-                    <h3>{{activeEvent.venue}}</h3>
-                    <h5>{{activeEvent.address}}</h5>
-                    <h5>{{activeEvent.city}}, {{activeEvent.state}}--{{activeEvent.timeZone}}</h5>
+                <div class="col-xs-offset-3 col-xs-6">
+                    <h2>{{formatDateForDisplay(activeEvent.startDate)}} - {{formatDateForDisplay(activeEvent.endDate)}}</h2>
+                    <h3>
+                        <b>{{activeEvent.venue}}</b>
+                    </h3>
+                    <h4>{{activeEvent.address}}</h4>
+                    <h4>{{activeEvent.city}}, {{activeEvent.state}}</h4>
+                    <h4>{{activeEvent.zip}}</h4>
+                    <h5>Time Zone: {{activeEvent.timeZone}}</h5>
                 </div>
             </div>
             <div v-if="activeUser && activeUser.events">
-                <div class="col-xs-4 col-xs-offset-7 text-right" v-if="activeUser._id != activeEvent.creatorId">
-                    <button v-if="!activeUser.events.includes(activeEvent._id)" class="btn btn-primary btn-lg" @click="addToMyEvents">Join Event</button>
-                    <h3 v-if="joined">This event has been added to your events</h3>
+                <div class="col-xs-4 col-xs-offset-4 text-right" v-if="activeUser._id != activeEvent.creatorId">
+                    <button v-if="!activeUser.events.includes(activeEvent._id)" class="btn btn-default btn-lg join-btn" data-toggle="tooltip"
+                        data-placement="top" title="Join event to add activities to your schedule!" @click="addToMyEvents">Join Event</button>
+                    <h3 class="main-headline" style="margin-right: 30px; color: blue" v-if="joined">You have Joined this Event</h3>
                 </div>
-                <div class="col-xs-4 col-xs-offset-7 text-right" v-else>
+                <div class="col-xs-4 col-xs-offset-4" v-else>
                     <router-link :to="{path: '/admin-edit/' + activeEvent._id}">
-                        <button class="btn btn-warning btn-lg">Edit Schedule</button>
+                        <button class="btn btn-default btn-lg admin-btn">Edit Schedule</button>
                     </router-link>
                     <router-link :to="{name: 'mySchedule'}">
-                            <button class="btn btn-success btn-lg">View My Schedule</button>
-                        </router-link>
+                        <button class="btn btn-default btn-lg admin-btn">View My Schedule</button>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -241,6 +232,10 @@
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 bottom-buffer">
                 </div>
             </div>
         </div>
@@ -343,7 +338,7 @@
             addToMySchedule() {
                 if (this.activeActivity.capacity) {
                     this.activeActivity.capacity--
-                    this.$store.dispatch('editActivity', {activity:this.activeActivity, emit:true})
+                    this.$store.dispatch('editActivity', { activity: this.activeActivity, emit: true })
                 }
                 this.$store.dispatch('addToMySchedule', { activity: this.activeActivity, user: this.activeUser })
             }
@@ -363,7 +358,31 @@
     .success-text {
         color: blue;
     }
-    .description{
+
+    .description {
         width: 50%;
+    }
+
+    .admin-btn {
+        background-color: lightgray;
+        margin-bottom: 5px;
+        font: black;
+        border: 1px solid black;
+        width: 75%;
+    }
+
+    .desc-style {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+
+    .join-btn {
+        background-color: lightgray;
+        color: black;
+        margin-bottom: 10px;
+    }
+
+    .bottom-buffer {
+        margin-bottom: 50px;
     }
 </style>

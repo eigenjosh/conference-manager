@@ -14,10 +14,10 @@
                 <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
                     <p class="navbar-text">Welcome {{activeUser.name}}</p>
                     <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
-                    <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
+                    <button type="button" class="btn btn-danger navbar-btn logout-btn" @click="logout">Logout</button>
                 </div>
                 <div class="text-right" v-else>
-                    <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Login</button>
+                    <button type="button" class="btn btn-primary navbar-btn " data-toggle="modal" data-target="#myModal">Login</button>
                     <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
                 </div>
             </div>
@@ -444,6 +444,9 @@
 
     .navbar ul {
         list-style-type: none;
+    }
+    .logout-btn {
+        margin-left:2px;
     }
 
     @media (max-width: 2000px) {

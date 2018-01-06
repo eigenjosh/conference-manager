@@ -73,10 +73,9 @@
                     </button>
                 </router-link>
                 <br>
-                <!-- <button class="btn btn-danger btn-sm remove" @click="removeEvent">REMOVE EVENT FROM MY SCHEDULE</button> -->
             </div>
         </div>
-        <div v-if="activeEvent" class="row">
+        <div v-if="activeUser.events.includes(activeEvent._id)" class="row delete-btn">
             <div class="col-xs-1">
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -236,13 +235,6 @@
         display: none;
     }
 
-    /* .activities{
-        margin-top:5px;
-        margin-bottom: 5px;
-        background-color:#CBCCB4;
-        color: rgba(12, 12, 12, 0.657);
-    } */
-
     .event {
         height: 130px;
     }
@@ -269,5 +261,9 @@
     .event-name:hover {
         text-decoration: none;
         text-shadow: 0px 0px 15px #7F7F7F
+    }
+
+    .delete-btn {
+        margin-bottom: 5px;
     }
 </style>
