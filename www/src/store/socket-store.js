@@ -48,11 +48,11 @@ export default {
             })
 
             socket.on('receiveUpdate', payload => {
-                debugger
+                
                 if (payload.action) {
                     dispatch(payload.action, payload)
                 }
-                if (payload.mutation) {
+                if(payload.mutation){
                     commit(payload.mutation, payload)
                 }
             })
@@ -77,7 +77,7 @@ export default {
         },
         emitData({ commit, dispatch }, payload) {
             if (!payload.mutation) { return console.error("SOCKET ERROR: HEY YOU FORGOT TO ADD A MUTATION", payload) }
-            debugger
+            
 
             socket.emit('update', payload)
         }

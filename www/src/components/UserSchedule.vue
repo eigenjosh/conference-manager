@@ -23,15 +23,15 @@
                         <button v-else class="btn btn-primary" data-dismiss="modal" data-toggle="modal" @click="saveNote" data-target="#notepad">Take Note</button>
                     </div>
                     <div class="modal-footer">
-                            <div class="btn-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <button data-dismiss="modal" @click="removeActivity">Remove Activity from My Schedule</button>
-                                    </ul>
-                                </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <button data-dismiss="modal" @click="removeActivity">Remove Activity from My Schedule</button>
+                            </ul>
+                        </div>
                         <!-- <button class="btn btn-danger" @click="removeActivity" data-dismiss="modal">Remove from Schedule</button> -->
                     </div>
                 </div>
@@ -87,9 +87,6 @@
                         <button data-dismiss="modal" @click="removeEvent">Remove Event from My Schedule</button>
                     </ul>
                 </div>
-
-
-
             </div>
         </div>
         <div class="row" v-for="(timeDict, date) in userSchedule">
@@ -198,7 +195,7 @@
             removeActivity() {
                 if (this.activeActivity.capacity) {
                     this.activeActivity.capacity++
-                    this.$store.dispatch('editActivity', {activity: this.activeActivity, emit:true})
+                    this.$store.dispatch('editActivity', { activity: this.activeActivity, emit: true })
                 }
                 this.$store.dispatch('removeFromMySchedule', { user: this.activeUser, event: this.activeEvent, activity: this.activeActivity })
             },
