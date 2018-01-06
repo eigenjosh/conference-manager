@@ -17,8 +17,8 @@
                     <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
                     <div class="text-right">
                         <p class="navbar-text">Welcome {{activeUser.name}}</p>
-                        <button type="button" class="btn btn-default navbar-btn nav-btn-defaults" data-toggle="modal" data-target="#myModal">Create Note</button>
-                        <button type="button" class="btn btn-default navbar-btn nav-btn-defaults" @click="logout">Logout</button>
+                        <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Create Note</button>
+                        <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
                     </div>
                 </div>
 
@@ -95,9 +95,9 @@
                     <h3 class= "main-headline" style="font-size: 80px">General Notes</h3>
                     <div v-for="userNote in userNotes">
                         <div v-if="!userNote.activityId" class="row">
-                            <button type="button" @click="setActiveNote(userNote)" class="btn btn-default note-btn" data-toggle="modal" data-target="#myModal2">
+                            <button type="button" @click="setActiveNote(userNote)" class="btn btn-default note-btn word-wrap" data-toggle="modal" data-target="#myModal2">
                                 <div class="col-xs-12">
-                                    <h1>{{userNote.title}}</h1>
+                                    <h3>{{userNote.title}}</h3>
                                 </div>
                             </button>
                         </div>
@@ -109,9 +109,9 @@
                     <h3 class="main-headline" style="font-size: 80px">Activity Notes</h3>
                     <div v-for="userNote in userNotes">
                         <div v-if="userNote.activityId" class="row">
-                            <button type="button" @click="setActiveNote(userNote)" class="btn btn-default note-btn" data-toggle="modal" data-target="#myModal2">
+                            <button type="button" @click="setActiveNote(userNote)" class="btn btn-default note-btn word-wrap" data-toggle="modal" data-target="#myModal2">
                                 <div class="col-xs-12">
-                                    <h1>{{userNote.title}}</h1>
+                                    <h3>{{userNote.title}}</h3>
                                 </div>
                             </button>
                         </div>

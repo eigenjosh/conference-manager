@@ -61,10 +61,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12">
-                <h3>A digital conference website that centralizes your event information in one place. A digital conference website
-                    that centralizes your information in one place. A digital conference website that centralizes your information
-                    in one place. A digital conference website that centralizes your information in one place. </h3>
+            <div class="col-xs-offset-3 col-xs-6 col-xs-offset-3 main-headline text-justify">
+                <h3>A digital conference website that centralizes your event information in one place.</h3>
+                  
+                    <h3>Keeps your conferences stream-lined and stress free with Confer.</h3>
             </div>
         </div>
         <!-- LOGIN MODAL -->
@@ -148,7 +148,6 @@
 
             </div>
         </div>
-
         <!-- Create new event modal -->
         <div id="myModal3" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -223,11 +222,42 @@
         <div class="jumbotron second-pic">
         </div>
         <div class="row">
+            <div class="col-xs-offset-3 col-xs-6 col-xs-offset-3 text-justify">
+                <h3>
+                    <b>| Create an account to build your event! Once you have an account you are able to join events, add activities
+                        to your schedule, and create notes.</b>
+                </h3>
+                <br>
+
+                <h3>
+                    <b>| When Creating an Event, you are able to keep it in 'private' mode while adding activities, then click
+                        'publish' to post it to the site. You may edit your event at any time, whether in private or published
+                        modes.
+                    </b>
+                </h3>
+                <br>
+                <h3>
+                    <b>| Activities are able to be created with Seating Capacity, and as guests add your activities the seats
+                        will fill. Once full, the activity will close for registration and display as full. Guests have the
+                        ability to drop the event, thus opening seats for the event activity back up to registrants.</b>
+                </h3>
+                <br>
+                <h3>
+                    <b>| Notes are stored on your user account, and can be created generally or tied to a specific event, thus
+                        allowing you and your guests to stay organized and jot down vital information without a pen and paper.</b>
+                </h3>
+                <br>
+                <h3>
+                    <b>| Create your free account and get started!</b>
+                </h3>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-3 col-md-offset-1 well">
                 <h3></h3>
                 <div class="thumbnail">
                     <a>
-                        <img src="https://thumbs.dreamstime.com/t/coaching-mentoring-seminar-meeting-conference-business-concept-60792479.jpg" alt="">
+                        <img src="../assets/Optimized-Events.png">
                     </a>
                     <div class="caption">
                         <h5></h5>
@@ -238,8 +268,7 @@
                 <h3></h3>
                 <div class="thumbnail">
                     <a>
-                        <img src="https://thumbs.dreamstime.com/t/business-people-conference-meeting-boardroom-working-concept-conversation-51218569.jpg"
-                            alt="">
+                        <img src="../assets/Optimized-notes.png">
                     </a>
                     <div class="caption">
                         <h5></h5>
@@ -250,7 +279,7 @@
                 <h3></h3>
                 <div class="thumbnail">
                     <a>
-                        <img src="https://static.pexels.com/photos/7096/people-woman-coffee-meeting.jpg" alt="">
+                        <img src="../assets/Optimized-schedule.png">
                     </a>
                     <div class="caption">
                         <h5></h5>
@@ -445,8 +474,9 @@
     .navbar ul {
         list-style-type: none;
     }
+
     .logout-btn {
-        margin-left:2px;
+        margin-left: 2px;
     }
 
     @media (max-width: 2000px) {
