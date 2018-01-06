@@ -398,6 +398,10 @@ var store = new vuex.Store({
           if (payload.emit) {
             payload.action = 'getActivityById' //what should the other users commit?
             dispatch('emitData', payload)
+            payload.action = "getActivities"
+            dispatch('emitData', payload)
+            payload.action = "getMySchedule"
+            dispatch('emitData', payload)
           }
         })
         .catch(err => {
@@ -470,6 +474,8 @@ var store = new vuex.Store({
           dispatch('getActivities', { _id: res.data.data.eventId })
           if (payload.emit) {
             payload.action = 'getActivities' //what should the other users commit?
+            dispatch('emitData', payload)
+            payload.action = 'getMyActivities'
             dispatch('emitData', payload)
           }
         })

@@ -57,6 +57,9 @@ export default {
                     else if(payload.action == "getActivities"){
                         dispatch(payload.action, {_id:payload.activity.eventId})
                     }
+                    else if(payload.action == "getMySchedule"){
+                        dispatch(payload.action, {_id:payload.activity.eventId})
+                    }
                     else{
                         dispatch(payload.action, payload)
                     }
