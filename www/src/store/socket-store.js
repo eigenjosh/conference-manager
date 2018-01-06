@@ -48,23 +48,23 @@ export default {
             })
 
             socket.on('receiveUpdate', payload => {
-                debugger
+                console.log("RECIEVING UPDATE:", payload)
+                if (payload.eventId) {
+                    dispatch("getMySchedule", { _id: payload.eventId })
+                }
                 if (payload.action) {
-                    
-                    if(payload.action == "getActivityById"){
+
+                    if (payload.action == "getActivityById") {
                         dispatch(payload.action, payload.activity)
                     }
-                    else if(payload.action == "getActivities"){
-                        dispatch(payload.action, {_id:payload.activity.eventId})
+                    else if (payload.action == "getActivities") {
+                        dispatch(payload.action, { _id: payload.activity.eventId })
                     }
-                    else if(payload.action == "getMySchedule"){
-                        dispatch(payload.action, {_id:payload.activity.eventId})
-                    }
-                    else{
+                    else {
                         dispatch(payload.action, payload)
                     }
                 }
-                if(payload.mutation){
+                if (payload.mutation) {
                     commit(payload.mutation, payload)
                 }
             })
@@ -78,11 +78,11 @@ export default {
                 commit('setRoom', room)
             })
 
-            socket.on('userLeft', user =>{
+            socket.on('userLeft', user => {
                 commit('removeUserFromRoom', user)
             })
-            
-            socket.on('userJoined', user =>{
+
+            socket.on('userJoined', user => {
                 commit('addUserToRoom', user)
             })
 
@@ -90,9 +90,13 @@ export default {
         emitData({ commit, dispatch }, payload) {
 
             if (!payload.mutation && !payload.action) { return console.error("SOCKET ERROR: HEY YOU FORGOT TO ADD A MUTATION", payload) }
-            
-            
+
+            console.log('EMMITTING:', payload)
             socket.emit('update', payload)
+        },
+        joinRoom({ commit, dispatch }, roomName) {
+            console.log("trying to join room", roomName)
+            socket.emit('joinRoom', roomName)
         }
     }
 }

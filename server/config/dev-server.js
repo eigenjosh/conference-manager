@@ -101,10 +101,22 @@ io.on('connection', function (socket) {
     })
 
     socket.on('update', payload => {
-        socket.broadcast.emit('receiveUpdate', payload)
+
+        if (payload.activity) {
+            console.log("updating whatever wer are here")
+            socket.to(payload.activity.eventId).emit('receiveUpdate', { eventId: payload.activity.eventId })
+        } else {
+
+            socket.broadcast.emit('receiveUpdate', payload)
+        }
+
     })
 
     socket.on('joinRoom', roomName => {
+        console.log("joingin room ", roomName)
+        if(activeRoom){
+            socket.leave(activeRoom.name)
+        }
         activeRoom = joinRoom(socket, roomName, client)
     })
 

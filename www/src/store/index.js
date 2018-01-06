@@ -134,7 +134,14 @@ var store = new vuex.Store({
       }
 
     },
-   
+    // updateMyActivities(state, data){
+    //   var i = state.myActivities.findIndex(a=> a._id == data.activity._id)
+    //   if(i > -1){
+    //     vue.set(state.myActivities, i, data.activity)
+    //   }else{
+    //     state.events.push(data.event)
+    //   }
+    // },
     setEvents(state, data) {
       state.events = data
       console.log(state.events)
@@ -143,17 +150,16 @@ var store = new vuex.Store({
       state.myEvents = data
       console.log(state.myEvents)
     },
-    // setMyActivities(state, data) {
-    //   state.myActivities = data
-    //   console.log(state.myActivities)
-    // },
+    setMyActivities(state, data) {
+      state.myActivities = data
+      console.log(state.myActivities)
+    },
     setActiveEvent(state, data) {
       state.activeEvent = {}
       state.activeEvent = data
     },
+    
     setActiveActivity(state, data) {
-      // state.activeActivity = {}
-      // state.activeActivity = data
       vue.set(state, "activeActivity", data)
     },
     setTimeSlot(state, data) {
@@ -340,6 +346,7 @@ var store = new vuex.Store({
         .then(res => {
           commit('setActiveEvent', res.data.data)
           dispatch('getActivities', { _id: event._id })
+          dispatch('joinRoom', event._id)
         })
         .catch(err => {
           commit('handleError', err)
@@ -501,6 +508,7 @@ var store = new vuex.Store({
         .then(res => {
           commit('setUserSchedule', res.data.data)
           commit('setActiveEvent', event)
+          dispatch("joinRoom", event._id)
         })
         .catch(err => {
           commit('handleError', err)
