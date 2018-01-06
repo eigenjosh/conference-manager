@@ -48,9 +48,18 @@ export default {
             })
 
             socket.on('receiveUpdate', payload => {
-                
+                debugger
                 if (payload.action) {
-                    dispatch(payload.action, payload)
+                    
+                    if(payload.action == "getActivityById"){
+                        dispatch(payload.action, payload.activity)
+                    }
+                    else if(payload.action == "getActivities"){
+                        dispatch(payload.action, {_id:payload.activity.eventId})
+                    }
+                    else{
+                        dispatch(payload.action, payload)
+                    }
                 }
                 if(payload.mutation){
                     commit(payload.mutation, payload)
@@ -76,9 +85,10 @@ export default {
 
         },
         emitData({ commit, dispatch }, payload) {
-            if (!payload.mutation) { return console.error("SOCKET ERROR: HEY YOU FORGOT TO ADD A MUTATION", payload) }
-            
 
+            if (!payload.mutation && !payload.action) { return console.error("SOCKET ERROR: HEY YOU FORGOT TO ADD A MUTATION", payload) }
+            
+            
             socket.emit('update', payload)
         }
     }

@@ -152,8 +152,9 @@ var store = new vuex.Store({
       state.activeEvent = data
     },
     setActiveActivity(state, data) {
-      state.activeActivity = {}
-      state.activeActivity = data
+      // state.activeActivity = {}
+      // state.activeActivity = data
+      vue.set(state, "activeActivity", data)
     },
     setTimeSlot(state, data) {
       state.timeSlots = data
@@ -354,7 +355,6 @@ var store = new vuex.Store({
           dispatch('getActivities', { _id: payload.activity.eventId })
           if (payload.emit) {
             payload.action = 'getActivities' //what should the other users commit?
-            payload.user = null
             dispatch('emitData', payload)
           }
         })
@@ -395,11 +395,10 @@ var store = new vuex.Store({
         .then(res => {
           commit('setActiveActivity', payload.activity)
           dispatch('getActivities', { _id: payload.activity.eventId })
-          // if (payload.emit) {
-          //   payload.action = 'getActivityById' //what should the other users commit?
-          //   payload.user = null
-          //   dispatch('emitData', payload)
-          // }
+          if (payload.emit) {
+            payload.action = 'getActivityById' //what should the other users commit?
+            dispatch('emitData', payload)
+          }
         })
         .catch(err => {
           commit('handleError', err)
@@ -608,8 +607,7 @@ var store = new vuex.Store({
         .then(res => {
           dispatch('getAllEvents')
           if (payload.emit) {
-            payload.action = 'getEventById' //what should the other users commit?
-            payload.user = null
+            payload.mutation = 'addOrUpdateEvent' //what should the other users commit?
             dispatch('emitData', payload)
           }
         })
