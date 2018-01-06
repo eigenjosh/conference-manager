@@ -118,7 +118,6 @@
                 this.$store.dispatch('getMySchedule', e)
             },
             getMyActivities() {
-                debugger
                 // this.activeEvent = {}
                 this.$store.dispatch('getMyActivities')
             }

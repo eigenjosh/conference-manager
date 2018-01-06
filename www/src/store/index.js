@@ -134,7 +134,14 @@ var store = new vuex.Store({
       }
 
     },
-   
+    // updateMyActivities(state, data){
+    //   var i = state.myActivities.findIndex(a=> a._id == data.activity._id)
+    //   if(i > -1){
+    //     vue.set(state.myActivities, i, data.activity)
+    //   }else{
+    //     state.events.push(data.event)
+    //   }
+    // },
     setEvents(state, data) {
       state.events = data
       console.log(state.events)
@@ -143,17 +150,17 @@ var store = new vuex.Store({
       state.myEvents = data
       console.log(state.myEvents)
     },
-    // setMyActivities(state, data) {
-    //   state.myActivities = data
-    //   console.log(state.myActivities)
-    // },
+    setMyActivities(state, data) {
+      state.myActivities = data
+      console.log(state.myActivities)
+    },
     setActiveEvent(state, data) {
       state.activeEvent = {}
       state.activeEvent = data
     },
+    
     setActiveActivity(state, data) {
-      state.activeActivity = {}
-      state.activeActivity = data
+      vue.set(state, "activeActivity", data)
     },
     setTimeSlot(state, data) {
       state.timeSlots = data
@@ -339,6 +346,7 @@ var store = new vuex.Store({
         .then(res => {
           commit('setActiveEvent', res.data.data)
           dispatch('getActivities', { _id: event._id })
+          dispatch('joinRoom', event._id)
         })
         .catch(err => {
           commit('handleError', err)
@@ -354,7 +362,6 @@ var store = new vuex.Store({
           dispatch('getActivities', { _id: payload.activity.eventId })
           if (payload.emit) {
             payload.action = 'getActivities' //what should the other users commit?
-            payload.user = null
             dispatch('emitData', payload)
           }
         })
@@ -395,11 +402,14 @@ var store = new vuex.Store({
         .then(res => {
           commit('setActiveActivity', payload.activity)
           dispatch('getActivities', { _id: payload.activity.eventId })
-          // if (payload.emit) {
-          //   payload.action = 'getActivityById' //what should the other users commit?
-          //   payload.user = null
-          //   dispatch('emitData', payload)
-          // }
+          if (payload.emit) {
+            payload.action = 'getActivityById' //what should the other users commit?
+            dispatch('emitData', payload)
+            payload.action = "getActivities"
+            dispatch('emitData', payload)
+            payload.action = "getMySchedule"
+            dispatch('emitData', payload)
+          }
         })
         .catch(err => {
           commit('handleError', err)
@@ -472,6 +482,8 @@ var store = new vuex.Store({
           if (payload.emit) {
             payload.action = 'getActivities' //what should the other users commit?
             dispatch('emitData', payload)
+            payload.action = 'getMyActivities'
+            dispatch('emitData', payload)
           }
         })
         .catch(err => {
@@ -496,6 +508,7 @@ var store = new vuex.Store({
         .then(res => {
           commit('setUserSchedule', res.data.data)
           commit('setActiveEvent', event)
+          dispatch("joinRoom", event._id)
         })
         .catch(err => {
           commit('handleError', err)
@@ -608,8 +621,7 @@ var store = new vuex.Store({
         .then(res => {
           dispatch('getAllEvents')
           if (payload.emit) {
-            payload.action = 'getEventById' //what should the other users commit?
-            payload.user = null
+            payload.mutation = 'addOrUpdateEvent' //what should the other users commit?
             dispatch('emitData', payload)
           }
         })
