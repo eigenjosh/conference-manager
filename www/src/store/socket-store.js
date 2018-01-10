@@ -49,9 +49,6 @@ export default {
 
             socket.on('receiveUpdate', payload => {
                 console.log("RECIEVING UPDATE:", payload)
-                if (payload.eventId) {
-                    dispatch("getMySchedule", { _id: payload.eventId })
-                }
                 if (payload.action) {
 
                     if (payload.action == "getActivityById") {

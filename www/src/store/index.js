@@ -407,8 +407,6 @@ var store = new vuex.Store({
             dispatch('emitData', payload)
             payload.action = "getActivities"
             dispatch('emitData', payload)
-            payload.action = "getMySchedule"
-            dispatch('emitData', payload)
           }
         })
         .catch(err => {

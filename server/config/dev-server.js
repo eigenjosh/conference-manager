@@ -102,13 +102,13 @@ io.on('connection', function (socket) {
 
     socket.on('update', payload => {
 
-        if (payload.activity) {
-            console.log("updating whatever wer are here")
-            socket.to(payload.activity.eventId).emit('receiveUpdate', { eventId: payload.activity.eventId })
-        } else {
+        // if (payload.activity) {
+        //     console.log("updating whatever wer are here")
+        //     socket.to(payload.activity.eventId).emit('receiveUpdate', { eventId: payload.activity.eventId })
+        // } else {
 
             socket.broadcast.emit('receiveUpdate', payload)
-        }
+        // }
 
     })
 
