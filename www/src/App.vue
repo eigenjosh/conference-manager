@@ -102,4 +102,7 @@
     background-color: lightgray;
     color: black;
   }
+  .body-text {
+            font-family: 'Lato', sans-serif;
+        }
 </style>
