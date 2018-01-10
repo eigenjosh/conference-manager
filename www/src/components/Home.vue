@@ -167,46 +167,99 @@
                                     <input type="text" name="eventName" maxlength="40" class="form-control" placeholder="Whats the event called?" required v-model="event.name"
                                         required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="description">Description</label>
-                                    <textarea type="text" name="description" maxlength="300" class="form-control" rows="5" placeholder="What is this event for?"
-                                        required v-model="event.description"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="startDate">Start Date:</label>
-                                    <input type="date" name="startDate" class="form-control" placeholder="Start Date" :min="date" v-model="event.startDate" required
-                                        @change="validateForm">
-                                    <p class="error-message text-left text-danger" v-if="!this.validator.startDate">Start date must be today or later.</p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="endDate">End Date:</label>
-                                    <input type="date" name="endDate" class="form-control" placeholder="End Date" :min="event.startDate" required v-model="event.endDate"
-                                        @change="validateForm">
-                                    <p class="error-message text-left text-danger" v-if="!this.validator.endDate">End date must be the same as or later than the start date.</p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="venue">Venue:</label>
-                                    <input type="text" name="venue" class="form-control" maxlength="40" placeholder="Venue" required v-model="event.venue">
-                                </div>
-                                <div class="form-group">
-                                    <label for="address">Address:</label>
-                                    <input type="text" name="address" class="form-control" maxlength="75" placeholder="Venue Address" v-model="event.address"
-                                        required>
-                                    <input type="text" name="city" class="form-control" maxlength="75" placeholder="Venue City" v-model="event.city" required>
-                                    <div class="form-group state">
-                                        <label for="state">Venue State</label>
-                                        <select class="form-control state" v-model="event.state">
-                                            <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
-                                        </select>
+                                <div class="modal-body">
+                                    <form id="createEvent" class="form">
+                                        <div class="form-group">
+                                            <label for="eventName">Event Name</label>
+                                            <input type="text" name="eventName" maxlength="40" class="form-control" placeholder="Whats the event called?" required v-model="event.name"
+                                                required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Description</label>
+                                            <textarea type="text" name="description" maxlength="300" class="form-control" rows="5" placeholder="What is this event for?"
+                                                required v-model="event.description"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="logo">Logo:</label>
+                                            <input type="text" name="logo" class="form-control" maxlength="150" placeholder="Path or URL" required v-model="event.logo">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="startDate">Start Date:</label>
+                                            <input type="date" name="startDate" class="form-control" placeholder="Start Date" :min="date" v-model="event.startDate" required
+                                                @change="validateForm">
+                                            <p class="error-message text-left text-danger" v-if="!this.validator.startDate">Start date must be today or later.</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="endDate">End Date:</label>
+                                            <input type="date" name="endDate" class="form-control" placeholder="End Date" :min="event.startDate" required v-model="event.endDate"
+                                                @change="validateForm">
+                                            <p class="error-message text-left text-danger" v-if="!this.validator.endDate">End date must be the same as or later than the start date.</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="venue">Venue:</label>
+                                            <input type="text" name="venue" class="form-control" maxlength="40" placeholder="Venue" required v-model="event.venue">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="address">Address:</label>
+                                            <input type="text" name="address" class="form-control" maxlength="75" placeholder="Venue Address" v-model="event.address"
+                                                required>
+                                            <input type="text" name="city" class="form-control" maxlength="75" placeholder="Venue City" v-model="event.city" required>
+                                            <div class="form-group state">
+                                                <label for="state">Venue State</label>
+                                                <select class="form-control state" v-model="event.state">
+                                                    <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="description">Description</label>
+                                                <textarea type="text" name="description" maxlength="300" class="form-control" rows="5" placeholder="What is this event for?"
+                                                    required v-model="event.description"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="startDate">Start Date:</label>
+                                                <input type="date" name="startDate" class="form-control" placeholder="Start Date" :min="date" v-model="event.startDate" required
+                                                    @change="validateForm">
+                                                <p class="error-message text-left text-danger" v-if="!this.validator.startDate">Start date must be today or later.</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="endDate">End Date:</label>
+                                                <input type="date" name="endDate" class="form-control" placeholder="End Date" :min="event.startDate" required v-model="event.endDate"
+                                                    @change="validateForm">
+                                                <p class="error-message text-left text-danger" v-if="!this.validator.endDate">End date must be the same as or later than the start date.</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="venue">Venue:</label>
+                                                <input type="text" name="venue" class="form-control" maxlength="40" placeholder="Venue" required v-model="event.venue">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="address">Address:</label>
+                                                <input type="text" name="address" class="form-control" maxlength="75" placeholder="Venue Address" v-model="event.address"
+                                                    required>
+                                                <input type="text" name="city" class="form-control" maxlength="75" placeholder="Venue City" v-model="event.city" required>
+                                                <div class="form-group state">
+                                                    <label for="state">Venue State</label>
+                                                    <select class="form-control state" v-model="event.state">
+                                                        <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
+                                                    </select>
+                                                </div>
+                                                <input type="number" name="zip" maxlength="5" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
+                                                <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p>
+                                                <div class="form-group">
+                                                    <label for="timeZone">Time Zone</label>
+                                                    <select class="form-control" v-model="event.timeZone">
+                                                        <option :value="timeZone" v-for="timeZone in timeZones">{{timeZone}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <button class="btn btn-submit btn-success" data-dismiss="modal" @click="createEvent" type="submit" :disabled="!this.validator.form">Create New Event</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     </div>
-                                    <input type="number" name="zip" maxlength="5" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
-                                    <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p>
-                                    <div class="form-group">
-                                        <label for="timeZone">Time Zone</label>
-                                        <select class="form-control" v-model="event.timeZone">
-                                            <option :value="timeZone" v-for="timeZone in timeZones">{{timeZone}}</option>
-                                        </select>
-                                    </div>
+
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-submit btn-success" data-dismiss="modal" @click="createEvent" type="submit" :disabled="!this.validator.form">Create New Event</button>
@@ -214,111 +267,111 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>ƒ
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Pen & Paper picture -->
-            <div class="row">
-                <div class="col-xs-12 second-pic">
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="container-fluid body-text">
-            <div class="row">
-                <div class="col-xs-12 col-md-4">
-                    <h4>
-                        | Create an account to build your event! With an account you can join events, add activities to your schedule, and create
-                        notes.
-                    </h4>
-                </div>
-                <div class="col-xs-12 col-md-4">
-                    <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
+                <!-- Pen & Paper picture -->
+                <div class="row">
+                    <div class="col-xs-12 second-pic">
+                    </div>
                 </div>
             </div>
             <hr>
-            <div class="row">
-                <div class="col-xs-12 col-md-4">
-                    <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
+            <div class="container-fluid body-text">
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <h4>
+                            | Create an account to build your event! With an account you can join events, add activities to your schedule, and create
+                            notes.
+                        </h4>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-md-4">
-                <h4>
-                    | Create an Event, keep it in 'private' mode while adding activities, then click 'publish' to post it to the site. You may
-                    edit your event at any time, whether in private or published modes.
+                <hr>
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <h4>
+                        | Create an Event, keep it in 'private' mode while adding activities, then click 'publish' to post it to the site. You may
+                        edit your event at any time, whether in private or published modes.
 
-                </h4>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-xs-12 col-md-4">
-                    <h4>
-                        | Create Activities on your events for your guests to join. Attach a speaker to their Activities are able to be created with
-                        Seating Capacity, and as guests add your activities the seats will fill. Once full, the activity
-                        will close for registration and display as full. Guests have the ability to drop the event, thus
-                        opening seats for the event activity back up to registrants.
-                    </h4>
-                </div>
-                <div class="col-xs-12 col-md-4">
-                    <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-xs-12 col-md-4">
-                    <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
-                </div>
-                <div class="col-xs-12 col-md-4">
-                    <h4>
-                        | Notes are stored on your user account, and can be created generally or tied to a specific event, thus allowing you and
-                        your guests to stay organized and jot down vital information without a pen and paper.
                     </h4>
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col-xs-12">
-                        <h3>
-                            | Create your free account and get started!
-                        </h3>
+                    <div class="col-xs-12 col-md-4">
+                        <h4>
+                            | Create Activities on your events for your guests to join. Attach a speaker to their Activities are able to be created with
+                            Seating Capacity, and as guests add your activities the seats will fill. Once full, the activity
+                            will close for registration and display as full. Guests have the ability to drop the event, thus
+                            opening seats for the event activity back up to registrants.
+                        </h4>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <h4>
+                            | Notes are stored on your user account, and can be created generally or tied to a specific event, thus allowing you and
+                            your guests to stay organized and jot down vital information without a pen and paper.
+                        </h4>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h3>
+                                | Create your free account and get started!
+                            </h3>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-md-3 col-md-offset-1 well">
-                <h3></h3>
-                <div class="thumbnail">
-                    <a>
-                        <img src="../assets/Optimized-Events.png">
-                    </a>
-                    <div class="caption">
-                        <h5></h5>
+            <hr>
+            <div class="row">
+                <div class="col-md-3 col-md-offset-1 well">
+                    <h3></h3>
+                    <div class="thumbnail">
+                        <a>
+                            <img src="../assets/Optimized-Events.png">
+                        </a>
+                        <div class="caption">
+                            <h5></h5>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3 well screenshot">
-                <h3></h3>
-                <div class="thumbnail">
-                    <a>
-                        <img src="../assets/Optimized-notes.png">
-                    </a>
-                    <div class="caption">
-                        <h5></h5>
+                <div class="col-md-3 well screenshot">
+                    <h3></h3>
+                    <div class="thumbnail">
+                        <a>
+                            <img src="../assets/Optimized-notes.png">
+                        </a>
+                        <div class="caption">
+                            <h5></h5>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3 well screenshot">
-                <h3></h3>
-                <div class="thumbnail">
-                    <a>
-                        <img src="../assets/Optimized-schedule.png">
-                    </a>
-                    <div class="caption">
-                        <h5></h5>
+                <div class="col-md-3 well screenshot">
+                    <h3></h3>
+                    <div class="thumbnail">
+                        <a>
+                            <img src="../assets/Optimized-schedule.png">
+                        </a>
+                        <div class="caption">
+                            <h5></h5>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -355,7 +408,8 @@
                     zip: '',
                     startDate: '',
                     endDate: '',
-                    timeZone: ''
+                    timeZone: '',
+                    logo: ''
                 },
                 validator: {
                     zip: false,

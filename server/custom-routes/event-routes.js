@@ -28,49 +28,13 @@ module.exports = {
             })
         }
       },
-      /*
-    getPublishedEventsByLocation: {
-        path: '/find-events/:location',
-        reqType: 'get',
-        method(req, res, next) {
-            let action = 'Find Activities By Location'
-            Events.find({ city: req.params.location, published: true})
-                .then(events => {
-                    res.send(handleResponse(action, events))
-                }).catch(error => {
-                    return next(handleResponse(action, null, error))
-                })
-        }
-    },
-    */
+
     getPublishedEventsBySearchTerms: {
         path: '/find-events/:query',
         reqType: 'get',
         method(req, res, next) {
             let action = 'Find Activities By Search Terms'
-            Events.find({$text: {$search: req.params.query}})
-                .then(events => {
-                    res.send(handleResponse(action, events))
-                }).catch(error => {
-                    return next(handleResponse(action, null, error))
-                })
-        }
-    },
-    /*
-    getEventsByProperties: {
-        path: '/find-events?city=:city&state=:state&zip=:zip&venue=:venue',
-        reqType: 'get',
-        method(req, res, next) {
-            let action = 'Find Activities By Properties'
-            console.log('request parameters for get Events: ', req.params)
-            var query = {}
-            for (var prop in req.params) {
-               if(req.params[prop]) {
-                   query[prop] = req.params[prop]
-               }
-            }
-            query['published'] = true
-            Events.find(query)
+            Events.find({$text: {$search: req.params.query}, published: true})
                 .then(events => {
                     res.send(handleResponse(action, events))
                 }).catch(error => {
@@ -78,7 +42,6 @@ module.exports = {
                 })
         }
     }
-    */
 }
 
 function handleResponse(action, data, error) {

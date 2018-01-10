@@ -147,7 +147,7 @@
     list-style-type: none;
 }
 .logout-btn {
-    margin-left:2px;
+    margin-left: 2px;
 }
 @media (max-width: 2000px) {
 .navbar-header {
@@ -598,6 +598,9 @@
 .bottom-buffer {
     margin-bottom: 50px;
 }
+.add-btn {
+    margin-bottom: 5px;
+}
 
 .btn-text {
     overflow: hidden;
@@ -708,4 +711,4 @@
 }
 
 
-/*# sourceMappingURL=app.9b3f31c908f00484872bae95142443b1.css.map*/
+/*# sourceMappingURL=app.544600f34e7dcd00301c6ba3f6b55955.css.map*/
