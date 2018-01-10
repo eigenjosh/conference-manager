@@ -317,13 +317,6 @@ var store = new vuex.Store({
           dispatch('getAllEvents')
           dispatch('getCreatedEvents')
           dispatch('addToMyEvents', { user: payload.user, event: res.data.data })
-
-          // if (payload.emit) {
-          //   payload.mutation = 'addOrUpdateEvent' //what should the other users commit?
-          //   payload.user = null
-          //   dispatch('emitData', payload)
-          // }
-
         })
         .catch(err => {
           commit('handleError', err)
@@ -363,7 +356,7 @@ var store = new vuex.Store({
           console.log(res)
           dispatch('getActivities', { _id: payload.activity.eventId })
           if (payload.emit) {
-            payload.action = 'getActivities' //what should the other users commit?
+            payload.action = 'getActivities'
             dispatch('emitData', payload)
           }
         })
@@ -390,7 +383,7 @@ var store = new vuex.Store({
           commit('setActiveEvent', payload.event)
           
           if (payload.emit) {
-            payload.mutation = 'addOrUpdateEvent' //what should the other users commit?
+            payload.mutation = 'addOrUpdateEvent' 
             dispatch('emitData', payload)
           }
         })
@@ -405,7 +398,7 @@ var store = new vuex.Store({
           commit('setActiveActivity', payload.activity)
           dispatch('getActivities', { _id: payload.activity.eventId })
           if (payload.emit) {
-            payload.action = 'getActivityById' //what should the other users commit?
+            payload.action = 'getActivityById' 
             dispatch('emitData', payload)
             payload.action = "getActivities"
             dispatch('emitData', payload)
@@ -457,7 +450,6 @@ var store = new vuex.Store({
       api('notes/' + note._id)
         .then(res => {
           commit('setActiveNote', res.data.data)
-          // dispatch('getAllUserNotes', note)
         })
         .catch(err => {
           commit('handleError', err)
@@ -480,7 +472,7 @@ var store = new vuex.Store({
           console.log("delete request:", res)
           dispatch('getActivities', { _id: res.data.data.eventId })
           if (payload.emit) {
-            payload.action = 'getActivities' //what should the other users commit?
+            payload.action = 'getActivities' 
             dispatch('emitData', payload)
             payload.action = 'getMyActivities'
             dispatch('emitData', payload)
@@ -525,7 +517,7 @@ var store = new vuex.Store({
           router.push('/admin-events')
           dispatch('getAllEvents')
           if (payload.emit) {
-            payload.action = 'getAllEvents' //what should the other users commit?
+            payload.action = 'getAllEvents'
             dispatch('emitData', payload)
           }
         })
@@ -566,46 +558,6 @@ var store = new vuex.Store({
     },
 
     removeFromMyEvents({ commit, dispatch }, payload) {
-      
-      // var removedEvent
-      // for (var i = 0; i < payload.user.events.length; i++) {
-      //   var event = payload.user.events[i]
-      //   if (event == payload.event._id) {
-      //     payload.user.events.splice(i, 1)
-      //     removedEvent = event
-      //     break
-      //   }
-      // }
-      /*
-      for (var i = 0; i < payload.user.activities.length; i++) {
-        var activity = payload.user.activities[i]
-        if (activity.eventId == removedEvent._id) {
-          payload.user.activities.splice(i, 1)
-          i--
-        }
-      }
-      */
-
-      //Need to account for newly open seats in activities when users delete events
-
-      // var removedActivities = []
-      // for (var date in payload.userSchedule) {
-      //   for (var time in payload.userSchedule[date]) {
-      //     var activities = payload.userSchedule[date][time]
-      //     for(var i = 0; i < activities.length; i++) {
-      //       var activity = activities[i]
-      //       if (activity.eventId == removedEvent) {
-      //         removedActivities.push(activity._id)
-      //       }
-      //     }
-      //   }
-      // }
-      // console.log('user activities: ', payload.user.activities)
-      // console.log('removed activity ids: ', removedActivities)
-      // payload.user.activities = payload.user.activities.filter((activity) => {
-      //   return !removedActivities.includes(activity)
-      // })
-      // console.log('user activities post-filter: ', payload.user.activities)
       api.put('/user-events/' + payload.event._id, payload.event)
         .then(res => {
           console.log('this event has been removed from user events')
@@ -621,7 +573,7 @@ var store = new vuex.Store({
         .then(res => {
           dispatch('getAllEvents')
           if (payload.emit) {
-            payload.mutation = 'addOrUpdateEvent' //what should the other users commit?
+            payload.mutation = 'addOrUpdateEvent' 
             dispatch('emitData', payload)
           }
         })

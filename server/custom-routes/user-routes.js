@@ -4,7 +4,7 @@ let Notes = require('../models/note')
 let Users = require('../models/user')
 
 module.exports = {
-  userNotes: {
+  getUserNotes: {
     path: '/user-notes',
     reqType: 'get',
     method(req, res, next) {
@@ -17,15 +17,14 @@ module.exports = {
         })
     }
   },
-  userEvents: {
+
+  getUserEvents: {
     path: '/user-events',
     reqType: 'get',
     method(req, res, next) {
       let action = 'Find User Events'
       Users.find({ _id: req.session.uid })
         .then(user => {
-          console.log('user: ', user[0])
-          console.log('user events: ', user[0].events)
           Events.find({ _id: { $in: user[0].events } })
             .then(events => {
               res.send(handleResponse(action, events))
@@ -35,7 +34,8 @@ module.exports = {
         })
     }
   },
-  userActivities: {
+
+  getUserActivities: {
     path: '/user-activities',
     reqType: 'get',
     method(req, res, next) {
@@ -51,7 +51,8 @@ module.exports = {
         })
     }
   },
-  userActivitiesByEventId: {
+
+  getUserActivitiesByEventId: {
     path: '/user-events/:eventId/activities',
     reqType: 'get',
     method(req, res, next) {
@@ -67,6 +68,7 @@ module.exports = {
         })
     }
   },
+
   editUserEvents: {
     path: '/user-events',
     reqType: 'put',
@@ -81,7 +83,8 @@ module.exports = {
         })
     }
   },
-  deleteUserEvents: {
+
+  removeEventFromUserSchedule: {
     path: '/user-events/:eventId',
     reqType: 'put',
     method(req, res, next) {
@@ -132,7 +135,7 @@ module.exports = {
     path: '/user-activities',
     reqType: 'put',
     method(req, res, next) {
-      let action = 'Add User Activity'
+      let action = 'Edit User Activities'
       Users.findOneAndUpdate({ _id: req.session.uid }, req.body)
         .then(data => {
           return res.send(handleResponse(action, { message: 'Successfully updated user activities.' }))
@@ -143,7 +146,7 @@ module.exports = {
     }
   },
 
-  adminEvents: {
+  getAdminEvents: {
     path: '/admin-events',
     reqType: 'get',
     method(req, res, next) {
@@ -157,25 +160,36 @@ module.exports = {
     }
   },
 
-  deleteAdminEvents: {
+  getAdminEvent: {
+    path: '/admin-event/:eventId',
+    reqType: 'get',
+    method(req, res, next) {
+      let action = 'Find Event Created By Admin at Specific Id'
+      Events.find({ _id: req.params.eventId, creatorId: req.session.uid })
+        .then(events => {
+          res.send(handleResponse(action, events))
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
+
+  deleteAdminEvent: {
     path: '/admin-events/:eventId',
     reqType: 'delete',
     method(req, res, next) {
       let action = 'Delete Event Created By Admin'
       var eventData = { "error": "Event data not set." }
-      Events.findOneAndRemove({ _id: req.params.eventId })
+      Events.findOneAndRemove({ _id: req.params.eventId, creatorId: req.session.uid })
         .then(event => {
           var eventData = event
           Notes.find({ _id: req.params.eventId })
             .then(notes => {
-              console.log('notes: ', notes)
               for (var i = 0; i < notes.length; i++) {
                 var note = notes[i]
-                console.log('note before update: ', note)
                 note.eventId = null
                 delete note.eventId
                 note.update()
-                console.log('note after update: ', note)
               }
             }).then(() => {
               res.send(handleResponse(action, eventData))
