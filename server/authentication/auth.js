@@ -6,11 +6,19 @@ router.post('/register', (req, res) => {
     .then((user) => {
       req.session.uid = user._id
       req.session.save()
-      user.password = null
-      delete user.password
+      //user.password = null
+      //delete user.password
+      var returnUserObj = {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        created: user.created,
+        events: user.events,
+        activities: user.activities
+      }
       res.send({
         message: 'Successfully created user account',
-        data: user
+        data: returnUserObj //user
       })
     })
     .catch(err => {
@@ -29,11 +37,19 @@ router.post('/login', (req, res) => {
           }
           req.session.uid = user._id;
           req.session.save()
-          user.password = null
-          delete user.password
+          //user.password = null
+          //delete user.password
+          var returnUserObj = {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            created: user.created,
+            events: user.events,
+            activities: user.activities
+          }
           res.send({
             message: 'successfully logged in',
-            data: user
+            data: returnUserObj //user
           })
         })
         .catch(err => {
