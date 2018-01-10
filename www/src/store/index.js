@@ -540,7 +540,6 @@ var store = new vuex.Store({
           console.log('activity has been removed from user schedule')
           dispatch('authenticate')
           dispatch('getMySchedule', payload.event)
-          dispatch('emitData', payload)
         })
         .catch(err => {
           commit('handleError', err)
