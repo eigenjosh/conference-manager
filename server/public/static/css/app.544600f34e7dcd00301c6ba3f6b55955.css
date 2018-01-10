@@ -1,0 +1,714 @@
+
+#app {
+  font-family: 'Source Sans Pro', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+.word-wrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.navbar-inverse .navbar-brand {
+  color: white;
+}
+.navbar {
+  background: black;
+  font: white;
+}
+.nav-drop-btn {
+  width: 90%;
+  background-color: #FFFFF9;
+  margin: 2px;
+  font: black;
+}
+.navbar-brand {
+  font-size: 50px;
+}
+.navbar-inverse .navbar-text {
+  color: white;
+  font-size: 20px;
+}
+.date-col {
+  padding-left: 40px;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  background: black;
+  color: white;
+}
+.activities {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: lightslategrey;
+  color: white;
+}
+.event-name-btn {
+  background-color: darkslategrey;
+  height: 100%;
+  width: 100%;
+  /* color: black; */
+}
+.main-headline {
+  font-family: 'Abril Fatface', cursive;
+  margin-bottom: 100px;
+}
+.a-pointer {
+  cursor: pointer;
+}
+.event-btn {
+  width: 100%;
+  background-color: lightgray;
+  margin-bottom: 10px;
+  border: black 1px solid;
+}
+.nav-btn-defaults {
+  width: 10%;
+  background-color: lightgray;
+  color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.home {
+    background-image: url('https://bhubaneswarlive.com/wp-content/uploads/2016/11/Savin-NY-Website-Background-Web.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center
+}
+.well {
+    background: rgb(127, 127, 127)
+}
+.navbar {
+    background: black;
+    font: white;
+}
+
+/* .parallax {
+    The image used
+    background-image: url("https://images.pexels.com/photos/34092/pexels-photo.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb");
+
+    Set a specific height
+    height: 500px;
+
+    Create the parallax scrolling effect
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+} */
+.main-pic {
+    background-image: url('https://images.pexels.com/photos/34092/pexels-photo.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.main-heading {
+    font-family: 'Abril Fatface', cursive;
+    text-shadow: 0px 0px 15px black;
+    color: white;
+}
+.second-pic {
+    /* margin-top: 300px; */
+    height: 300px;
+    background-image: url('https://i.pinimg.com/originals/50/1f/1a/501f1a19290e28cd676605f9acf36d03.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.info-text {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.btn-default {
+    width: 100%;
+}
+.screenshot {
+    margin-left: 50px;
+}
+.navbar ul {
+    list-style-type: none;
+}
+.logout-btn {
+    margin-left: 2px;
+}
+@media (max-width: 2000px) {
+.navbar-header {
+        float: none;
+}
+.navbar-toggle {
+        display: block;
+}
+.navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.navbar-collapse.collapse {
+        display: none!important;
+}
+.navbar-collapse.collapse.in {
+        display: block!important;
+}
+.navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+}
+.navbar-nav>li {
+        float: none;
+}
+.navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+}
+.state {
+        width: 50%
+}
+.nav-drop-btn {
+        width: 90%;
+        background-color: #FFFFF9;
+        margin: 2px;
+        font: black;
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.row {
+    text-align: center;
+}
+.container {
+    text-align: center;
+}
+.title-head {
+    text-align: center;
+}
+.note-btn {
+    background-color: lightgray;
+    width: 50%;
+    margin-bottom: 5px;
+}
+.nav-btn-defaults{
+    width: 15%;
+}
+
+
+.event-btn[data-v-4f013dea] {
+    width: 100%;
+    background-color: lightgray;
+    margin-bottom: 10px;
+}
+.search-form-group[data-v-4f013dea] {
+    width: 50%;
+    margin-top: 50px;
+}
+.search-btn[data-v-4f013dea] {
+    width: 50%;
+    margin-top: 5px;
+    margin-bottom: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.activities {
+    width: 100%;
+}
+.danger-text {
+    color: red;
+}
+.success-text {
+    color: blue;
+}
+.description {
+    width: 50%;
+}
+.admin-btn {
+    background-color: lightgray;
+    margin-bottom: 5px;
+    font: black;
+    border: 1px solid black;
+    width: 75%;
+}
+.desc-style {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.join-btn {
+    background-color: lightgray;
+    color: black;
+    margin-bottom: 10px;
+}
+.bottom-buffer {
+    margin-bottom: 50px;
+}
+.add-btn {
+    margin-bottom: 5px;
+}
+
+.btn-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* .my-schedule {
+    background-color: rgba(203, 204, 180, 0.541);
+    height: 100vh;
+} */
+.view-all {
+    background-color: rgba(127, 127, 113, 0.746);
+    width: 20%;
+    color: whitesmoke;
+    margin-bottom: 5px;
+}
+.btn-event {
+    background-color: rgba(127, 127, 113, 0.746);
+    color: whitesmoke;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.navbar {
+    background: black;
+    font: white;
+}
+.nav-drop-btn {
+    width: 90%;
+    background-color: #FFFFF9;
+    margin: 2px;
+    font: black;
+}
+.btn-default-picker {
+    background-color: lightgray;
+    border: black solid 1px;
+}
+
+.notepad textarea {
+    width: 100%;
+}
+
+/* .date-col{
+    padding-left: 40px;
+    border-bottom: 1px solid #7F7F71;
+    border-top: 1px solid #7F7F71;
+    background: #7F7F71;
+    color:whitesmoke;
+} */
+.time-col {
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.well:hover .remove {
+    display: inline-block;
+}
+.remove {
+    display: none;
+}
+.event {
+    height: 130px;
+}
+.event button {
+    margin-right: 20px;
+}
+.well {
+    margin-top: 5px;
+    background-color: rgba(203, 204, 180, 0);
+    border-top: 1px solid #CBCCB4;
+}
+.well h2 {
+    color: whitesmoke;
+}
+
+/* .event-name-btn{
+    background-color: rgba(127, 127, 113, 0.746);
+    color: whitesmoke;
+} */
+.event-name:hover {
+    text-decoration: none;
+    text-shadow: 0px 0px 15px #7F7F7F
+}
+.delete-btn {
+    margin-bottom: 5px;
+}
+
+.activities {
+    width: 100%;
+}
+.time {
+    width: 100px;
+}
+.date {
+    width: 250px;
+}
+.admin-edit-btn {
+    width: 75%;
+    margin-bottom: 5px;
+    background-color: lightgray;
+    border: black solid 1px;
+}
+.delete-admin-edit-btn {
+    width: 75%;
+    margin-bottom: 5px;
+    border: black solid 1px;
+}
+
+
+/*# sourceMappingURL=app.544600f34e7dcd00301c6ba3f6b55955.css.map*/

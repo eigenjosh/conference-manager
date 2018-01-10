@@ -169,7 +169,7 @@
                     <div v-if="activeUser && activeUser.events">
                         <div v-if="activeUser.events.includes(activeEvent._id)">
                             <button v-if="!activeUser.activities.includes(activeActivity._id) && (activeActivity.capacity > 0 || !activeActivity.capacity)"
-                                @click="addToMySchedule" class="btn btn-success">Add to My Schedule</button>
+                                @click="addToMySchedule" class="btn btn-primary add-btn">Add to My Schedule</button>
                             <h4 class="danger-text" v-else-if="activeActivity.capacity == 0 && activeActivity.capacity">Activity Full</h4>
                         </div>
                         <div v-if="activeUser.activities.includes(activeActivity._id)">
@@ -384,5 +384,8 @@
 
     .bottom-buffer {
         margin-bottom: 50px;
+    }
+    .add-btn {
+        margin-bottom: 5px;
     }
 </style>
