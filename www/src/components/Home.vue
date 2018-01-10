@@ -172,6 +172,10 @@
                                     required v-model="event.description"></textarea>
                             </div>
                             <div class="form-group">
+                                <label for="logo">Logo:</label>
+                                <input type="text" name="logo" class="form-control" maxlength="80" placeholder="Path or URL" required v-model="event.logo">
+                            </div>
+                            <div class="form-group">
                                 <label for="startDate">Start Date:</label>
                                 <input type="date" name="startDate" class="form-control" placeholder="Start Date" :min="date" v-model="event.startDate" required
                                     @change="validateForm">
@@ -206,6 +210,7 @@
                                         <option :value="timeZone" v-for="timeZone in timeZones">{{timeZone}}</option>
                                     </select>
                                 </div>
+                                
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-submit btn-success" data-dismiss="modal" @click="createEvent" type="submit" :disabled="!this.validator.form">Create New Event</button>
@@ -319,7 +324,8 @@
                     zip: '',
                     startDate: '',
                     endDate: '',
-                    timeZone: ''
+                    timeZone: '',
+                    logo: ''
                 },
                 validator: {
                     zip: false,
