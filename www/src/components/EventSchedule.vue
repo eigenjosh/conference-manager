@@ -184,6 +184,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <h1 class="main-headline" style="font-size: 80px">{{activeEvent.name}}</h1>
+                    <img src=activeEvent.logo alt="//placehold.it/200/200">
                     <h3 class="well text-center desc-style">{{activeEvent.description}}</h3>
                 </div>
             </div>
