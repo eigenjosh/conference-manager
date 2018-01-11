@@ -358,8 +358,8 @@ var store = new vuex.Store({
     removeCollab({commit, dispatch}, payload){
       api.put('remove-collaborator/'+ payload.event._id, payload)
         .then(res=>{
-          console.log(res)
-          dispatch('getCollabs')
+          console.log('remove collab', res)
+          dispatch('getCollabs', payload.event)
         })
         .catch(err=>{
           commit('handleError', err)

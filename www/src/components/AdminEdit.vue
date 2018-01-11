@@ -286,7 +286,7 @@
                     <div class="modal-body">
                         <form id="collabs" class="form">
                             <div v-for="collab in collaborators">
-                                <h4>{{collab.name}}<span class="glyphicon glyphicon-trash" aria-hidden="true" @click="removeCollab"></span></h4>
+                                <h4>{{collab.name}}<span class="glyphicon glyphicon-trash" aria-hidden="true" @click="removeCollab(collab._id)"></span></h4>
                             </div>
                             <div class="form-group">
                                 <label for="email">Collab Email Address:</label>
@@ -498,8 +498,8 @@
             getCollabs(){
                 this.$store.dispatch('getCollabs', activeEvent)
             },
-            removeCollab(){
-                this.$store.dispatch('removeCollab',{event: this.activeEvent, user: this.activeCollaborator})
+            removeCollab(id){
+                this.$store.dispatch('removeCollab',{event: this.activeEvent, _id:id})
             },
             addActivity() {
                 this.validateActivityForm()
