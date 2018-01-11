@@ -199,7 +199,9 @@
                 this.$store.dispatch('removeFromMySchedule', { user: this.activeUser, event: this.activeEvent, activity: this.activeActivity })
             },
             removeEvent() {
-                this.$store.dispatch('removeFromMyEvents', { user: this.activeUser, event: this.activeEvent, userSchedule: this.userSchedule })
+                if(activeUser._id != activeEvent.creatorId){
+                    this.$store.dispatch('removeFromMyEvents', { user: this.activeUser, event: this.activeEvent, userSchedule: this.userSchedule })
+                }
             }
 
 

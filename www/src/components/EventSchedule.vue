@@ -201,7 +201,7 @@
                 </div>
             </div>
             <div v-if="activeUser && activeUser.events">
-                <div class="col-xs-4 col-xs-offset-4 text-right" v-if="activeUser._id != activeEvent.creatorId">
+                <div class="col-xs-4 col-xs-offset-4 text-right" v-if="activeUser._id != activeEvent.creatorId && !activeEvent.collaborators.includes(activeUser._id)">
                     <button v-if="!activeUser.events.includes(activeEvent._id)" class="btn btn-default btn-lg join-btn" data-toggle="tooltip"
                         data-placement="top" title="Join event to add activities to your schedule!" @click="addToMyEvents">Join Event</button>
                     <h3 class="main-headline" style="margin-right: 30px; color: blue" v-if="joined">You have Joined this Event</h3>
