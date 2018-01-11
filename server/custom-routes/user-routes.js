@@ -115,7 +115,25 @@ module.exports = {
       let action = 'Get Collaborators on Event'
       Events.find({ _id: req.params.eventId, creatorId: req.session.uid })
         .then(events => {
-          return res.send(handleResponse(action, events[0].collaborators))
+          Users.find({ _id: { $in: events[0].collaborators } })
+            .then(users => {
+              var userReturnObj = []
+              for (var i = 0; i < users.length; i++) {
+                var returnObj = {
+                  _id: user._id,
+                  name: user.name,
+                  email: user.email,
+                  created: user.created,
+                  events: user.events,
+                  activities: user.activities
+                }
+                userReturnObj.push(returnObj)
+              }
+              return res.send(handleResponse(action, userReturnObj))
+            })
+            .catch(error => {
+              return next(handleResponse(action, null, error))
+            })
         }).catch(error => {
           return next(handleResponse(action, null, error))
         })
