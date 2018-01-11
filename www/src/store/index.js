@@ -137,6 +137,15 @@ var store = new vuex.Store({
       }
 
     },
+    removeEvent(state, data){
+      for(var i=0; i< state.events.length; i++){
+        var event = state.events[i]
+        if(event._id == data.event._id){
+          state.events.splice(i,1)
+          return
+        }
+      }
+    },
     // updateMyActivities(state, data){
     //   var i = state.myActivities.findIndex(a=> a._id == data.activity._id)
     //   if(i > -1){
@@ -593,8 +602,12 @@ var store = new vuex.Store({
       api.put('/events/' + payload.event._id, payload.event)
         .then(res => {
           dispatch('getAllEvents')
-          if (payload.emit) {
+          if (payload.emit && payload.event.published) {
             payload.mutation = 'addOrUpdateEvent' 
+            dispatch('emitData', payload)
+          }
+          if(payload.emit && !payload.event.published){
+            payload.mutation = 'removeEvent'
             dispatch('emitData', payload)
           }
         })
