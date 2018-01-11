@@ -28,11 +28,12 @@ var schema = new mongoose.Schema({
   startDate: { type: String, required: true },
   endDate: { type: String, required: true },
   created: { type: Number, default: Date.now() },
-  creatorId: {type: ObjectId, ref: models.user.name, required: true},
+  creatorId: { type: ObjectId, ref: models.user.name, required: true },
   published: { type: Boolean, default: false, required: true },
+  logo: { type: String }
 });
 
-schema.index({'$**': 'text'})
+schema.index({ '$**': 'text' })
 
 schema.pre('remove', function (next) {
   console.log('schema.pre in event')

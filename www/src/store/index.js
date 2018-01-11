@@ -25,6 +25,8 @@ var store = new vuex.Store({
   state: {
     error: {},
     activeUser: {},
+    collaborators: [],
+    activeCollaborator:{},
     schedule: {},
     userSchedule: {},
     events: [],
@@ -153,6 +155,13 @@ var store = new vuex.Store({
     setMyEvents(state, data) {
       state.myEvents = data
       console.log(state.myEvents)
+    },
+    //COLLABORATORS
+    setCollaborators(state, data){
+      state.collaborators = data
+    },
+    setActiveCollaborator(state, data){
+      vue.set(state, "activeCollaborator", data)
     },
     setMyActivities(state, data) {
       state.myActivities = data
@@ -324,7 +333,37 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
+    // ADD COLLABORATORS
+    addCollab({commit,dispatch}, payload){
+      api('add-collaborator/'+ payload.event._id, payload)
+        .then(res=>{
+          dispatch('getCollabs', payload.event)
+        })
+        .catch(err=>{
+          commit('handleError', err)
+        })
+    },
+    // GET COLLABORATORS
+    getCollabs({commit, dispatch}, event){
+      api('collaborators/'+ event._id)
+        .then(res =>{
+          console.log(res)
+          commit('setCollabs',res.data.data)
+        })
+        .catch(err=>{
+          commit('handleError', err)
+        })
+    },
+    //DELETE COLLABORATOR
+    removeCollab({commit, dispatch}, payload){
+      api(''+ payload.event._id, payload)
+        .then(res=>{
+          dispatch('getCollabs')
+        })
+        .catch(err=>{
+          commit('handleError', err)
+        })
+    },
     // GET ACTIVITY BY ID
     getActivityById({ commit, dispatch }, activity) {
       api('activities/' + activity._id)
