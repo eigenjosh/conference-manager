@@ -181,21 +181,17 @@ module.exports = {
       let action = 'Remove Collaborator from Event'
       Events.find({ _id: req.params.eventId, creatorId: req.session.uid })
         .then(events => {
-          Users.find({ _id: req.body._id })
+          Users.find({ _id: { $in: events[0].collaborators } })
           .then(users => {
-            var user = users[0]
-            console.log("remove---EVENTS:",events)
-              console.log("remove---USER:", user)
-              for (var i = 0; i < events[0].collaborators.length; i++) {
-                if (events[0].collaborators[i] == user._id) {
-                  console.log("in for loop",events[0].collaborators)
-                  events[0].collaborators.splice(i, 1)
-                  break
+              var updatedCollaboratorIds = []
+              for (var i = 0; i < users.length; i++) {
+                if (!(users[i]._id == req.body._id)) {
+                  updatedCollaboratorIds.push(users[i]._id)
                 }
               }
+              events[0].collaborators = updatedCollaboratorIds
               events[0].save() //asynchronous?
               console.log("after save",events[0].collaborators)
-
               return res.send(handleResponse(action, {message:"removed collaborator successful"}))
             })
             .catch(error => {
