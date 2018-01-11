@@ -30,7 +30,8 @@ var schema = new mongoose.Schema({
   created: { type: Number, default: Date.now() },
   creatorId: { type: ObjectId, ref: models.user.name, required: true },
   published: { type: Boolean, default: false, required: true },
-  logo: { type: String }
+  logo: { type: String },
+  collaborators: { type: [ObjectId], default: [] }
 });
 
 schema.index({ '$**': 'text' })

@@ -13,8 +13,7 @@ var schema = new mongoose.Schema({
 	creatorId: { type: ObjectId, ref: models.user.name, required: true },
 	eventId: { type: ObjectId, required: true },
 	notes: { type: [String] },
-	speakerId: { type: ObjectId },
-	speakerName: { type: String },
+	speakers: { type: [ObjectId], default: [] },
 	capacity: { type: String }
 });
 
