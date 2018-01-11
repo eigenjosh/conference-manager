@@ -119,6 +119,7 @@ module.exports = {
             .then(users => {
               var userReturnObj = []
               for (var i = 0; i < users.length; i++) {
+                var user = users[i]
                 var returnObj = {
                   _id: user._id,
                   name: user.name,
@@ -180,8 +181,9 @@ module.exports = {
       let action = 'Remove Collaborator from Event'
       Events.find({ _id: req.params.eventId, creatorId: req.session.uid })
         .then(events => {
-          Users.find({ email: req.body.email })
-            .then(user => {
+          Users.find({ _id: req.body.user._id })
+            .then(users => {
+              var user = users[0]
               for (var i = 0; i < events[0].collaborators.length; i++) {
                 if (events[0].collaborators[i] == user._id) {
                   events[0].collaborators.splice(i, 1)

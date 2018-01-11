@@ -344,6 +344,7 @@ var store = new vuex.Store({
     },
     // GET COLLABORATORS
     getCollabs({commit, dispatch}, event){
+      console.log(event)
       api('events/'+ event._id + '/collaborators')
         .then(res =>{
           console.log(res)
@@ -355,7 +356,7 @@ var store = new vuex.Store({
     },
     //DELETE COLLABORATOR
     removeCollab({commit, dispatch}, payload){
-      api.put('remove-collaborator'+ payload.event._id, payload)
+      api.put('remove-collaborator/'+ payload.event._id, payload)
         .then(res=>{
           console.log(res)
           dispatch('getCollabs')
