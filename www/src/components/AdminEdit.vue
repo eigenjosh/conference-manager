@@ -330,7 +330,7 @@
                     <div class="col-xs-3">
                         <button class="btn btn-danger delete-admin-edit-btn" @click="deleteEvent">Delete Event</button>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-xs-3" v-if="activeUser._id == activeEvent.creatorId">
                         <button class = "btn btn-default admin-edit-btn" data-toggle="modal" data-target="#addCollab">Edit Collaborators</button>
                     </div>
                 </div>
@@ -494,6 +494,7 @@
             addCollab(){
                 console.log("trying to add:", this.collab.email)
                 this.$store.dispatch('addCollab', {event: this.activeEvent ,email:this.collab.email})
+                this.collab.email=""
             },
             getCollabs(){
                 this.$store.dispatch('getCollabs', activeEvent)

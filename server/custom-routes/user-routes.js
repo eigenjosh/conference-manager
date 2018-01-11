@@ -300,26 +300,26 @@ module.exports = {
 
   // Compatible with collaborators?
 
-  /*
-    getAdminEvent: {
-      path: '/admin-events/:eventId',
-      reqType: 'get',
-      method(req, res, next) {
-        let action = 'Find Event Created By Admin at Specific Id'
-        Events.find({ _id: req.params.eventId })
-          .then(events => {
-            var returnEvent = null
-            if (req.session.uid == events[0].creatorId || events[0].collaborators.includes(req.session.uid)) {
-              console.log("Valid admin event: " + events[0])
-              var returnEvent = events[0]
-            }
-            res.send(handleResponse(action, returnEvent))
-          }).catch(error => {
-            return next(handleResponse(action, null, error))
-          })
-      }
-    },
-    */
+  
+    // getAdminEvent: {
+    //   path: '/admin-events/:eventId',
+    //   reqType: 'get',
+    //   method(req, res, next) {
+    //     let action = 'Find Event Created By Admin at Specific Id'
+    //     Events.find({ _id: req.params.eventId })
+    //       .then(events => {
+    //         var returnEvent = null
+    //         if (req.session.uid == events[0].creatorId || events[0].collaborators.includes(req.session.uid)) {
+    //           console.log("Valid admin event: " + events[0])
+    //           var returnEvent = events[0]
+    //         }
+    //         res.send(handleResponse(action, returnEvent))
+    //       }).catch(error => {
+    //         return next(handleResponse(action, null, error))
+    //       })
+    //   }
+    // },
+    
 
   deleteAdminEvent: {
     path: '/admin-events/:eventId',
