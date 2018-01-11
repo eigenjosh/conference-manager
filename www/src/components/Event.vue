@@ -4,7 +4,7 @@
             <router-link :to="{path: 'event-schedule/' + event._id}">
                 <button class="btn btn-default event-btn word-wrap" @click="setActiveEvent(event)">
                     <h2>{{event.name}}</h2>
-                    <img :src="event.logo" alt="//placehold.it/200x200" srcset="">
+                    <img :src="event.logo">
                     <h3>{{formatDateForDisplay(event.startDate)}} - {{formatDateForDisplay(event.endDate)}}</h3>
                     <h3>{{event.description}}</h3>
                     <h3>{{event.venue}}</h3>

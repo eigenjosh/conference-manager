@@ -214,6 +214,11 @@
                                     required v-model="event.name" required>{{activeEvent.name}}</textarea>
                             </div>
                             <div class="form-group">
+                                <label for="logo">Logo</label>
+                                <textarea type="text" name="logo" maxlength="300" class="form-control" rows="5" placeholder="Image path or URL"
+                                    required v-model="event.logo">{{activeEvent.logo}}</textarea>
+                                    </div>
+                            <div class="form-group">
                                 <label for="description">Description</label>
                                 <textarea type="text" name="description" maxlength="300" class="form-control" rows="5" placeholder="What is this event for?"
                                     required v-model="event.description">{{activeEvent.description}}</textarea>
