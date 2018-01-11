@@ -418,6 +418,9 @@
             schedule() {
                 return this.$store.state.schedule
             },
+            collaborators(){
+                return this.$store.state.collaborators
+            },
             activeEvent() {
                 return this.$store.state.activeEvent
             },
@@ -488,6 +491,7 @@
                 }
             },
             addCollab(){
+                console.log("trying to add:", this.collab.email)
                 this.$store.dispatch('addCollab', {event: this.activeEvent ,email:this.collab.email})
             },
             getCollabs(){

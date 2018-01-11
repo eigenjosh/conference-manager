@@ -157,11 +157,9 @@ var store = new vuex.Store({
       console.log(state.myEvents)
     },
     //COLLABORATORS
-    setCollaborators(state, data){
+    setCollabs(state, data){
+      console.log(data)
       state.collaborators = data
-    },
-    setActiveCollaborator(state, data){
-      vue.set(state, "activeCollaborator", data)
     },
     setMyActivities(state, data) {
       state.myActivities = data
@@ -335,8 +333,9 @@ var store = new vuex.Store({
     },
     // ADD COLLABORATORS
     addCollab({commit,dispatch}, payload){
-      api('add-collaborator/'+ payload.event._id, payload)
+      api.put('add-collaborator/'+ payload.event._id, payload)
         .then(res=>{
+          console.log(res)
           dispatch('getCollabs', payload.event)
         })
         .catch(err=>{
@@ -345,7 +344,7 @@ var store = new vuex.Store({
     },
     // GET COLLABORATORS
     getCollabs({commit, dispatch}, event){
-      api('collaborators/'+ event._id)
+      api('events/'+ event._id + '/collaborators')
         .then(res =>{
           console.log(res)
           commit('setCollabs',res.data.data)
@@ -356,8 +355,9 @@ var store = new vuex.Store({
     },
     //DELETE COLLABORATOR
     removeCollab({commit, dispatch}, payload){
-      api(''+ payload.event._id, payload)
+      api.put('remove-collaborator'+ payload.event._id, payload)
         .then(res=>{
+          console.log(res)
           dispatch('getCollabs')
         })
         .catch(err=>{

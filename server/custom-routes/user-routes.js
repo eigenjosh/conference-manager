@@ -130,9 +130,11 @@ module.exports = {
       Events.find({ _id: req.params.eventId, creatorId: req.session.uid })
         .then(events => {
           Users.find({ email: req.body.email })
-            .then(user => {
+            .then(users => {
+              var user = users[0]
               events[0].collaborators.push(user._id)
-              event[0].save() //asynchronous?
+              events[0].save() //asynchronous?
+              console.log("add-collaborator:", events, user)
               var returnUserObj = {
                 _id: user._id,
                 name: user.name,
@@ -141,7 +143,7 @@ module.exports = {
                 events: user.events,
                 activities: user.activities
               }
-              console.log("collaborators: ", collaborators)
+              console.log("collaborators: ", events[0].collaborators)
               return res.send(handleResponse(action, returnUserObj))
             })
             .catch(error => {
