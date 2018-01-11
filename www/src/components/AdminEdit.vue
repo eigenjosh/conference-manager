@@ -363,7 +363,7 @@
             }
         },
         mounted() {
-            this.$store.dispatch('getEventById', { _id: this.$route.params.id })
+            this.$store.dispatch('getAdminEventById', { _id: this.$route.params.id })
             this.date = new Date().toJSON().split('T')[0];
         },
         computed: {

@@ -161,13 +161,13 @@ module.exports = {
   },
 
   getAdminEvent: {
-    path: '/admin-event/:eventId',
+    path: '/admin-events/:eventId',
     reqType: 'get',
     method(req, res, next) {
       let action = 'Find Event Created By Admin at Specific Id'
       Events.find({ _id: req.params.eventId, creatorId: req.session.uid })
         .then(events => {
-          res.send(handleResponse(action, events))
+          res.send(handleResponse(action, events[0]))
         }).catch(error => {
           return next(handleResponse(action, null, error))
         })
