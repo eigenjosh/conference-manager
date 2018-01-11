@@ -52,19 +52,14 @@ let connectedUsers = {}
 let rooms = {
     general: {
         name: 'General',
-        users: {},
-        moderators: {},
-        banned: {}
+        users: {}
     }
 }
 
 function Room(name, client) {
     this.name = name
     this.users = {}
-    this.moderators = {}
-    this.moderators[client.userId] = client
     this.users[client.userId] = client
-    this.banned = {}
     rooms[name.toLowerCase()] = this
 }
 
@@ -102,19 +97,11 @@ io.on('connection', function (socket) {
     })
 
     socket.on('update', payload => {
-
-        // if (payload.activity) {
-        //     console.log("updating whatever wer are here")
-        //     socket.to(payload.activity.eventId).emit('receiveUpdate', { eventId: payload.activity.eventId })
-        // } else {
-
-            socket.broadcast.emit('receiveUpdate', payload)
-        // }
-
+        socket.to(activeRoom.name).emit('receiveUpdate', payload)
     })
 
     socket.on('joinRoom', roomName => {
-        console.log("joingin room ", roomName)
+        console.log("joining room ", roomName)
         if(activeRoom){
             socket.leave(activeRoom.name)
         }
