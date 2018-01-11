@@ -50,7 +50,6 @@ export default {
             })
 
             socket.on('receiveUpdate', payload => {
-                debugger
                 console.log("RECIEVING UPDATE:", payload)
                 if (payload.action) {
 
