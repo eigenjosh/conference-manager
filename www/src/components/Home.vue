@@ -239,61 +239,63 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid body-text off-section">
-            <div class="row">
+        <div class="container-fluid body-text">
+            <div class="row top-spacer space-text">
                 <div class="col-xs-12 col-md-offset-1 col-md-4">
                     <h4>
-                        | Create an account to build your event! With an account you can join events, add activities to your schedule, and create
-                        notes.
-                    </h4>
+                        Create an account to begin! </h4>
+                    <br>
+                    <h4>By signing up you can join events, add activities to your schedule, and take notes.</h4>
                 </div>
                 <div class="col-xs-12 col-md-offset-1 col-md-4">
                     <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
                 </div>
             </div>
-            <div class="row">
+            <div class="row spacer off-section">
                 <div class="col-xs-12 col-md-offset-1 col-md-4">
                     <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
                 </div>
                 <div class="col-xs-12 col-md-offset-1 col-md-4">
                     <h4>
-                        | Create an Event, keep it in 'private' mode while adding activities, then click 'publish' to post it to the site. You may
-                        edit your event at any time, whether in private or published modes.
+                        Now that you have an account you can build your event! </h4>
+                    <br>
+                    <h4>Keep your event in 'private' mode while adding your activities, then click 'publish' to post it for the
+                        world to see.</h4>
+                    <br>
+                    <h4> You may edit your event at any time, whether in private or published modes.</h4>
+                </div>
+            </div>
+            <div class="row spacer space-text">
+                <div class="col-xs-12 col-md-offset-1 col-md-4">
+                    <h4>Create Activities on your events for your guests to join.</h4>
+                    <br>
+                    <h4>Add collaborators to help edit your event, and allow speakers to edit their own activities</h4>
+                    <br>
+                    <h4>Post seating capacity to limit the size of an event, and enable your guests to reserve their seat by
+                        joining the activity.</h4>
+                </div>
+                <div class="col-xs-12 col-md-offset-1 col-md-4">
+                    <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
+                </div>
+            </div>
+            <div class="row spacer off-section">
+                <div class="col-xs-12 col-md-offset-1 col-md-4">
+                    <img src="../assets/Optimized-pen-paper.jpg" class="multi-img">
+                </div>
+                <div class="col-xs-12 col-md-offset-2 col-md-4 multi-text">
+                    <h4>Add activities to your personal schedule to see your own agenda. Add and remove as your schedule changes.</h4>
+                    <br>
+                    <h4>Take notes on activities you're in, or jot down general notes to remember. Both are stored on your user
+                        account.
+                    </h4>
+                    <h4>Stay organized and save vital information without carrying around a pen and paper.</h4>
+                </div>
+            </div>
 
-                    </h4>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-xs-12 col-md-offset-1 col-md-4">
-                    <h4>
-                        | Create Activities on your events for your guests to join. Attach a speaker to their Activities are able to be created with
-                        Seating Capacity, and as guests add your activities the seats will fill. Once full, the activity
-                        will close for registration and display as full. Guests have the ability to drop the event, thus
-                        opening seats for the event activity back up to registrants.
-                    </h4>
-                </div>
-                <div class="col-xs-12 col-md-offset-1 col-md-4">
-                    <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-xs-12 col-md-offset-1 col-md-4">
-                    <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
-                </div>
-                <div class="col-xs-12 col-md-offset-1 col-md-4">
-                    <h4>
-                        | Notes are stored on your user account, and can be created generally or tied to a specific event, thus allowing you and
-                        your guests to stay organized and jot down vital information without a pen and paper.
-                    </h4>
-                </div>
-            </div>
-            
-            <div class="row">
+            <div class="row spacer space-text">
                 <div class="col-xs-12">
                     <h3>
-                        | Create your free account and get started!
+                        Create your free account and get started!
                     </h3>
                 </div>
             </div>
@@ -509,52 +511,32 @@
         padding: 18px;
         font-size: 50px;
         letter-spacing: 10px;
-    }
 
-    .caption-bottom {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        width: 100%;
-        text-align: center;
-        color: #000;
-        background-color: #111;
-        color: #fff;
-        padding: 18px;
-        font-size: 50px;
-        letter-spacing: 10px;
-    }
-
-    .caption span.border {
-        background-color: #111;
-        color: #fff;
-        padding: 18px;
-        font-size: 50px;
-        letter-spacing: 10px;
     }
 
     .space-text {
-        color: #777;
-        background-color: white;
-        text-align: center;
-        padding: 50px 80px;
-        text-align: justify;
-        font-family: 'Lato', sans-serif;
-        background-color: #111;
         color: #fff;
-        padding: 18px;
-        font-size: 50px;
-        letter-spacing: 10px;
+        background-color: #111;
+        font-family: 'Lato', sans-serif;
+        /* padding: 50px 80px; */
+        letter-spacing: 5px;
     }
 
     .off-section {
-        color: #ddd;
-        background-color: #282E34;
-        text-align: center;
-        padding: 50px 80px;
-        position: relative;
-        /* font-size: 20px; */
+        color: black;
+        background-color: white;
         font-family: 'Lato', sans-serif;
+        /* padding: 50px 80px; */
+        letter-spacing: 5px;
+    }
+
+    .spacer {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .top-spacer {
+        margin-bottom: 10px;
     }
 
     /* 
@@ -639,9 +621,13 @@
             margin: 2px;
             font: black;
         }
-
-        /* .multi-img {
-            height: 100%;
-        } */
+        .multi-img {
+           margin-top: -10px;
+           margin-bottom: -10px;
+        }
+        .multi-text {
+            padding-top: 50px;
+            padding-bottom: 10px;
+        }
     }
 </style>

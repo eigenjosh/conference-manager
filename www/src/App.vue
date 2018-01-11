@@ -25,6 +25,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    margin-top: 100px;
   }
 
   .word-wrap {
@@ -101,7 +102,8 @@
     background-color: lightgray;
     color: black;
   }
+
   .body-text {
-            font-family: 'Lato', sans-serif;
-        }
+    font-family: 'Lato', sans-serif;
+  }
 </style>
