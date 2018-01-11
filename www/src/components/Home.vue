@@ -55,8 +55,10 @@
             </nav>
             <div class="jumbotron main-heading main-pic">
                 <div class="row">
-                    <div class="col-xs-12 text-responsive">
-                        <h1 style="font-size: 150px">CONFER</h1>
+                    <div class="col-xs-12 main-logo">
+                        <h1>CONFER</h1>
+                    </div>
+                    <div class="col-xs-12">
                         <h3 style="font-size: 30px">Digital Conference Manager</h3>
                     </div>
                 </div>
@@ -450,11 +452,28 @@
 </script>
 
 <style>
+
     .home {
         background-image: url('https://bhubaneswarlive.com/wp-content/uploads/2016/11/Savin-NY-Website-Background-Web.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center
+    }
+
+    .main-logo {
+        font-size: 150px;
+    }
+
+    @media (max-width: 400px) {
+        .main-logo {
+            font-size: 30px;
+        }
+    }
+
+    @media (min-width: 401px) {
+        .main-logo {
+            font-size: 150px;
+        }
     }
 
     .well {
