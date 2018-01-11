@@ -330,7 +330,7 @@
                     <div class="col-xs-3">
                         <button class="btn btn-danger delete-admin-edit-btn" @click="deleteEvent">Delete Event</button>
                     </div>
-                    <div class="col-xs-3" v-if="activeUser._id == activeEvent.creatorId">
+                    <div class="col-xs-3" v-if="user._id == activeEvent.creatorId">
                         <button class = "btn btn-default admin-edit-btn" data-toggle="modal" data-target="#addCollab">Edit Collaborators</button>
                     </div>
                 </div>
