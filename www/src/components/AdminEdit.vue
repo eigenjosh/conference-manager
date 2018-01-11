@@ -269,6 +269,36 @@
             </div>
         </div>
 
+        <div id="addCollab" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add Collab Team</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="collabs" class="form">
+                            <div v-for="collab in collaborators">
+                                <h4>{{collab.name}}<span class="glyphicon glyphicon-trash" aria-hidden="true" @click="removeCollab"></span></h4>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Collab Email Address:</label>
+                                <input type="email" maxlength="57" name="email" class="form-control" placeholder="Email" required v-model='collab.email'>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-submit btn-success" @click="addCollab"  type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12 well main-headline" data-toggle="modal" data-target="#myModal3" @click="eventFormClickHandler">
@@ -282,10 +312,10 @@
                         <button class="btn btn-default admin-edit-btn" data-toggle="modal" data-target="#myModalAdd" @click="validateActivityForm">Add Activity</button>
                     </div>
                     <div class="col-xs-3">
-                        <button v-if="!activeEvent.published" class="btn btn-default admin-edit-btn" @click="publish" data-toggle="tooltip"
-                        data-placement="top" title="Publish event so others can see it!">Publish</button>
-                        <button v-else="activeEvent.published" class="btn btn-default admin-edit-btn" @click="unPublish" data-toggle="tooltip"
-                        data-placement="top" title="Only you can see Private events!">Make Private</button>
+                        <button v-if="!activeEvent.published" class="btn btn-default admin-edit-btn" @click="publish" data-toggle="tooltip" data-placement="top"
+                            title="Publish event so others can see it!">Publish</button>
+                        <button v-else="activeEvent.published" class="btn btn-default admin-edit-btn" @click="unPublish" data-toggle="tooltip" data-placement="top"
+                            title="Only you can see Private events!">Make Private</button>
                     </div>
                     <div class="col-xs-3">
                         <router-link :to="{path: '/event-schedule/' + activeEvent._id}">
@@ -293,8 +323,11 @@
                         </router-link>
                     </div>
                     <div class="col-xs-3">
-                            <button class="btn btn-danger delete-admin-edit-btn" @click="deleteEvent">Delete Event</button>
-                        </div>
+                        <button class="btn btn-danger delete-admin-edit-btn" @click="deleteEvent">Delete Event</button>
+                    </div>
+                    <div class="col-xs-3">
+                        <button class = "btn btn-default admin-edit-btn" data-toggle="modal" data-target="#addCollab">Edit Collaborators</button>
+                    </div>
                 </div>
             </div>
             <div class="row" v-for="(timeDict, date) in schedule">
@@ -359,6 +392,9 @@
                     startDate: false,
                     endDate: false,
                     eventForm: false
+                },
+                collab:{
+                    email: "",
                 }
 
             }
@@ -446,6 +482,15 @@
                     return newDate.split(',')[0]
                 }
             },
+            addCollab(){
+                this.$store.dispatch('addCollab', {event: this.activeEvent ,email:this.collab.email})
+            },
+            getCollabs(){
+                this.$store.dispatch('getCollabs', activeEvent)
+            },
+            removeCollab(){
+                this.$store.dispatch('removeCollab',{event: this.activeEvent, user: this.activeCollaborator})
+            },
             addActivity() {
                 this.validateActivityForm()
                 if (this.validator.activityForm) {
@@ -530,10 +575,10 @@
         background-color: lightgray;
         border: black solid 1px;
     }
+
     .delete-admin-edit-btn {
         width: 75%;
         margin-bottom: 5px;
         border: black solid 1px;
     }
-
 </style>
