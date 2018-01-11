@@ -55,7 +55,7 @@
             </nav>
             <div class="jumbotron main-heading main-pic">
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 text-responsive">
                         <h1 style="font-size: 150px">CONFER</h1>
                         <h3 style="font-size: 30px">Digital Conference Manager</h3>
                     </div>
@@ -234,32 +234,32 @@
         <hr>
         <div class="container-fluid body-text">
             <div class="row">
-                <div class="col-xs-12 col-md-4">
+                <div class="col-xs-12 col-md-offset-1 col-md-4">
                     <h4>
                         | Create an account to build your event! With an account you can join events, add activities to your schedule, and create
                         notes.
                     </h4>
                 </div>
-                <div class="col-xs-12 col-md-4">
+                <div class="col-xs-12 col-md-offset-1 col-md-4">
                     <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-xs-12 col-md-4">
+                <div class="col-xs-12 col-md-offset-1 col-md-4">
                     <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
                 </div>
-            </div>
-            <div class="col-xs-12 col-md-4">
-                <h4>
-                    | Create an Event, keep it in 'private' mode while adding activities, then click 'publish' to post it to the site. You may
-                    edit your event at any time, whether in private or published modes.
+                <div class="col-xs-12 col-md-offset-1 col-md-4">
+                    <h4>
+                        | Create an Event, keep it in 'private' mode while adding activities, then click 'publish' to post it to the site. You may
+                        edit your event at any time, whether in private or published modes.
 
-                </h4>
+                    </h4>
+                </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-xs-12 col-md-4">
+                <div class="col-xs-12 col-md-offset-1 col-md-4">
                     <h4>
                         | Create Activities on your events for your guests to join. Attach a speaker to their Activities are able to be created with
                         Seating Capacity, and as guests add your activities the seats will fill. Once full, the activity
@@ -267,28 +267,28 @@
                         opening seats for the event activity back up to registrants.
                     </h4>
                 </div>
-                <div class="col-xs-12 col-md-4">
+                <div class="col-xs-12 col-md-offset-1 col-md-4">
                     <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-xs-12 col-md-4">
+                <div class="col-xs-12 col-md-offset-1 col-md-4">
                     <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
                 </div>
-                <div class="col-xs-12 col-md-4">
+                <div class="col-xs-12 col-md-offset-1 col-md-4">
                     <h4>
                         | Notes are stored on your user account, and can be created generally or tied to a specific event, thus allowing you and
                         your guests to stay organized and jot down vital information without a pen and paper.
                     </h4>
                 </div>
-                <hr>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h3>
-                            | Create your free account and get started!
-                        </h3>
-                    </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>
+                        | Create your free account and get started!
+                    </h3>
                 </div>
             </div>
         </div>
