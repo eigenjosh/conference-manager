@@ -182,7 +182,7 @@ module.exports = {
       Events.find({ _id: req.params.eventId, creatorId: req.session.uid })
         .then(events => {
           Users.find({ _id: { $in: events[0].collaborators } })
-          .then(users => {
+            .then(users => {
               var updatedCollaboratorIds = []
               for (var i = 0; i < users.length; i++) {
                 if (!(users[i]._id == req.body._id)) {
@@ -191,8 +191,8 @@ module.exports = {
               }
               events[0].collaborators = updatedCollaboratorIds
               events[0].save() //asynchronous?
-              console.log("after save",events[0].collaborators)
-              return res.send(handleResponse(action, {message:"removed collaborator successful"}))
+              console.log("after save", events[0].collaborators)
+              return res.send(handleResponse(action, { message: "removed collaborator successful" }))
             })
             .catch(error => {
               return next(handleResponse(action, null, error))
@@ -300,26 +300,38 @@ module.exports = {
 
   // Compatible with collaborators?
 
+  // getAdminEvent: {
+  //   path: '/admin-events/:eventId',
+  //   reqType: 'get',
+  //   method(req, res, next) {
+  //     let action = 'Find Event Created By Admin at Specific Id'
+  //     Events.find({ _id: req.params.eventId })
+  //       .then(events => {
+  //         Users.find({ _id: { $in: events[0].collaborators } })
+  //           .then(users => {
+  //             var validCollaborator = false
+  //             for (var i = 0; i < users.length; i++) {
+  //               if (users[i]._id == req.session.uid) {
+  //                 var validCollaborator = true
+  //                 break
+  //               }
+  //             }
+  //             var returnEvent = null
+  //             if (req.session.uid == events[0].creatorId || validCollaborator) {
+  //               console.log("Valid admin event: " + events[0])
+  //               returnEvent = events[0]
+  //             }
+  //             res.send(handleResponse(action, returnEvent))
+  //           })
+  //           .catch(error => {
+  //             return next(handleResponse(action, null, error))
+  //           })
+  //       }).catch(error => {
+  //         return next(handleResponse(action, null, error))
+  //       })
+  //   }
+  // },
   
-    // getAdminEvent: {
-    //   path: '/admin-events/:eventId',
-    //   reqType: 'get',
-    //   method(req, res, next) {
-    //     let action = 'Find Event Created By Admin at Specific Id'
-    //     Events.find({ _id: req.params.eventId })
-    //       .then(events => {
-    //         var returnEvent = null
-    //         if (req.session.uid == events[0].creatorId || events[0].collaborators.includes(req.session.uid)) {
-    //           console.log("Valid admin event: " + events[0])
-    //           var returnEvent = events[0]
-    //         }
-    //         res.send(handleResponse(action, returnEvent))
-    //       }).catch(error => {
-    //         return next(handleResponse(action, null, error))
-    //       })
-    //   }
-    // },
-    
 
   deleteAdminEvent: {
     path: '/admin-events/:eventId',
