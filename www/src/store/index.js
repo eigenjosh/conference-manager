@@ -352,12 +352,14 @@ var store = new vuex.Store({
 
     // GET ADMIN EVENT BY ID
     getAdminEventById({ commit, dispatch }, event) {
-
       api('admin-events/' + event._id)
         .then(res => {
           commit('setActiveEvent', res.data.data)
           dispatch('getActivities', { _id: event._id })
           dispatch('joinRoom', event._id)
+          if (!res.data.data) {
+            router.push(`/event-schedule/${event._id}`)
+          }
         })
         .catch(err => {
           commit('handleError', err)
