@@ -83,6 +83,111 @@ module.exports = {
         })
     }
   },
+  /*
+    addCollaborator: {
+      // find event by uid for security
+      // send back updated user object
+      path: '/add-collaborator/:eventId',
+      reqType: 'put',
+      method(req, res, next) {
+        let action = 'Add Collaborator to Event'
+        Events.find({ _id: req.params.eventId, creatorId: req.session.uid })
+          .then(events => {
+            Users.find({ email: req.body.email })
+              .then(user => {
+                //incomplete:
+                user.collaboratorEvents.push(events[0]._id)
+                return res.send(handleResponse(action, { message: 'Successfully updated user events.' }))
+              })
+              .catch(error => {
+                return next(handleResponse(action, null, error))
+              })
+          }).catch(error => {
+            return next(handleResponse(action, null, error))
+          })
+      }
+    },
+    */
+  getCollaborators: {
+    path: '/events/:eventId/collaborators',
+    reqType: 'get',
+    method(req, res, next) {
+      let action = 'Get Collaborators on Event'
+      Events.find({ _id: req.params.eventId, creatorId: req.session.uid })
+        .then(events => {
+          return res.send(handleResponse(action, events[0].collaborators))
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
+
+  addCollaborator: {
+    path: '/add-collaborator/:eventId',
+    reqType: 'put',
+    method(req, res, next) {
+      let action = 'Add Collaborator to Event'
+      Events.find({ _id: req.params.eventId, creatorId: req.session.uid })
+        .then(events => {
+          Users.find({ email: req.body.email })
+            .then(user => {
+              events[0].collaborators.push(user._id)
+              event[0].save() //asynchronous?
+              var returnUserObj = {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                created: user.created,
+                events: user.events,
+                activities: user.activities
+              }
+              console.log("collaborators: ", collaborators)
+              return res.send(handleResponse(action, returnUserObj))
+            })
+            .catch(error => {
+              return next(handleResponse(action, null, error))
+            })
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
+
+  removeCollaborator: {
+    path: '/remove-collaborator/:eventId',
+    reqType: 'put',
+    method(req, res, next) {
+      let action = 'Remove Collaborator from Event'
+      Events.find({ _id: req.params.eventId, creatorId: req.session.uid })
+        .then(events => {
+          Users.find({ email: req.body.email })
+            .then(user => {
+              for (var i = 0; i < events[0].collaborators.length; i++) {
+                if (events[0].collaborators[i] == user._id) {
+                  events[0].collaborators.splice(i, 1)
+                  break
+                }
+              }
+              event[0].save() //asynchronous?
+              var returnUserObj = {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                created: user.created,
+                events: user.events,
+                activities: user.activities
+              }
+              console.log("collaborators: ", collaborators)
+              return res.send(handleResponse(action, returnUserObj))
+            })
+            .catch(error => {
+              return next(handleResponse(action, null, error))
+            })
+        }).catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+  },
 
   removeEventFromUserSchedule: {
     path: '/user-events/:eventId',
@@ -92,7 +197,7 @@ module.exports = {
       Users.find({ _id: req.session.uid })
         .then(users => {
           var user = users[0]
-          Events.find({ _id: {$in: user.events } })
+          Events.find({ _id: { $in: user.events } })
             .then(events => {
               var updatedEventIds = []
               for (var i = 0; i < events.length; i++) {
@@ -101,7 +206,7 @@ module.exports = {
                 }
               }
               user.events = updatedEventIds
-              Activities.find({ _id: {$in: user.activities}})
+              Activities.find({ _id: { $in: user.activities } })
                 .then(activities => {
                   var updatedActivityIds = []
                   for (var i = 0; i < activities.length; i++) {
@@ -160,6 +265,10 @@ module.exports = {
     }
   },
 
+  ////Original:
+
+  //Events.find({ _id: req.params.eventId, $or: [{ creatorId: req.session.uid }, { _id: { $in: user.adminEvents } }] })
+
   getAdminEvent: {
     path: '/admin-events/:eventId',
     reqType: 'get',
@@ -173,6 +282,30 @@ module.exports = {
         })
     }
   },
+
+
+  // Compatible with collaborators?
+
+  /*
+    getAdminEvent: {
+      path: '/admin-events/:eventId',
+      reqType: 'get',
+      method(req, res, next) {
+        let action = 'Find Event Created By Admin at Specific Id'
+        Events.find({ _id: req.params.eventId })
+          .then(events => {
+            var returnEvent = null
+            if (req.session.uid == events[0].creatorId || events[0].collaborators.includes(req.session.uid)) {
+              console.log("Valid admin event: " + events[0])
+              var returnEvent = events[0]
+            }
+            res.send(handleResponse(action, returnEvent))
+          }).catch(error => {
+            return next(handleResponse(action, null, error))
+          })
+      }
+    },
+    */
 
   deleteAdminEvent: {
     path: '/admin-events/:eventId',
