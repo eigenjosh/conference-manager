@@ -137,14 +137,15 @@ var store = new vuex.Store({
       }
 
     },
-    // updateMyActivities(state, data){
-    //   var i = state.myActivities.findIndex(a=> a._id == data.activity._id)
-    //   if(i > -1){
-    //     vue.set(state.myActivities, i, data.activity)
-    //   }else{
-    //     state.events.push(data.event)
-    //   }
-    // },
+    removeEvent(state, data){
+      for(var i=0; i< state.events.length; i++){
+        var event = state.events[i]
+        if(event._id == data.event._id){
+          state.events.splice(i,1)
+          return
+        }
+      }
+    },
     setEvents(state, data) {
       state.events = data
       console.log(state.events)
@@ -352,12 +353,14 @@ var store = new vuex.Store({
 
     // GET ADMIN EVENT BY ID
     getAdminEventById({ commit, dispatch }, event) {
-
       api('admin-events/' + event._id)
         .then(res => {
           commit('setActiveEvent', res.data.data)
           dispatch('getActivities', { _id: event._id })
           dispatch('joinRoom', event._id)
+          if (!res.data.data) {
+            router.push(`/event-schedule/${event._id}`)
+          }
         })
         .catch(err => {
           commit('handleError', err)
@@ -387,6 +390,10 @@ var store = new vuex.Store({
         .then(res => {
           console.log('activity has been added')
           dispatch('authenticate')
+          if(payload.emit){
+            payload.action = 'getActivityById'
+            dispatch('emitData', payload)
+          }
         })
         .catch(err => {
           commit('handleError', err)
@@ -490,7 +497,7 @@ var store = new vuex.Store({
           if (payload.emit) {
             payload.action = 'getActivities' 
             dispatch('emitData', payload)
-            payload.action = 'getMyActivities'
+            payload.action = 'getActivityById'
             dispatch('emitData', payload)
           }
         })
@@ -589,8 +596,12 @@ var store = new vuex.Store({
       api.put('/events/' + payload.event._id, payload.event)
         .then(res => {
           dispatch('getAllEvents')
-          if (payload.emit) {
+          if (payload.emit && payload.event.published) {
             payload.mutation = 'addOrUpdateEvent' 
+            dispatch('emitData', payload)
+          }
+          if(payload.emit && !payload.event.published){
+            payload.mutation = 'removeEvent'
             dispatch('emitData', payload)
           }
         })

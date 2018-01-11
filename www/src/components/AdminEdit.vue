@@ -323,6 +323,7 @@
 </template>
 
 <script>
+    import router from '../router'
     export default {
         name: 'adminEdit',
         data() {
