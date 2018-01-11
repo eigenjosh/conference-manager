@@ -329,6 +329,7 @@ var store = new vuex.Store({
       api('activities/' + activity._id)
         .then(res => {
           commit('setActiveActivity', res.data.data)
+          dispatch('joinRoom', activity._id)
         })
         .catch(err => {
           commit('handleError', err)
