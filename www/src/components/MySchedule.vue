@@ -1,6 +1,6 @@
 <template>
     <div class="my-schedule container-fluid">
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div>
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
