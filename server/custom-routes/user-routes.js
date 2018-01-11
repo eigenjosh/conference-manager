@@ -161,7 +161,7 @@ module.exports = {
   },
 
   getAdminEvent: {
-    path: '/admin-event/:eventId',
+    path: '/admin-events/:eventId',
     reqType: 'get',
     method(req, res, next) {
       let action = 'Find Event Created By Admin at Specific Id'
