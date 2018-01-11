@@ -1,6 +1,6 @@
 <template>
     <div class="find-events">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-fixed-top navbar-space">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -387,6 +387,7 @@
 </script>
 
 <style scoped>
+
     .event-btn {
         width: 100%;
         background-color: lightgray;
