@@ -323,6 +323,7 @@
 </template>
 
 <script>
+    import router from '../router'
     export default {
         name: 'adminEdit',
         data() {
@@ -364,6 +365,9 @@
         },
         mounted() {
             this.$store.dispatch('getAdminEventById', { _id: this.$route.params.id })
+            if (!(this.activeEvent.creatorId)) {
+                router.push('/my-schedule')
+            }
             this.date = new Date().toJSON().split('T')[0];
         },
         computed: {
