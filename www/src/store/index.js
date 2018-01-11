@@ -387,6 +387,10 @@ var store = new vuex.Store({
         .then(res => {
           console.log('activity has been added')
           dispatch('authenticate')
+          if(payload.emit){
+            payload.action = 'getActivityById'
+            dispatch('emitData', payload)
+          }
         })
         .catch(err => {
           commit('handleError', err)
@@ -490,7 +494,7 @@ var store = new vuex.Store({
           if (payload.emit) {
             payload.action = 'getActivities' 
             dispatch('emitData', payload)
-            payload.action = 'getMyActivities'
+            payload.action = 'getActivityById'
             dispatch('emitData', payload)
           }
         })

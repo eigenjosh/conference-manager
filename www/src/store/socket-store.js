@@ -50,10 +50,12 @@ export default {
             })
 
             socket.on('receiveUpdate', payload => {
+                debugger
                 console.log("RECIEVING UPDATE:", payload)
                 if (payload.action) {
 
                     if (payload.action == "getActivityById") {
+                        
                         dispatch(payload.action, payload.activity)
                     }
                     else if (payload.action == "getActivities") {
@@ -68,12 +70,12 @@ export default {
                 }
             })
             socket.on('joinedRoom', room => {
-                console.log('SETTING ROOM')
+                console.log('JOINED ROOM', room)
                 commit('setRoom', room)
             })
 
             socket.on('leftRoom', room => {
-                console.log('SETTING ROOM')
+                console.log('LEFT ROOM', room)
                 commit('setRoom', room)
             })
 
