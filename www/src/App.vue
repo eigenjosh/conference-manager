@@ -27,7 +27,11 @@
     color: #2c3e50;
 
   }
-
+  @media screen and (min-width: 500px) {
+        .jumbotron, .h1 {
+        font-size: 150px;
+        }
+    }
   .word-wrap {
     overflow: hidden;
     text-overflow: ellipsis;
