@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <!-- BEGINNING OF NAVBAR -->
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
                     aria-expanded="false">
@@ -67,7 +67,7 @@
         <div class="container-fluid">
             <div class="row space-text">
                 <div class="col-xs-offset-3 col-xs-6 col-xs-offset-3">
-                    <h3>A digital conference website that centralizes your event information in one place.</h3>
+                    <h2>A digital conference application that centralizes your event information in one place.</h2>
                 </div>
             </div>
         </div>
@@ -234,12 +234,11 @@
         <div class="container-fluid bgimg-2">
             <div class="row">
                 <div class="col-xs-12 caption">
-                    <h3>Create a free account to create and join events</h3>
+                    <h2>Sign up for a free account, create and join events</h2>
+                    <h2>and add them to your personal schedule.</h2>
                 </div>
             </div>
         </div>
-
-        <hr>
         <div class="container-fluid body-text off-section">
             <div class="row">
                 <div class="col-xs-12 col-md-offset-1 col-md-4">
@@ -252,7 +251,6 @@
                     <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
                 </div>
             </div>
-            <hr>
             <div class="row">
                 <div class="col-xs-12 col-md-offset-1 col-md-4">
                     <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
@@ -265,7 +263,7 @@
                     </h4>
                 </div>
             </div>
-            <hr>
+            
             <div class="row">
                 <div class="col-xs-12 col-md-offset-1 col-md-4">
                     <h4>
@@ -279,7 +277,7 @@
                     <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
                 </div>
             </div>
-            <hr>
+            
             <div class="row">
                 <div class="col-xs-12 col-md-offset-1 col-md-4">
                     <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
@@ -291,7 +289,7 @@
                     </h4>
                 </div>
             </div>
-            <hr>
+            
             <div class="row">
                 <div class="col-xs-12">
                     <h3>
@@ -301,8 +299,6 @@
             </div>
         </div>
 
-
-        <hr>
         <!-- <div class="container-fluid bgimg-3">
             <div class="row caption">
                 <div class="col-md-3 col-md-offset-1 well">
@@ -463,7 +459,6 @@
     .home {
         height: 100%;
         margin: 0;
-        /* background-image: url('https://bhubaneswarlive.com/wp-content/uploads/2016/11/Savin-NY-Website-Background-Web.jpg'); */
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center
@@ -494,7 +489,7 @@
     }
 
     .bgimg-2 {
-        background-image: url("https://bhubaneswarlive.com/wp-content/uploads/2016/11/Savin-NY-Website-Background-Web.jpg");
+        background-image: url('../assets/Optimized-conference.jpeg');
         min-height: 400px;
     }
 
@@ -506,10 +501,14 @@
     .caption {
         position: absolute;
         left: 0;
-        top: 50%;
+        top: 30%;
         width: 100%;
         text-align: center;
-        color: #000;
+        color: white;
+        font-family: 'Lato', sans-serif;
+        padding: 18px;
+        font-size: 50px;
+        letter-spacing: 10px;
     }
 
     .caption-bottom {
@@ -540,6 +539,12 @@
         text-align: center;
         padding: 50px 80px;
         text-align: justify;
+        font-family: 'Lato', sans-serif;
+        background-color: #111;
+        color: #fff;
+        padding: 18px;
+        font-size: 50px;
+        letter-spacing: 10px;
     }
 
     .off-section {
@@ -548,7 +553,8 @@
         text-align: center;
         padding: 50px 80px;
         position: relative;
-        font-size: 20px;
+        /* font-size: 20px; */
+        font-family: 'Lato', sans-serif;
     }
 
     /* 
