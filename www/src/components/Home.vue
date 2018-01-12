@@ -10,7 +10,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive">Confer</a>
+                <router-link :to="{name: 'Home'}">
+                    <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive">Confer</a>
+                </router-link>
                 <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
                     <p class="navbar-text">Welcome {{activeUser.name}}</p>
                     <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
@@ -60,6 +62,30 @@
                 </div>
                 <div class="col-xs-12">
                     <h2>Conference Manager</h2>
+                </div>
+            </div>
+            <div class="row login-field">
+                <div v-if="!activeUser.name" class="col-xs-12">
+                    <form class="form-inline">
+                        <div id="force-inline" class="form-group">
+                            <!-- <label for="email">Email address:</label> -->
+                            <input type="email" maxlength="57" class="form-control" name="email" placeholder="Email" required v-model='login.email'>
+                        </div>
+                        <div id="force-inline" class="form-group">
+                            <!-- <label for="password">Password:</label> -->
+                            <input type="password" class="form-control" name="password" maxlength="20" placeholder="Password" required v-model='login.password'>
+                            <button formnovalidate type="submit" class="btn btn-default front-login-btn" @click="submitLogin">LOGIN</button>
+                        </div>
+                    </form>
+                </div>
+                <div v-else class="col-xs-12">
+                    <h1>Welcome Back,</h1>
+                    <h2>{{activeUser.name}}</h2>
+                    <router-link :to="{name: 'mySchedule'}">
+                        <button type="button" class="btn btn-default my-sched-link">
+                            My Schedule
+                        </button>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -653,6 +679,27 @@
         .multi-text-four {
             padding-top: 70px;
             padding-bottom: 50px;
+        }
+
+        .login-field {
+            margin-top: 250px;
+            font-family: 'Lato', sans-serif;
+            color: white;
+            font-size: 20px;
+        }
+
+        .front-login-btn {
+            width: 10%;
+        }
+
+        #force-inline {
+            display: inline;
+        }
+
+        .my-sched-link {
+            width: 15%;
+            color: black;
+            font-family: 'Lato', sans-serif;
         }
     }
 </style>

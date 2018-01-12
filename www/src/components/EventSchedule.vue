@@ -11,7 +11,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
+                    <router-link :to="{name: 'Home'}">
+                        <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive">Confer</a>
+                    </router-link>
                     <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
                         <p class="navbar-text">Welcome {{activeUser.name}}</p>
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
@@ -386,6 +388,7 @@
     .bottom-buffer {
         margin-bottom: 50px;
     }
+
     .add-btn {
         margin-bottom: 5px;
     }

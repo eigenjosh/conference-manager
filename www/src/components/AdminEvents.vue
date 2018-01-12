@@ -11,7 +11,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
+                    <router-link :to="{name: 'Home'}">
+                        <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive">Confer</a>
+                    </router-link>
                     <div class="text-right">
                         <p class="navbar-text">Welcome {{activeUser.name}}</p>
                         <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
@@ -237,5 +239,4 @@
 </script>
 
 <style scoped>
-
 </style>

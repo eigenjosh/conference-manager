@@ -11,7 +11,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
+                    <router-link :to="{name: 'Home'}">
+                        <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive">Confer</a>
+                    </router-link>
                     <div class="text-right">
                         <p class="navbar-text">Welcome {{user.name}}</p>
                         <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
@@ -215,9 +217,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="logo">Logo</label>
-                                <textarea type="text" name="logo" maxlength="300" class="form-control" rows="5" placeholder="Image path or URL"
-                                    required v-model="event.logo">{{activeEvent.logo}}</textarea>
-                                    </div>
+                                <textarea type="text" name="logo" maxlength="300" class="form-control" rows="5" placeholder="Image path or URL" required
+                                    v-model="event.logo">{{activeEvent.logo}}</textarea>
+                            </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
                                 <textarea type="text" name="description" maxlength="300" class="form-control" rows="5" placeholder="What is this event for?"
@@ -286,14 +288,16 @@
                     <div class="modal-body">
                         <form id="collabs" class="form">
                             <div v-for="collab in collaborators">
-                                <h4>{{collab.name}}<span class="glyphicon glyphicon-trash" aria-hidden="true" @click="removeCollab(collab._id)"></span></h4>
+                                <h4>{{collab.name}}
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true" @click="removeCollab(collab._id)"></span>
+                                </h4>
                             </div>
                             <div class="form-group">
                                 <label for="email">Collab Email Address:</label>
                                 <input type="email" maxlength="57" name="email" class="form-control" placeholder="Email" required v-model='collab.email'>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" @click="addCollab"  type="submit">Submit</button>
+                                <button class="btn btn-submit btn-success" @click="addCollab" type="submit">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -331,7 +335,7 @@
                         <button class="btn btn-danger delete-admin-edit-btn" @click="deleteEvent">Delete Event</button>
                     </div>
                     <div class="col-xs-3" v-if="user._id == activeEvent.creatorId">
-                        <button class = "btn btn-default admin-edit-btn" data-toggle="modal" data-target="#addCollab">Edit Collaborators</button>
+                        <button class="btn btn-default admin-edit-btn" data-toggle="modal" data-target="#addCollab">Edit Collaborators</button>
                     </div>
                 </div>
             </div>
@@ -398,7 +402,7 @@
                     endDate: false,
                     eventForm: false
                 },
-                collab:{
+                collab: {
                     email: "",
                 }
 
@@ -406,7 +410,7 @@
         },
         mounted() {
             this.$store.dispatch('getAdminEventById', { _id: this.$route.params.id })
-            this.$store.dispatch('getCollabs',{ _id: this.$route.params.id})
+            this.$store.dispatch('getCollabs', { _id: this.$route.params.id })
             this.date = new Date().toJSON().split('T')[0];
         },
         computed: {
@@ -419,7 +423,7 @@
             schedule() {
                 return this.$store.state.schedule
             },
-            collaborators(){
+            collaborators() {
                 return this.$store.state.collaborators
             },
             activeEvent() {
@@ -491,16 +495,16 @@
                     return newDate.split(',')[0]
                 }
             },
-            addCollab(){
+            addCollab() {
                 console.log("trying to add:", this.collab.email)
-                this.$store.dispatch('addCollab', {event: this.activeEvent ,email:this.collab.email})
-                this.collab.email=""
+                this.$store.dispatch('addCollab', { event: this.activeEvent, email: this.collab.email })
+                this.collab.email = ""
             },
-            getCollabs(){
+            getCollabs() {
                 this.$store.dispatch('getCollabs', activeEvent)
             },
-            removeCollab(id){
-                this.$store.dispatch('removeCollab',{event: this.activeEvent, _id:id})
+            removeCollab(id) {
+                this.$store.dispatch('removeCollab', { event: this.activeEvent, _id: id })
             },
             addActivity() {
                 this.validateActivityForm()

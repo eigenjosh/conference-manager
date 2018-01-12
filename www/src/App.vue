@@ -20,7 +20,7 @@
 
 <style>
   #app {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Abril Fatface', cursive;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;

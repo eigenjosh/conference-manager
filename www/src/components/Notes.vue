@@ -14,7 +14,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive;">Confer</a>
+                    <router-link :to="{name: 'Home'}">
+                        <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive">Confer</a>
+                    </router-link>
                     <div class="text-right">
                         <p class="navbar-text">Welcome {{activeUser.name}}</p>
                         <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Create Note</button>
@@ -92,7 +94,7 @@
         <div class="draw-notes">
             <div class="row">
                 <div class="col-xs-6 well">
-                    <h3 class= "main-headline" style="font-size: 80px">General Notes</h3>
+                    <h3 class="main-headline" style="font-size: 80px">General Notes</h3>
                     <div v-for="userNote in userNotes">
                         <div v-if="!userNote.activityId" class="row">
                             <button type="button" @click="setActiveNote(userNote)" class="btn btn-default note-btn word-wrap" data-toggle="modal" data-target="#myModal2">
@@ -219,8 +221,8 @@
         width: 50%;
         margin-bottom: 5px;
     }
-    .nav-btn-defaults{
+
+    .nav-btn-defaults {
         width: 15%;
     }
-
 </style>
