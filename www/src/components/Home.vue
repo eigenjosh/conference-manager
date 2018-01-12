@@ -59,15 +59,16 @@
                     <h1 id="main-logo">CONFER</h1>
                 </div>
                 <div class="col-xs-12">
-                    <h2>Digital Conference Manager</h2>
+                    <h2>Conference Manager</h2>
                 </div>
             </div>
         </div>
 
         <div class="container-fluid">
-            <div class="row space-text">
+            <div class="row space-text extra-padding">
                 <div class="col-xs-offset-3 col-xs-6 col-xs-offset-3">
-                    <h2>A digital conference application that centralizes your event information in one place.</h2>
+                    <h1 style="font-size: 100px; font-family: 'Abril Fatface', cursive;">Confer</h1>
+                    <h2> is a digital conference and event application that centralizes your event information in one place.</h2>
                 </div>
             </div>
         </div>
@@ -233,110 +234,73 @@
         <!-- Pen & Paper picture -->
         <div class="container-fluid bgimg-2">
             <div class="row">
-                <div class="col-xs-12 caption">
+                <div class="col-xs-12 caption extra-padding">
                     <h2>Sign up for a free account, create and join events</h2>
                     <h2>and add them to your personal schedule.</h2>
                 </div>
             </div>
         </div>
         <div class="container-fluid body-text">
-            <div class="row top-spacer space-text">
+            <div class="row top-spacer space-text multi-text">
                 <div class="col-xs-12 col-md-offset-1 col-md-4">
                     <h4>
-                        Create an account to begin! </h4>
+                        Create an account to begin </h4>
                     <br>
-                    <h4>By signing up you can join events, add activities to your schedule, and take notes.</h4>
+                    <h4>By signing up you can join events, add activities to your schedule, and take notes</h4>
                 </div>
                 <div class="col-xs-12 col-md-offset-1 col-md-4">
-                    <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
+                    <img src="../assets/Optimized-computer.jpeg" class="multi-img-one">
                 </div>
             </div>
             <div class="row spacer off-section">
                 <div class="col-xs-12 col-md-offset-1 col-md-4">
-                    <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
+                    <img src="../assets/Optimized-click.jpeg" class="multi-img-two">
                 </div>
-                <div class="col-xs-12 col-md-offset-1 col-md-4">
+                <div class="col-xs-12 col-md-offset-2 col-md-4">
                     <h4>
-                        Now that you have an account you can build your event! </h4>
+                        Once you have an account you can build your event </h4>
                     <br>
                     <h4>Keep your event in 'private' mode while adding your activities, then click 'publish' to post it for the
-                        world to see.</h4>
+                        world to see</h4>
                     <br>
-                    <h4> You may edit your event at any time, whether in private or published modes.</h4>
+                    <h4> You may edit your event at any time, whether in private or published modes</h4>
                 </div>
             </div>
             <div class="row spacer space-text">
-                <div class="col-xs-12 col-md-offset-1 col-md-4">
-                    <h4>Create Activities on your events for your guests to join.</h4>
+                <div class="col-xs-12 col-md-offset-1 col-md-4 multi-text">
+                    <h4>Create Activities on your events for your guests to join</h4>
                     <br>
                     <h4>Add collaborators to help edit your event, and allow speakers to edit their own activities</h4>
                     <br>
                     <h4>Post seating capacity to limit the size of an event, and enable your guests to reserve their seat by
-                        joining the activity.</h4>
+                        joining the activity</h4>
                 </div>
                 <div class="col-xs-12 col-md-offset-1 col-md-4">
-                    <img src="../assets/Optimized-Mobile-Phone.jpeg" class="img-rounded">
+                    <img src="../assets/Optimized-chairs.jpeg" class="multi-img-three">
                 </div>
             </div>
             <div class="row spacer off-section">
                 <div class="col-xs-12 col-md-offset-1 col-md-4">
-                    <img src="../assets/Optimized-pen-paper.jpg" class="multi-img">
+                    <img src="../assets/Optimized-pen-paper.jpg" class="multi-img-four">
                 </div>
                 <div class="col-xs-12 col-md-offset-2 col-md-4 multi-text">
-                    <h4>Add activities to your personal schedule to see your own agenda. Add and remove as your schedule changes.</h4>
+                    <h4>Add activities to your personal schedule to see your own agenda. Add and remove as your schedule changes</h4>
                     <br>
                     <h4>Take notes on activities you're in, or jot down general notes to remember. Both are stored on your user
-                        account.
+                        account
                     </h4>
-                    <h4>Stay organized and save vital information without carrying around a pen and paper.</h4>
+                    <h4>Stay organized and save vital information without carrying around a pen and paper</h4>
                 </div>
             </div>
 
             <div class="row spacer space-text">
                 <div class="col-xs-12">
                     <h3>
-                        Create your free account and get started!
+                        Create your free account and get started
                     </h3>
                 </div>
             </div>
         </div>
-
-        <!-- <div class="container-fluid bgimg-3">
-            <div class="row caption">
-                <div class="col-md-3 col-md-offset-1 well">
-                    <h3></h3>
-                    <div class="thumbnail">
-                        <a>
-                            <img src="../assets/Optimized-Events.png">
-                        </a>
-                        <div class="caption">
-                            <h5></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 well screenshot">
-                    <h3></h3>
-                    <div class="thumbnail">
-                        <a>
-                            <img src="../assets/Optimized-notes.png">
-                        </a>
-                        <div class="caption">
-                            <h5></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 well screenshot">
-                    <h3></h3>
-                    <div class="thumbnail">
-                        <a>
-                            <img src="../assets/Optimized-schedule.png">
-                        </a>
-                        <div class="caption">
-                            <h5></h5>
-                        </div>
-                    </div>
-                </div> 
-            </div>-->
     </div>
 </template>
 
@@ -488,6 +452,7 @@
     .bgimg-1 {
         background-image: url('../assets/Optimized-confer-main-photo.jpg');
         min-height: 1000px;
+        margin-top: -45px;
     }
 
     .bgimg-2 {
@@ -503,7 +468,7 @@
     .caption {
         position: absolute;
         left: 0;
-        top: 30%;
+        top: 20%;
         width: 100%;
         text-align: center;
         color: white;
@@ -518,7 +483,6 @@
         color: #fff;
         background-color: #111;
         font-family: 'Lato', sans-serif;
-        /* padding: 50px 80px; */
         letter-spacing: 5px;
     }
 
@@ -526,8 +490,11 @@
         color: black;
         background-color: white;
         font-family: 'Lato', sans-serif;
-        /* padding: 50px 80px; */
         letter-spacing: 5px;
+    }
+
+    .extra-padding {
+        padding: 50px 80px;
     }
 
     .spacer {
@@ -539,34 +506,12 @@
         margin-bottom: 10px;
     }
 
-    /* 
-    .navbar {
-        background: black;
-        font: white;
-    } */
-
-    /* .main-pic {
-        background-image: url('https://images.pexels.com/photos/34092/pexels-photo.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-    } */
-
     .main-heading {
         font-family: 'Abril Fatface', cursive;
         text-shadow: 0px 0px 35px black;
         color: white;
-        margin-top: 250px;
+        margin-top: 275px;
     }
-
-    /* 
-    .second-pic {
-        height: 300px;
-        background-image: url('https://i.pinimg.com/originals/50/1f/1a/501f1a19290e28cd676605f9acf36d03.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-    } */
 
     .btn-default {
         width: 100%;
@@ -621,9 +566,21 @@
             margin: 2px;
             font: black;
         }
-        .multi-img {
-           margin-top: -10px;
-           margin-bottom: -10px;
+        .multi-img-one {
+            margin-top: -50px;
+            margin-bottom: -10px;
+        }
+        .multi-img-two {
+            margin-top: -10px;
+            margin-bottom: -10px;
+        }
+        .multi-img-three {
+            /* margin-top: -10px;
+            margin-bottom: -10px; */
+        }
+        .multi-img-four {
+            margin-top: -10px;
+            margin-bottom: -10px;
         }
         .multi-text {
             padding-top: 50px;
