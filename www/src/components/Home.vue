@@ -14,13 +14,13 @@
                     <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive">Confer</a>
                 </router-link>
                 <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
-                    <p class="navbar-text">Welcome {{activeUser.name}}</p>
-                    <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
-                    <button type="button" class="btn btn-danger navbar-btn logout-btn" @click="logout">Logout</button>
+                    <p class="navbar-text">Hi, {{activeUser.name}}</p>
+                    <button type="button" class="btn btn-primary navbar-btn btn-square" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
+                    <button type="button" class="btn btn-danger navbar-btn logout-btn btn-square" @click="logout">Logout</button>
                 </div>
                 <div class="text-right" v-else>
-                    <button type="button" class="btn btn-primary navbar-btn " data-toggle="modal" data-target="#myModal">Login</button>
-                    <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
+                    <button type="button" class="btn btn-primary navbar-btn btn-square" data-toggle="modal" data-target="#myModal">Login</button>
+                    <button type="button" class="btn btn-success navbar-btn btn-square" data-toggle="modal" data-target="#myModal2">Sign-up</button>
                 </div>
             </div>
 
@@ -64,25 +64,29 @@
                     <h2>Conference Manager</h2>
                 </div>
             </div>
+
+            <!-- FRONT PAGE LOGIN/GREETING -->
+
             <div class="row login-field">
                 <div v-if="!activeUser.name" class="col-xs-12">
                     <form class="form-inline">
                         <div id="force-inline" class="form-group">
-                            <!-- <label for="email">Email address:</label> -->
                             <input type="email" maxlength="57" class="form-control" name="email" placeholder="Email" required v-model='login.email'>
                         </div>
                         <div id="force-inline" class="form-group">
-                            <!-- <label for="password">Password:</label> -->
                             <input type="password" class="form-control" name="password" maxlength="20" placeholder="Password" required v-model='login.password'>
-                            <button formnovalidate type="submit" class="btn btn-default front-login-btn" @click="submitLogin">LOGIN</button>
+                            <button formnovalidate type="submit" class="btn btn-default front-login-btn" @click="submitLogin">
+                                <span class="glyphicon glyphicon-log-in"></span>
+                            </button>
                         </div>
                     </form>
+                    <h3 class="shadow">Don't have an account yet? <a class="a-pointer" data-toggle="modal" data-target="#myModal2">Click Here to Get Started</a></h3>
                 </div>
                 <div v-else class="col-xs-12">
-                    <h1>Welcome Back,</h1>
-                    <h2>{{activeUser.name}}</h2>
+                    <h1 class="welcome">Welcome Back,</h1>
+                    <h2 class="welcome">{{activeUser.name}}</h2>
                     <router-link :to="{name: 'mySchedule'}">
-                        <button type="button" class="btn btn-default my-sched-link">
+                        <button type="button" class="btn bg-dark btn-default btn-square my-sched-link">
                             My Schedule
                         </button>
                     </router-link>
@@ -318,12 +322,13 @@
                     <h4>Stay organized and save vital information without carrying around a pen and paper</h4>
                 </div>
             </div>
-
-            <div class="row spacer space-text">
-                <div class="col-xs-12">
-                    <h3>
-                        Create your free account and get started
-                    </h3>
+            <div class="container-fluid bgimg-1">
+                <div class="row">
+                    <div class="col-xs-12 extra-padding main-heading">
+                        <h3>
+                            Create your free account and get started
+                        </h3>
+                    </div>
                 </div>
             </div>
         </div>
@@ -503,17 +508,38 @@
     .bgimg-2,
     .bgimg-3 {
         position: relative;
-        opacity: 0.65;
         background-attachment: fixed;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+        z-index: 0;
+    }
+
+    .bgimg-1 *,
+    .bgimg-2 *,
+    .bgimg-3 * {
+        position: relative;
+        z-index: 2 !important;
+    }
+
+    .bgimg-1:after,
+    .bgimg-2:after,
+    .bgimg-3:after {
+        position: absolute;
+        display: block;
+        content: " ";
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(245, 242, 242, .37);
+        z-index: 1;
     }
 
     .bgimg-1 {
         background-image: url('../assets/Optimized-confer-main-photo.jpg');
         min-height: 1000px;
-        margin-top: -45px;
+        margin-top: -50px;
     }
 
     .bgimg-2 {
@@ -582,13 +608,15 @@
 
     .main-heading {
         font-family: 'Abril Fatface', cursive;
-        text-shadow: 0px 0px 35px black;
+        text-shadow: 2px 2px 10px black;
         color: white;
         margin-top: 275px;
     }
 
-    .btn-default {
-        width: 100%;
+    .welcome {
+        font-family: 'Abril Fatface', cursive;
+        text-shadow: 2px 2px 4px black;
+        color: white;
     }
 
     .screenshot {
@@ -682,14 +710,16 @@
         }
 
         .login-field {
-            margin-top: 250px;
+            margin-top: 50px;
             font-family: 'Lato', sans-serif;
             color: white;
             font-size: 20px;
         }
 
         .front-login-btn {
-            width: 10%;
+           background-color: black;
+           color: white;
+           border-color: black;
         }
 
         #force-inline {
@@ -697,9 +727,15 @@
         }
 
         .my-sched-link {
-            width: 15%;
-            color: black;
+            color: white;
             font-family: 'Lato', sans-serif;
+            background-color: black;
+        }
+
+        .shadow {
+            font-family: 'Lato', sans-serif;
+            color: white;
+            text-shadow: 2px 2px 4px black;
         }
     }
 </style>

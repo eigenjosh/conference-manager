@@ -20,11 +20,11 @@
 
 <style>
   #app {
-    font-family: 'Abril Fatface', cursive;
+    font-family: 'Lato', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
+    color: black;
     margin-top: 100px;
   }
 
@@ -90,6 +90,16 @@
     cursor: pointer;
   }
 
+  a {
+    text-shadow: 2px 2px 4px black;
+    color: white;
+  }
+
+  a:hover {
+    text-shadow: 4px 4px 10px black;
+    color: white;
+  }
+
   .event-btn {
     width: 100%;
     background-color: lightgray;
@@ -105,5 +115,9 @@
 
   .body-text {
     font-family: 'Lato', sans-serif;
+  }
+
+  .btn-square {
+    border-radius: 0;
   }
 </style>
