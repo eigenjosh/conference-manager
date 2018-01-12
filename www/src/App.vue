@@ -120,4 +120,24 @@
   .btn-square {
     border-radius: 0;
   }
+
+  .login-color {
+    background-color: #a6c7e2;
+    color: black;
+  }
+
+  .register-color {
+    background-color: #c195a5;
+    color: black;
+  }
+
+  .create-color {
+    background-color: #a6c7e2;
+    color: black;
+  }
+
+  .logout-color {
+    background-color: #6d6b6bb5;
+    color: white;
+  }
 </style>

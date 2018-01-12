@@ -15,12 +15,12 @@
                 </router-link>
                 <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
                     <p class="navbar-text">Hi, {{activeUser.name}}</p>
-                    <button type="button" class="btn btn-primary navbar-btn btn-square" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
-                    <button type="button" class="btn btn-danger navbar-btn logout-btn btn-square" @click="logout">Logout</button>
+                    <button type="button" class="btn create-color navbar-btn btn-square" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
+                    <button type="button" class="btn logout-color navbar-btn logout-btn btn-square" @click="logout">Logout</button>
                 </div>
                 <div class="text-right" v-else>
-                    <button type="button" class="btn btn-primary navbar-btn btn-square" data-toggle="modal" data-target="#myModal">Login</button>
-                    <button type="button" class="btn btn-success navbar-btn btn-square" data-toggle="modal" data-target="#myModal2">Sign-up</button>
+                    <button type="button" class="btn login-color navbar-btn btn-square" data-toggle="modal" data-target="#myModal">Login</button>
+                    <button type="button" class="btn register-color navbar-btn btn-square" data-toggle="modal" data-target="#myModal2">Sign-up</button>
                 </div>
             </div>
 
@@ -80,13 +80,15 @@
                             </button>
                         </div>
                     </form>
-                    <h3 class="shadow">Don't have an account yet? <a class="a-pointer" data-toggle="modal" data-target="#myModal2">Click Here to Get Started</a></h3>
+                    <h3 class="shadow">Don't have an account yet?
+                        <a class="a-pointer" data-toggle="modal" data-target="#myModal2">Click Here to Get Started</a>
+                    </h3>
                 </div>
                 <div v-else class="col-xs-12">
                     <h1 class="welcome">Welcome Back,</h1>
                     <h2 class="welcome">{{activeUser.name}}</h2>
                     <router-link :to="{name: 'mySchedule'}">
-                        <button type="button" class="btn bg-dark btn-default btn-square my-sched-link">
+                        <button type="button" class="btn-square fe-btn">
                             My Schedule
                         </button>
                     </router-link>
@@ -269,12 +271,22 @@
                     <h2>and add them to your personal schedule.</h2>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 no-padding-xs extra-padding-md">
+                    <router-link :to="{name: 'findEvents'}">
+                        <h1>
+                            <button type="button" class="fe-btn">Start Finding Events</button>
+                        </h1>
+                    </router-link>
+                </div>
+            </div>
         </div>
         <div class="container-fluid body-text">
             <div class="row top-spacer space-text">
                 <div class="col-md-12 col-lg-offset-1 col-lg-4 multi-text-one">
-                    <h4>
-                        Create an account to begin </h4>
+                    <h4 data-toggle="modal" data-target="#myModal2" class="a-pointer under">
+                        <b>Create an account to begin</b>
+                    </h4>
                     <br>
                     <h4>By signing up you can join events, add activities to your schedule, and take notes</h4>
                 </div>
@@ -287,19 +299,17 @@
                     <img src="../assets/Optimized-click.jpeg" class="multi-img-two my-img-responsive">
                 </div>
                 <div class="col-md-12 col-lg-offset-2 col-lg-4 multi-text-two">
-                    <h4>
-                        With an account you can build your event </h4>
+                    <h4>With an account you can</h4>
+                    <h4 data-toggle="modal" data-target="#myModal3" class="a-pointer under">build your event</h4>
                     <br>
-                    <h4>Keep your event in 'private' mode while adding your activities, then click 'publish' to post it for the
-                        world to see</h4>
+                    <h4>Keep your event in 'private' mode while adding your activities, then click 'publish' to post it for your
+                        guests to see</h4>
                     <br>
                     <h4> You may edit your event at any time, whether in private or published modes</h4>
                 </div>
             </div>
             <div class="row spacer space-text">
                 <div class="col-md-12 col-lg-offset-1 col-lg-4 multi-text-three">
-                    <h4>Create Activities on your events for your guests to join</h4>
-                    <br>
                     <h4>Add collaborators to help edit your event, and allow speakers to edit their own activities</h4>
                     <br>
                     <h4>Post seating capacity to limit the size of an event, and enable your guests to reserve their seat by
@@ -314,7 +324,8 @@
                     <img src="../assets/Optimized-pen-paper.jpg" class="multi-img-four my-img-responsive">
                 </div>
                 <div class="col-md-12 col-lg-offset-2 col-lg-4 multi-text-four">
-                    <h4>Add activities to your personal schedule to see your own agenda. Add and remove as your schedule changes</h4>
+                    <h4>Join an event to add its activities to your personal schedule and see your own agenda. Add and remove
+                        as your schedule changes</h4>
                     <br>
                     <h4>Take notes on activities you're in, or jot down general notes to remember. Both are stored on your user
                         account
@@ -322,12 +333,31 @@
                     <h4>Stay organized and save vital information without carrying around a pen and paper</h4>
                 </div>
             </div>
-            <div class="container-fluid bgimg-1">
+            <div class="container-fluid bgimg-3 neg-marg">
                 <div class="row">
-                    <div class="col-xs-12 extra-padding main-heading">
-                        <h3>
-                            Create your free account and get started
-                        </h3>
+                    <div class="col-xs-12 end-footer">
+                        <h1>
+                            <button data-toggle="modal" data-target="#myModal2" class="fe-btn">Create your
+                                <b>Confer</b> Account</button>
+                        </h1>
+                    </div>
+                    <div class="col-xs-12 plain-txt">
+                        <h2>and then start to</h2>
+                    </div>
+                    <div class="col-xs-12">
+                        <router-link :to="{name: 'findEvents'}">
+                            <h1>
+                                <button class="fe-btn">Find Events</button>
+                            </h1>
+                        </router-link>
+                    </div>
+                    <div class="col-xs-12 plain-txt">
+                        <h2>or</h2>
+                    </div>
+                    <div class="col-xs-12">
+                        <h1>
+                            <button data-toggle="modal" data-target="#myModal3" class="fe-btn">Create Your Own</button>
+                        </h1>
                     </div>
                 </div>
             </div>
@@ -548,8 +578,8 @@
     }
 
     .bgimg-3 {
-        background-image: url("https://images.unsplash.com/38/awhCbhLqRceCdjcPQUnn_IMG_0249.jpg?dpr=1&auto=format&fit=crop&w=967&q=60&cs=tinysrgb");
-        min-height: 400px;
+        background-image: url('../assets/Optimized-people.jpeg');
+        min-height: 600px;
     }
 
     @media screen and (min-width: 500px) {
@@ -610,13 +640,21 @@
         font-family: 'Abril Fatface', cursive;
         text-shadow: 2px 2px 10px black;
         color: white;
-        margin-top: 275px;
+        margin-top: 250px;
+    }
+
+    .end-footer {
+        /* font-family: 'Abril Fatface', cursive;
+        text-shadow: 2px 2px 10px black;
+        color: white; */
+        margin-top: 200px;
     }
 
     .welcome {
-        font-family: 'Abril Fatface', cursive;
+        font-family: 'Lato', sans-serif;
         text-shadow: 2px 2px 4px black;
         color: white;
+        letter-spacing: 5px;
     }
 
     .screenshot {
@@ -717,25 +755,49 @@
         }
 
         .front-login-btn {
-           background-color: black;
-           color: white;
-           border-color: black;
+            background-color: black;
+            color: white;
+            border-color: black;
         }
 
         #force-inline {
             display: inline;
         }
 
-        .my-sched-link {
-            color: white;
-            font-family: 'Lato', sans-serif;
-            background-color: black;
-        }
-
         .shadow {
             font-family: 'Lato', sans-serif;
             color: white;
             text-shadow: 2px 2px 4px black;
+        }
+
+        .fe-btn {
+            background-color: black;
+            color: white;
+            font-family: 'Lato', sans-serif;
+            border: black;
+            letter-spacing: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .fe-btn:hover {
+            box-shadow: 1px 1px 1px 1px white;
+        }
+
+        .under {
+            text-decoration: underline;
+        }
+
+        .neg-marg {
+            margin-left: -20px;
+            margin-right: -20px;
+        }
+
+        .plain-txt {
+            font-family: 'Lato', sans-serif;
+            letter-spacing: 5px;
         }
     }
 </style>
