@@ -64,10 +64,10 @@
             </div>
         </div>
 
-        <div class="container-fluid">
+        <div class="container-fluid text-responsive">
             <div class="row space-text extra-padding">
-                <div class="col-xs-offset-3 col-xs-6 col-xs-offset-3">
-                    <h1 style="font-size: 100px; font-family: 'Abril Fatface', cursive;">Confer</h1>
+                <div class="col-xs-12 col-md-offset-3 col-md-6 col-md-offset-3">
+                    <h1 style="font-family: 'Abril Fatface', cursive;">Confer</h1>
                     <h2> is a digital conference and event application that centralizes your event information in one place.</h2>
                 </div>
             </div>
@@ -234,31 +234,31 @@
         <!-- Pen & Paper picture -->
         <div class="container-fluid bgimg-2">
             <div class="row">
-                <div class="col-xs-12 caption extra-padding">
+                <div class="col-xs-12 no-padding-xs extra-padding-md">
                     <h2>Sign up for a free account, create and join events</h2>
                     <h2>and add them to your personal schedule.</h2>
                 </div>
             </div>
         </div>
         <div class="container-fluid body-text">
-            <div class="row top-spacer space-text multi-text">
-                <div class="col-xs-12 col-md-offset-1 col-md-4">
+            <div class="row top-spacer space-text">
+                <div class="col-md-12 col-lg-offset-1 col-lg-4 multi-text-one">
                     <h4>
                         Create an account to begin </h4>
                     <br>
                     <h4>By signing up you can join events, add activities to your schedule, and take notes</h4>
                 </div>
-                <div class="col-xs-12 col-md-offset-1 col-md-4">
-                    <img src="../assets/Optimized-computer.jpeg" class="multi-img-one">
+                <div class="col-md-12 col-lg-offset-1 col-lg-4">
+                    <img src="../assets/Optimized-computer.jpeg" class="multi-img-one my-img-responsive">
                 </div>
             </div>
             <div class="row spacer off-section">
-                <div class="col-xs-12 col-md-offset-1 col-md-4">
-                    <img src="../assets/Optimized-click.jpeg" class="multi-img-two">
+                <div class="col-md-12 col-lg-offset-1 col-lg-4">
+                    <img src="../assets/Optimized-click.jpeg" class="multi-img-two my-img-responsive">
                 </div>
-                <div class="col-xs-12 col-md-offset-2 col-md-4">
+                <div class="col-md-12 col-lg-offset-2 col-lg-4 multi-text-two">
                     <h4>
-                        Once you have an account you can build your event </h4>
+                        With an account you can build your event </h4>
                     <br>
                     <h4>Keep your event in 'private' mode while adding your activities, then click 'publish' to post it for the
                         world to see</h4>
@@ -267,7 +267,7 @@
                 </div>
             </div>
             <div class="row spacer space-text">
-                <div class="col-xs-12 col-md-offset-1 col-md-4 multi-text">
+                <div class="col-md-12 col-lg-offset-1 col-lg-4 multi-text-three">
                     <h4>Create Activities on your events for your guests to join</h4>
                     <br>
                     <h4>Add collaborators to help edit your event, and allow speakers to edit their own activities</h4>
@@ -275,15 +275,15 @@
                     <h4>Post seating capacity to limit the size of an event, and enable your guests to reserve their seat by
                         joining the activity</h4>
                 </div>
-                <div class="col-xs-12 col-md-offset-1 col-md-4">
-                    <img src="../assets/Optimized-chairs.jpeg" class="multi-img-three">
+                <div class="col-md-12 col-lg-offset-1 col-lg-4">
+                    <img src="../assets/Optimized-meeting.jpeg" class="multi-img-three my-img-responsive">
                 </div>
             </div>
             <div class="row spacer off-section">
-                <div class="col-xs-12 col-md-offset-1 col-md-4">
-                    <img src="../assets/Optimized-pen-paper.jpg" class="multi-img-four">
+                <div class="col-md-12 col-lg-offset-1 col-lg-4">
+                    <img src="../assets/Optimized-pen-paper.jpg" class="multi-img-four my-img-responsive">
                 </div>
-                <div class="col-xs-12 col-md-offset-2 col-md-4 multi-text">
+                <div class="col-md-12 col-lg-offset-2 col-lg-4 multi-text-four">
                     <h4>Add activities to your personal schedule to see your own agenda. Add and remove as your schedule changes</h4>
                     <br>
                     <h4>Take notes on activities you're in, or jot down general notes to remember. Both are stored on your user
@@ -436,6 +436,41 @@
         }
     }
 
+    @media screen and (min-width: 500px) {
+        #second-logo {
+            font-size: 100px;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        .no-padding-xs {
+            position: absolute;
+            left: 0;
+            top: 10%;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-family: 'Lato', sans-serif;
+            font-size: 50px;
+            letter-spacing: 10px;
+        }
+    }
+
+    @media screen and (min-width: 501px) {
+        .extra-padding-md {
+            position: absolute;
+            left: 0;
+            top: 20%;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-family: 'Lato', sans-serif;
+            font-size: 50px;
+            letter-spacing: 10px;
+            padding: 50px 80px;
+        }
+    }
+
     /* BACKGROUND PHOTOS */
 
     .bgimg-1,
@@ -465,6 +500,20 @@
         min-height: 400px;
     }
 
+    @media screen and (min-width: 500px) {
+        #main-logo {
+            font-size: 150px;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        .my-img-responsive {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
     .caption {
         position: absolute;
         left: 0;
@@ -476,7 +525,6 @@
         padding: 18px;
         font-size: 50px;
         letter-spacing: 10px;
-
     }
 
     .space-text {
@@ -566,25 +614,45 @@
             margin: 2px;
             font: black;
         }
-        .multi-img-one {
+        /* .multi-img-one {
             margin-top: -50px;
             margin-bottom: -10px;
-        }
+        } */
         .multi-img-two {
             margin-top: -10px;
             margin-bottom: -10px;
         }
-        .multi-img-three {
-            /* margin-top: -10px;
-            margin-bottom: -10px; */
-        }
+        /* .multi-img-three {
+            
+        } */
         .multi-img-four {
             margin-top: -10px;
             margin-bottom: -10px;
         }
+
         .multi-text {
             padding-top: 50px;
             padding-bottom: 10px;
+        }
+
+        .multi-text-one {
+            padding-top: 100px;
+            padding-bottom: 50px;
+        }
+
+        .multi-text-two {
+            padding-top: 75px;
+            padding-bottom: 50px;
+        }
+
+        .multi-text-three {
+            padding-top: 60px;
+            padding-bottom: 50px;
+        }
+
+        .multi-text-four {
+            padding-top: 70px;
+            padding-bottom: 50px;
         }
     }
 </style>

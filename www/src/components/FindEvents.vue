@@ -57,12 +57,6 @@
                         </div>
 
                     </ul>
-
-
-                    <!-- SEARCH BAR -->
-
-                    <ul class="nav navbar-nav navbar-right">
-                    </ul>
                 </div>
                 <!-- /.navbar-collapse -->
             </div>
@@ -74,12 +68,14 @@
                     <h1 style="font-size: 80px">Find Events</h1>
                 </div>
                 <div class="col-xs-offset-4 col-xs-8">
-                    <form id="find-events" class="form" @submit.prevent="findEvents">
-                        <div class="search-form-group">
+                    <div class="input-group">
+                        <form id="find-events" class="form" @submit.prevent="findEvents">
                             <input type="text" name="text" class="form-control" placeholder="Find an Event by Location" required v-model='search.location'>
-                            <button class="btn btn-submit btn-default search-btn" type="submit">Search</button>
-                        </div>
-                    </form>
+                            <span class="input-group-btn">
+                                <button class="btn btn-submit btn-default" type="submit">Search</button>
+                            </span>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -346,6 +342,7 @@
                 }
             },
             findEvents() {
+                debugger
                 this.$store.dispatch('findEvents', this.search.location)
                 this.search.location = ''
             },
@@ -387,7 +384,6 @@
 </script>
 
 <style scoped>
-
     .event-btn {
         width: 100%;
         background-color: lightgray;
