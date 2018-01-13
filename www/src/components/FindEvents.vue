@@ -40,7 +40,7 @@
                         <div v-if="activeUser.hasOwnProperty('name')">
                             <li>
                                 <router-link :to="{name: 'adminEvents'}">
-                                    <button type="button" class="btn nav-drop-btn btn-default">Events I've Created</button>
+                                    <button type="button" class="btn nav-drop-btn btn-default">Edit Events</button>
                                 </router-link>
                             </li>
                             <li>

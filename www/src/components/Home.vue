@@ -35,7 +35,7 @@
                     <div v-if="activeUser.hasOwnProperty('name')">
                         <li>
                             <router-link :to="{name: 'adminEvents'}">
-                                <button type="button" class="btn btn-default nav-drop-btn">Events I've Created</button>
+                                <button type="button" class="btn btn-default nav-drop-btn">Edit Events</button>
                             </router-link>
                         </li>
                         <li>
@@ -294,13 +294,15 @@
                     <img src="../assets/Optimized-computer.jpeg" class="multi-img-one my-img-responsive">
                 </div>
             </div>
-            <div class="row spacer off-section">
+            <div class="row neg-sec-spacer off-section">
                 <div class="col-md-12 col-lg-offset-1 col-lg-4">
                     <img src="../assets/Optimized-click.jpeg" class="multi-img-two my-img-responsive">
                 </div>
                 <div class="col-md-12 col-lg-offset-2 col-lg-4 multi-text-two">
                     <h4>With an account you can</h4>
-                    <h4 data-toggle="modal" data-target="#myModal3" class="a-pointer under">build your event</h4>
+                    
+                    <h4 v-if="activeUser.hasOwnProperty('name')" data-toggle="modal" data-target="#myModal3" class="a-pointer under">build your event</h4>
+                    <h4 v-else>build your event</h4>
                     <br>
                     <h4>Keep your event in 'private' mode while adding your activities, then click 'publish' to post it for your
                         guests to see</h4>
@@ -319,7 +321,7 @@
                     <img src="../assets/Optimized-meeting.jpeg" class="multi-img-three my-img-responsive">
                 </div>
             </div>
-            <div class="row spacer off-section">
+            <div class="row neg-spacer off-section">
                 <div class="col-md-12 col-lg-offset-1 col-lg-4">
                     <img src="../assets/Optimized-pen-paper.jpg" class="multi-img-four my-img-responsive">
                 </div>
@@ -334,8 +336,8 @@
                 </div>
             </div>
             <div class="container-fluid bgimg-3 neg-marg">
-                <div class="row">
-                    <div class="col-xs-12 end-footer">
+                <div class="row end-footer">
+                    <div class="col-xs-12">
                         <h1>
                             <button data-toggle="modal" data-target="#myModal2" class="fe-btn">Create your
                                 <b>Confer</b> Account</button>
@@ -356,7 +358,8 @@
                     </div>
                     <div class="col-xs-12">
                         <h1>
-                            <button data-toggle="modal" data-target="#myModal3" class="fe-btn">Create Your Own</button>
+                            <button v-if="activeUser.hasOwnProperty('name')" data-toggle="modal" data-target="#myModal3" class="fe-btn">Create Your Own</button>
+                            <button v-else data-toggle="modal" data-target="#myModal2" class="fe-btn">Create Your Own</button>
                         </h1>
                     </div>
                 </div>
@@ -627,14 +630,14 @@
         padding: 50px 80px;
     }
 
-    .spacer {
+    /* .spacer {
         margin-top: 10px;
         margin-bottom: 10px;
     }
 
     .top-spacer {
         margin-bottom: 10px;
-    }
+    } */
 
     .main-heading {
         font-family: 'Abril Fatface', cursive;
@@ -644,10 +647,8 @@
     }
 
     .end-footer {
-        /* font-family: 'Abril Fatface', cursive;
-        text-shadow: 2px 2px 10px black;
-        color: white; */
         margin-top: 200px;
+        padding-bottom: 200px;
     }
 
     .welcome {
@@ -657,16 +658,8 @@
         letter-spacing: 5px;
     }
 
-    .screenshot {
-        margin-left: 50px;
-    }
-
     .navbar ul {
         list-style-type: none;
-    }
-
-    .logout-btn {
-        margin-left: 2px;
     }
 
     @media (max-width: 2000px) {
@@ -710,17 +703,17 @@
             margin-top: -50px;
             margin-bottom: -10px;
         } */
-        .multi-img-two {
+        /* .multi-img-two {
             margin-top: -10px;
             margin-bottom: -10px;
-        }
-        /* .multi-img-three {
-            
         } */
-        .multi-img-four {
+        /* .multi-img-three {
+            margin-top: -16px;
+        } */
+        /* .multi-img-four {
             margin-top: -10px;
             margin-bottom: -10px;
-        }
+        } */
 
         .multi-text {
             padding-top: 50px;
@@ -799,5 +792,15 @@
             font-family: 'Lato', sans-serif;
             letter-spacing: 5px;
         }
+
+        /* .neg-spacer {
+            margin-top: 10px;
+            margin-bottom: -10px;
+        }
+
+        .neg-sec-spacer {
+            margin-top: 10px;
+            margin-bottom: -26px;
+        } */
     }
 </style>
