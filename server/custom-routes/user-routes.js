@@ -298,7 +298,8 @@ module.exports = {
   },
 
 
-  // Compatible with collaborators?
+  // Collaborator Compatibility Attempt 1:
+  // Failed: Direct comparison of ObjectIds doesn't appear to work consistently outside of mongoose methods
 
   // getAdminEvent: {
   //   path: '/admin-events/:eventId',
@@ -307,21 +308,36 @@ module.exports = {
   //     let action = 'Find Event Created By Admin at Specific Id'
   //     Events.find({ _id: req.params.eventId })
   //       .then(events => {
-  //         Users.find({ _id: { $in: events[0].collaborators } })
-  //           .then(users => {
-  //             var validCollaborator = false
-  //             for (var i = 0; i < users.length; i++) {
-  //               if (users[i]._id == req.session.uid) {
-  //                 var validCollaborator = true
-  //                 break
-  //               }
-  //             }
-  //             var returnEvent = null
-  //             if (req.session.uid == events[0].creatorId || validCollaborator) {
-  //               console.log("Valid admin event: " + events[0])
-  //               returnEvent = events[0]
-  //             }
-  //             res.send(handleResponse(action, returnEvent))
+  //         console.log("event: " + events[0]._id)
+  //         console.log("collab: " + events[0].collaborators[0])
+  //         Users.find({ _id: req.session.uid })
+  //           .then(activeUsers => {
+  //             console.log("active user: " + activeUsers[0]._id)
+  //             Users.find({ _id: { $in: events[0].collaborators } })
+  //               .then(collaborators => {
+  //                 var validCollaborator = false
+  //                 for (var i = 0; i < collaborators.length; i++) {
+  //                   if (collaborators[i]._id == activeUsers[0]._id) {
+  //                     var validCollaborator = true
+  //                     break
+  //                   }
+  //                 }
+  //                 var returnEvent = null
+  //                 console.log("uid: " + req.session.uid)
+  //                 console.log(typeof (req.session.uid))
+  //                 console.log("event creator id: " + events[0].creatorId)
+  //                 console.log(typeof (events[0].creatorId))
+  //                 console.log("valid collaborator " + validCollaborator)
+  //                 console.log("equal? ", req.session.uid == events[0].creatorId)
+  //                 if (req.session.uid == events[0].creatorId || validCollaborator) {
+  //                   console.log("Valid admin event: " + events[0])
+  //                   returnEvent = events[0]
+  //                 }
+  //                 res.send(handleResponse(action, returnEvent))
+  //               })
+  //               .catch(error => {
+  //                 return next(handleResponse(action, null, error))
+  //               })
   //           })
   //           .catch(error => {
   //             return next(handleResponse(action, null, error))
@@ -331,7 +347,62 @@ module.exports = {
   //       })
   //   }
   // },
-  
+
+  // Collaborator Compatibility Attempt 2:
+  // Incomplete
+
+  // getAdminEvent: {
+  //   path: '/admin-events/:eventId',
+  //   reqType: 'get',
+  //   method(req, res, next) {
+  //     let action = 'Find Event Created By Admin at Specific Id'
+  //     Events.find({ _id: req.params.eventId })
+  //       .then(events => {
+  //         Users.find({ _id: { $in: events[0].collaborators } })
+  //           .then(validUsers => {
+  //             Users.find({ _id: events[0].creatorId })
+  //               .then(creators => {
+  //                 if (creators.length == 1) {
+  //                   validUsers.push(creators[0])
+  //                 }
+  //                 var returnEvent = null
+  //                 if (req.session.uid == events[0].creatorId || validCollaborator) {
+  //                   console.log("Valid admin event: " + events[0])
+  //                   returnEvent = events[0]
+  //                 }
+  //                 res.send(handleResponse(action, returnEvent))
+  //               })
+  //               .catch(error => {
+  //                 return next(handleResponse(action, null, error))
+  //               })
+  //           })
+  //           .catch(error => {
+  //             return next(handleResponse(action, null, error))
+  //           })
+  //       }).catch(error => {
+  //         return next(handleResponse(action, null, error))
+  //       })
+  //   }
+  // },
+
+  // Collaborator Compatibility Attempt 3:
+  // Try using $where (might not want to go with this as may cause performance issues with a large user base)
+  // Failed: Doesn't return expected event, likely due to a failure in comparing objectIds as above
+  // getAdminEvent: {
+  //   path: '/admin-events/:eventId',
+  //   reqType: 'get',
+  //   method(req, res, next) {
+  //     let action = 'Find Event Created By Admin at Specific Id'
+  //     var uid = req.session.uid
+  //     Events.find({ _id: req.params.eventId, $where: function(uid) { return this.collaborators.includes(uid) || this.creatorId == uid } })
+  //       .then(events => {
+  //         console.log("events length: ", events.length)
+  //         res.send(handleResponse(action, events[0]))
+  //       }).catch(error => {
+  //         return next(handleResponse(action, null, error))
+  //       })
+  //   }
+  // },
 
   deleteAdminEvent: {
     path: '/admin-events/:eventId',
