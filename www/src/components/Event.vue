@@ -1,20 +1,31 @@
 <template>
-    <div>
-        <div class="col-xs-12">
-            <router-link :to="{path: 'event-schedule/' + event._id}">
-                <button class="btn btn-default event-btn word-wrap" @click="setActiveEvent(event)">
-                    <h2>{{event.name}}</h2>
-                    <img :src="event.logo">
-                    <h3>{{formatDateForDisplay(event.startDate)}} - {{formatDateForDisplay(event.endDate)}}</h3>
-                    <h3>{{event.description}}</h3>
-                    <h3>{{event.venue}}</h3>
-                    <h5>{{event.address}}</h5>
-                    <h5>{{event.city}}, {{event.state}}--{{event.timeZone}}</h5>
-                    <h6>Created
-                        <timeago :since="event.created"></timeago>
-                    </h6>
-                </button>
-            </router-link>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-lg-offset-3 col-lg-6">
+                <router-link :to="{path: 'event-schedule/' + event._id}">
+                    <button class="btn lt-btn event-btn word-wrap" @click="setActiveEvent(event)">
+                        <div class="col-xs-12">
+                            <h1>{{event.name}}</h1>
+                        </div>
+                        <div class="col-xs-12 col-lg-offset-3 col-lg-6 img-space">
+                            <img :src="event.logo">
+                        </div>
+                        <div class="col-xs-12 col-lg-offset-2 col-lg-6">
+                            <h3>{{formatDateForDisplay(event.startDate)}} - {{formatDateForDisplay(event.endDate)}}</h3>
+                        </div>
+                        <!-- <h3>{{event.description}}</h3> -->
+                        <!-- <h3>{{event.venue}}</h3> -->
+                        <!-- <h5>{{event.address}}</h5> -->
+                        <!-- <h5>{{event.city}}, {{event.state}}--{{event.timeZone}}</h5> -->
+                        <div class="col-xs-12 col-lg-offset-3 col-lg-6">
+                            <h6>Created
+                                <timeago :since="event.created"></timeago>
+                            </h6>
+                        </div>
+                    </button>
+                </router-link>
+                <hr>
+            </div>
         </div>
     </div>
 </template>
@@ -53,5 +64,8 @@
 </script>
 
 <style>
- 
+    .img-space {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
 </style>

@@ -71,10 +71,10 @@
                 <div v-if="!activeUser.name" class="col-xs-12">
                     <form class="form-inline">
                         <div id="force-inline" class="form-group">
-                            <input type="email" maxlength="57" class="form-control" name="email" placeholder="Email" required v-model='login.email'>
+                            <input type="email" maxlength="57" class="form-control btn-square" name="email" placeholder="Email" required v-model='login.email'>
                         </div>
                         <div id="force-inline" class="form-group">
-                            <input type="password" class="form-control" name="password" maxlength="20" placeholder="Password" required v-model='login.password'>
+                            <input type="password" class="form-control btn-square" name="password" maxlength="20" placeholder="Password" required v-model='login.password'>
                             <button formnovalidate type="submit" class="btn btn-default front-login-btn" @click="submitLogin">
                                 <span class="glyphicon glyphicon-log-in"></span>
                             </button>
@@ -107,7 +107,7 @@
         <!-- LOGIN MODAL -->
 
         <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+            <div class="user-modal-dialog modal-dialog">
 
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -126,12 +126,16 @@
                                 <input type="password" name="password" maxlength="20" class="form-control" placeholder="password" required v-model='login.password'>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" @click="submitLogin" data-dismiss="modal" type="submit">Submit</button>
+                                <button class="btn btn-submit btn-default btn-square submit-color" @click="submitLogin" data-dismiss="modal" type="submit">Submit</button>
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="row">
+                        <div class="col-xs-offset-3 col-xs-6">
+                            <!-- <div class="modal-footer"> -->
+                            <button type="button" class="btn btn-default btn-square" data-dismiss="modal">Close</button>
+                            <!-- </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -140,127 +144,193 @@
         <!-- SIGN UP MODAL -->
 
         <div id="myModal2" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+            <div class="user-modal-dialog modal-dialog">
 
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Create a Confer Account</h4>
+                        <h1 class="modal-title">Create your Confer Account</h1>
                         <p v-if="error">
                             <b>Your Passwords Do Not Match</b>
                         </p>
                     </div>
                     <div class="modal-body">
-                        <form id="register" class="form">
+                        <div class="container-fluid">
+                            <!-- <form id="register" class="form"> -->
                             <div class="form-group">
-                                <label for="firstName">First Name:</label>
-                                <input type="firstName" name="firstName" maxlength="20" class="form-control" placeholder="First Name" required v-model="signUp.firstName">
+                                <div class="row">
+                                    <div class="col-xs-6 modal-space">
+                                        <label for="firstName">First Name:</label>
+                                        <input type="firstName" name="firstName" maxlength="20" class="form-control input-sm" placeholder="First Name" required v-model="signUp.firstName">
+                                    </div>
+                                    <div class="col-xs-6 modal-space">
+                                        <label for="lastName">Last Name:</label>
+                                        <input type="lastName" name="lastName" maxlength="20" class="form-control input-sm" placeholder="Last Name" required v-model="signUp.lastName">
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="lastName">Last Name:</label>
-                                <input type="lastName" name="lastName" maxlength="20" class="form-control" placeholder="Last Name" required v-model="signUp.lastName">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <label for="email">Email:</label>
+                                        <input type="email" maxlength="57" name="email" class="form-control input-sm" placeholder="Email" required v-model="signUp.email">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email:</label>
-                                <input type="email" maxlength="57" name="email" class="form-control" placeholder="Email" required v-model="signUp.email">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="password">Password:</label>
+                                        <input type="password" name="password" maxlength="20" class="form-control" placeholder="password" required v-model="signUp.password">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="password">Password:</label>
-                                <input type="password" name="password" maxlength="20" class="form-control" placeholder="password" required v-model="signUp.password">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="reEnterPassword">Re-enter Password:</label>
+                                        <input type="password" name="reEnterPassword" maxlength="20" class="form-control" placeholder="Re Enter Password" v-model="signUp.rPassword">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="reEnterPassword">Re-enter Password:</label>
-                                <input type="password" name="reEnterPassword" maxlength="20" class="form-control" placeholder="Re Enter Password" v-model="signUp.rPassword">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <button class="btn btn-submit submit-color btn-square" data-dismiss="modal" type="submit" @click="submitRegister">Submit</button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <button class="btn btn-submit btn-success" data-dismiss="modal" type="submit" @click="submitRegister">Submit</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="row">
+                        <div class="col-xs-offset-3 col-xs-6">
+                            <!-- <div class="modal-footer"> -->
+                            <button type="button" class="btn btn-default btn-square" data-dismiss="modal">Close</button>
+                            <!-- </div> -->
+                        </div>
                     </div>
                 </div>
 
             </div>
         </div>
 
-        <!-- Create new event modal -->
+        <!-- CREATE NEW EVENT MODAL -->
+
         <div id="myModal3" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+            <div class="event-modal-dialog modal-dialog">
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Create a New Event</h4>
-                    </div>
-
-                    <div class="modal-body">
-                        <form id="createEvent" class="form">
-                            <div class="form-group">
-                                <label for="eventName">Event Name</label>
-                                <input type="text" name="eventName" maxlength="40" class="form-control" placeholder="Whats the event called?" required v-model="event.name"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea type="text" name="description" maxlength="300" class="form-control" rows="5" placeholder="What is this event for?"
-                                    required v-model="event.description"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="logo">Logo:</label>
-                                <input type="text" name="logo" class="form-control" maxlength="150" placeholder="Path or URL" required v-model="event.logo">
-                            </div>
-                            <div class="form-group">
-                                <label for="startDate">Start Date:</label>
-                                <input type="date" name="startDate" class="form-control" placeholder="Start Date" :min="date" v-model="event.startDate" required
-                                    @change="validateForm">
-                                <p class="error-message text-left text-danger" v-if="!this.validator.startDate">Start date must be today or later.</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="endDate">End Date:</label>
-                                <input type="date" name="endDate" class="form-control" placeholder="End Date" :min="event.startDate" required v-model="event.endDate"
-                                    @change="validateForm">
-                                <p class="error-message text-left text-danger" v-if="!this.validator.endDate">End date must be the same as or later than the start date.</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="venue">Venue:</label>
-                                <input type="text" name="venue" class="form-control" maxlength="40" placeholder="Venue" required v-model="event.venue">
-                            </div>
-                            <div class="form-group">
-                                <label for="address">Address:</label>
-                                <input type="text" name="address" class="form-control" maxlength="75" placeholder="Venue Address" v-model="event.address"
-                                    required>
-                                <input type="text" name="city" class="form-control" maxlength="75" placeholder="Venue City" v-model="event.city" required>
-                                <div class="form-group state">
-                                    <label for="state">Venue State</label>
-                                    <select class="form-control state" v-model="event.state">
-                                        <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
-                                    </select>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h1 class="modal-title">Create a New Event</h1>
                                 </div>
-                                <input type="number" name="zip" maxlength="5" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
-                                <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p>
+                            </div>
+                        </div>
+
+                        <div class="modal-body">
+                            <form id="createEvent" class="form">
                                 <div class="form-group">
-                                    <label for="timeZone">Time Zone</label>
-                                    <select class="form-control" v-model="event.timeZone">
-                                        <option :value="timeZone" v-for="timeZone in timeZones">{{timeZone}}</option>
-                                    </select>
+                                    <div class="row modal-space well">
+                                        <div class="col-xs-6">
+                                            <label for="eventName">Event Name:</label>
+                                            <input type="text" name="eventName" maxlength="40" class="form-control" placeholder="What is your event called?" required
+                                                v-model="event.name" required>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <label for="logo">Your Logo:</label>
+                                            <input type="text" name="logo" class="form-control" maxlength="150" placeholder="Path or URL" required v-model="event.logo">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-submit btn-success" data-dismiss="modal" @click="createEvent" type="submit" :disabled="!this.validator.form">Create New Event</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+                                <div class="form-group">
+                                    <div class="row modal-space well">
+                                        <div class="col-xs-12">
+                                            <label for="description">Event Description:</label>
+                                            <textarea type="text" name="description" maxlength="300" class="form-control" rows="5" placeholder="What is this event for?    Let your guests know here..."
+                                                required v-model="event.description"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row modal-space well">
+                                        <div class="col-xs-4">
+                                            <label for="startDate">Event Start Date:</label>
+                                            <input type="date" name="startDate" class="form-control" placeholder="Event Start Date" :min="date" v-model="event.startDate"
+                                                required @change="validateForm">
+                                            <p class="error-message text-left text-danger" v-if="!this.validator.startDate">Start date must be today or later.</p>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <label for="endDate">Event End Date:</label>
+                                            <input type="date" name="endDate" class="form-control" placeholder="Event End Date" :min="event.startDate" required v-model="event.endDate"
+                                                @change="validateForm">
+                                            <p class="error-message text-left text-danger" v-if="!this.validator.endDate">End date must be the same as or later than the start date.</p>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <label for="timeZone">Time Zone:</label>
+                                            <select class="form-control" v-model="event.timeZone">
+                                                <option :value="timeZone" v-for="timeZone in timeZones">{{timeZone}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row modal-space well">
+                                        <div class="col-xs-offset-3 col-xs-6 col-xs-offset-3 xs-modal-space">
+                                            <label for="venue">Venue:</label>
+                                            <input type="text" name="venue" class="form-control input-sm" maxlength="40" placeholder="What is the name of your venue?"
+                                                required v-model="event.venue">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-offset-3 col-xs-6 col-xs-offset-3 xs-modal-space">
+                                                <label for="address">Address:</label>
+                                                <input type="text" name="address" class="form-control" maxlength="75" placeholder="Venue Address" v-model="event.address"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-offset-3 col-xs-4 xs-modal-space">
+                                                <label for="city">City:</label>
+                                                <input type="text" name="city" class="form-control" maxlength="75" placeholder="Venue City" v-model="event.city" required>
+                                            </div>
 
+                                            <div class="col-xs-3 state xs-modal-space">
+                                                <label for="state">State:</label>
+                                                <select class="form-control state" v-model="event.state">
+                                                    <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-offset-3 col-xs-6 col-xs-offset-3">
+                                                <label for="zip">Zip Code:</label>
+                                                <input type="number" name="zip" maxlength="5" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
+                                                <!-- <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-submit btn-square btn-lg fe-btn" data-dismiss="modal" @click="createEvent" type="submit" :disabled="!this.validator.form">Create Event</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-offset-3 col-xs-6">
+                            <!-- <div class="modal-footer"> -->
+                            <button type="button" class="btn btn-default btn-square" data-dismiss="modal">Close</button>
+                            <!-- </div> -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
 
 
         <!-- Pen & Paper picture -->
@@ -300,7 +370,7 @@
                 </div>
                 <div class="col-md-12 col-lg-offset-2 col-lg-4 multi-text-two">
                     <h4>With an account you can</h4>
-                    
+
                     <h4 v-if="activeUser.hasOwnProperty('name')" data-toggle="modal" data-target="#myModal3" class="a-pointer under">build your event</h4>
                     <h4 v-else>build your event</h4>
                     <br>
@@ -494,13 +564,19 @@
         background-position: center
     }
 
-    @media screen and (min-width: 500px) {
+    @media screen and (min-width: 650px) {
         #main-logo {
             font-size: 150px;
         }
     }
 
-    @media screen and (min-width: 500px) {
+    @media screen and (max-width: 649px) {
+        #main-logo {
+            font-size: 75px;
+        }
+    }
+
+    @media screen and (min-width: 650px) {
         #second-logo {
             font-size: 100px;
         }
@@ -585,12 +661,6 @@
         min-height: 600px;
     }
 
-    @media screen and (min-width: 500px) {
-        #main-logo {
-            font-size: 150px;
-        }
-    }
-
     @media screen and (max-width: 500px) {
         .my-img-responsive {
             display: block;
@@ -629,15 +699,6 @@
     .extra-padding {
         padding: 50px 80px;
     }
-
-    /* .spacer {
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
-    .top-spacer {
-        margin-bottom: 10px;
-    } */
 
     .main-heading {
         font-family: 'Abril Fatface', cursive;
@@ -691,7 +752,7 @@
             padding-bottom: 10px;
         }
         .state {
-            width: 50%
+            width: 30%;
         }
         .nav-drop-btn {
             width: 90%;
@@ -714,7 +775,6 @@
             margin-top: -10px;
             margin-bottom: -10px;
         } */
-
         .multi-text {
             padding-top: 50px;
             padding-bottom: 10px;
@@ -763,22 +823,6 @@
             text-shadow: 2px 2px 4px black;
         }
 
-        .fe-btn {
-            background-color: black;
-            color: white;
-            font-family: 'Lato', sans-serif;
-            border: black;
-            letter-spacing: 10px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-
-        .fe-btn:hover {
-            box-shadow: 1px 1px 1px 1px white;
-        }
-
         .under {
             text-decoration: underline;
         }
@@ -792,15 +836,5 @@
             font-family: 'Lato', sans-serif;
             letter-spacing: 5px;
         }
-
-        /* .neg-spacer {
-            margin-top: 10px;
-            margin-bottom: -10px;
-        }
-
-        .neg-sec-spacer {
-            margin-top: 10px;
-            margin-bottom: -26px;
-        } */
     }
 </style>

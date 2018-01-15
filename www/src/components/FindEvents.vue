@@ -1,6 +1,6 @@
 <template>
-    <div class="find-events">
-        <nav class="navbar navbar-inverse navbar-fixed-top navbar-space">
+    <div class="find-events bg-img">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -16,27 +16,23 @@
                     </router-link>
                     <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
                         <p class="navbar-text">Welcome {{activeUser.name}}</p>
-                        <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
-                        <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
+                        <button type="button" class="btn create-color navbar-btn btn-square" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
+                        <button type="button" class="btn logout-color navbar-btn logout-btn btn-square" @click="logout">Logout</button>
                     </div>
                     <div class="text-right" v-else>
-                        <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Login</button>
-                        <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
+                        <button type="button" class="btn login-color navbar-btn btn-square" data-toggle="modal" data-target="#myModal">Login</button>
+                        <button type="button" class="btn register-color navbar-btn btn-square" data-toggle="modal" data-target="#myModal2">Sign-up</button>
                     </div>
-                    <!-- Trigger the SIGN UP modal -->
                 </div>
 
                 <!-- MENU DROPDOWN -->
                 <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
-
                     <ul>
                         <li>
-
                             <router-link :to="{name: 'Home'}">
                                 <button type="button" class="btn nav-drop-btn btn-default">Home</button>
                             </router-link>
                         </li>
-
                         <div v-if="activeUser.hasOwnProperty('name')">
                             <li>
                                 <router-link :to="{name: 'adminEvents'}">
@@ -50,40 +46,39 @@
                                 </router-link>
                             </li>
                             <li>
-
                                 <router-link :to="{name:'userNotes'}">
                                     <button type="button" class="btn nav-drop-btn btn-default">My Notes</button>
                                 </router-link>
                             </li>
-
                         </div>
-
                     </ul>
                 </div>
-                <!-- /.navbar-collapse -->
             </div>
-            <!-- /.container-fluid -->
         </nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12 main-headline">
                     <h1 style="font-size: 80px">Find Events</h1>
                 </div>
-                <div class="col-xs-offset-4 col-xs-8">
-                    <div class="input-group">
-                        <form id="find-events" class="form" @submit.prevent="findEvents">
-                            <input type="text" name="text" class="form-control" placeholder="Find an Event by Location" required v-model='search.location'>
-                            <span class="input-group-btn">
-                                <button class="btn btn-submit btn-default" type="submit">Search</button>
-                            </span>
-                        </form>
-                    </div>
-                </div>
             </div>
             <div class="row">
+                <div class="col-xs-offset-3 col-xs-6">
+                    <form id="find-events" class="form" @submit.prevent="findEvents">
+                        <div class="input-group">
+                            <input type="text" name="text" class="form-control better-text" placeholder="Find an Event by Location" required v-model='search.location'>
+                            <div class="input-group-btn">
+                                <button class="btn btn-submit" type="submit">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row spacer">
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <button type="button" class="btn btn-lg btn-primary" @click="getAllEvents">View All Events</button>
+                        <button type="button" class="btn btn-lg fe-btn" @click="getAllEvents">View All Events</button>
                     </div>
                 </div>
             </div>
@@ -92,10 +87,11 @@
             </div>
         </div>
 
+
         <!-- LOGIN MODAL -->
 
         <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+            <div class="user-modal-dialog modal-dialog">
 
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -107,22 +103,25 @@
                         <form id="login" class="form">
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" name="email" maxlength="57" class="form-control" placeholder="Email" required v-model='login.email'>
+                                <input type="email" maxlength="57" name="email" class="form-control" placeholder="Email" required v-model='login.email'>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
                                 <input type="password" name="password" maxlength="20" class="form-control" placeholder="password" required v-model='login.password'>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" @click="submitLogin" data-dismiss="modal" type="submit">Submit</button>
+                                <button class="btn btn-submit btn-default btn-square submit-color" @click="submitLogin" data-dismiss="modal" type="submit">Submit</button>
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="row">
+                        <div class="col-xs-offset-3 col-xs-6">
+                            <!-- <div class="modal-footer"> -->
+                            <button type="button" class="btn btn-default btn-square" data-dismiss="modal">Close</button>
+                            <!-- </div> -->
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -174,78 +173,120 @@
 
             </div>
         </div>
-        <!-- Create new event modal -->
+
+        <!-- CREATE NEW EVENT MODAL -->
+
         <div id="myModal3" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+            <div class="event-modal-dialog modal-dialog">
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Create a New Event</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form id="createEvent" class="form">
-                            <div class="form-group">
-                                <label for="eventName">Event Name</label>
-                                <input type="text" name="eventName" maxlength="40" class="form-control" placeholder="Whats the event called?" required v-model="event.name"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea type="text" name="description" maxlength="300" class="form-control" rows="5" placeholder="What is this event for?"
-                                    required v-model="event.description"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="logo">Logo:</label>
-                                <input type="text" name="logo" class="form-control" maxlength="300" placeholder="Path or URL" required v-model="event.logo">
-                            </div>
-                            <div class="form-group">
-                                <label for="startDate">Start Date:</label>
-                                <input type="date" name="startDate" class="form-control" placeholder="Start Date" :min="date" v-model="event.startDate" required
-                                    @change="validateForm">
-                                <p class="error-message text-left text-danger" v-if="!this.validator.startDate">Start date must be today or later.</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="endDate">End Date:</label>
-                                <input type="date" name="endDate" class="form-control" placeholder="End Date" :min="event.startDate" required v-model="event.endDate"
-                                    @change="validateForm">
-                                <p class="error-message text-left text-danger" v-if="!this.validator.endDate">End date must be the same as or later than the start date.</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="venue">Venue:</label>
-                                <input type="text" name="venue" class="form-control" maxlength="30" placeholder="Venue" required v-model="event.venue">
-                            </div>
-                            <div class="form-group">
-                                <label for="address">Address:</label>
-                                <input type="text" name="address" class="form-control" maxlength="75" placeholder="Venue Address" v-model="event.address"
-                                    required>
-                                <input type="text" name="city" maxlength="75" class="form-control" placeholder="Venue City" v-model="event.city" required>
-                                <div class="form-group state">
-                                    <label for="state">Venue State</label>
-                                    <select class="form-control state" v-model="event.state">
-                                        <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
-                                    </select>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h1 class="modal-title">Create a New Event</h1>
                                 </div>
-                                <input type="number" maxlength="5" name="zip" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
-                                <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p>
+                            </div>
+                        </div>
+
+                        <div class="modal-body">
+                            <form id="createEvent" class="form">
                                 <div class="form-group">
-                                    <label for="timeZone">Time Zone</label>
-                                    <select class="form-control" v-model="event.timeZone">
-                                        <option :value="timeZone" v-for="timeZone in timeZones">{{timeZone}}</option>
-                                    </select>
+                                    <div class="row modal-space well">
+                                        <div class="col-xs-6">
+                                            <label for="eventName">Event Name:</label>
+                                            <input type="text" name="eventName" maxlength="40" class="form-control" placeholder="What is your event called?" required
+                                                v-model="event.name" required>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <label for="logo">Your Logo:</label>
+                                            <input type="text" name="logo" class="form-control" maxlength="150" placeholder="Path or URL" required v-model="event.logo">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-submit btn-success" data-dismiss="modal" @click="createEvent" type="submit" :disabled="!this.validator.form">Create New Event</button>
-                            </div>
-                        </form>
+                                <div class="form-group">
+                                    <div class="row modal-space well">
+                                        <div class="col-xs-12">
+                                            <label for="description">Event Description:</label>
+                                            <textarea type="text" name="description" maxlength="300" class="form-control" rows="5" placeholder="What is this event for?    Let your guests know here..."
+                                                required v-model="event.description"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row modal-space well">
+                                        <div class="col-xs-4">
+                                            <label for="startDate">Event Start Date:</label>
+                                            <input type="date" name="startDate" class="form-control" placeholder="Event Start Date" :min="date" v-model="event.startDate"
+                                                required @change="validateForm">
+                                            <p class="error-message text-left text-danger" v-if="!this.validator.startDate">Start date must be today or later.</p>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <label for="endDate">Event End Date:</label>
+                                            <input type="date" name="endDate" class="form-control" placeholder="Event End Date" :min="event.startDate" required v-model="event.endDate"
+                                                @change="validateForm">
+                                            <p class="error-message text-left text-danger" v-if="!this.validator.endDate">End date must be the same as or later than the start date.</p>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <label for="timeZone">Time Zone:</label>
+                                            <select class="form-control" v-model="event.timeZone">
+                                                <option :value="timeZone" v-for="timeZone in timeZones">{{timeZone}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row modal-space well">
+                                        <div class="col-xs-offset-3 col-xs-6 col-xs-offset-3 xs-modal-space">
+                                            <label for="venue">Venue:</label>
+                                            <input type="text" name="venue" class="form-control input-sm" maxlength="40" placeholder="What is the name of your venue?"
+                                                required v-model="event.venue">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-offset-3 col-xs-6 col-xs-offset-3 xs-modal-space">
+                                                <label for="address">Address:</label>
+                                                <input type="text" name="address" class="form-control" maxlength="75" placeholder="Venue Address" v-model="event.address"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-offset-3 col-xs-4 xs-modal-space">
+                                                <label for="city">City:</label>
+                                                <input type="text" name="city" class="form-control" maxlength="75" placeholder="Venue City" v-model="event.city" required>
+                                            </div>
+
+                                            <div class="col-xs-3 state xs-modal-space">
+                                                <label for="state">State:</label>
+                                                <select class="form-control state" v-model="event.state">
+                                                    <option :value="state" v-for="(postalCode, state) in locations">{{postalCode}} - {{state}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-offset-3 col-xs-6 col-xs-offset-3">
+                                                <label for="zip">Zip Code:</label>
+                                                <input type="number" name="zip" maxlength="5" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
+                                                <!-- <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-submit btn-square btn-lg fe-btn" data-dismiss="modal" @click="createEvent" type="submit" :disabled="!this.validator.form">Create Event</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="row">
+                        <div class="col-xs-offset-3 col-xs-6">
+                            <!-- <div class="modal-footer"> -->
+                            <button type="button" class="btn btn-default btn-square" data-dismiss="modal">Close</button>
+                            <!-- </div> -->
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -385,21 +426,19 @@
     }
 </script>
 
-<style scoped>
-    .event-btn {
-        width: 100%;
-        background-color: lightgray;
-        margin-bottom: 10px;
+<style>
+    .spacer {
+        padding-bottom: 50px;
+        padding-top: 50px;
     }
 
-    .search-form-group {
-        width: 50%;
-        margin-top: 50px;
-    }
-
-    .search-btn {
-        width: 50%;
-        margin-top: 5px;
-        margin-bottom: 50px;
+    .bg-img {
+        background-image: url('../assets/mouse-background.jpeg');
+        position: relative;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: 0;
     }
 </style>

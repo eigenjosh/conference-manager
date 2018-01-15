@@ -22,41 +22,33 @@
                         <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Login</button>
                         <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
                     </div>
-                    <!-- Trigger the SIGN UP modal -->
                 </div>
 
                 <!-- MENU DROWDOWN -->
                 <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
-
                     <ul>
                         <li>
-
                             <router-link :to="{name: 'Home'}">
                                 <button type="button" class="btn btn-default nav-drop-btn">Home</button>
                             </router-link>
                         </li>
                         <li>
-
                             <router-link :to="{name: 'findEvents'}">
                                 <button type="button" class="btn btn-default nav-drop-btn">Find Events</button>
                             </router-link>
                         </li>
-
                         <div v-if="activeUser.hasOwnProperty('name')">
                             <li>
-
                                 <router-link :to="{name: 'adminEvents'}">
                                     <button type="button" class="btn btn-default nav-drop-btn">Edit Events</button>
                                 </router-link>
                             </li>
                             <li>
-
                                 <router-link :to="{name:'mySchedule'}">
                                     <button type="button" class="btn btn-default nav-drop-btn">My Schedule</button>
                                 </router-link>
                             </li>
                             <li>
-
                                 <router-link :to="{name:'userNotes'}">
                                     <button type="button" class="btn btn-default nav-drop-btn">My Notes</button>
                                 </router-link>
@@ -69,6 +61,8 @@
             </div>
         </nav>
 
+        <!-- LOGIN MODAL -->
+        
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
 

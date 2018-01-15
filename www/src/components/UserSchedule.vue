@@ -64,7 +64,6 @@
             </div>
         </div>
 
-
         <div class="row">
             <div class="col-xs-12 event well" v-if="activeUser.events.includes(activeEvent._id)">
                 <router-link :to="{path: 'event-schedule/' + activeEvent._id}" class="event-name">
@@ -254,11 +253,6 @@
     .well h2 {
         color: whitesmoke;
     }
-
-    /* .event-name-btn{
-        background-color: rgba(127, 127, 113, 0.746);
-        color: whitesmoke;
-    } */
 
     .event-name:hover {
         text-decoration: none;
