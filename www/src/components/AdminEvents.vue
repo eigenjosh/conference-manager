@@ -17,7 +17,7 @@
                     <div class="text-right">
                         <p class="navbar-text">Welcome {{activeUser.name}}</p>
                         <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
-                        <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
+                        <button type="button" class="btn logout-color navbar-btn logout-btn btn-square" @click="logout">Logout</button>
                     </div>
                     <!-- Trigger the SIGN UP modal -->
                 </div>

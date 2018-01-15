@@ -16,7 +16,7 @@
                     </router-link>
                     <div class="text-right">
                         <p class="navbar-text">Welcome {{activeUser.name}}</p>
-                        <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
+                        <button type="button" class="btn logout-color navbar-btn logout-btn btn-square" @click="logout">Logout</button>
                     </div>
 
                     <!-- Trigger the SIGN UP modal -->

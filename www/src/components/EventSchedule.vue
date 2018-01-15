@@ -1,5 +1,5 @@
 <template>
-    <div class="event-schedule">
+    <div class="event-schedule sec-bg-img">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -16,11 +16,11 @@
                     </router-link>
                     <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
                         <p class="navbar-text">Welcome {{activeUser.name}}</p>
-                        <button type="button" class="btn btn-danger navbar-btn" @click="logout">Logout</button>
+                        <button type="button" class="btn logout-color navbar-btn logout-btn btn-square" @click="logout">Logout</button>
                     </div>
                     <div class="text-right" v-else>
-                        <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#myModal">Login</button>
-                        <button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal2">Sign-up</button>
+                        <button type="button" class="btn login-color navbar-btn btn-square" data-toggle="modal" data-target="#myModal">Login</button>
+                        <button type="button" class="btn register-color navbar-btn btn-square" data-toggle="modal" data-target="#myModal2">Sign-up</button>
                     </div>
                 </div>
 
@@ -62,9 +62,9 @@
         </nav>
 
         <!-- LOGIN MODAL -->
-        
+
         <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+            <div class="user-modal-dialog modal-dialog">
 
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -80,64 +80,92 @@
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
-                                <input type="password" maxlength="20" name="password" class="form-control" placeholder="password" required v-model='login.password'>
+                                <input type="password" name="password" maxlength="20" class="form-control" placeholder="password" required v-model='login.password'>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" @click="submitLogin" data-dismiss="modal" type="submit">Submit</button>
+                                <button class="btn btn-submit btn-default btn-square submit-color" @click="submitLogin" data-dismiss="modal" type="submit">Submit</button>
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="row">
+                        <div class="col-xs-offset-3 col-xs-6">
+                            <!-- <div class="modal-footer"> -->
+                            <button type="button" class="btn btn-default btn-square" data-dismiss="modal">Close</button>
+                            <!-- </div> -->
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
         <!-- SIGN UP MODAL -->
 
         <div id="myModal2" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+            <div class="user-modal-dialog modal-dialog">
 
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Create a Confer Account</h4>
+                        <h1 class="modal-title">Create your Confer Account</h1>
                         <p v-if="error">
                             <b>Your Passwords Do Not Match</b>
                         </p>
                     </div>
                     <div class="modal-body">
-                        <form id="register" class="form">
+                        <div class="container-fluid">
+                            <!-- <form id="register" class="form"> -->
                             <div class="form-group">
-                                <label for="firstName">First Name:</label>
-                                <input type="firstName" name="firstName" maxlength="20" class="form-control" placeholder="First Name" required v-model="signUp.firstName">
+                                <div class="row">
+                                    <div class="col-xs-6 modal-space">
+                                        <label for="firstName">First Name:</label>
+                                        <input type="firstName" name="firstName" maxlength="20" class="form-control input-sm" placeholder="First Name" required v-model="signUp.firstName">
+                                    </div>
+                                    <div class="col-xs-6 modal-space">
+                                        <label for="lastName">Last Name:</label>
+                                        <input type="lastName" name="lastName" maxlength="20" class="form-control input-sm" placeholder="Last Name" required v-model="signUp.lastName">
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="lastName">Last Name:</label>
-                                <input type="lastName" name="lastName" maxlength="20" class="form-control" placeholder="Last Name" required v-model="signUp.lastName">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <label for="email">Email:</label>
+                                        <input type="email" maxlength="57" name="email" class="form-control input-sm" placeholder="Email" required v-model="signUp.email">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email:</label>
-                                <input type="email" name="email" maxlength="57" class="form-control" placeholder="Email" required v-model="signUp.email">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="password">Password:</label>
+                                        <input type="password" name="password" maxlength="20" class="form-control" placeholder="password" required v-model="signUp.password">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="password">Password:</label>
-                                <input type="password" name="password" maxlength="20" class="form-control" placeholder="password" required v-model="signUp.password">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="reEnterPassword">Re-enter Password:</label>
+                                        <input type="password" name="reEnterPassword" maxlength="20" class="form-control" placeholder="Re Enter Password" v-model="signUp.rPassword">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="reEnterPassword">Re-enter Password:</label>
-                                <input type="password" name="reEnterPassword" maxlength="20" class="form-control" placeholder="Re Enter Password" v-model="signUp.rPassword">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <button class="btn btn-submit submit-color btn-square" data-dismiss="modal" type="submit" @click="submitRegister">Submit</button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <button class="btn btn-submit btn-success" data-dismiss="modal" type="submit" @click="submitRegister">Submit</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="row">
+                        <div class="col-xs-offset-3 col-xs-6">
+                            <!-- <div class="modal-footer"> -->
+                            <button type="button" class="btn btn-default btn-square" data-dismiss="modal">Close</button>
+                            <!-- </div> -->
+                        </div>
                     </div>
                 </div>
 
@@ -176,23 +204,54 @@
             </div>
         </div>
 
+        <!-- START OF DISPLAY -->
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
                     <h1 class="main-headline" style="font-size: 80px">{{activeEvent.name}}</h1>
+                </div>
+                <div class="col-xs-12 bottom-space">
                     <img :src="activeEvent.logo" style="background-image: url(activeEvent.logo)">
-                    <h3 class="well text-center desc-style">{{activeEvent.description}}</h3>
+                </div>
+                <div class="col-xs-12 col-md-offset-3 col-md-6 desc-style">
+                    <h3 class="text-center">{{activeEvent.description}}</h3>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-offset-3 col-xs-6">
+                <div class="col-xs-12">
                     <h2>{{formatDateForDisplay(activeEvent.startDate)}} - {{formatDateForDisplay(activeEvent.endDate)}}</h2>
-                    <h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>
+                        Venue:
                         <b>{{activeEvent.venue}}</b>
-                    </h3>
-                    <h4>{{activeEvent.address}}</h4>
-                    <h4>{{activeEvent.city}}, {{activeEvent.state}}</h4>
+                    </h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Address:    {{activeEvent.address}}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    City, State:
+                    <h3>{{activeEvent.city}}</h3>,
+                    <h3>{{activeEvent.state}}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    Zip Code:
                     <h4>{{activeEvent.zip}}</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    Time Zone:
                     <h5>Time Zone: {{activeEvent.timeZone}}</h5>
                 </div>
             </div>
@@ -202,12 +261,12 @@
                         data-placement="top" title="Join event to add activities to your schedule!" @click="addToMyEvents">Join Event</button>
                     <h3 class="main-headline" style="margin-right: 30px; color: blue" v-if="joined">You have Joined this Event</h3>
                 </div>
-                <div class="col-xs-4 col-xs-offset-4" v-else>
+                <div class="col-xs-12 col-sm-offset-4 col-sm-4" v-else>
                     <router-link :to="{path: '/admin-edit/' + activeEvent._id}">
-                        <button class="btn btn-default btn-lg admin-btn">Edit Schedule</button>
+                        <button class="btn btn-lg fe-btn bottom-spacer">Edit Schedule</button>
                     </router-link>
                     <router-link :to="{name: 'mySchedule'}">
-                        <button class="btn btn-default btn-lg admin-btn">View My Schedule</button>
+                        <button class="btn btn-lg fe-btn bottom-spacer">View My Schedule</button>
                     </router-link>
                 </div>
             </div>
@@ -344,7 +403,7 @@
 </script>
 
 <style>
-    .activities {
+    /* .activities {
         width: 100%;
     }
 
@@ -358,19 +417,6 @@
 
     .description {
         width: 50%;
-    }
-
-    .admin-btn {
-        background-color: lightgray;
-        margin-bottom: 5px;
-        font: black;
-        border: 1px solid black;
-        width: 75%;
-    }
-
-    .desc-style {
-        margin-left: 100px;
-        margin-right: 100px;
     }
 
     .join-btn {
@@ -390,5 +436,30 @@
     .logo {
         height: 200px;
         width: 200px;
+    } */
+
+    .sec-bg-img {
+        background-image: url('../assets/light-bg.jpeg');
+        position: relative;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 1000px;
+    }
+
+    .bottom-space {
+        padding-bottom: 50px;
+    }
+
+    .desc-style {
+        border: 5px solid black;
+        letter-spacing: 5px;
+        background-color: black;
+        color: white;
+    }
+
+    .bottom-spacer {
+        margin-bottom: 20px;
     }
 </style>

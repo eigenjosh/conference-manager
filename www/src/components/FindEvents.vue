@@ -433,12 +433,12 @@
     }
 
     .bg-img {
-        background-image: url('../assets/mouse-background.jpeg');
+        background-image: url('../assets/background-light.jpeg');
         position: relative;
         background-attachment: fixed;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        z-index: 0;
+        min-height: 1000px;
     }
 </style>

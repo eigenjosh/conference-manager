@@ -310,8 +310,6 @@
     }
   }
 
-
-
   .better-text {
     font-family: 'Lato', sans-serif;
     letter-spacing: 10px;
