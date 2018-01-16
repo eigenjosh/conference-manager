@@ -110,8 +110,15 @@
                                 <input type="password" name="password" maxlength="20" class="form-control" placeholder="password" required v-model='login.password'>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-default btn-square submit-color" @click="submitLogin" data-dismiss="modal" type="submit">Submit</button>
+                                <button class="btn btn-submit btn-default btn-square submit-color" @click="submitLogin"type="submit">Submit</button>
                             </div>
+                            <div v-if="handledError == 'Invalid Email or Password'">
+                                    <h4>{{handledError}}</h4>
+                                </div>
+                                <div v-else-if="success == 'successfully logged in'" v-on:mousemove="closeModal()">
+                                    <h4>{{success}}</h4>
+                                </div>
+                                <div v-else></div>
                         </form>
                     </div>
                     <div class="row">
@@ -346,6 +353,12 @@
             this.$store.dispatch('getAllEvents')
         },
         computed: {
+            handledError(){
+                return this.$store.state.error
+            },
+            success(){
+                return this.$store.state.success
+            },
             activeUser() {
                 return this.$store.state.activeUser
             },
@@ -360,6 +373,10 @@
             }
         },
         methods: {
+            closeModal(){
+                $("#myModal").modal("hide")
+                this.$store.dispatch('setSuccess')
+            },
             validateZip() {
                 this.validator.zip = (this.event.zip.length == 5)
             },
@@ -377,7 +394,7 @@
                 console.log('validator: ', this.validator)
             },
             submitLogin() {
-
+                this.$store.dispatch('setError')
                 this.$store.dispatch('login', this.login)
                 this.login = {
                     email: '',
