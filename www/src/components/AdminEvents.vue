@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="bg-img-8">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -278,5 +278,13 @@
     }
 </script>
 
-<style scoped>
+<style>
+    .bg-img-8 {
+        background-image: url('../assets/light-bg.jpeg');
+        position: relative;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 </style>

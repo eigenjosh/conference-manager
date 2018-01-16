@@ -1,5 +1,5 @@
 <template>
-    <div class="my-schedule container-fluid bg-">
+    <div class="my-schedule container-fluid bg-img-9">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div>
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -184,4 +184,14 @@
         background-color: lightgray;
         border: black solid 1px;
     } */
+
+    .bg-img-9 {
+        background-image: url('../assets/light-bg.jpeg');
+        position: relative;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 1000px;
+    }
 </style>
