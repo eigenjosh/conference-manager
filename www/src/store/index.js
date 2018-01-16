@@ -24,6 +24,7 @@ vue.use(vuex)
 var store = new vuex.Store({
   state: {
     error: {},
+    success:{},
     activeUser: {},
     collaborators: [],
     activeCollaborator:{},
@@ -55,7 +56,7 @@ var store = new vuex.Store({
       state.activeUser = user
     },
     resetState(state) {
-      state.error = {},
+        state.error = {},
         state.activeUser = {},
         state.schedule = {},
         state.userSchedule = {},
@@ -73,9 +74,12 @@ var store = new vuex.Store({
 
     //HANDLE ERROR
     handleError(state, err) {
-      state.error = err
+      debugger
+      vue.set(state, "error", err)
     },
-
+    setSuccess(state, data){
+      vue.set(state, "success", data)
+    },
     //SET & DISPLAY SCHEDULE
     setSchedule(state, activities) {
       var schedule = {}
@@ -198,17 +202,25 @@ var store = new vuex.Store({
     //***LOGIN AND REGISTER***
 
     //LOGIN
-
+    setSuccess({commit, dispatch}){
+      commit('setSuccess', {})
+    },
+    setError({commit, dispatch}){
+      commit('handleError', {})
+    },
     login({ commit, dispatch }, payload) {
-
+      debugger
       auth.post('login', payload)
         .then(res => {
+          debugger
           console.log("successful login")
           commit('setUser', res.data.data)
+          commit('setSuccess', res.data.message)
           dispatch('initSocket', res.data.data)
         })
         .catch(err => {
-          commit('handleError', err)
+          debugger
+          commit('handleError', err.response.data.message)
         })
     },
 

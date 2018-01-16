@@ -19,7 +19,7 @@
                     <button type="button" class="btn logout-color navbar-btn logout-btn btn-square" @click="logout">Logout</button>
                 </div>
                 <div class="text-right" v-else>
-                    <button type="button" class="btn login-color navbar-btn btn-square" data-toggle="modal" data-target="#myModal">Login</button>
+                    <button type="button" class="btn login-color navbar-btn btn-square" data-toggle="modal" data-target="#myModal" >Login</button>
                     <button type="button" class="btn register-color navbar-btn btn-square" data-toggle="modal" data-target="#myModal2">Sign-up</button>
                 </div>
             </div>
@@ -80,6 +80,7 @@
                             </button>
                         </div>
                     </form>
+                    <div v-if="handledError == 'Invalid Email or Password'">{{handledError}}</div>
                     <h3 class="shadow">Don't have an account yet?
                         <a class="a-pointer" data-toggle="modal" data-target="#myModal2">Click Here to Get Started</a>
                     </h3>
@@ -126,8 +127,19 @@
                                 <input type="password" name="password" maxlength="20" class="form-control" placeholder="password" required v-model='login.password'>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-default btn-square submit-color" @click="submitLogin" data-dismiss="modal" type="submit">Submit</button>
+                                <button class="btn btn-submit btn-default btn-square submit-color" type="submit"@click="submitLogin">Submit</button>
                             </div>
+                            <div v-if="handledError == 'Invalid Email or Password'">
+                                <h4>{{handledError}}</h4>
+                            </div>
+                            <div v-else-if="success == 'successfully logged in'" v-on:mousemove="closeModal()">
+                                <h4>{{success}}</h4>
+                            </div>
+                            <div v-else></div>
+                            <!-- <div class="form-group" v-else>
+                                <button class="btn btn-submit btn-default btn-square submit-color" @click="submitLogin" data-dismiss="modal" type="submit">Submit</button>
+                            </div> -->
+
                         </form>
                     </div>
                     <div class="row">
@@ -493,9 +505,19 @@
             },
             timeZones() {
                 return this.$store.state.timeZones
+            },
+            handledError() {
+                return this.$store.state.error
+            },
+            success(){
+                return this.$store.state.success
             }
         },
         methods: {
+            closeModal(){
+                $("#myModal").modal("hide")
+                this.$store.dispatch('setSuccess')
+            },
             validateZip() {
                 this.validator.zip = (this.event.zip.length == 5)
             },
@@ -513,12 +535,15 @@
                 console.log('validator: ', this.validator)
             },
             submitLogin() {
-
+                debugger
+                this.$store.dispatch('setError')
                 this.$store.dispatch('login', this.login)
                 this.login = {
                     email: '',
                     password: ''
                 }
+                // return this.$store.state.error
+                
             },
             submitRegister() {
                 if (this.signUp.password == this.signUp.rPassword) {
