@@ -535,7 +535,6 @@
                 console.log('validator: ', this.validator)
             },
             submitLogin() {
-                debugger
                 this.$store.dispatch('setError')
                 this.$store.dispatch('login', this.login)
                 this.login = {

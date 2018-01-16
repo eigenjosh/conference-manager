@@ -74,7 +74,6 @@ var store = new vuex.Store({
 
     //HANDLE ERROR
     handleError(state, err) {
-      debugger
       vue.set(state, "error", err)
     },
     setSuccess(state, data){
@@ -209,17 +208,14 @@ var store = new vuex.Store({
       commit('handleError', {})
     },
     login({ commit, dispatch }, payload) {
-      debugger
       auth.post('login', payload)
         .then(res => {
-          debugger
           console.log("successful login")
           commit('setUser', res.data.data)
           commit('setSuccess', res.data.message)
           dispatch('initSocket', res.data.data)
         })
         .catch(err => {
-          debugger
           commit('handleError', err.response.data.message)
         })
     },
