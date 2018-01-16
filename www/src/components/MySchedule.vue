@@ -1,5 +1,5 @@
 <template>
-    <div class="my-schedule container-fluid">
+    <div class="my-schedule container-fluid bg-">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div>
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -61,11 +61,10 @@
         </div>
         <div v-else class="display">
             <div class="row">
-
                 <div class="col-xs-12">
                     <div class="btn-group">
                         <!-- <button type="button" class="btn btn-default">Choose Schedule to View</button> -->
-                        <button type="button" class="btn btn-default-picker dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button type="button" class="btn fe-btn btn-square dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <h3>Choose Schedule to View</h3>
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
@@ -130,19 +129,30 @@
     }
 </script>
 
-<style>
-    .btn-text {
+<style scoped>
+
+    .fe-btn:hover {
+        color: white;
+
+    }
+
+    a {
+        color: white;
+    }
+
+
+    /* .btn-text {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-    }
+    } */
 
     /* .my-schedule {
         background-color: rgba(203, 204, 180, 0.541);
         height: 100vh;
     } */
 
-    .view-all {
+    /* .view-all {
         background-color: rgba(127, 127, 113, 0.746);
         width: 20%;
         color: whitesmoke;
@@ -173,5 +183,5 @@
     .btn-default-picker {
         background-color: lightgray;
         border: black solid 1px;
-    }
+    } */
 </style>

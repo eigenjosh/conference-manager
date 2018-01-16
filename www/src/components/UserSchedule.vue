@@ -65,9 +65,9 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-12 event well" v-if="activeUser.events.includes(activeEvent._id)">
+            <div class="col-xs-12" v-if="activeUser.events.includes(activeEvent._id)">
                 <router-link :to="{path: 'event-schedule/' + activeEvent._id}" class="event-name">
-                    <button class="btn event-name-btn">
+                    <button class="btn fe-btn bot-sp">
                         <h2>{{activeEvent.name}}</h2>
                     </button>
                 </router-link>
@@ -211,9 +211,9 @@
 </script>
 
 <style>
-    .notepad textarea {
+    /* .notepad textarea {
         width: 100%;
-    }
+    } */
 
     /* .date-col{
         padding-left: 40px;
@@ -223,7 +223,7 @@
         color:whitesmoke;
     } */
 
-    .time-col {
+    /* .time-col {
         border-right: 1px solid black;
         border-bottom: 1px solid black;
     }
@@ -261,5 +261,12 @@
 
     .delete-btn {
         margin-bottom: 5px;
+    } */
+
+    .bot-sp {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        /* margin-left: 20px; */
+        /* margin-right: 20px; */
     }
 </style>

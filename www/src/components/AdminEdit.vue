@@ -1,5 +1,5 @@
 <template>
-    <div class="event-schedule">
+    <div class="event-schedule bg-img-ae">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -15,7 +15,7 @@
                         <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive">Confer</a>
                     </router-link>
                     <div class="text-right">
-                        <p class="navbar-text">Welcome {{user.name}}</p>
+                        <!-- <p class="navbar-text">Welcome {{user.name}}</p> -->
                         <button type="button" class="btn logout-color navbar-btn logout-btn btn-square" @click="logout">Logout</button>
                     </div>
                 </div>
@@ -52,83 +52,118 @@
                             </router-link>
                         </li>
                     </ul>
-                    <!-- SEARCH BAR -->
                     <ul class="nav navbar-nav navbar-right">
-                        <!-- LOGIN BUTTON -->
-                        <!-- Trigger the LOGIN modal -->
-                        <!-- Trigger the SIGN UP modal -->
                     </ul>
                 </div>
-                <!-- /.navbar-collapse -->
             </div>
-            <!-- /.container-fluid -->
         </nav>
-        <!-- add new activity modal -->
+
+        <!-- ADD NEW ACTIVITY MODAL -->
         <div id="myModalAdd" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add new Activity</h4>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h1 class="modal-title">Add new Activity</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label for="name">Name:</label>
+                                            <input type="text" name="name" maxlength="70" class="form-control" placeholder="Name" required v-model='activity.name'>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label for="description">Description:</label>
+                                            <textarea type="text" name="description" maxlength="500" class="form-control" rows="5" placeholder="Whats this for?" required
+                                                v-model='activity.description'></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label for="room">Room:</label>
+                                            <input type="text" name="room" class="form-control" maxlength="30" placeholder="Room number" required v-model='activity.location'>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group date">
+                                            <label for="date">Date:</label>
+                                            <input type="date" name="date" class="form-control" placeholder="date" :min="activeEvent.startDate" :max="activeEvent.endDate"
+                                                required v-model='activity.date' @change="validateActivityForm">
+                                            <p class="error-message text-left text-danger" v-if="!this.validator.date">Date must be during the event.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- START TIME -->
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group time">
+                                            <label for="sel1">Start Time</label>
+                                            <select class="form-control" required v-model="activity.startTime" @change="timeClickHandler">
+                                                <option :value="startSlot" v-for="startSlot in timeSlots">{{startSlot}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- END TIME -->
+                                    <div class="col-xs-12">
+                                        <div class="form-group time">
+                                            <label for="sel2">End Time</label>
+                                            <select class="form-control" v-model="activity.endTime" @change="validateActivityForm">
+                                                <option :value="endSlot" v-for="endSlot in timeSlots">{{endSlot}}</option>
+                                            </select>
+                                            <p class="error-message text-left text-danger" v-if="!this.validator.endTime">End time must be later than start time.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label for="capacity">Number of Seats (optional):</label>
+                                            <input type="number" name="capacity" class="form-control" placeholder="Number of Seats Available" v-model='activity.capacity'>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label for="speakerName">Speaker Name:</label>
+                                            <input type="text" name="speakerName" class="form-control" maxlength="30" placeholder="Speaker Name" v-model='activity.speakerName'>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-submit btn-success" @click="addActivity" data-dismiss="modal" type="submit" :disabled="!this.validator.activityForm">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <form class="form">
-                            <div class="form-group">
-                                <label for="name">Name:</label>
-                                <input type="text" name="name" maxlength="70" class="form-control" placeholder="Name" required v-model='activity.name'>
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description:</label>
-                                <textarea type="text" name="description" maxlength="500" class="form-control" rows="5" placeholder="Whats this for?" required
-                                    v-model='activity.description'></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="room">Room:</label>
-                                <input type="text" name="room" class="form-control" maxlength="30" placeholder="Room number" required v-model='activity.location'>
-                            </div>
-                            <div class="form-group date">
-                                <label for="date">Date:</label>
-                                <input type="date" name="date" class="form-control" placeholder="date" :min="activeEvent.startDate" :max="activeEvent.endDate"
-                                    required v-model='activity.date' @change="validateActivityForm">
-                                <p class="error-message text-left text-danger" v-if="!this.validator.date">Date must be during the event.</p>
-                            </div>
-                            <!-- START TIME -->
-                            <div class="form-group time">
-                                <label for="sel1">Start Time</label>
-                                <select class="form-control" required v-model="activity.startTime" @change="timeClickHandler">
-                                    <option :value="startSlot" v-for="startSlot in timeSlots">{{startSlot}}</option>
-                                </select>
-                            </div>
-                            <!-- END TIME -->
-                            <div class="form-group time">
-                                <label for="sel2">End Time</label>
-                                <select class="form-control" v-model="activity.endTime" @change="validateActivityForm">
-                                    <option :value="endSlot" v-for="endSlot in timeSlots">{{endSlot}}</option>
-                                </select>
-                                <p class="error-message text-left text-danger" v-if="!this.validator.endTime">End time must be later than start time.</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="capacity">Number of Seats (optional):</label>
-                                <input type="number" name="capacity" class="form-control" placeholder="Number of Seats Available" v-model='activity.capacity'>
-                            </div>
-                            <div class="form-group">
-                                <label for="speakerName">Speaker Name:</label>
-                                <input type="text" name="speakerName" class="form-control" maxlength="30" placeholder="Speaker Name" v-model='activity.speakerName'>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-submit btn-success" @click="addActivity" data-dismiss="modal" type="submit" :disabled="!this.validator.activityForm">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
 
+                </div>
             </div>
         </div>
+
+
+        <!-- EDIT ACTIVITY MODAL -->
+
         <div id="myModalDetails" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
@@ -183,8 +218,8 @@
                                 <textarea type="text" maxlength="30" name="speakerName" class="form-control" placeholder="Speaker Name" v-model='activity.speakerName'>{{activeActivity.speakerName}}</textarea>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" @click="editActivity" data-dismiss="modal" type="submit" :disabled="!this.validator.activityForm">Save Changes</button>
-                                <button class="btn btn-danger" data-dismiss="modal" @click="deleteActivity" :disabled="!this.validator.activityForm">Delete</button>
+                                <button class="btn fe-btn btn-square" @click="editActivity" data-dismiss="modal" type="submit" :disabled="!this.validator.activityForm">Save Changes</button>
+                                <button class="btn logout-color btn-square" data-dismiss="modal" @click="deleteActivity" :disabled="!this.validator.activityForm">Delete Activity</button>
                             </div>
                         </form>
                     </div>
@@ -197,7 +232,8 @@
         </div>
 
 
-        <!-- EDIT EVENT STUFF -->
+        <!-- EDIT EVENT MODAL -->
+
         <div id="myModal3" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
@@ -205,7 +241,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Edit Event</h4>
+                        <h1 class="modal-title">Edit Event</h1>
 
                     </div>
                     <div class="modal-body">
@@ -264,7 +300,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" data-dismiss="modal" @click="editEvent" type="submit" :disabled="!this.validator.eventForm">Edit Event</button>
+                                <button class="btn btn-submit btn-square btn-lg fe-btn" data-dismiss="modal" @click="editEvent" type="submit" :disabled="!this.validator.eventForm">Edit Event</button>
                             </div>
                         </form>
                     </div>
@@ -276,6 +312,8 @@
             </div>
         </div>
 
+        <!-- ADD COLLABORATOR MODAL -->
+
         <div id="addCollab" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
@@ -283,7 +321,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add Collab Team</h4>
+                        <h4 class="modal-title">Add Collaborators To Help Build Event</h4>
                     </div>
                     <div class="modal-body">
                         <form id="collabs" class="form">
@@ -293,11 +331,11 @@
                                 </h4>
                             </div>
                             <div class="form-group">
-                                <label for="email">Collab Email Address:</label>
+                                <label for="email">Collaborator's Email Address:</label>
                                 <input type="email" maxlength="57" name="email" class="form-control" placeholder="Email" required v-model='collab.email'>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-submit btn-success" @click="addCollab" type="submit">Submit</button>
+                                <button class="btn btn-submit btn-square btn-lg fe-btn" @click="addCollab" type="submit">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -310,32 +348,32 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-12 well main-headline" data-toggle="modal" data-target="#myModal3" @click="eventFormClickHandler">
-                    <h1 style="font-size: 80px">{{activeEvent.name}}</h1>
-                    <i class="fa fa-pencil fa-1x " aria-hidden="true"> Click to Edit Event Details</i>
+                <div class="col-xs-12 main-headline" data-toggle="modal" data-target="#myModal3" @click="eventFormClickHandler">
+                    <h1 class="bottom-sp">{{activeEvent.name}}</h1>
+                    <a class="a-pointer fe-btn bottom-sp" aria-hidden="true"> Click to Edit Event Details</a>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12">
-                    <div class="col-xs-3">
-                        <button class="btn btn-default admin-edit-btn" data-toggle="modal" data-target="#myModalAdd" @click="validateActivityForm">Add Activity</button>
-                    </div>
-                    <div class="col-xs-3">
-                        <button v-if="!activeEvent.published" class="btn btn-default admin-edit-btn" @click="publish" data-toggle="tooltip" data-placement="top"
-                            title="Publish event so others can see it!">Publish</button>
-                        <button v-else="activeEvent.published" class="btn btn-default admin-edit-btn" @click="unPublish" data-toggle="tooltip" data-placement="top"
-                            title="Only you can see Private events!">Make Private</button>
-                    </div>
-                    <div class="col-xs-3">
-                        <router-link :to="{path: '/event-schedule/' + activeEvent._id}">
-                            <button class="btn btn-default admin-edit-btn" @click="setActiveEvent(event)">Go To Event Page</button>
-                        </router-link>
-                    </div>
-                    <div class="col-xs-3">
-                        <button class="btn btn-danger delete-admin-edit-btn" @click="deleteEvent">Delete Event</button>
-                    </div>
-                    <div class="col-xs-3" v-if="user._id == activeEvent.creatorId">
-                        <button class="btn btn-default admin-edit-btn" data-toggle="modal" data-target="#addCollab">Edit Collaborators</button>
+                <div class="col-xs-12 col-md-3">
+                    <button class="btn fe-btn btn-square" data-toggle="modal" data-target="#myModalAdd" @click="validateActivityForm">Add Activity</button>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                    <button v-if="!activeEvent.published" class="btn fe-btn btn-square" @click="publish" data-toggle="tooltip" data-placement="top"
+                        title="Publish event so others can see it!">Publish</button>
+                    <button v-else="activeEvent.published" class="btn fe-btn btn-square" @click="unPublish" data-toggle="tooltip" data-placement="top"
+                        title="Only you can see Private events!">Make Private</button>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                    <router-link :to="{path: '/event-schedule/' + activeEvent._id}">
+                        <button class="btn fe-btn btn-square" @click="setActiveEvent(event)">Go To Event Page</button>
+                    </router-link>
+                </div>
+                <div class="col-xs-12 col-md-3" v-if="user._id == activeEvent.creatorId">
+                    <button class="btn fe-btn btn-square" data-toggle="modal" data-target="#addCollab">Edit Collaborators</button>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button class="btn logout-color btn-square bottom-sp" @click="deleteEvent">Delete Event</button>
                     </div>
                 </div>
             </div>
@@ -353,7 +391,7 @@
                                 <button data-toggle="modal" data-target="#myModalDetails" @click="activityFormClickHandler(activity)" class="btn btn-primary activities">
                                     <h5>{{formatDateForDisplay(activity.date)}} {{activity.startTime}} - {{activity.endTime}}</h5>
                                     <h4>{{activity.name}}</h4>
-                                    <i class="fa fa-pencil fa-1x pull-right" aria-hidden="true" @click="validateActivityForm"> Click to Edit Activity</i>
+                                    <a class="a-pointer" aria-hidden="true" @click="validateActivityForm"> Click to Edit Activity</a>
                                 </button>
                             </div>
                         </div>
@@ -572,7 +610,22 @@
 </script>
 
 <style>
-    .activities {
+    .bottom-sp {
+        margin-bottom: 50px;
+        margin-top: 50px;
+    }
+
+    .bg-img-ae {
+        background-image: url('../assets/light-bg.jpeg');
+        position: relative;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        
+    }
+   
+    /* .activities {
         width: 100%;
     }
 
@@ -595,5 +648,5 @@
         width: 75%;
         margin-bottom: 5px;
         border: black solid 1px;
-    }
+    } */
 </style>
