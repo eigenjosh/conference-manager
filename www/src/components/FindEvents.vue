@@ -15,7 +15,7 @@
                         <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive">Confer</a>
                     </router-link>
                     <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
-                        <p class="navbar-text">Welcome {{activeUser.name}}</p>
+                        <!-- <p class="navbar-text">Welcome {{activeUser.name}}</p> -->
                         <button type="button" class="btn create-color navbar-btn btn-square" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
                         <button type="button" class="btn logout-color navbar-btn logout-btn btn-square" @click="logout">Logout</button>
                     </div>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            <div v-for="event in events" class="row event-row">
+            <div v-for="event in events" class="row">
                 <event :event="event"></event>
             </div>
         </div>
@@ -247,14 +247,14 @@
                                         <div class="row">
                                             <div class="col-xs-offset-3 col-xs-6 col-xs-offset-3 xs-modal-space">
                                                 <label for="address">Address:</label>
-                                                <input type="text" name="address" class="form-control" maxlength="75" placeholder="Venue Address" v-model="event.address"
+                                                <input type="text" name="address" class="form-control" maxlength="50" placeholder="Venue Address" v-model="event.address"
                                                     required>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-offset-3 col-xs-4 xs-modal-space">
                                                 <label for="city">City:</label>
-                                                <input type="text" name="city" class="form-control" maxlength="75" placeholder="Venue City" v-model="event.city" required>
+                                                <input type="text" name="city" class="form-control" maxlength="20" placeholder="Venue City" v-model="event.city" required>
                                             </div>
 
                                             <div class="col-xs-3 state xs-modal-space">

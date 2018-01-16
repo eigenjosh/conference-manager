@@ -15,7 +15,7 @@
                         <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive">Confer</a>
                     </router-link>
                     <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
-                        <p class="navbar-text">Welcome {{activeUser.name}}</p>
+                        <!-- <p class="navbar-text">Welcome {{activeUser.name}}</p> -->
                         <button type="button" class="btn logout-color navbar-btn logout-btn btn-square" @click="logout">Logout</button>
                     </div>
                     <div class="text-right" v-else>
@@ -193,7 +193,7 @@
                     <div v-if="activeUser && activeUser.events">
                         <div v-if="activeUser.events.includes(activeEvent._id)">
                             <button v-if="!activeUser.activities.includes(activeActivity._id) && (activeActivity.capacity > 0 || !activeActivity.capacity)"
-                                @click="addToMySchedule" class="btn btn-primary add-btn">Add to My Schedule</button>
+                                @click="addToMySchedule" class="btn fe-btn btn-square bottom-sp">Add to My Schedule</button>
                             <h4 class="danger-text" v-else-if="activeActivity.capacity == 0 && activeActivity.capacity">Activity Full</h4>
                         </div>
                         <div v-if="activeUser.activities.includes(activeActivity._id)">
@@ -209,9 +209,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
-                    <h1 class="main-headline" style="font-size: 80px">{{activeEvent.name}}</h1>
+                    <h1 class="main-headline">{{activeEvent.name}}</h1>
                 </div>
-                <div class="col-xs-12 bottom-space">
+                <div class="col-xs-12">
                     <img :src="activeEvent.logo" style="background-image: url(activeEvent.logo)">
                 </div>
                 <div class="col-xs-12 col-md-offset-3 col-md-6 desc-style">
@@ -226,33 +226,28 @@
             <div class="row">
                 <div class="col-xs-12">
                     <h2>
-                        Venue:
                         <b>{{activeEvent.venue}}</b>
                     </h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <h3>Address:    {{activeEvent.address}}</h3>
+                    <h3>{{activeEvent.address}}</h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    City, State:
-                    <h3>{{activeEvent.city}}</h3>,
-                    <h3>{{activeEvent.state}}</h3>
+                    <h3>{{activeEvent.city}}, {{activeEvent.state}}</h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    Zip Code:
                     <h4>{{activeEvent.zip}}</h4>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    Time Zone:
-                    <h5>Time Zone: {{activeEvent.timeZone}}</h5>
+                    <h5>{{activeEvent.timeZone}} Time Zone</h5>
                 </div>
             </div>
             <div v-if="activeUser && activeUser.events">
@@ -263,10 +258,10 @@
                 </div>
                 <div class="col-xs-12 col-sm-offset-4 col-sm-4" v-else>
                     <router-link :to="{path: '/admin-edit/' + activeEvent._id}">
-                        <button class="btn btn-lg fe-btn bottom-spacer">Edit Schedule</button>
+                        <button class="btn fe-btn bottom-spacer">Edit Event</button>
                     </router-link>
                     <router-link :to="{name: 'mySchedule'}">
-                        <button class="btn btn-lg fe-btn bottom-spacer">View My Schedule</button>
+                        <button class="btn fe-btn bottom-spacer">View My Schedule</button>
                     </router-link>
                 </div>
             </div>
@@ -446,10 +441,6 @@
         background-repeat: no-repeat;
         background-size: cover;
         min-height: 1000px;
-    }
-
-    .bottom-space {
-        padding-bottom: 50px;
     }
 
     .desc-style {

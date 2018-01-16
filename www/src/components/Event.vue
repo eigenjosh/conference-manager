@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <router-link :to="{path: 'event-schedule/' + event._id}">
-                    <button class="btn lt-btn event-btn word-wrap" @click="setActiveEvent(event)">
+                    <button class="lt-btn event-btn word-wrap" @click="setActiveEvent(event)">
                         <div class="col-xs-12">
                             <h1>{{event.name}}</h1>
                         </div>

@@ -81,8 +81,8 @@
   .activities {
     margin-top: 5px;
     margin-bottom: 5px;
-    background-color: lightslategrey;
-    color: white;
+    background-color: white;
+    color: black;
   }
 
   .event-name-btn {
@@ -274,7 +274,7 @@
     box-shadow: 1px 1px 1px 1px white;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: 601px) {
     .lt-btn {
       background-color: white;
       color: black;
@@ -292,7 +292,7 @@
     }
   }
 
-  @media (max-width: 601px) {
+  @media (max-width: 600px) {
     .lt-btn {
       background-color: white;
       color: black;
