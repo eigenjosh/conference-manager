@@ -484,19 +484,19 @@ hr {
 }
 .multi-text-one {
         padding-top: 100px;
-        padding-bottom: 50px;
+        /* padding-bottom: 50px; */
 }
 .multi-text-two {
         padding-top: 75px;
-        padding-bottom: 50px;
+        /* padding-bottom: 50px; */
 }
 .multi-text-three {
         padding-top: 60px;
-        padding-bottom: 50px;
+        /* padding-bottom: 50px; */
 }
 .multi-text-four {
         padding-top: 70px;
-        padding-bottom: 50px;
+        /* padding-bottom: 50px; */
 }
 .login-field {
         margin-top: 50px;
@@ -1455,4 +1455,4 @@ a[data-v-edc2fcca] {
     border: black solid 1px;
 } */
 
-/*# sourceMappingURL=app.2acf7ee3ed861a8fc2231cc96377c58f.css.map*/
+/*# sourceMappingURL=app.22ea9a375026ab63a24bc5696be0fa65.css.map*/
