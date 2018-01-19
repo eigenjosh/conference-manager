@@ -392,7 +392,7 @@
                     <h4> You may edit your event at any time, whether in private or published modes</h4>
                 </div>
             </div>
-            <div class="row spacer space-text">
+            <div class="row space-text">
                 <div class="col-md-12 col-lg-offset-1 col-lg-4 multi-text-three">
                     <h4>Add collaborators to help edit your event, and allow speakers to edit their own activities</h4>
                     <br>
@@ -806,22 +806,22 @@
 
         .multi-text-one {
             padding-top: 100px;
-            padding-bottom: 50px;
+            /* padding-bottom: 50px; */
         }
 
         .multi-text-two {
             padding-top: 75px;
-            padding-bottom: 50px;
+            /* padding-bottom: 50px; */
         }
 
         .multi-text-three {
             padding-top: 60px;
-            padding-bottom: 50px;
+            /* padding-bottom: 50px; */
         }
 
         .multi-text-four {
             padding-top: 70px;
-            padding-bottom: 50px;
+            /* padding-bottom: 50px; */
         }
 
         .login-field {

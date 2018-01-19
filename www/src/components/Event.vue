@@ -13,10 +13,6 @@
                         <div class="col-xs-12">
                             <h3>{{formatDateForDisplay(event.startDate)}} - {{formatDateForDisplay(event.endDate)}}</h3>
                         </div>
-                        <!-- <h3>{{event.description}}</h3> -->
-                        <!-- <h3>{{event.venue}}</h3> -->
-                        <!-- <h5>{{event.address}}</h5> -->
-                        <!-- <h5>{{event.city}}, {{event.state}}--{{event.timeZone}}</h5> -->
                         <div class="col-xs-12">
                             <h6>Created
                                 <timeago :since="event.created"></timeago>
