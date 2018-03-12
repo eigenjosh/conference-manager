@@ -69,9 +69,6 @@ var store = new vuex.Store({
         state.activeNote = {},
         state.adminEvents = []
     },
-
-
-
     //HANDLE ERROR
     handleError(state, err) {
       vue.set(state, "error", err)
@@ -101,10 +98,8 @@ var store = new vuex.Store({
         }
       })
       state.schedule = schedule
-
     },
     //SET MYSCHEDULE
-
     setUserSchedule(state, activities) {
       console.log("setUserSched", activities)
       var schedule = {}
@@ -127,20 +122,15 @@ var store = new vuex.Store({
         }
       })
       state.userSchedule = schedule
-
     },
-
-
     //SET EVENTS
     addOrUpdateEvent(state, data) {
-      
       var i = state.events.findIndex(e => e._id == data.event._id)
       if (i > -1) {
        vue.set(state.events, i, data.event)
       }else{
         state.events.push(data.event)
       }
-
     },
     removeEvent(state, data){
       for(var i=0; i< state.events.length; i++){
@@ -183,10 +173,8 @@ var store = new vuex.Store({
     setUserNotes(state, data) {
       state.userNotes = data
     },
-
     // SET ACTIVE NOTE
     setActiveNote(state, note) {
-
       state.activeNote = {}
       state.activeNote = note
     },
@@ -194,12 +182,9 @@ var store = new vuex.Store({
       console.log()
       state.adminEvents = data
     }
-
   },
   actions: {
-
     //***LOGIN AND REGISTER***
-
     //LOGIN
     setSuccess({commit, dispatch}){
       commit('setSuccess', {})
@@ -219,11 +204,8 @@ var store = new vuex.Store({
           commit('handleError', err.response.data.message)
         })
     },
-
     //REGISTER
-
     register({ commit, dispatch }, payload) {
-
       auth.post('register', payload)
         .then(res => {
           commit('setUser', res.data.data)
@@ -233,49 +215,37 @@ var store = new vuex.Store({
           { commit('handleError', err) }
         })
     },
-
     //AUTHENTICATE
-
     authenticate({ commit, dispatch }) {
       auth('authenticate')
         .then(res => {
           commit('setUser', res.data.data)
           dispatch('initSocket', res.data.data)
-
         })
         .catch((err) => {
           commit('handleError', err)
         })
     },
-
     //LOGOUT
-
     logout({ commit, dispatch }) {
       auth.delete('logout')
         .then((user) => {
           user = {}
-
           commit('setUser', user)
           commit('resetState')
           router.push({ name: 'Home' })
         })
     },
-
     //*** EVENTS/ACTIVITIES ***/
-
     //GET ALL EVENTS
-
     getAllEvents({ commit, dispatch }) {
       api('/find-events')
         .then(res => {
           commit('setEvents', res.data.data)
         })
     },
-
     //GET ACTIVITIES BY EVENT ID
-
     getActivities({ commit, dispatch }, payload) {
-
       api('/events/' + payload._id + '/activities')
         .then(res => {
           commit('setSchedule', res.data.data)
@@ -284,9 +254,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
     //GET EVENTS BY LOCATION
-
     findEvents({ commit, dispatch }, location) {
       api(`/find-events/${location}`)
         .then(res => {
@@ -297,9 +265,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
     //GET MY EVENTS (USER)
-
     getMyEvents({ commit, dispatch }) {
       api(`/user-events`)
         .then(res => {
@@ -310,9 +276,7 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
     getMyActivities({ commit, dispatch }) {
-      
       api(`/user-activities`)
         .then(res => {
           console.log('res to getMyActivities: ', res)
@@ -322,11 +286,8 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
     // CREATE NEW EVENT
-
-    createEvent({ commit, dispatch }, payload) {
-      
+    createEvent({ commit, dispatch }, payload) { 
       api.post('events/', payload.event)
         .then(res => {
           console.log('res to create event: ', res.data.data)
@@ -383,10 +344,8 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
     // GET EVENT BY ID
     getEventById({ commit, dispatch }, event) {
-
       api('events/' + event._id)
         .then(res => {
           commit('setActiveEvent', res.data.data)
@@ -397,7 +356,6 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
     // GET ADMIN EVENT BY ID
     getAdminEventById({ commit, dispatch }, event) {
       api('admin-events/' + event._id)
@@ -413,7 +371,6 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
     // ADD ACTIVITY
     addActivity({ commit, dispatch }, payload) {
       payload.activity.eventId = payload.eventId
@@ -430,7 +387,6 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
     addToMySchedule({ commit, dispatch }, payload) {
       payload.user.activities.push(payload.activity._id)
       api.put('/user-activities', payload.user)
@@ -445,13 +401,11 @@ var store = new vuex.Store({
         .catch(err => {
           commit('handleError', err)
         })
-
     },
     editEvent({ commit, dispatch }, payload) {
       api.put('events/' + payload.event._id, payload.event)
         .then(res => {
-          commit('setActiveEvent', payload.event)
-          
+          commit('setActiveEvent', payload.event)  
           if (payload.emit) {
             payload.mutation = 'addOrUpdateEvent' 
             dispatch('emitData', payload)
@@ -462,7 +416,6 @@ var store = new vuex.Store({
         })
     },
     editActivity({ commit, dispatch }, payload) {
-      
       api.put('activities/' + payload.activity._id, payload.activity)
         .then(res => {
           commit('setActiveActivity', payload.activity)
@@ -478,10 +431,8 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
     // CREATE NOTE
     createNote({ commit, dispatch }, note) {
-
       api.post('notes', note)
         .then(res => {
           console.log(res)
@@ -492,7 +443,6 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
     // GET ALL USER NOTES
     getAllUserNotes({ commit, dispatch }) {
       api.get('user-notes')
@@ -501,7 +451,6 @@ var store = new vuex.Store({
           commit('setUserNotes', res.data.data)
         })
     },
-
     //UPDATE NOTE
     updateNote({ commit, dispatch }, note) {
       api.put('notes/' + note._id, note)
@@ -513,10 +462,8 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
     // GET NOTE BY NOTE ID
     getNotebyNoteId({ commit, dispatch }, note) {
-
       api('notes/' + note._id)
         .then(res => {
           commit('setActiveNote', res.data.data)
@@ -536,7 +483,6 @@ var store = new vuex.Store({
         })
     },
     deleteActivity({ commit, dispatch }, payload) {
-
       api.delete('activities/' + payload.activity._id)
         .then(res => {
           console.log("delete request:", res)
@@ -564,7 +510,6 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
     getMySchedule({ commit, dispatch }, event) {
       api('/user-events/' + event._id + '/activities')
         .then(res => {
@@ -576,11 +521,8 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
     //VARIOUS DELETES
-
-    deleteEvent({ commit, dispatch }, payload) {
-      
+    deleteEvent({ commit, dispatch }, payload) { 
       api.delete('events/' + payload.event._id)
         .then(res => {
           console.log('res to delete event: ', res.data.data)
@@ -614,7 +556,6 @@ var store = new vuex.Store({
           commit('handleError', err)
         })
     },
-
     getCreatedEvents({ commit, dispatch }) {
       api('/admin-events')
         .then(res => {
@@ -652,19 +593,15 @@ var store = new vuex.Store({
             dispatch('emitData', payload)
           }
         })
-
         .catch(err => {
           commit('handleError', err)
         })
     },
-
     //HANDLE ERROR
     handleError({ commit, dispatch }, err) {
       commit('handleError', err)
     }
-
   }
-
 })
 
 

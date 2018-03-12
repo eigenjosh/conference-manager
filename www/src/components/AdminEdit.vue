@@ -2,7 +2,6 @@
     <div class="event-schedule bg-img-ae">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
                         aria-expanded="false">
@@ -15,7 +14,6 @@
                         <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive">Confer</a>
                     </router-link>
                     <div class="text-right">
-                        <!-- <p class="navbar-text">Welcome {{user.name}}</p> -->
                         <button type="button" class="btn logout-color navbar-btn logout-btn btn-square" @click="logout">Logout</button>
                     </div>
                 </div>
@@ -160,8 +158,6 @@
                 </div>
             </div>
         </div>
-
-
         <!-- EDIT ACTIVITY MODAL -->
 
         <div id="myModalDetails" class="modal fade" role="dialog">
@@ -230,8 +226,6 @@
 
             </div>
         </div>
-
-
         <!-- EDIT EVENT MODAL -->
 
         <div id="myModal3" class="modal fade" role="dialog">
@@ -311,7 +305,6 @@
 
             </div>
         </div>
-
         <!-- ADD COLLABORATOR MODAL -->
 
         <div id="addCollab" class="modal fade" role="dialog">
@@ -443,7 +436,6 @@
                 collab: {
                     email: "",
                 }
-
             }
         },
         mounted() {
@@ -614,7 +606,6 @@
         margin-bottom: 50px;
         margin-top: 50px;
     }
-
     .bg-img-ae {
         background-image: url('../assets/light-bg.jpeg');
         position: relative;
@@ -624,29 +615,4 @@
         background-size: cover;
         
     }
-   
-    /* .activities {
-        width: 100%;
-    }
-
-    .time {
-        width: 100px;
-    }
-
-    .date {
-        width: 250px;
-    }
-
-    .admin-edit-btn {
-        width: 75%;
-        margin-bottom: 5px;
-        background-color: lightgray;
-        border: black solid 1px;
-    }
-
-    .delete-admin-edit-btn {
-        width: 75%;
-        margin-bottom: 5px;
-        border: black solid 1px;
-    } */
 </style>

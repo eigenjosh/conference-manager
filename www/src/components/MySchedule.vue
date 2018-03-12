@@ -2,7 +2,6 @@
     <div class="my-schedule container-fluid bg-img-9">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div>
-                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
                         aria-expanded="false">
@@ -24,7 +23,6 @@
 
                 <!-- MENU DROPDOWN -->
                 <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
-
                     <ul>
                         <li>
                             <router-link :to="{name:'Home'}">
@@ -54,7 +52,6 @@
         </nav>
 
         <h1 style="font-size: 80px" class="main-headline">My Schedule</h1>
-        <!-- <button class="btn view-all" @click="getMyActivities">View All Activities</button> -->
         <div v-if="myEvents.length == 0" class="header">
             <h3>Looks like you have not added any activities to your schedule yet! Join an event and click "add to my schedule"
                 to see them here!</h3>
@@ -63,7 +60,6 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="btn-group">
-                        <!-- <button type="button" class="btn btn-default">Choose Schedule to View</button> -->
                         <button type="button" class="btn fe-btn btn-square dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <h3>Choose Schedule to View</h3>
                             <span class="caret"></span>
@@ -103,9 +99,6 @@
             myEvents() {
                 return this.$store.state.myEvents
             },
-            // activeEvent() {
-            //     return this.$store.state.activeEvent
-            // }
         },
         mounted() {
             this.$store.dispatch('getMyEvents')
@@ -130,61 +123,12 @@
 </script>
 
 <style scoped>
-
     .fe-btn:hover {
         color: white;
-
     }
-
     a {
         color: white;
     }
-
-
-    /* .btn-text {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    } */
-
-    /* .my-schedule {
-        background-color: rgba(203, 204, 180, 0.541);
-        height: 100vh;
-    } */
-
-    /* .view-all {
-        background-color: rgba(127, 127, 113, 0.746);
-        width: 20%;
-        color: whitesmoke;
-        margin-bottom: 5px;
-    }
-
-    .btn-event {
-        background-color: rgba(127, 127, 113, 0.746);
-        color: whitesmoke;
-        width: 100%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .navbar {
-        background: black;
-        font: white;
-    }
-
-    .nav-drop-btn {
-        width: 90%;
-        background-color: #FFFFF9;
-        margin: 2px;
-        font: black;
-    }
-
-    .btn-default-picker {
-        background-color: lightgray;
-        border: black solid 1px;
-    } */
-
     .bg-img-9 {
         background-image: url('../assets/light-bg.jpeg');
         position: relative;

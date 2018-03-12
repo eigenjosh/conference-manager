@@ -5,7 +5,6 @@
 
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
                         aria-expanded="false">
@@ -26,7 +25,6 @@
 
                 <!-- MENU DROWDOWN -->
                 <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
-
                     <ul>
                         <li>
                             <router-link :to="{name:'Home'}">
@@ -43,20 +41,16 @@
                                 <button type="button" class="btn btn-default nav-drop-btn">Find Events</button>
                             </router-link>
                         </li>
-
                         <li>
                             <router-link :to="{name:'mySchedule'}">
                                 <button type="button" class="btn btn-default nav-drop-btn">My Schedule</button>
                             </router-link>
                         </li>
-
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                     </ul>
                 </div>
-                <!-- /.navbar-collapse -->
             </div>
-            <!-- /.container-fluid -->
         </nav>
 
         <!-- END OF NAVBAR -->
@@ -164,7 +158,6 @@
         },
         mounted() {
             this.$store.dispatch('getAllUserNotes', this.note.creatorId)
-
         },
         computed: {
             activeUser() {
@@ -176,7 +169,6 @@
             activeNote() {
                 return this.$store.state.activeNote
             },
-
         },
         methods: {
             logout() {
@@ -207,21 +199,17 @@
     .row {
         text-align: center;
     }
-
     .container {
         text-align: center;
     }
-
     .title-head {
         text-align: center;
     }
-
     .note-btn {
         background-color: lightgray;
         width: 50%;
         margin-bottom: 5px;
     }
-
     .nav-btn-defaults {
         width: 15%;
     }

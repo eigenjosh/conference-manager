@@ -2,7 +2,6 @@
     <div class="bg-img-8">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
                         aria-expanded="false">
@@ -19,12 +18,10 @@
                         <button type="button" class="btn create-color navbar-btn btn-square" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
                         <button type="button" class="btn logout-color navbar-btn logout-btn btn-square" @click="logout">Logout</button>
                     </div>
-                    <!-- Trigger the SIGN UP modal -->
                 </div>
 
                 <!-- MENU DROPDOWN -->
                 <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
-
                     <ul>
                         <li>
                             <router-link :to="{name: 'Home'}">
@@ -147,7 +144,6 @@
                                             <div class="col-xs-offset-3 col-xs-6 col-xs-offset-3">
                                                 <label for="zip">Zip Code:</label>
                                                 <input type="number" name="zip" maxlength="5" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
-                                                <!-- <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p> -->
                                             </div>
                                         </div>
                                     </div>
@@ -160,9 +156,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-offset-3 col-xs-6">
-                            <!-- <div class="modal-footer"> -->
                             <button type="button" class="btn btn-default btn-square" data-dismiss="modal">Close</button>
-                            <!-- </div> -->
                         </div>
                     </div>
                 </div>
@@ -271,10 +265,8 @@
                         endDate: ''
                     }
                 }
-
             }
         }
-
     }
 </script>
 

@@ -2,7 +2,6 @@
     <div class="find-events bg-img">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
                         aria-expanded="false">
@@ -15,7 +14,6 @@
                         <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive">Confer</a>
                     </router-link>
                     <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
-                        <!-- <p class="navbar-text">Welcome {{activeUser.name}}</p> -->
                         <button type="button" class="btn create-color navbar-btn btn-square" data-toggle="modal" data-target="#myModal3" @click="validateForm">Create Event</button>
                         <button type="button" class="btn logout-color navbar-btn logout-btn btn-square" @click="logout">Logout</button>
                     </div>
@@ -86,8 +84,6 @@
                 <event :event="event"></event>
             </div>
         </div>
-
-
         <!-- LOGIN MODAL -->
 
         <div id="myModal" class="modal fade" role="dialog">
@@ -123,9 +119,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-offset-3 col-xs-6">
-                            <!-- <div class="modal-footer"> -->
                             <button type="button" class="btn btn-default btn-square" data-dismiss="modal">Close</button>
-                            <!-- </div> -->
                         </div>
                     </div>
                 </div>
@@ -133,7 +127,6 @@
         </div>
 
         <!-- SIGN UP MODAL -->
-
         <div id="myModal2" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
@@ -180,7 +173,6 @@
 
             </div>
         </div>
-
         <!-- CREATE NEW EVENT MODAL -->
 
         <div id="myModal3" class="modal fade" role="dialog">
@@ -197,7 +189,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="modal-body">
                             <form id="createEvent" class="form">
                                 <div class="form-group">
@@ -275,7 +266,6 @@
                                             <div class="col-xs-offset-3 col-xs-6 col-xs-offset-3">
                                                 <label for="zip">Zip Code:</label>
                                                 <input type="number" name="zip" maxlength="5" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
-                                                <!-- <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p> -->
                                             </div>
                                         </div>
                                     </div>
@@ -288,15 +278,12 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-offset-3 col-xs-6">
-                            <!-- <div class="modal-footer"> -->
                             <button type="button" class="btn btn-default btn-square" data-dismiss="modal">Close</button>
-                            <!-- </div> -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -437,7 +424,6 @@
                         endDate: ''
                     }
                 }
-
             }
         }
     }

@@ -16,7 +16,6 @@
                         <h4 v-if="activeActivity.capacity"> Seats Available: {{activeActivity.capacity}}</h4>
                         <h4>Speaker: {{activeActivity.speakerName}}</h4>
                         <h4>{{activeActivity.description}}</h4>
-                        <!-- <h4>Seats Available: {{activeActivity.capacity}}</h4> -->
                     </div>
                     <div>
                         <button v-if="isCreated" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#notepad" @click="setActiveNote">Edit My Note</button>
@@ -32,7 +31,6 @@
                                 <button data-dismiss="modal" @click="removeActivity">Remove Activity from My Schedule</button>
                             </ul>
                         </div>
-                        <!-- <button class="btn btn-danger" @click="removeActivity" data-dismiss="modal">Remove from Schedule</button> -->
                     </div>
                 </div>
 
@@ -142,8 +140,6 @@
             activeUser() {
                 return this.$store.state.activeUser
             }
-
-
         },
         mounted() {
             this.$store.dispatch('getAllUserNotes', this.note.creatorId)
@@ -202,71 +198,13 @@
                     this.$store.dispatch('removeFromMyEvents', { user: this.activeUser, event: this.activeEvent, userSchedule: this.userSchedule })
                 }
             }
-
-
-
         },
-
     }
 </script>
 
 <style>
-    /* .notepad textarea {
-        width: 100%;
-    } */
-
-    /* .date-col{
-        padding-left: 40px;
-        border-bottom: 1px solid #7F7F71;
-        border-top: 1px solid #7F7F71;
-        background: #7F7F71;
-        color:whitesmoke;
-    } */
-
-    /* .time-col {
-        border-right: 1px solid black;
-        border-bottom: 1px solid black;
-    }
-
-    .well:hover .remove {
-        display: inline-block;
-    }
-
-    .remove {
-        display: none;
-    }
-
-    .event {
-        height: 130px;
-    }
-
-    .event button {
-        margin-right: 20px;
-    }
-
-    .well {
-        margin-top: 5px;
-        background-color: rgba(203, 204, 180, 0);
-        border-top: 1px solid #CBCCB4;
-    }
-
-    .well h2 {
-        color: whitesmoke;
-    }
-
-    .event-name:hover {
-        text-decoration: none;
-        text-shadow: 0px 0px 15px #7F7F7F
-    }
-
-    .delete-btn {
-        margin-bottom: 5px;
-    } */
-
     .bot-sp {
         margin-top: 50px;
         margin-bottom: 50px;
-        /* margin-left: 20px; */
-        /* margin-right: 20px; */
     }
 </style>

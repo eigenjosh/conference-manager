@@ -2,7 +2,6 @@
     <div class="event-schedule sec-bg-img">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
                         aria-expanded="false">
@@ -15,7 +14,6 @@
                         <a class="navbar-brand" style="font-family: 'Abril Fatface', cursive">Confer</a>
                     </router-link>
                     <div class="text-right" v-if="activeUser.hasOwnProperty('name')">
-                        <!-- <p class="navbar-text">Welcome {{activeUser.name}}</p> -->
                         <button type="button" class="btn logout-color navbar-btn logout-btn btn-square" @click="logout">Logout</button>
                     </div>
                     <div class="text-right" v-else>
@@ -60,7 +58,6 @@
                 </div>
             </div>
         </nav>
-
         <!-- LOGIN MODAL -->
 
         <div id="myModal" class="modal fade" role="dialog">
@@ -89,15 +86,12 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-offset-3 col-xs-6">
-                            <!-- <div class="modal-footer"> -->
                             <button type="button" class="btn btn-default btn-square" data-dismiss="modal">Close</button>
-                            <!-- </div> -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <!-- SIGN UP MODAL -->
 
         <div id="myModal2" class="modal fade" role="dialog">
@@ -114,7 +108,6 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <!-- <form id="register" class="form"> -->
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-xs-6 modal-space">
@@ -162,9 +155,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-offset-3 col-xs-6">
-                            <!-- <div class="modal-footer"> -->
                             <button type="button" class="btn btn-default btn-square" data-dismiss="modal">Close</button>
-                            <!-- </div> -->
                         </div>
                     </div>
                 </div>
@@ -291,8 +282,6 @@
             </div>
         </div>
     </div>
-
-
     </div>
 </template>
 
@@ -345,8 +334,6 @@
             activeActivity() {
                 return this.$store.state.activeActivity
             },
-
-
         },
         methods: {
             formatDateForDisplay(date) {
@@ -398,41 +385,6 @@
 </script>
 
 <style>
-    /* .activities {
-        width: 100%;
-    }
-
-    .danger-text {
-        color: red;
-    }
-
-    .success-text {
-        color: blue;
-    }
-
-    .description {
-        width: 50%;
-    }
-
-    .join-btn {
-        background-color: lightgray;
-        color: black;
-        margin-bottom: 10px;
-    }
-
-    .bottom-buffer {
-        margin-bottom: 50px;
-    }
-
-    .add-btn {
-        margin-bottom: 5px;
-    }
-
-    .logo {
-        height: 200px;
-        width: 200px;
-    } */
-
     .sec-bg-img {
         background-image: url('../assets/light-bg.jpeg');
         position: relative;

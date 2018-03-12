@@ -39,20 +39,16 @@ export default {
                 console.log(data)
                 commit('setUsers', data.connectedUsers)
             })
-
             socket.on('userConnected', user => {
                 console.log('A new user has connected', user)
                 commit('addUser', user)
             })
-
             socket.on('userDisconnected', userId => {
                 commit('removeUser', userId)
             })
-
             socket.on('receiveUpdate', payload => {
                 console.log("RECIEVING UPDATE:", payload)
                 if (payload.action) {
-
                     if (payload.action == "getActivityById") {
                         
                         dispatch(payload.action, payload.activity)
@@ -72,25 +68,19 @@ export default {
                 console.log('JOINED ROOM', room)
                 commit('setRoom', room)
             })
-
             socket.on('leftRoom', room => {
                 console.log('LEFT ROOM', room)
                 commit('setRoom', room)
             })
-
             socket.on('userLeft', user => {
                 commit('removeUserFromRoom', user)
             })
-
             socket.on('userJoined', user => {
                 commit('addUserToRoom', user)
             })
-
         },
         emitData({ commit, dispatch }, payload) {
-
             if (!payload.mutation && !payload.action) { return console.error("SOCKET ERROR: HEY YOU FORGOT TO ADD A MUTATION", payload) }
-
             console.log('EMMITTING:', payload)
             socket.emit('update', payload)
         },

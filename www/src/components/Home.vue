@@ -64,7 +64,6 @@
                     <h2>Conference Manager</h2>
                 </div>
             </div>
-
             <!-- FRONT PAGE LOGIN/GREETING -->
 
             <div class="row login-field">
@@ -136,17 +135,11 @@
                                 <h4>{{success}}</h4>
                             </div>
                             <div v-else></div>
-                            <!-- <div class="form-group" v-else>
-                                <button class="btn btn-submit btn-default btn-square submit-color" @click="submitLogin" data-dismiss="modal" type="submit">Submit</button>
-                            </div> -->
-
                         </form>
                     </div>
                     <div class="row">
                         <div class="col-xs-offset-3 col-xs-6">
-                            <!-- <div class="modal-footer"> -->
                             <button type="button" class="btn btn-default btn-square" data-dismiss="modal">Close</button>
-                            <!-- </div> -->
                         </div>
                     </div>
                 </div>
@@ -169,7 +162,6 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <!-- <form id="register" class="form"> -->
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-xs-6 modal-space">
@@ -217,9 +209,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-offset-3 col-xs-6">
-                            <!-- <div class="modal-footer"> -->
                             <button type="button" class="btn btn-default btn-square" data-dismiss="modal">Close</button>
-                            <!-- </div> -->
                         </div>
                     </div>
                 </div>
@@ -321,7 +311,6 @@
                                             <div class="col-xs-offset-3 col-xs-6 col-xs-offset-3">
                                                 <label for="zip">Zip Code:</label>
                                                 <input type="number" name="zip" maxlength="5" class="form-control" placeholder="Venue Zip" v-model="event.zip" required @change="validateForm">
-                                                <!-- <p class="error-message text-left text-danger" v-if="!this.validator.zip">Zip code must be 5 characters long.</p> -->
                                             </div>
                                         </div>
                                     </div>
@@ -334,9 +323,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-offset-3 col-xs-6">
-                            <!-- <div class="modal-footer"> -->
                             <button type="button" class="btn btn-default btn-square" data-dismiss="modal">Close</button>
-                            <!-- </div> -->
                         </div>
                     </div>
                 </div>
@@ -573,7 +560,6 @@
                         timeZone: ''
                     }
                 }
-
             }
         }
     }
@@ -587,25 +573,21 @@
         background-repeat: no-repeat;
         background-position: center
     }
-
     @media screen and (min-width: 650px) {
         #main-logo {
             font-size: 150px;
         }
     }
-
     @media screen and (max-width: 649px) {
         #main-logo {
             font-size: 75px;
         }
     }
-
     @media screen and (min-width: 650px) {
         #second-logo {
             font-size: 100px;
         }
     }
-
     @media screen and (max-width: 500px) {
         .no-padding-xs {
             position: absolute;
@@ -619,7 +601,6 @@
             letter-spacing: 10px;
         }
     }
-
     @media screen and (min-width: 501px) {
         .extra-padding-md {
             position: absolute;
@@ -634,9 +615,7 @@
             padding: 50px 80px;
         }
     }
-
     /* BACKGROUND PHOTOS */
-
     .bgimg-1,
     .bgimg-2,
     .bgimg-3 {
@@ -647,14 +626,12 @@
         background-size: cover;
         z-index: 0;
     }
-
     .bgimg-1 *,
     .bgimg-2 *,
     .bgimg-3 * {
         position: relative;
         z-index: 2 !important;
     }
-
     .bgimg-1:after,
     .bgimg-2:after,
     .bgimg-3:after {
@@ -668,23 +645,19 @@
         background: rgba(245, 242, 242, .37);
         z-index: 1;
     }
-
     .bgimg-1 {
         background-image: url('../assets/Optimized-confer-main-photo.jpg');
         min-height: 1000px;
         margin-top: -50px;
     }
-
     .bgimg-2 {
         background-image: url('../assets/Optimized-conference.jpeg');
         min-height: 400px;
     }
-
     .bgimg-3 {
         background-image: url('../assets/Optimized-people.jpeg');
         min-height: 600px;
     }
-
     @media screen and (max-width: 500px) {
         .my-img-responsive {
             display: block;
@@ -692,7 +665,6 @@
             height: auto;
         }
     }
-
     .caption {
         position: absolute;
         left: 0;
@@ -705,48 +677,40 @@
         font-size: 50px;
         letter-spacing: 10px;
     }
-
     .space-text {
         color: #fff;
         background-color: #111;
         font-family: 'Lato', sans-serif;
         letter-spacing: 5px;
     }
-
     .off-section {
         color: black;
         background-color: white;
         font-family: 'Lato', sans-serif;
         letter-spacing: 5px;
     }
-
     .extra-padding {
         padding: 50px 80px;
     }
-
     .main-heading {
         font-family: 'Abril Fatface', cursive;
         text-shadow: 2px 2px 10px black;
         color: white;
         margin-top: 250px;
     }
-
     .end-footer {
         margin-top: 200px;
         padding-bottom: 200px;
     }
-
     .welcome {
         font-family: 'Lato', sans-serif;
         text-shadow: 2px 2px 4px black;
         color: white;
         letter-spacing: 5px;
     }
-
     .navbar ul {
         list-style-type: none;
     }
-
     @media (max-width: 2000px) {
         .navbar-header {
             float: none;
@@ -784,21 +748,6 @@
             margin: 2px;
             font: black;
         }
-        /* .multi-img-one {
-            margin-top: -50px;
-            margin-bottom: -10px;
-        } */
-        /* .multi-img-two {
-            margin-top: -10px;
-            margin-bottom: -10px;
-        } */
-        /* .multi-img-three {
-            margin-top: -16px;
-        } */
-        /* .multi-img-four {
-            margin-top: -10px;
-            margin-bottom: -10px;
-        } */
         .multi-text {
             padding-top: 50px;
             padding-bottom: 10px;
@@ -806,56 +755,42 @@
 
         .multi-text-one {
             padding-top: 100px;
-            /* padding-bottom: 50px; */
         }
-
         .multi-text-two {
             padding-top: 75px;
-            /* padding-bottom: 50px; */
         }
-
         .multi-text-three {
             padding-top: 60px;
-            /* padding-bottom: 50px; */
         }
-
         .multi-text-four {
             padding-top: 70px;
-            /* padding-bottom: 50px; */
         }
-
         .login-field {
             margin-top: 50px;
             font-family: 'Lato', sans-serif;
             color: white;
             font-size: 20px;
         }
-
         .front-login-btn {
             background-color: black;
             color: white;
             border-color: black;
         }
-
         #force-inline {
             display: inline;
         }
-
         .shadow {
             font-family: 'Lato', sans-serif;
             color: white;
             text-shadow: 2px 2px 4px black;
         }
-
         .under {
             text-decoration: underline;
         }
-
         .neg-marg {
             margin-left: -20px;
             margin-right: -20px;
         }
-
         .plain-txt {
             font-family: 'Lato', sans-serif;
             letter-spacing: 5px;
